@@ -1,0 +1,924 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  margin: clamp(1rem, 2vw, 1.8rem);
+  border-radius: clamp(1.2rem, 2vw, 2rem);
+  background: #0c0c0b;
+  color: #ffffff;
+  opacity: 1;
+  transform: none;
+}
+
+.inView {
+  opacity: 1;
+  transform: none;
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+.opener,
+.services,
+.workflow,
+.principles,
+.trackRecord,
+.stackStrip,
+.credentials,
+.closer {
+  position: relative;
+  z-index: 2;
+}
+
+.opener {
+  overflow: hidden;
+  background: #0c0c0b;
+}
+
+.glowLeft,
+.glowRight {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.glowLeft {
+  top: -120px;
+  left: -120px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.18) 0%, transparent 65%);
+}
+
+.glowRight {
+  right: -80px;
+  bottom: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(180, 60, 20, 0.12) 0%, transparent 60%);
+}
+
+.openerInner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+}
+
+.openerCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 64px 48px 64px 56px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(245, 166, 35, 0.7);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow span {
+  width: 24px;
+  height: 1px;
+  background: rgba(245, 166, 35, 0.6);
+}
+
+.statement {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+}
+
+.statement span {
+  display: block;
+  color: #ffffff;
+  font-size: clamp(4.2rem, 7vw, 80px);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+}
+
+.statement .ghost {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.48);
+}
+
+.statement .amber {
+  color: #f5a623;
+}
+
+.statement .italic {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: clamp(3.25rem, 5.6vw, 64px);
+  font-style: italic;
+  font-weight: 800;
+}
+
+.narrative {
+  max-width: 40rem;
+  margin: 34px 0 0;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.openerBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 40px;
+}
+
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #4ade80;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.availability span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+.index {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.photoPanel {
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+  background: linear-gradient(160deg, #1e1a14 0%, #141210 100%);
+}
+
+.photoGlow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.22) 0%, rgba(180, 80, 20, 0.1) 40%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.photoFrame {
+  position: absolute;
+  inset: 48px 52px 0;
+  overflow: hidden;
+  border: 1px solid rgba(245, 166, 35, 0.13);
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+  background: #211a12;
+}
+
+.photoBadge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  padding: 42px 28px 28px;
+  background: linear-gradient(to top, rgba(12, 12, 11, 0.95) 0%, transparent 100%);
+}
+
+.photoBadge strong {
+  display: block;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.photoBadge span {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 11px;
+}
+
+.metaStrip {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.metaItem {
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 18px 24px;
+}
+
+.metaItem:last-child {
+  border-right: 0;
+}
+
+.metaItem span {
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.metaItem strong {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.metaItem .live {
+  color: #4ade80;
+}
+
+.services {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #111110;
+}
+
+.servicesHeader {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 52px 56px 40px;
+}
+
+.servicesHeader h3,
+.trackRecord h3,
+.closerCta h3 {
+  margin: 0;
+}
+
+.servicesHeader h3 {
+  color: #ffffff;
+  font-size: clamp(2.5rem, 4vw, 44px);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.servicesHeader h3 span {
+  color: rgba(255, 255, 255, 0.46);
+}
+
+.servicesHeader p {
+  max-width: 34rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.34);
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.serviceCard {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #111110;
+  padding: 36px 32px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.serviceCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0), transparent);
+  transition: background 0.3s ease;
+}
+
+.serviceCard:hover {
+  border-color: rgba(245, 166, 35, 0.18);
+  background: #161614;
+}
+
+.serviceCard:hover::before {
+  background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0.6), transparent);
+}
+
+.serviceNumber {
+  color: rgba(245, 166, 35, 0.48);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.serviceCard h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.serviceCard p {
+  flex: 1;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.34);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.workflow {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0c0c0b;
+  padding: 56px;
+}
+
+.workflowHeader {
+  display: grid;
+  max-width: 48rem;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.workflowHeader h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 3.5vw, 3.4rem);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.workflowHeader p:not(.label) {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.44);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.workflowGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.workflowStep {
+  display: grid;
+  align-content: start;
+  gap: 0.85rem;
+  min-height: 14rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #111110;
+  padding: 1.4rem;
+}
+
+.workflowStep span {
+  color: rgba(245, 166, 35, 0.62);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.workflowStep h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.workflowStep p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+.principles {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.68fr) minmax(0, 1.32fr);
+  gap: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #111110;
+  padding: 46px 56px;
+}
+
+.principlesHeader {
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+}
+
+.principlesHeader .label {
+  margin-bottom: 0;
+}
+
+.principlesHeader h3 {
+  max-width: 26rem;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.7rem, 3vw, 2.75rem);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.principles div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.principles blockquote {
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #111110;
+  padding: 1.15rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.6;
+}
+
+.serviceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.serviceTags span,
+.stackStrip em {
+  border: 0.5px solid rgba(255, 255, 255, 0.07);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.serviceTags span {
+  padding: 3px 9px;
+}
+
+.trackRecord {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0c0c0b;
+  padding: 56px 56px;
+}
+
+.label {
+  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.trackRecord h3 {
+  max-width: 38rem;
+  color: #ffffff;
+  font-size: clamp(1.9rem, 3vw, 32px);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.trackRecord h3 em {
+  color: rgba(255, 255, 255, 0.22);
+  font-style: italic;
+  font-weight: 350;
+}
+
+.trackRecord p:not(.label) {
+  max-width: 39rem;
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.34);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.trackRecord strong {
+  color: rgba(255, 255, 255, 0.68);
+  font-weight: 700;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stat {
+  background: #0c0c0b;
+  padding: 28px;
+}
+
+.stat strong {
+  display: block;
+  color: #ffffff;
+  font-size: clamp(2.7rem, 5vw, 48px);
+  font-weight: 850;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.stat strong span {
+  color: #f5a623;
+}
+
+.stat p {
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.stackStrip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #111110;
+  padding: 24px 56px;
+}
+
+.stackStrip > span {
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  margin-right: 20px;
+  padding-right: 20px;
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.stackStrip div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.stackStrip em {
+  padding: 5px 12px;
+  font-size: 11px;
+}
+
+.credentials {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.7fr) minmax(0, 1.3fr);
+  gap: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0c0c0b;
+  padding: 42px 56px;
+}
+
+.credentials h3 {
+  max-width: 28rem;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.55rem, 2.5vw, 2.2rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.credentialGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.credentialCard {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  min-height: 10rem;
+  background: #111110;
+  padding: 1.05rem;
+}
+
+.credentialCard span {
+  color: rgba(245, 166, 35, 0.7);
+  font-size: 0.64rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.credentialCard strong {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.92rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.credentialCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.36);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.closer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background:
+    radial-gradient(circle at 20% 16%, rgba(245, 166, 35, 0.1), transparent 18rem),
+    radial-gradient(circle at 88% 80%, rgba(255, 255, 255, 0.035), transparent 18rem),
+    linear-gradient(160deg, #1a1108 0%, #161210 46%, #0c0c0b 100%);
+  padding: clamp(2.8rem, 5vw, 4rem) 56px;
+}
+
+.closerGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.closer blockquote,
+.closerCta {
+  position: relative;
+  z-index: 2;
+}
+
+.closer blockquote {
+  margin: 0;
+}
+
+.quoteMark {
+  display: block;
+  margin-bottom: 12px;
+  color: rgba(245, 166, 35, 0.25);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 100px;
+  line-height: 0.6;
+}
+
+.closer blockquote p {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+.closer blockquote p span {
+  color: #f5a623;
+}
+
+.closer footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.closer footer span {
+  width: 18px;
+  height: 1px;
+  background: rgba(245, 166, 35, 0.44);
+}
+
+.closerCta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.closerCta > span {
+  color: rgba(245, 166, 35, 0.66);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.closerCta h3 {
+  max-width: 32rem;
+  color: #ffffff;
+  font-size: clamp(1.85rem, 3.2vw, 3rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.closerCta p {
+  max-width: 34rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 0.9rem;
+  font-weight: 560;
+  line-height: 1.7;
+}
+
+.closerCta div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.closerCta a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 13px 24px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.closerCta a:first-child {
+  border: 1px solid #f5a623;
+  background: #f5a623;
+  color: #1a1008;
+}
+
+.closerCta a:last-child {
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.closerCta a:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 980px) {
+  .openerInner,
+  .principles,
+  .credentials,
+  .trackRecord,
+  .closer {
+    grid-template-columns: 1fr;
+  }
+
+  .openerCopy {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .photoPanel {
+    min-height: 34rem;
+  }
+
+  .metaStrip,
+  .serviceGrid,
+  .workflowGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .principles div {
+    grid-template-columns: 1fr;
+  }
+
+  .credentialGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .servicesHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .servicesHeader p {
+    max-width: 34rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .openerCopy,
+  .servicesHeader,
+  .workflow,
+  .principles,
+  .credentials,
+  .trackRecord,
+  .stackStrip,
+  .closer {
+    padding: 3rem 1.2rem;
+  }
+
+  .statement span {
+    font-size: clamp(2.85rem, 14vw, 4.1rem);
+  }
+
+  .statement .italic {
+    font-size: clamp(2.2rem, 11vw, 3.2rem);
+  }
+
+  .narrative {
+    font-size: 0.94rem;
+  }
+
+  .photoPanel {
+    min-height: 29rem;
+  }
+
+  .photoFrame {
+    inset: 1.2rem 1.2rem 0;
+  }
+
+  .metaStrip,
+  .serviceGrid,
+  .workflowGrid,
+  .credentialGrid,
+  .statGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .metaItem {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .serviceCard {
+    padding: 2rem 1.2rem;
+  }
+
+  .stackStrip > span {
+    width: 100%;
+    border-right: 0;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section,
+  .glowLeft,
+  .glowRight,
+  .availability span {
+    animation: none;
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+}

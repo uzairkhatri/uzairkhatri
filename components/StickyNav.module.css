@@ -1,0 +1,108 @@
+.nav {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: calc(100vw - 1rem);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.82);
+  padding: 0.45rem 0.55rem 0.45rem 1.1rem;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-0.75rem);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.brand {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-left: 0.25rem;
+}
+
+.links a {
+  border-radius: 999px;
+  padding: 0.42rem 0.75rem;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.links a:hover {
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  height: 2rem;
+  border: 1px solid #f5a623;
+  border-radius: 999px;
+  background: #f5a623;
+  padding: 0 0.9rem;
+  color: #1a1008;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.cta:hover {
+  background: #ffc563;
+  border-color: #ffc563;
+}
+
+@media (max-width: 560px) {
+  .nav {
+    display: none;
+  }
+}
+
+@media (min-width: 561px) and (max-width: 720px) {
+  .nav {
+    padding-left: 0.55rem;
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .links {
+    margin-left: 0;
+  }
+
+  .links a {
+    padding: 0.42rem 0.5rem;
+  }
+
+  .cta {
+    padding: 0 0.7rem;
+    font-size: 0.68rem;
+  }
+}

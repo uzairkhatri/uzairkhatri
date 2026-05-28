@@ -1,0 +1,11 @@
+.next/
+out/
+node_modules/
+
+.env*.local
+.next-server*.log
+responsive-check/
+.claude/
+
+Thumbs.db
+.DS_Store

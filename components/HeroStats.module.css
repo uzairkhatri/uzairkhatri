@@ -1,0 +1,65 @@
+.section {
+  padding: clamp(1rem, 2vw, 1.8rem);
+  background: #000000;
+}
+
+.shell {
+  display: grid;
+  position: relative;
+  overflow: hidden;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: clamp(1.2rem, 2vw, 2rem);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(245, 166, 35, 0.1), transparent 18rem),
+    linear-gradient(135deg, #151413 0%, #0d0d0c 100%);
+  color: #ffffff;
+}
+
+.shell::before {
+  content: none;
+}
+
+.stat {
+  position: relative;
+  display: grid;
+  gap: 0.45rem;
+  min-height: 8.2rem;
+  align-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(1.35rem, 2.2vw, 2rem);
+}
+
+.stat:last-child {
+  border-right: 0;
+}
+
+.stat strong {
+  color: #ffffff;
+  font-size: clamp(1.75rem, 2.8vw, 2.55rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.stat span {
+  max-width: 12rem;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: clamp(0.76rem, 0.9vw, 0.9rem);
+  font-weight: 750;
+  line-height: 1.22;
+}
+
+@media (max-width: 760px) {
+  .shell {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .stat:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
