@@ -1,37 +1,5 @@
-import Image from "next/image";
 import styles from "./About.module.css";
-import { BOOKING_URL, withBasePath } from "./siteLinks";
-
-const meta = [
-  ["Status", "Selective availability", true],
-  ["Location", "Karachi, Pakistan"],
-  ["Timezone", "PKT - UTC +5"],
-  ["Engagement", "Architecture Advisory"],
-];
-
-const services = [
-  {
-    number: "01",
-    title: "AI Systems Architecture",
-    description:
-      "The AI system that impresses in demos but fails under load is not architecture; it is liability. I design the production layer around orchestration, retrieval quality, guardrails, observability, and cost control.",
-    tags: ["LangGraph", "OpenAI", "Agents", "VectorDB"],
-  },
-  {
-    number: "02",
-    title: "Scalable Backend Platforms",
-    description:
-      "When growth exposes slow APIs, fragile queues, and unclear ownership, I rebuild the backend path around speed, resilience, and operational clarity.",
-    tags: ["FastAPI", "SQS", "Redis", "AWS"],
-  },
-  {
-    number: "03",
-    title: "Architecture Advisory",
-    description:
-      "I turn technical risk into decisions teams can execute: system reviews, architecture tradeoffs, team standards, mentoring, and production-readiness plans.",
-    tags: ["System Design", "Reviews", "Leadership"],
-  },
-];
+import { BOOKING_URL } from "./siteLinks";
 
 const workflow = [
   ["01", "Clarity Session", "We map the product goal, current system, constraints, and architecture risks before anyone starts building around assumptions."],
@@ -42,8 +10,10 @@ const workflow = [
 
 const principles = [
   "Most AI systems fail around the model, not inside it.",
-  "Architecture is only useful when the team can operate it under pressure.",
   "A demo without observability, retries, and cost control is not production.",
+  "Agents need owners, limits, state, and failure paths before they need more tools.",
+  "Architecture is only useful when the team can operate it under pressure.",
+  "The best AI system is not the flashiest one; it is the one the business can trust.",
 ];
 
 const stats = [
@@ -97,95 +67,17 @@ const credentials = [
 
 export default function About() {
   return (
-    <section id="about" className={styles.section} aria-label="About Uzair Khatri">
+    <section id="about" className={styles.section} aria-label="How Uzair Khatri thinks and works">
       <div className={styles.noise} aria-hidden="true" />
 
-      <div className={styles.opener}>
-        <div className={styles.glowLeft} aria-hidden="true" />
-        <div className={styles.glowRight} aria-hidden="true" />
-
-        <div className={styles.openerInner}>
-          <div className={styles.openerCopy}>
-            <div className={styles.eyebrow}>
-              <span />
-              About
-            </div>
-
-            <h2 className={styles.statement}>
-              <span>From</span>
-              <span className={styles.ghost}>prototype</span>
-              <span className={styles.amber}>to</span>
-              <span className={styles.italic}>production.</span>
-            </h2>
-
-            <p className={styles.narrative}>
-              I started as a backend engineer and kept getting pulled into the same problem:
-              products were growing faster than their architecture. Today, I help teams make the
-              decisions that decide whether an AI product becomes a reliable business system or a
-              maintenance burden.
-              <br />
-              <br />
-              Most AI systems are not failing because the model is wrong. They are failing because
-              no one designed the infrastructure to survive the model being right. That is the gap I
-              work in.
-            </p>
-
-          </div>
-
-          <div className={styles.photoPanel}>
-            <div className={styles.photoGlow} aria-hidden="true" />
-            <div className={styles.photoFrame}>
-              <Image
-                src={withBasePath("/img/profile/my-image.jpeg")}
-                alt="Uzair Khatri"
-                fill
-                sizes="(max-width: 900px) 92vw, 44vw"
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-              />
-            </div>
-            <div className={styles.photoBadge}>
-              <strong>Uzair Khatri</strong>
-              <span>AI Systems Architect - Karachi, Pakistan</span>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.metaStrip}>
-          {meta.map(([label, value, isLive]) => (
-            <div className={styles.metaItem} key={label as string}>
-              <span>{label}</span>
-              <strong className={isLive ? styles.live : ""}>{value}</strong>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.services}>
-        <header className={styles.servicesHeader}>
-          <h3>
-            What I
-            <br />
-            <span>architect.</span>
-          </h3>
-          <p>Three disciplines. One standard: production-grade, or it does not count.</p>
-          <p>
-            Most AI products do not fail because the model is weak. They fail because the system
-            around the model was never designed for production.
-          </p>
+      <div className={styles.principles}>
+        <header className={styles.principlesHeader}>
+          <p className={styles.label}>How I think</p>
+          <h3>Strong opinions on production AI. No hedging.</h3>
         </header>
-
-        <div className={styles.serviceGrid}>
-          {services.map((service) => (
-            <article className={styles.serviceCard} key={service.title}>
-              <span className={styles.serviceNumber}>{service.number}</span>
-              <h4>{service.title}</h4>
-              <p>{service.description}</p>
-              <div className={styles.serviceTags}>
-                {service.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-            </article>
+        <div>
+          {principles.map((principle) => (
+            <blockquote key={principle}>{principle}</blockquote>
           ))}
         </div>
       </div>
@@ -207,18 +99,6 @@ export default function About() {
               <h4>{title}</h4>
               <p>{text}</p>
             </article>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.principles}>
-        <header className={styles.principlesHeader}>
-          <p className={styles.label}>Architecture principles</p>
-          <h3>What I believe about production AI.</h3>
-        </header>
-        <div>
-          {principles.map((principle) => (
-            <blockquote key={principle}>{principle}</blockquote>
           ))}
         </div>
       </div>

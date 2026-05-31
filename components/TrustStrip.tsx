@@ -43,7 +43,7 @@ function TestimonialCard({ author, quote, source }: { author: string; quote: str
   return (
     <article className={styles.card}>
       <div className={styles.cardStars} aria-label="Five star rating">
-        {"★★★★★"}
+        {"*****"}
       </div>
       <p className={styles.cardText}>&ldquo;{quote}&rdquo;</p>
       <footer className={styles.cardFooter}>
@@ -67,15 +67,15 @@ export default function TrustStrip() {
         <header className={styles.header}>
           <h2>Trusted when the system has to work.</h2>
           <p>
-            Feedback from founders, product leads, and platform owners who brought me into
-            business-critical engineering and architecture work.
+            Client names withheld per NDA and platform policy. References available upon request
+            for serious architecture conversations.
           </p>
         </header>
 
         <div className={styles.inner}>
           <div className={styles.featured}>
             <div className={styles.featuredStars} aria-label="Five star rating">
-              {"★★★★★"}
+              {"*****"}
             </div>
             <blockquote className={styles.featuredQuote}>
               &ldquo;Exceptional engineer. Strong technical depth, proactive communication, and the

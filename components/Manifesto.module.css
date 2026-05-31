@@ -1,0 +1,63 @@
+.section {
+  padding: 0 clamp(1rem, 2vw, 1.8rem) clamp(1rem, 2vw, 1.8rem);
+  background: #000;
+}
+
+.shell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: clamp(1.2rem, 2vw, 2rem);
+  background:
+    radial-gradient(circle at 12% 30%, rgba(245, 166, 35, 0.14), transparent 22rem),
+    linear-gradient(160deg, #141312 0%, #0b0b0a 100%);
+  padding: clamp(2.2rem, 5vw, 5rem);
+}
+
+.shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 4.5rem 4.5rem;
+  mask-image: radial-gradient(circle at 30% 30%, #000, transparent 70%);
+}
+
+.shell p {
+  position: relative;
+  margin: 0 0 1.2rem;
+  color: rgba(245, 166, 35, 0.72);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.shell h2 {
+  position: relative;
+  max-width: 18ch;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.4rem, 5vw, 5.4rem);
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.98;
+}
+
+.shell h2 span {
+  color: rgba(255, 255, 255, 0.52);
+}
+
+@media (max-width: 620px) {
+  .section {
+    padding: 0;
+  }
+
+  .shell {
+    border-radius: 0;
+    padding: 3rem 1.2rem;
+  }
+}

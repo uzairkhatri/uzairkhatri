@@ -47,7 +47,7 @@ const projects: Project[] = [
       ["3", "Production AI agents built"],
       ["80%", "Workflow automation improvement"],
       ["Multi-agent", "AI platform architecture"],
-      ["10K+", "Concurrent-request architecture target"],
+      ["LLM visibility", "Search intelligence across AI surfaces"],
     ],
   },
   {
@@ -247,6 +247,9 @@ export default function SelectedWork() {
               <br />
               <span>production.</span>
             </h2>
+            <p className={styles.subtitle}>
+              Architecture diagrams are visible where the system thinking matters most.
+            </p>
           </div>
           <div className={styles.headerRight}>
             <span>04 projects</span>
@@ -320,6 +323,9 @@ export default function SelectedWork() {
                           <span>{label}</span>
                         </div>
                       ))}
+                      <a className={styles.talkLink} href="#contact">
+                        Built something similar? Let&apos;s talk -&gt;
+                      </a>
                     </div>
                   </div>
                 </div>

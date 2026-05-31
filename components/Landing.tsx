@@ -10,6 +10,7 @@ export default function Landing() {
         </a>
         <div>
           <a href="#work">Work</a>
+          <a href="#writing">Writing</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a className="hero-nav-icon" href="https://github.com/UzairKhatri" aria-label="GitHub profile" target="_blank" rel="noreferrer">
@@ -21,6 +22,9 @@ export default function Landing() {
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6.94 8.98H3.72V20h3.22V8.98ZM7.2 5.58C7.2 4.55 6.43 3.8 5.35 3.8S3.5 4.55 3.5 5.58c0 1 .75 1.78 1.8 1.78h.02c1.1 0 1.88-.78 1.88-1.78ZM20.5 13.69c0-3.38-1.8-4.95-4.2-4.95-1.94 0-2.8 1.07-3.29 1.82V8.98H9.8c.04 1.03 0 11.02 0 11.02h3.21v-6.15c0-.33.03-.66.12-.9.26-.66.86-1.34 1.86-1.34 1.31 0 1.84 1.01 1.84 2.49V20h3.21l.46-6.31Z" />
             </svg>
+          </a>
+          <a className="hero-nav-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
+            Book Architecture Call
           </a>
         </div>
       </nav>
@@ -37,19 +41,19 @@ export default function Landing() {
         </div>
         <div className="hero-role">
           <small>AI Systems Architect</small>
-          <strong>I turn AI prototypes into production systems.</strong>
+          <strong>Your AI prototype is one bad deployment away from losing trust. I prevent that.</strong>
           <span>
-            I help founders and CTOs build agentic workflows, LLM platforms, and backend systems
-            that survive real users, real traffic, and real business pressure, not just demos.
+            I design the systems, agents, and infrastructure that keep AI products alive under real
+            users, real traffic, and real business pressure.
           </span>
-          <em>Trusted across AI SaaS, fintech, edtech, and enterprise systems.</em>
         </div>
         <div className="hero-actions" aria-label="Hero actions">
           <a href={BOOKING_URL} target="_blank" rel="noreferrer">
-            Book Architecture Call
+            Book a 30-Min Architecture Review -&gt;
           </a>
           <a href="#work">View Production Work</a>
         </div>
+        <p className="hero-microcopy">Free. No pitch. Just clarity on your system.</p>
       </div>
     </section>
   );

@@ -1,0 +1,116 @@
+.section {
+  padding: clamp(1rem, 2vw, 1.8rem);
+  background: #000;
+}
+
+.shell {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: clamp(1.2rem, 2vw, 2rem);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(245, 166, 35, 0.12), transparent 20rem),
+    linear-gradient(160deg, #111110 0%, #090909 100%);
+  padding: clamp(2.6rem, 5vw, 4.5rem);
+  color: #fff;
+}
+
+.header {
+  display: grid;
+  max-width: 52rem;
+  gap: 0.8rem;
+  margin-bottom: clamp(1.8rem, 4vw, 3rem);
+}
+
+.header p {
+  margin: 0;
+  color: rgba(245, 166, 35, 0.72);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.2rem, 4.5vw, 4.4rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+}
+
+.header span {
+  max-width: 39rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.card {
+  display: grid;
+  align-content: start;
+  min-height: 17rem;
+  gap: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #111110;
+  padding: clamp(1.25rem, 2vw, 1.7rem);
+}
+
+.card span {
+  color: rgba(245, 166, 35, 0.7);
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 0.88rem;
+  font-weight: 560;
+  line-height: 1.7;
+}
+
+.card a {
+  align-self: end;
+  color: #f5a623;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .section {
+    padding: 0;
+  }
+
+  .shell {
+    border-radius: 0;
+    padding: 3rem 1.2rem;
+  }
+}

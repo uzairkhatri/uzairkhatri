@@ -1,11 +1,11 @@
 import styles from "./Contact.module.css";
-import { BOOKING_URL, EMAIL_ADDRESS, EMAIL_URL } from "./siteLinks";
+import { BOOKING_URL, EMAIL_ADDRESS, EMAIL_URL, withBasePath } from "./siteLinks";
 
 const links = [
   ["Email", EMAIL_URL, EMAIL_ADDRESS],
   ["LinkedIn", "https://www.linkedin.com/in/uzair-khatri", "Connect professionally"],
   ["GitHub", "https://github.com/UzairKhatri", "Review technical work"],
-  ["Resume", "/Uzair%20Iqbal%20%E2%80%94%20CV.pdf", "Download CV / Resume"],
+  ["Resume", withBasePath("/Uzair%20Iqbal%20%E2%80%94%20CV.pdf"), "Download CV / Resume"],
 ];
 
 const engagementTypes = [
@@ -60,6 +60,34 @@ export default function Contact() {
               ))}
             </div>
           </div>
+
+          <form className={styles.intakeForm} action={EMAIL_URL} method="post" encType="text/plain">
+            <p>Quick intake</p>
+            <label>
+              <span>Name</span>
+              <input name="name" type="text" autoComplete="name" />
+            </label>
+            <label>
+              <span>Company</span>
+              <input name="company" type="text" autoComplete="organization" />
+            </label>
+            <label>
+              <span>What you&apos;re building</span>
+              <textarea name="what-you-are-building" rows={3} />
+            </label>
+            <label>
+              <span>Current state</span>
+              <input name="current-state" type="text" placeholder="Prototype, MVP, live product..." />
+            </label>
+            <label>
+              <span>Biggest blocker</span>
+              <textarea name="biggest-blocker" rows={3} />
+            </label>
+            <button type="submit">
+              Send architecture context
+              <ArrowIcon />
+            </button>
+          </form>
 
           <div className={styles.links}>
             {links.map(([label, href, description]) => (

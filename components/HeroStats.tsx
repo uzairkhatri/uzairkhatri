@@ -1,10 +1,12 @@
 import styles from "./HeroStats.module.css";
 
 const stats = [
-  { value: "10+", label: "Years across software and AI" },
-  { value: "25+", label: "Systems and product builds" },
-  { value: "4", label: "Industries: AI SaaS, fintech, edtech, enterprise" },
-  { value: "8+", label: "Engineers mentored and led" },
+  "10+ Years",
+  "25+ Systems Built",
+  "AI SaaS",
+  "Fintech",
+  "EdTech",
+  "Enterprise",
 ];
 
 export default function HeroStats() {
@@ -12,10 +14,7 @@ export default function HeroStats() {
     <section className={styles.section} aria-label="Career credibility snapshot">
       <div className={styles.shell}>
         {stats.map((stat) => (
-          <div className={styles.stat} key={stat.label}>
-            <strong>{stat.value}</strong>
-            <span>{stat.label}</span>
-          </div>
+          <span className={styles.stat} key={stat}>{stat}</span>
         ))}
       </div>
     </section>

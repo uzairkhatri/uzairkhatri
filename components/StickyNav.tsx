@@ -29,6 +29,7 @@ export default function StickyNav() {
 
       <div className={styles.links}>
         <a href="#work">Work</a>
+        <a href="#writing">Writing</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>

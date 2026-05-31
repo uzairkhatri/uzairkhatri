@@ -161,6 +161,21 @@ a {
   background: rgba(245, 166, 35, 0.1);
 }
 
+.hero-nav-cta {
+  display: inline-flex;
+  min-height: 2.35rem;
+  align-items: center;
+  border: 1px solid #f5a623 !important;
+  border-radius: 999px;
+  background: #f5a623;
+  padding: 0 1rem !important;
+  color: #1a1008;
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .hero-portrait-stage {
   position: relative;
   z-index: 7;
@@ -274,10 +289,10 @@ a {
 
 .hero-role strong {
   color: var(--ink);
-  max-width: 16ch;
-  font-size: clamp(2.55rem, 3.85vw, 4.4rem);
+  max-width: 15ch;
+  font-size: clamp(2.15rem, 3.35vw, 3.95rem);
   font-weight: 900;
-  line-height: 0.92;
+  line-height: 0.94;
   white-space: normal;
   text-shadow: 0 0.5rem 1.4rem rgba(255, 255, 255, 0.14);
 }
@@ -292,22 +307,18 @@ a {
   text-transform: none;
 }
 
-.hero-role em {
-  max-width: 40ch;
-  color: rgba(17, 20, 24, 0.58);
-  font-size: clamp(0.76rem, 0.8vw, 0.86rem);
-  font-style: normal;
-  font-weight: 850;
-  letter-spacing: 0.04em;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: clamp(0.95rem, 1.45vw, 1.25rem);
+}
+
+.hero-microcopy {
+  margin: 0.65rem 0 0;
+  color: rgba(17, 20, 24, 0.58);
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .hero-actions a {
@@ -447,6 +458,10 @@ a {
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 0.8rem 1rem;
+  }
+
+  .hero-nav-cta {
+    display: none;
   }
 
   .hero-nav-icon {

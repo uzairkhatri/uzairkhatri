@@ -13,6 +13,7 @@ export default function Footer() {
 
       <nav aria-label="Footer navigation">
         <a href="#work">Work</a>
+        <a href="#writing">Writing</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
         <a href="https://www.linkedin.com/in/uzair-khatri" target="_blank" rel="noreferrer">LinkedIn</a>
