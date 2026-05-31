@@ -11,7 +11,7 @@
   background:
     radial-gradient(circle at 12% 30%, rgba(245, 166, 35, 0.14), transparent 22rem),
     linear-gradient(160deg, #141312 0%, #0b0b0a 100%);
-  padding: clamp(2.2rem, 5vw, 5rem);
+  padding: clamp(2rem, 4vw, 3.6rem);
 }
 
 .shell::before {
@@ -38,13 +38,13 @@
 
 .shell h2 {
   position: relative;
-  max-width: 18ch;
+  max-width: 24ch;
   margin: 0;
   color: #fff;
-  font-size: clamp(2.4rem, 5vw, 5.4rem);
+  font-size: clamp(2rem, 3.8vw, 4rem);
   font-weight: 900;
-  letter-spacing: -0.065em;
-  line-height: 0.98;
+  letter-spacing: -0.055em;
+  line-height: 1.02;
 }
 
 .shell h2 span {

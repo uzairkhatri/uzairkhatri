@@ -41,10 +41,10 @@ export default function Landing() {
         </div>
         <div className="hero-role">
           <small>AI Systems Architect</small>
-          <strong>Your AI prototype is one bad deployment away from losing trust. I prevent that.</strong>
+          <strong>I help AI products survive production.</strong>
           <span>
-            I design the systems, agents, and infrastructure that keep AI products alive under real
-            users, real traffic, and real business pressure.
+            I design the systems, agents, and infrastructure that keep AI products reliable under
+            real users, real traffic, and real business pressure.
           </span>
         </div>
         <div className="hero-actions" aria-label="Hero actions">
