@@ -6,8 +6,8 @@
 .shell {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1.02fr) minmax(20rem, 0.72fr);
+  gap: clamp(2rem, 6vw, 6rem);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: clamp(1.2rem, 2vw, 2rem);
@@ -41,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 46rem;
 }
 
 .kicker {
@@ -62,22 +63,40 @@
 }
 
 .left h2 {
-  max-width: 13ch;
+  max-width: 12ch;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(2.7rem, 5.2vw, 5.2rem);
+  font-size: clamp(2.55rem, 4.8vw, 4.7rem);
   font-weight: 900;
   line-height: 0.92;
   letter-spacing: -0.065em;
 }
 
 .copy {
-  max-width: 42rem;
+  max-width: 39rem;
   margin: clamp(1.1rem, 2.2vw, 1.6rem) 0 0;
   color: rgba(255, 255, 255, 0.58);
   font-size: clamp(1rem, 1.25vw, 1.1rem);
   font-weight: 500;
   line-height: 1.75;
+}
+
+.fitList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  max-width: 42rem;
+  margin-top: clamp(1.35rem, 2.5vw, 1.85rem);
+}
+
+.fitList span {
+  border: 1px solid rgba(245, 166, 35, 0.18);
+  border-radius: 999px;
+  background: rgba(245, 166, 35, 0.07);
+  padding: 0.55rem 0.75rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .actions {
@@ -150,24 +169,17 @@
   gap: 1rem;
 }
 
-.panel {
+.contactCard {
   border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 1.25rem;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(245, 166, 35, 0.14), transparent 16rem),
+    rgba(255, 255, 255, 0.04);
+  padding: clamp(1.35rem, 2.4vw, 2rem);
 }
 
-.intakeForm {
-  display: grid;
-  gap: 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.035);
-  padding: 1.25rem;
-}
-
-.intakeForm > p {
-  margin: 0;
+.contactCard p {
+  margin: 0 0 1rem;
   color: rgba(245, 166, 35, 0.74);
   font-size: 0.72rem;
   font-weight: 900;
@@ -175,97 +187,24 @@
   text-transform: uppercase;
 }
 
-.intakeForm label {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.intakeForm label span {
-  color: rgba(255, 255, 255, 0.42);
-  font-size: 0.72rem;
-  font-weight: 850;
-}
-
-.intakeForm input,
-.intakeForm textarea {
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  outline: 0;
-  background: rgba(0, 0, 0, 0.22);
-  padding: 0.82rem 0.9rem;
-  color: rgba(255, 255, 255, 0.86);
-  font: inherit;
-  font-size: 0.88rem;
-  resize: vertical;
-}
-
-.intakeForm input:focus,
-.intakeForm textarea:focus {
-  border-color: rgba(245, 166, 35, 0.54);
-  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.08);
-}
-
-.intakeForm button {
-  display: inline-flex;
-  width: fit-content;
-  max-width: 100%;
-  min-height: 3rem;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  border: 1px solid #f5a623;
-  border-radius: 999px;
-  background: #f5a623;
-  color: #1a1008;
-  cursor: pointer;
-  font-size: 0.72rem;
-  font-weight: 950;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.intakeForm button svg {
-  width: 1rem;
-  height: 1rem;
-  flex: 0 0 auto;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.panel p {
-  margin: 0 0 1rem;
-  color: rgba(255, 255, 255, 0.34);
-  font-size: 0.72rem;
+.contactCard h3 {
+  max-width: 22rem;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.55rem, 2.4vw, 2.3rem);
   font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
 }
 
-.engagements {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-}
-
-.engagements span {
-  border: 1px solid rgba(245, 166, 35, 0.18);
-  border-radius: 999px;
-  background: rgba(245, 166, 35, 0.07);
-  padding: 0.55rem 0.75rem;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.78rem;
-  font-weight: 800;
-  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-.engagements span:hover {
-  transform: translateY(-2px);
-  border-color: rgba(245, 166, 35, 0.48);
-  color: #f5a623;
+.contactCard span {
+  display: block;
+  max-width: 28rem;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.92rem;
+  font-weight: 560;
+  line-height: 1.65;
 }
 
 .links {
@@ -336,10 +275,6 @@
   }
 
   .actions a {
-    width: 100%;
-  }
-
-  .intakeForm button {
     width: 100%;
   }
 

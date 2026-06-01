@@ -39,6 +39,12 @@ export default function Contact() {
             decisions that make AI products reliable at scale.
           </p>
 
+          <div className={styles.fitList} aria-label="Best fit for">
+            {engagementTypes.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+
           <div className={styles.actions}>
             <a className={styles.primary} href={BOOKING_URL} target="_blank" rel="noreferrer">
               Book Architecture Call
@@ -52,42 +58,14 @@ export default function Contact() {
         </div>
 
         <div className={styles.right}>
-          <div className={styles.panel}>
-            <p>Best fit for</p>
-            <div className={styles.engagements}>
-              {engagementTypes.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
+          <div className={styles.contactCard}>
+            <p>Start here</p>
+            <h3>Send the context. I&apos;ll tell you what needs pressure-testing.</h3>
+            <span>
+              No pitch deck needed. Share what you are building, where the system is stuck, and
+              what has to survive production.
+            </span>
           </div>
-
-          <form className={styles.intakeForm} action={EMAIL_URL} method="post" encType="text/plain">
-            <p>Quick intake</p>
-            <label>
-              <span>Name</span>
-              <input name="name" type="text" autoComplete="name" />
-            </label>
-            <label>
-              <span>Company</span>
-              <input name="company" type="text" autoComplete="organization" />
-            </label>
-            <label>
-              <span>What you&apos;re building</span>
-              <textarea name="what-you-are-building" rows={3} />
-            </label>
-            <label>
-              <span>Current state</span>
-              <input name="current-state" type="text" placeholder="Prototype, MVP, live product..." />
-            </label>
-            <label>
-              <span>Biggest blocker</span>
-              <textarea name="biggest-blocker" rows={3} />
-            </label>
-            <button type="submit">
-              Send architecture context
-              <ArrowIcon />
-            </button>
-          </form>
 
           <div className={styles.links}>
             {links.map(([label, href, description]) => (
