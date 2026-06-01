@@ -56,7 +56,7 @@ function TestimonialCard({ author, quote, source }: { author: string; quote: str
 
 export default function TrustStrip() {
   return (
-    <section className={styles.section} aria-label="Client testimonials">
+    <section className={`${styles.section} reveal-section`} aria-label="Client testimonials">
       <div className={styles.shell}>
         <div className={styles.eyebrow}>
           <span />

@@ -45,6 +45,35 @@ a {
   text-decoration: none;
 }
 
+.reveal-section,
+.reveal-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-item {
+  transition-delay: 0.08s;
+}
+
+.reveal-item:nth-child(2) {
+  transition-delay: 0.14s;
+}
+
+.reveal-item:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.reveal-item:nth-child(4) {
+  transition-delay: 0.26s;
+}
+
+.reveal-section.is-visible,
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -363,6 +392,13 @@ a {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
+  }
+
+  .reveal-section,
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 

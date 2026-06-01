@@ -20,7 +20,7 @@ const essays = [
 
 export default function Writing() {
   return (
-    <section className={styles.section} id="writing" aria-labelledby="writing-title">
+    <section className={`${styles.section} reveal-section`} id="writing" aria-labelledby="writing-title">
       <div className={styles.shell}>
         <header className={styles.header}>
           <p>Writing</p>
@@ -29,8 +29,8 @@ export default function Writing() {
         </header>
 
         <div className={styles.grid}>
-          {essays.map((essay) => (
-            <article className={styles.card} key={essay.title}>
+          {essays.map((essay, index) => (
+            <article className={`${styles.card} ${index === 0 ? styles.featured : ""} reveal-item`} key={essay.title}>
               <span>Architecture note</span>
               <h3>{essay.title}</h3>
               <p>{essay.summary}</p>

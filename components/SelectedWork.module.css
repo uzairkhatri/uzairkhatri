@@ -9,22 +9,22 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: clamp(1.2rem, 2vw, 2rem);
   background:
-    radial-gradient(circle at 10% 0%, rgba(245, 166, 35, 0.14), transparent 22rem),
-    radial-gradient(circle at 92% 86%, rgba(0, 214, 111, 0.06), transparent 24rem),
-    linear-gradient(160deg, #141312 0%, #0b0b0a 52%, #070707 100%);
+    radial-gradient(circle at 8% 0%, rgba(245, 166, 35, 0.12), transparent 24rem),
+    radial-gradient(circle at 92% 90%, rgba(0, 214, 111, 0.06), transparent 26rem),
+    linear-gradient(160deg, #131211 0%, #080808 100%);
   color: #ffffff;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  padding: clamp(2.4rem, 5vw, 4.8rem);
 }
 
 .shell::before {
-  content: "PROOF";
+  content: "WORK";
   position: absolute;
-  right: clamp(2rem, 5vw, 4rem);
-  top: 1.5rem;
+  top: 1.6rem;
+  right: clamp(1.5rem, 4vw, 3.5rem);
   color: rgba(255, 255, 255, 0.035);
-  font-size: clamp(4rem, 9vw, 9rem);
-  font-weight: 900;
-  letter-spacing: -0.055em;
+  font-size: clamp(4rem, 10vw, 10rem);
+  font-weight: 950;
+  letter-spacing: -0.08em;
   line-height: 1;
   pointer-events: none;
 }
@@ -32,12 +32,11 @@
 .header {
   position: relative;
   z-index: 1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: clamp(3rem, 5vw, 4rem) clamp(2rem, 5vw, 3.5rem) clamp(2.5rem, 4vw, 3.25rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.48fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+  margin-bottom: clamp(2rem, 4vw, 3.4rem);
 }
 
 .eyebrow {
@@ -47,7 +46,7 @@
   margin-bottom: 14px;
   color: rgba(245, 166, 35, 0.72);
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -59,584 +58,322 @@
 }
 
 .title {
+  max-width: 13ch;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(2.65rem, 5vw, 52px);
-  font-weight: 900;
-  letter-spacing: -0.055em;
-  line-height: 1.02;
+  font-size: clamp(2.7rem, 5.2vw, 5.8rem);
+  font-weight: 950;
+  letter-spacing: -0.07em;
+  line-height: 0.92;
 }
 
-.title span {
-  color: rgba(245, 166, 35, 0.52);
+.header > p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  font-weight: 560;
+  line-height: 1.7;
 }
 
-.subtitle {
-  max-width: 33rem;
-  margin: 1rem 0 0;
-  color: rgba(255, 255, 255, 0.48);
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1.65;
-}
-
-.headerRight {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-.headerRight span {
-  color: rgba(255, 255, 255, 0.22);
-  font-size: 11px;
-}
-
-.headerRight a {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.62rem 0.9rem;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-
-.headerRight a:hover {
-  transform: translateY(-1px);
-  border-color: #f5a623;
-  background: #f5a623;
-  color: #1a1008;
-}
-
-.headerRight svg,
-.arrow svg,
-.roleBadge svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.headerRight svg {
-  width: 14px;
-  height: 14px;
-  stroke-width: 1.8;
-}
-
-.rows {
+.grid {
   position: relative;
   z-index: 1;
-}
-
-.row {
-  position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
-  transition: background 0.22s ease, transform 0.22s ease;
-}
-
-.row::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  background: #f5a623;
-  opacity: 0;
-  transform: scaleY(0.35);
-  transition: opacity 0.22s ease, transform 0.22s ease;
-}
-
-.row:hover,
-.active {
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.row:hover {
-  transform: translateX(0.25rem);
-}
-
-.active::before,
-.row:hover::before {
-  opacity: 1;
-  transform: scaleY(1);
-}
-
-.rowButton {
-  position: relative;
   display: grid;
-  width: 100%;
-  grid-template-columns: 56px 1fr auto;
-  align-items: center;
-  border: 0;
-  background: transparent;
-  padding: 29px clamp(2rem, 5vw, 3.5rem);
-  color: inherit;
-  cursor: pointer;
-  text-align: left;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
 }
 
-.num {
-  color: rgba(245, 166, 35, 0.5);
-  font-size: 11px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  font-variant-numeric: tabular-nums;
-}
-
-.active .num {
-  color: #f5a623;
-}
-
-.rowMain {
-  display: flex;
-  min-width: 0;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.name {
-  color: rgba(255, 255, 255, 0.58);
-  font-size: clamp(1.04rem, 1.8vw, 19px);
-  font-weight: 850;
-  letter-spacing: -0.02em;
-  transition: color 0.2s ease;
-}
-
-.active .name,
-.row:hover .name {
-  color: #ffffff;
-}
-
-.category {
-  border: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 4px 10px;
-  color: rgba(255, 255, 255, 0.42);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.active .category {
-  border-color: rgba(245, 166, 35, 0.34);
-  background: rgba(245, 166, 35, 0.12);
-  color: #f5a623;
-}
-
-.rowRight {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.arrow {
-  display: flex;
-  width: 32px;
-  height: 32px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 50%;
-  color: rgba(255, 255, 255, 0.55);
-  transition: all 0.2s ease;
-}
-
-.arrow svg {
-  width: 15px;
-  height: 15px;
-  stroke-width: 1.9;
-}
-
-.active .arrow {
-  border-color: rgba(245, 166, 35, 0.55);
-  background: rgba(245, 166, 35, 0.12);
-  color: #f5a623;
-}
-
-.row:hover .arrow {
-  border-color: rgba(245, 166, 35, 0.45);
-  color: #f5a623;
-}
-
-.expand {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.active .expand {
-  max-height: 1500px;
-}
-
-.expandInner {
+.card {
   display: grid;
-  grid-template-columns: 1fr 192px;
-  gap: 44px;
-  align-items: start;
-  border-top: 1px solid rgba(255, 255, 255, 0.075);
-  background: rgba(255, 255, 255, 0.018);
-  padding: 28px clamp(2rem, 5vw, 3.5rem) 40px calc(clamp(2rem, 5vw, 3.5rem) + 56px);
-}
-
-.roleBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 0.5px solid rgba(245, 166, 35, 0.22);
-  border-radius: 6px;
-  background: rgba(245, 166, 35, 0.08);
-  margin-bottom: 14px;
-  padding: 5px 12px;
-  color: #f5a623;
-  font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.02em;
-}
-
-.roleBadge svg {
-  width: 15px;
-  height: 15px;
-  flex: 0 0 auto;
-  stroke-width: 1.7;
-}
-
-.description {
-  max-width: 56rem;
-  margin: 0 0 20px;
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 13.5px;
-  line-height: 1.85;
-}
-
-.builtLabel {
-  margin: 0 0 12px;
-  color: rgba(255, 255, 255, 0.24);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.builtItems {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.builtItem {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-
-.builtItem > span {
-  width: 4px;
-  height: 4px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: #f5a623;
-  margin-top: 7px;
-}
-
-.builtItem p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.56);
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.builtItem strong {
-  color: #ffffff;
-  font-weight: 800;
-}
-
-.architectureDiagram {
+  align-content: start;
+  gap: 1.05rem;
   overflow: hidden;
-  border: 1px solid rgba(245, 166, 35, 0.18);
-  border-radius: 14px;
+  min-height: 34rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
   background:
-    radial-gradient(circle at 8% 20%, rgba(245, 166, 35, 0.08), transparent 14rem),
-    rgba(255, 255, 255, 0.025);
-  margin: 0 0 20px;
-  padding: 1rem;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+    #0f0f0e;
+  padding: clamp(1.1rem, 2vw, 1.55rem);
+  transition: border-color 0.22s ease, transform 0.22s ease, background 0.22s ease;
 }
 
-.infrastructureFrame {
+.card:hover {
+  border-color: rgba(245, 166, 35, 0.28);
+  background:
+    linear-gradient(180deg, rgba(245, 166, 35, 0.05), rgba(255, 255, 255, 0.018)),
+    #11100f;
+  transform: translateY(-4px);
+}
+
+.featured {
+  min-height: 39rem;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cardTop span {
+  color: rgba(245, 166, 35, 0.66);
+}
+
+.cardTop em {
+  font-style: normal;
+}
+
+.diagram {
   position: relative;
-  border: 1px dashed rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  padding: 1.05rem 0.75rem 0.75rem;
+  overflow: hidden;
+  min-height: 15rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 45%, rgba(245, 166, 35, 0.12), transparent 13rem),
+    rgba(0, 0, 0, 0.24);
+  background-size: 2.25rem 2.25rem, 2.25rem 2.25rem, auto, auto;
 }
 
-.infrastructureLabel {
+.diagramFrame {
   position: absolute;
-  top: -0.55rem;
-  left: 0.8rem;
-  border: 1px solid rgba(245, 166, 35, 0.22);
+  top: 0.9rem;
+  left: 0.9rem;
+  z-index: 2;
+  border: 1px solid rgba(245, 166, 35, 0.2);
   border-radius: 999px;
-  background: #11100e;
-  padding: 0.16rem 0.55rem;
-  color: rgba(245, 166, 35, 0.76);
+  background: rgba(0, 0, 0, 0.36);
+  padding: 0.28rem 0.55rem;
+  color: rgba(245, 166, 35, 0.74);
   font-size: 0.58rem;
-  font-weight: 850;
+  font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.diagramLabel {
-  margin: 0 0 0.85rem;
-  color: rgba(245, 166, 35, 0.78);
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
-.diagramFlow {
+.diagramNodes {
+  position: absolute;
+  inset: 3.4rem 1rem 1rem;
   display: grid;
-  grid-template-columns: minmax(8rem, 1fr) auto minmax(9rem, 1.1fr) auto minmax(10rem, 1.2fr) auto minmax(9rem, 1.1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.55rem;
-  align-items: center;
+  align-content: center;
 }
 
-.diagramNode {
-  display: flex;
-  min-height: 3.35rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 10px;
+.diagramNodes span {
+  display: grid;
+  min-height: 3.4rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
   background: rgba(255, 255, 255, 0.045);
-  padding: 0.65rem;
-  color: rgba(255, 255, 255, 0.74);
-  font-size: 0.72rem;
-  font-weight: 800;
-  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.68rem;
+  font-weight: 850;
+  line-height: 1.2;
   text-align: center;
 }
 
-.diagramCore {
-  border-color: rgba(245, 166, 35, 0.28);
-  background: rgba(245, 166, 35, 0.08);
+.diagramNodes .activeNode {
+  border-color: rgba(245, 166, 35, 0.36);
+  background: rgba(245, 166, 35, 0.1);
   color: #f5a623;
 }
 
-.diagramAgents {
-  display: grid;
-  gap: 0.4rem;
-}
-
-.diagramAgents .diagramNode {
-  min-height: 2.35rem;
-}
-
-.diagramArrow {
-  position: relative;
-  display: block;
-  width: 2.35rem;
-  height: 2px;
-  overflow: visible;
-  border-radius: 999px;
-  background: rgba(245, 166, 35, 0.22);
-}
-
-.diagramArrow::before {
-  content: "";
+.diagram i {
   position: absolute;
-  top: 50%;
-  right: -1px;
-  width: 0.42rem;
-  height: 0.42rem;
-  border-top: 2px solid rgba(245, 166, 35, 0.8);
-  border-right: 2px solid rgba(245, 166, 35, 0.8);
-  transform: translateY(-50%) rotate(45deg);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0.65), transparent);
+  pointer-events: none;
 }
 
-.diagramNote {
-  margin: 0.9rem 0 0;
-  color: rgba(255, 255, 255, 0.46);
-  font-size: 0.76rem;
-  line-height: 1.6;
+.diagram i:nth-of-type(1) {
+  top: 47%;
+  left: 12%;
+  width: 76%;
 }
 
-.pills {
+.diagram i:nth-of-type(2) {
+  top: 68%;
+  left: 22%;
+  width: 56%;
+  opacity: 0.55;
+}
+
+.diagram i:nth-of-type(3) {
+  top: 31%;
+  left: 30%;
+  width: 40%;
+  opacity: 0.45;
+}
+
+.wellows {
+  --diagram-accent: #f5a623;
+}
+
+.classflow {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 45%, rgba(0, 214, 111, 0.1), transparent 13rem),
+    rgba(0, 0, 0, 0.24);
+}
+
+.savyour {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 45%, rgba(86, 145, 255, 0.1), transparent 13rem),
+    rgba(0, 0, 0, 0.24);
+}
+
+.efu {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.08), transparent 13rem),
+    rgba(0, 0, 0, 0.24);
+}
+
+.cardBody {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.projectMeta {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 20px;
+  gap: 0.45rem;
 }
 
-.pills span {
-  border: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
+.projectMeta span {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
-  padding: 4px 10px;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.caseLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  border-bottom: 1px solid rgba(245, 166, 35, 0.7);
-  padding-bottom: 2px;
-  color: #f5a623;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.07em;
+  padding: 0.36rem 0.6rem;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.metrics {
-  display: flex;
-  overflow: hidden;
-  flex-direction: column;
-  border: 0.5px solid rgba(255, 255, 255, 0.09);
-  border-radius: 12px;
+.card h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.65rem, 3vw, 2.5rem);
+  font-weight: 950;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.94rem;
+  font-weight: 520;
+  line-height: 1.7;
 }
 
 .metric {
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.035);
-  padding: 14px 16px;
-}
-
-.metric:last-child {
-  border-bottom: 0;
+  display: grid;
+  gap: 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 1rem 0;
 }
 
 .metric strong {
-  display: block;
-  margin-bottom: 3px;
   color: #ffffff;
-  font-size: 20px;
-  font-weight: 850;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 950;
+  letter-spacing: -0.05em;
   line-height: 1;
 }
 
 .metric span {
-  color: rgba(255, 255, 255, 0.38);
-  font-size: 10px;
-  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.5;
 }
 
-.talkLink {
-  display: block;
-  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
-  background: rgba(245, 166, 35, 0.08);
-  padding: 14px 16px;
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.stack span {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.45rem;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.34rem 0.55rem;
+  color: rgba(255, 255, 255, 0.44);
+  font-size: 0.66rem;
+  font-weight: 800;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+.actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  border-bottom: 1px solid rgba(245, 166, 35, 0.64);
+  padding-bottom: 0.2rem;
   color: #f5a623;
-  font-size: 10px;
+  font-size: 0.7rem;
   font-weight: 900;
   letter-spacing: 0.07em;
-  line-height: 1.45;
   text-transform: uppercase;
 }
 
-.talkLink:hover {
-  background: rgba(245, 166, 35, 0.14);
+.actions svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-@media (max-width: 900px) {
-  .header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .headerRight {
-    align-items: flex-start;
-  }
-
-  .rowButton {
-    grid-template-columns: 40px 1fr;
-    gap: 0.75rem;
-  }
-
-  .rowRight {
-    grid-column: 2;
-    align-items: center;
-  }
-
-  .expandInner {
+@media (max-width: 980px) {
+  .header,
+  .grid {
     grid-template-columns: 1fr;
-    padding-left: clamp(2rem, 5vw, 3.5rem);
-  }
-
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .metric {
-    border-right: 0.5px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .diagramFlow {
-    grid-template-columns: 1fr;
-  }
-
-  .diagramArrow {
-    width: 2px;
-    height: 2.1rem;
-    transform: none;
-    justify-self: center;
-  }
-
-  .diagramArrow::before {
-    top: auto;
-    right: auto;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%) rotate(135deg);
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 620px) {
   .section {
     padding: 0;
   }
 
   .shell {
     border-radius: 0;
+    padding: 3rem 1.2rem;
   }
 
-  .header,
-  .rowButton,
-  .expandInner {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
+  .card {
+    min-height: auto;
   }
 
-  .headerRight a {
-    max-width: 100%;
-  }
-
-  .rowMain {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .active .expand {
-    max-height: 2200px;
-  }
-
-  .metrics {
-    grid-template-columns: 1fr;
+  .diagramNodes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

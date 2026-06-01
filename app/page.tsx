@@ -8,11 +8,13 @@ import SelectedWork from "@/components/SelectedWork";
 import TrustStrip from "@/components/TrustStrip";
 import StickyNav from "@/components/StickyNav";
 import Writing from "@/components/Writing";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   return (
     <main>
       <h1 className="sr-only">Uzair Khatri AI systems architect portfolio</h1>
+      <ScrollReveal />
       <StickyNav />
       <Landing />
       <HeroStats />

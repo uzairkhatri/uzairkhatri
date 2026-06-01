@@ -67,7 +67,7 @@ const credentials = [
 
 export default function About() {
   return (
-    <section id="about" className={styles.section} aria-label="How Uzair Khatri thinks and works">
+    <section id="about" className={`${styles.section} reveal-section`} aria-label="How Uzair Khatri thinks and works">
       <div className={styles.noise} aria-hidden="true" />
 
       <div className={styles.principles}>

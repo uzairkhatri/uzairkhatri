@@ -25,7 +25,7 @@ function ArrowIcon() {
 
 export default function Contact() {
   return (
-    <section className={styles.section} id="contact" aria-labelledby="contact-title">
+    <section className={`${styles.section} reveal-section`} id="contact" aria-labelledby="contact-title">
       <div className={styles.shell}>
         <div className={styles.left}>
           <p className={styles.kicker}>
