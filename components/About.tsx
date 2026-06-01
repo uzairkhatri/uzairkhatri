@@ -14,6 +14,7 @@ const principles = [
   "Agents need owners, limits, state, and failure paths before they need more tools.",
   "Architecture is only useful when the team can operate it under pressure.",
   "The best AI system is not the flashiest one; it is the one the business can trust.",
+  "If the team cannot debug it at 2am, the architecture is not finished.",
 ];
 
 const stats = [
@@ -77,7 +78,7 @@ export default function About() {
         </header>
         <div>
           {principles.map((principle) => (
-            <blockquote key={principle}>{principle}</blockquote>
+            <blockquote className="reveal-item" key={principle}>{principle}</blockquote>
           ))}
         </div>
       </div>
@@ -94,7 +95,7 @@ export default function About() {
 
         <div className={styles.workflowGrid}>
           {workflow.map(([number, title, text]) => (
-            <article className={styles.workflowStep} key={title}>
+            <article className={`${styles.workflowStep} reveal-item`} key={title}>
               <span>{number}</span>
               <h4>{title}</h4>
               <p>{text}</p>
@@ -117,7 +118,7 @@ export default function About() {
 
         <div className={styles.statGrid}>
           {stats.map(([value, label]) => (
-            <article className={styles.stat} key={label}>
+            <article className={`${styles.stat} reveal-item`} key={label}>
               <strong>{value}</strong>
               <p>{label}</p>
             </article>
