@@ -16,6 +16,11 @@ const essays = [
     summary:
       "A note on designing agentic workflows with clear responsibilities, failure paths, and human-operable control surfaces.",
   },
+  {
+    title: "What Production Architecture Has to Survive",
+    summary:
+      "A checklist for cost, latency, observability, ownership, and failure recovery before an AI feature becomes a business system.",
+  },
 ];
 
 export default function Writing() {

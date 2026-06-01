@@ -1,6 +1,5 @@
 import styles from "./About.module.css";
 import { BOOKING_URL } from "./siteLinks";
-import CountUpNumber from "./CountUpNumber";
 
 const workflow = [
   ["01", "Clarity Session", "We map the product goal, current system, constraints, and architecture risks before anyone starts building around assumptions."],
@@ -21,10 +20,10 @@ const principles = [
 ];
 
 const stats = [
-  { value: "650+", end: 650, suffix: "+", label: "Brand-partner ecosystem supported at Savyour" },
-  { value: "100%", end: 100, suffix: "%", label: "Paperless delivery for FileNet transformation" },
+  { value: "650+", label: "Brand-partner ecosystem supported at Savyour" },
+  { value: "100%", label: "Paperless delivery for FileNet transformation" },
   { value: "AA++", label: "EFU Life credit rating proxy" },
-  { value: "3", end: 3, label: "Named AI agents: KIVA, OPTA, Citation Intelligence" },
+  { value: "3", label: "Named AI agents: KIVA, OPTA, Citation Intelligence" },
 ];
 
 const stack = [
@@ -132,13 +131,7 @@ export default function About() {
         <div className={styles.statGrid}>
           {stats.map((stat) => (
             <article className={`${styles.stat} reveal-item`} key={stat.label}>
-              <strong>
-                {typeof stat.end === "number" ? (
-                  <CountUpNumber end={stat.end} suffix={stat.suffix} />
-                ) : (
-                  stat.value
-                )}
-              </strong>
+              <strong>{stat.value}</strong>
               <p>{stat.label}</p>
             </article>
           ))}

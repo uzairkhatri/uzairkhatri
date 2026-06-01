@@ -505,7 +505,7 @@
 
 .principles div {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(0, 0.9fr));
   gap: 0.85rem;
   background: transparent;
 }
@@ -528,8 +528,9 @@
 }
 
 .featuredPrinciple {
-  grid-column: span 2;
-  min-height: 13rem;
+  grid-row: span 2;
+  grid-column: auto;
+  min-height: 100%;
   background:
     radial-gradient(circle at 0% 0%, rgba(245, 166, 35, 0.16), transparent 13rem),
     linear-gradient(135deg, rgba(245, 166, 35, 0.08), rgba(255, 255, 255, 0.025)),
@@ -957,7 +958,7 @@
   }
 
   .featuredPrinciple {
-    grid-column: auto;
+    grid-row: auto;
   }
 
   .credentialGrid {
