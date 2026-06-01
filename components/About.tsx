@@ -16,6 +16,8 @@ const principles = [
   "Architecture is only useful when the team can operate it under pressure.",
   "The best AI system is not the flashiest one; it is the one the business can trust.",
   "If the team cannot debug it at 2am, the architecture is not finished.",
+  "Cost, latency, and failure states are product decisions, not backend details.",
+  "A system is only production-ready when ownership is clear after launch.",
 ];
 
 const stats = [
