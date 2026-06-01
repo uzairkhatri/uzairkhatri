@@ -47,17 +47,17 @@ const credentials = [
   {
     issuer: "Anthropic",
     title: "Claude 101",
-    detail: "Issued Mar 2026 - ID 5mkc9ne9cwr5",
+    detail: "Issued Mar 2026",
   },
   {
     issuer: "IBM",
     title: "Machine Learning with Python",
-    detail: "Issued Dec 2024 - ID 16V1TEPM0AFV",
+    detail: "Issued Dec 2024",
   },
   {
     issuer: "BeMyApp / IBM TechXchange",
     title: "Virtual Agents Dev Day",
-    detail: "Issued Jan 2025 - ID 5b4536c4-403b-4913-a6c4-c3f68b6ef528",
+    detail: "Issued Jan 2025",
   },
   {
     issuer: "Laravel",
@@ -142,7 +142,7 @@ export default function About() {
         </div>
         <div className={styles.credentialGrid}>
           {credentials.map((credential) => (
-            <article className={styles.credentialCard} key={`${credential.issuer}-${credential.title}`}>
+            <article className={`${styles.credentialCard} reveal-item`} key={`${credential.issuer}-${credential.title}`}>
               <span>{credential.issuer}</span>
               <strong>{credential.title}</strong>
               <p>{credential.detail}</p>

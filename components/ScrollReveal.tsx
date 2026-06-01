@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 export default function ScrollReveal() {
   useEffect(() => {
+    document.documentElement.classList.add("reveal-ready");
     const targets = document.querySelectorAll<HTMLElement>(".reveal-section, .reveal-item");
 
     if (!("IntersectionObserver" in window)) {
@@ -24,7 +25,10 @@ export default function ScrollReveal() {
     );
 
     targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      document.documentElement.classList.remove("reveal-ready");
+    };
   }, []);
 
   return null;
