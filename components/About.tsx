@@ -1,5 +1,6 @@
 import styles from "./About.module.css";
 import { BOOKING_URL } from "./siteLinks";
+import CountUpNumber from "./CountUpNumber";
 
 const workflow = [
   ["01", "Clarity Session", "We map the product goal, current system, constraints, and architecture risks before anyone starts building around assumptions."],
@@ -18,10 +19,10 @@ const principles = [
 ];
 
 const stats = [
-  ["650+", "Brand-partner ecosystem supported at Savyour"],
-  ["100%", "Paperless delivery for FileNet transformation"],
-  ["AA++", "EFU Life credit rating proxy"],
-  ["3", "Named AI agents: KIVA, OPTA, Citation Intelligence"],
+  { value: "650+", end: 650, suffix: "+", label: "Brand-partner ecosystem supported at Savyour" },
+  { value: "100%", end: 100, suffix: "%", label: "Paperless delivery for FileNet transformation" },
+  { value: "AA++", label: "EFU Life credit rating proxy" },
+  { value: "3", end: 3, label: "Named AI agents: KIVA, OPTA, Citation Intelligence" },
 ];
 
 const stack = [
@@ -41,26 +42,31 @@ const stack = [
 const credentials = [
   {
     issuer: "Anthropic",
+    mark: "AI",
     title: "Claude Code in Action",
     detail: "Issued Mar 2026",
   },
   {
     issuer: "Anthropic",
+    mark: "C",
     title: "Claude 101",
     detail: "Issued Mar 2026",
   },
   {
     issuer: "IBM",
+    mark: "ML",
     title: "Machine Learning with Python",
     detail: "Issued Dec 2024",
   },
   {
     issuer: "BeMyApp / IBM TechXchange",
+    mark: "VA",
     title: "Virtual Agents Dev Day",
     detail: "Issued Jan 2025",
   },
   {
     issuer: "Laravel",
+    mark: "L",
     title: "Laravel Certification",
     detail: "Issued Sep 2022",
   },
@@ -77,8 +83,13 @@ export default function About() {
           <h3>Strong opinions on production AI. No hedging.</h3>
         </header>
         <div>
-          {principles.map((principle) => (
-            <blockquote className="reveal-item" key={principle}>{principle}</blockquote>
+          {principles.map((principle, index) => (
+            <blockquote
+              className={`${index === 0 ? styles.featuredPrinciple : ""} reveal-item`}
+              key={principle}
+            >
+              {principle}
+            </blockquote>
           ))}
         </div>
       </div>
@@ -117,10 +128,16 @@ export default function About() {
         </div>
 
         <div className={styles.statGrid}>
-          {stats.map(([value, label]) => (
-            <article className={`${styles.stat} reveal-item`} key={label}>
-              <strong>{value}</strong>
-              <p>{label}</p>
+          {stats.map((stat) => (
+            <article className={`${styles.stat} reveal-item`} key={stat.label}>
+              <strong>
+                {typeof stat.end === "number" ? (
+                  <CountUpNumber end={stat.end} suffix={stat.suffix} />
+                ) : (
+                  stat.value
+                )}
+              </strong>
+              <p>{stat.label}</p>
             </article>
           ))}
         </div>
@@ -143,6 +160,7 @@ export default function About() {
         <div className={styles.credentialGrid}>
           {credentials.map((credential) => (
             <article className={`${styles.credentialCard} reveal-item`} key={`${credential.issuer}-${credential.title}`}>
+              <em>{credential.mark}</em>
               <span>{credential.issuer}</span>
               <strong>{credential.title}</strong>
               <p>{credential.detail}</p>
