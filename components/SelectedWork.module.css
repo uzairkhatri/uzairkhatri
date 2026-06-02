@@ -1,17 +1,16 @@
 .section {
-  padding: clamp(1rem, 2vw, 1.8rem);
-  background: #000000;
+  padding: clamp(1.1rem, 2vw, 1.8rem);
+  background: #050607;
 }
 
 .shell {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: clamp(1.2rem, 2vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: clamp(0.95rem, 1.5vw, 1.35rem);
   background:
-    radial-gradient(circle at 8% 0%, rgba(245, 166, 35, 0.12), transparent 24rem),
-    radial-gradient(circle at 92% 90%, rgba(0, 214, 111, 0.06), transparent 26rem),
-    linear-gradient(160deg, #131211 0%, #080808 100%);
+    radial-gradient(circle at 8% 0%, rgba(201, 149, 60, 0.08), transparent 24rem),
+    linear-gradient(160deg, #0d0f10 0%, #080909 100%);
   color: #ffffff;
   padding: clamp(2.4rem, 5vw, 4.8rem);
 }
@@ -21,7 +20,7 @@
   position: absolute;
   top: 1.6rem;
   right: clamp(1.5rem, 4vw, 3.5rem);
-  color: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.028);
   font-size: clamp(4rem, 10vw, 10rem);
   font-weight: 950;
   letter-spacing: -0.08em;
@@ -44,7 +43,7 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 14px;
-  color: rgba(245, 166, 35, 0.72);
+  color: rgba(216, 173, 100, 0.72);
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -54,14 +53,14 @@
 .eyebrow span {
   width: 24px;
   height: 1px;
-  background: rgba(245, 166, 35, 0.62);
+  background: rgba(216, 173, 100, 0.62);
 }
 
 .title {
-  max-width: 13ch;
+  max-width: 14ch;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(2.7rem, 5.2vw, 5.8rem);
+  font-size: clamp(2.55rem, 4.8vw, 5.2rem);
   font-weight: 950;
   letter-spacing: -0.07em;
   line-height: 0.92;
@@ -88,22 +87,22 @@
   align-content: start;
   gap: 1.05rem;
   overflow: hidden;
-  min-height: 34rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.25rem;
+  min-height: 33rem;
+  border: 1px solid rgba(255, 255, 255, 0.095);
+  border-radius: 0.95rem;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
-    #0f0f0e;
+    #0f1112;
   padding: clamp(1.1rem, 2vw, 1.55rem);
   transition: border-color 0.22s ease, transform 0.22s ease, background 0.22s ease;
 }
 
 .card:hover {
-  border-color: rgba(245, 166, 35, 0.28);
+  border-color: rgba(201, 149, 60, 0.34);
   background:
-    linear-gradient(180deg, rgba(245, 166, 35, 0.05), rgba(255, 255, 255, 0.018)),
-    #11100f;
-  transform: translateY(-4px);
+    linear-gradient(180deg, rgba(201, 149, 60, 0.04), rgba(255, 255, 255, 0.018)),
+    #111314;
+  transform: translateY(-2px);
 }
 
 .featured {
@@ -122,7 +121,7 @@
 }
 
 .cardTop span {
-  color: rgba(245, 166, 35, 0.66);
+  color: rgba(216, 173, 100, 0.66);
 }
 
 .cardTop em {
@@ -138,7 +137,7 @@
   background:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    radial-gradient(circle at 50% 45%, rgba(245, 166, 35, 0.12), transparent 13rem),
+    radial-gradient(circle at 50% 45%, rgba(216, 173, 100, 0.12), transparent 13rem),
     rgba(0, 0, 0, 0.24);
   background-size: 2.25rem 2.25rem, 2.25rem 2.25rem, auto, auto;
 }
@@ -157,11 +156,11 @@
   top: 0.9rem;
   left: 0.9rem;
   z-index: 2;
-  border: 1px solid rgba(245, 166, 35, 0.2);
+  border: 1px solid rgba(216, 173, 100, 0.2);
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.36);
   padding: 0.28rem 0.55rem;
-  color: rgba(245, 166, 35, 0.74);
+  color: rgba(216, 173, 100, 0.74);
   font-size: 0.58rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -197,12 +196,12 @@
 }
 
 .diagramNodes .activeNode {
-  border-color: rgba(245, 166, 35, 0.48);
+  border-color: rgba(216, 173, 100, 0.48);
   background:
-    radial-gradient(circle at 50% 0%, rgba(245, 166, 35, 0.18), transparent 4rem),
-    rgba(245, 166, 35, 0.1);
-  box-shadow: 0 0 0 1px rgba(245, 166, 35, 0.1), 0 0 2rem rgba(245, 166, 35, 0.12);
-  color: #f5a623;
+    radial-gradient(circle at 50% 0%, rgba(216, 173, 100, 0.18), transparent 4rem),
+    rgba(216, 173, 100, 0.1);
+  box-shadow: 0 0 0 1px rgba(216, 173, 100, 0.1), 0 0 2rem rgba(216, 173, 100, 0.12);
+  color: #d8ad64;
 }
 
 .diagramNodes span::after {
@@ -212,7 +211,7 @@
   right: -0.74rem;
   width: 0.74rem;
   height: 1px;
-  background: rgba(245, 166, 35, 0.38);
+  background: rgba(216, 173, 100, 0.38);
   transform: translateY(-50%);
 }
 
@@ -229,8 +228,8 @@
   z-index: 3;
   width: 0.28rem;
   height: 0.28rem;
-  border-top: 1px solid rgba(245, 166, 35, 0.8);
-  border-right: 1px solid rgba(245, 166, 35, 0.8);
+  border-top: 1px solid rgba(216, 173, 100, 0.8);
+  border-right: 1px solid rgba(216, 173, 100, 0.8);
   transform: translateY(-50%) rotate(45deg);
 }
 
@@ -242,8 +241,8 @@
 .diagram i {
   position: absolute;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0.52), transparent);
-  filter: drop-shadow(0 0 0.45rem rgba(245, 166, 35, 0.22));
+  background: linear-gradient(90deg, transparent, rgba(216, 173, 100, 0.52), transparent);
+  filter: drop-shadow(0 0 0.45rem rgba(216, 173, 100, 0.22));
   pointer-events: none;
 }
 
@@ -268,7 +267,7 @@
 }
 
 .wellows {
-  --diagram-accent: #f5a623;
+  --diagram-accent: #d8ad64;
 }
 
 .classflow {
@@ -385,9 +384,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
-  border-bottom: 1px solid rgba(245, 166, 35, 0.64);
+  border-bottom: 1px solid rgba(216, 173, 100, 0.64);
   padding-bottom: 0.2rem;
-  color: #f5a623;
+  color: #d8ad64;
   font-size: 0.7rem;
   font-weight: 900;
   letter-spacing: 0.07em;

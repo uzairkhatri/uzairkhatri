@@ -1,6 +1,6 @@
 .section {
   padding: clamp(0.9rem, 1.8vw, 1.4rem) clamp(1rem, 2vw, 1.8rem);
-  background: #000000;
+  background: #050607;
 }
 
 .shell {
@@ -11,7 +11,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    radial-gradient(circle at 18% 50%, rgba(245, 166, 35, 0.12), transparent 18rem),
+    radial-gradient(circle at 18% 50%, rgba(201, 149, 60, 0.08), transparent 18rem),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
   padding: clamp(1.1rem, 2vw, 1.65rem) clamp(1rem, 2.8vw, 2rem);
   color: #ffffff;
@@ -28,7 +28,7 @@
 
 .shell span {
   flex: 0 0 auto;
-  color: rgba(245, 166, 35, 0.72);
+  color: rgba(201, 149, 60, 0.78);
   font-size: clamp(0.72rem, 0.9vw, 0.84rem);
   font-weight: 850;
   letter-spacing: 0.08em;

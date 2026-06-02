@@ -1,6 +1,6 @@
 .section {
   overflow: hidden;
-  background: #000;
+  background: #050607;
   padding: clamp(3rem, 7vw, 7rem) clamp(1.25rem, 4vw, 4rem);
 }
 
@@ -22,8 +22,7 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 18% 36%, rgba(245, 166, 35, 0.14), transparent 26rem),
-    radial-gradient(circle at 78% 44%, rgba(0, 214, 111, 0.08), transparent 22rem);
+    radial-gradient(circle at 18% 36%, rgba(201, 149, 60, 0.1), transparent 26rem);
 }
 
 .shell > * {
@@ -36,7 +35,7 @@
   top: -1.6rem;
   left: 0;
   margin: 0;
-  color: rgba(245, 166, 35, 0.72);
+  color: rgba(201, 149, 60, 0.78);
   font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -75,7 +74,7 @@
   background:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    radial-gradient(circle at 50% 50%, rgba(245, 166, 35, 0.12), transparent 16rem),
+    radial-gradient(circle at 50% 50%, rgba(216, 173, 100, 0.12), transparent 16rem),
     rgba(255, 255, 255, 0.025);
   background-size: 3.2rem 3.2rem, 3.2rem 3.2rem, auto, auto;
 }
@@ -101,9 +100,9 @@
   left: 50%;
   width: 7rem;
   height: 7rem;
-  border: 1px solid rgba(245, 166, 35, 0.42);
-  background: rgba(245, 166, 35, 0.12);
-  color: #f5a623;
+  border: 1px solid rgba(201, 149, 60, 0.42);
+  background: rgba(201, 149, 60, 0.12);
+  color: #d8ad64;
   transform: translate(-50%, -50%);
 }
 
