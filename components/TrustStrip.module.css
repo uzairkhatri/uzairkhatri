@@ -1,6 +1,6 @@
 .section {
   padding: clamp(1rem, 2vw, 1.8rem);
-  background: #050607;
+  background: #151817;
 }
 
 .shell {
@@ -11,7 +11,7 @@
   padding: clamp(2.5rem, 5vw, 4.5rem) clamp(2rem, 5vw, 5rem);
   background:
     radial-gradient(circle at 12% 16%, rgba(201, 149, 60, 0.1), transparent 22rem),
-    linear-gradient(160deg, #0d0f10 0%, #090a0a 58%, #060707 100%);
+    linear-gradient(160deg, #1b1f1e 0%, #171b1a 58%, #151817 100%);
   isolation: isolate;
 }
 
@@ -95,7 +95,7 @@
   justify-content: center;
   border: 1px solid rgba(216, 173, 100, 0.14);
   border-radius: 0.95rem;
-  background: #0f1112;
+  background: #202524;
   padding: clamp(1.35rem, 2.4vw, 2rem);
 }
 
@@ -188,7 +188,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0.95rem;
   padding: 1.15rem;
-  background: #0f1112;
+  background: #202524;
   cursor: default;
   transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 }
@@ -196,7 +196,7 @@
 .card:hover {
   transform: translateY(-4px);
   border-color: rgba(216, 173, 100, 0.22);
-  background: #111314;
+  background: #252b2a;
 }
 
 .cardStars {

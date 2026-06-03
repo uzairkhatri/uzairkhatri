@@ -1,6 +1,6 @@
 .section {
   padding: clamp(1rem, 2vw, 1.8rem);
-  background: #050607;
+  background: #151817;
 }
 
 .shell {
@@ -13,7 +13,7 @@
   border-radius: clamp(0.95rem, 1.5vw, 1.35rem);
   background:
     radial-gradient(circle at 8% 12%, rgba(201, 149, 60, 0.1), transparent 18rem),
-    linear-gradient(160deg, #0d0f10 0%, #080909 100%);
+    linear-gradient(160deg, #1b1f1e 0%, #171b1a 100%);
   padding: clamp(2.4rem, 5vw, 4.6rem);
   color: #ffffff;
 }
