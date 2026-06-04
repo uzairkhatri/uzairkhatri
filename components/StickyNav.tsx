@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./StickyNav.module.css";
-import { BOOKING_URL } from "./siteLinks";
+import { BOOKING_URL, withBasePath } from "./siteLinks";
 
 export default function StickyNav() {
   const [visible, setVisible] = useState(false);
@@ -23,7 +23,7 @@ export default function StickyNav() {
       className={`${styles.nav} ${visible ? styles.visible : ""}`}
       aria-label="Sticky navigation"
     >
-      <a href="/" className={styles.brand} aria-label="Uzair Khatri home">
+      <a href={withBasePath("/")} className={styles.brand} aria-label="Uzair Khatri home">
         Uzair Khatri
       </a>
 

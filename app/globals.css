@@ -18,6 +18,21 @@
   --text-faint: #c0bdb6;
   --dark-panel: #1a1a18;
   --accent-green: #4ade80;
+  --warm: #f1f0ea;
+  --warm-soft: #e8e5dc;
+  --warm-ink: #191d1c;
+  --warm-muted: #656b67;
+  --graphite: #171b1a;
+  --graphite-deep: #101312;
+  --graphite-card: #202624;
+  --dark-muted: rgba(255, 255, 255, 0.56);
+  --gold: #c59b53;
+  --gold-bright: #d8ad64;
+  --content-max: 92rem;
+  --page-pad: clamp(1.2rem, 4vw, 4rem);
+  --section-pad: clamp(4.5rem, 8vw, 8rem);
+  --hairline-dark: rgba(255, 255, 255, 0.1);
+  --hairline-light: rgba(25, 29, 28, 0.13);
 }
 
 * {
@@ -37,7 +52,7 @@ body {
 }
 
 main {
-  background: #151817;
+  background: var(--graphite);
 }
 
 a {
@@ -45,11 +60,10 @@ a {
   text-decoration: none;
 }
 
-.reveal-ready .reveal-section,
 .reveal-ready .reveal-item {
   opacity: 0;
-  transform: translateY(34px);
-  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(22px);
+  transition: opacity 0.62s ease, transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -69,7 +83,6 @@ a {
   transition-delay: 0.26s;
 }
 
-.reveal-ready .reveal-section.is-visible,
 .reveal-ready .reveal-item.is-visible {
   opacity: 1;
   transform: translateY(0);
@@ -487,6 +500,7 @@ a {
     font-size: clamp(0.62rem, 2.7vw, 0.7rem);
     line-height: 1.2;
     white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .hero-actions a:last-child {
@@ -530,5 +544,14 @@ a {
     width: min(21rem, 76vw);
     height: 34svh;
     min-height: 17rem;
+  }
+
+  .hero-actions {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-actions a {
+    font-size: 0.6rem;
   }
 }

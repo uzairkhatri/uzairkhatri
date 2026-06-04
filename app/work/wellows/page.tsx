@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
+import ProjectVisual from "@/components/ProjectVisual";
 
 export const metadata: Metadata = {
   title: "Wellows Case Study | Uzair Khatri",
@@ -102,18 +103,26 @@ export default function WellowsCaseStudy() {
 
       <header className={styles.hero}>
         <div className={styles.heroInner}>
-          <div className={styles.heroMeta}>
-            <span className={styles.tag}>AI Agents / SaaS</span>
-            <span className={styles.tag}>2024</span>
-            <span className={styles.tag}>Founding Architect</span>
+          <div className={styles.heroCopy}>
+            <div className={styles.heroMeta}>
+              <span className={styles.tag}>AI Agents / SaaS</span>
+              <span className={styles.tag}>11-week delivery</span>
+              <span className={styles.tag}>Founding Architect</span>
+            </div>
+            <h1 className={styles.heroTitle}>Wellows</h1>
+            <p className={styles.heroSub}>AI Search Visibility Platform</p>
+            <p className={styles.heroDesc}>
+              How I designed the production architecture for a multi-agent platform tracking brand
+              visibility across ChatGPT, Gemini, Perplexity, and Google AI, moving from prototype to
+              live business system in eleven weeks.
+            </p>
+            <div className={styles.heroFacts}>
+              <span><strong>3</strong> production agents</span>
+              <span><strong>80%</strong> fewer manual workflow steps</span>
+              <span><strong>&lt;200ms</strong> vector retrieval</span>
+            </div>
           </div>
-          <h1 className={styles.heroTitle}>Wellows</h1>
-          <p className={styles.heroSub}>AI Search Visibility Platform</p>
-          <p className={styles.heroDesc}>
-            How I designed the production architecture for a multi-agent platform tracking brand
-            visibility across ChatGPT, Gemini, Perplexity, and Google AI, moving from prototype to
-            live business system in eleven weeks.
-          </p>
+          <ProjectVisual type="wellows" variant="hero" />
         </div>
       </header>
 

@@ -1,5 +1,6 @@
 import styles from "./SelectedWork.module.css";
 import { withBasePath } from "./siteLinks";
+import ProjectVisual, { type ProjectVisualType } from "./ProjectVisual";
 
 type Project = {
   number: string;
@@ -11,7 +12,7 @@ type Project = {
   description: string;
   stack: string[];
   metric: [string, string];
-  diagram: "wellows" | "classflow" | "savyour" | "efu";
+  diagram: ProjectVisualType;
 };
 
 const projects: Project[] = [
@@ -74,33 +75,6 @@ function ArrowIcon() {
   );
 }
 
-function ProjectDiagram({ type }: { type: Project["diagram"] }) {
-  const labels =
-    type === "wellows"
-      ? ["Request", "LangGraph", "KIVA", "OPTA", "Citation", "Vector API"]
-      : type === "classflow"
-        ? ["Student", "Scheduling", "Teacher", "Payment", "Quality", "Lifecycle"]
-        : type === "savyour"
-          ? ["Partner", "Cashback", "Wallet", "Bank", "NLP", "Analytics"]
-          : ["Capture", "FileNet", "Cases", "Claims", "Policy", "Compliance"];
-
-  return (
-    <div className={`${styles.diagram} ${styles[type]}`} aria-hidden="true">
-      <span className={styles.diagramFrame}>Architecture preview</span>
-      <div className={styles.diagramNodes}>
-        {labels.map((label, index) => (
-          <span className={index === 1 ? styles.activeNode : ""} key={label}>
-            {label}
-          </span>
-        ))}
-      </div>
-      <i />
-      <i />
-      <i />
-    </div>
-  );
-}
-
 export default function SelectedWork() {
   return (
     <section className={`${styles.section} reveal-section`} id="work" aria-labelledby="selected-work-title">
@@ -132,7 +106,7 @@ export default function SelectedWork() {
                 <em>{project.year}</em>
               </div>
 
-              <ProjectDiagram type={project.diagram} />
+              <ProjectVisual type={project.diagram} variant={index === 0 ? "hero" : "card"} />
 
               <div className={styles.cardBody}>
                 <div className={styles.projectMeta}>

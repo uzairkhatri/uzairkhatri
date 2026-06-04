@@ -1,5 +1,7 @@
 import styles from "./Writing.module.css";
 
+const LINKEDIN_URL = "https://www.linkedin.com/in/uzair-khatri";
+
 const essays = [
   {
     title: "How I Think About Production AI",
@@ -39,7 +41,7 @@ export default function Writing() {
               <span>Architecture note</span>
               <h3>{essay.title}</h3>
               <p>{essay.summary}</p>
-              <a href="#contact">Discuss this idea -&gt;</a>
+              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">Read on LinkedIn -&gt;</a>
             </article>
           ))}
         </div>
