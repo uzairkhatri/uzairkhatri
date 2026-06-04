@@ -78,7 +78,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -87,7 +87,7 @@
   align-content: start;
   gap: 1.05rem;
   overflow: hidden;
-  min-height: 33rem;
+  min-height: 34rem;
   border: 1px solid rgba(255, 255, 255, 0.095);
   border-radius: 0.95rem;
   background:
@@ -106,7 +106,56 @@
 }
 
 .featured {
-  min-height: 39rem;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1.28fr) minmax(20rem, 0.72fr);
+  grid-template-areas:
+    "top top"
+    "diagram body"
+    "diagram metric"
+    "diagram stack"
+    "diagram actions";
+  gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
+  min-height: 37rem;
+  padding: clamp(1.3rem, 2.5vw, 2rem);
+  background:
+    radial-gradient(circle at 18% 24%, rgba(216, 173, 100, 0.08), transparent 28rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+    #202524;
+}
+
+.featured .cardTop {
+  grid-area: top;
+}
+
+.featured .diagram {
+  grid-area: diagram;
+  min-height: 31rem;
+}
+
+.featured .cardBody {
+  grid-area: body;
+  align-self: end;
+}
+
+.featured .metric {
+  grid-area: metric;
+}
+
+.featured .stack {
+  grid-area: stack;
+}
+
+.featured .actions {
+  grid-area: actions;
+  align-self: start;
+}
+
+.featured h3 {
+  font-size: clamp(3rem, 5vw, 5.5rem);
+}
+
+.featured p {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
 }
 
 .cardTop {
@@ -133,7 +182,7 @@
   overflow: hidden;
   min-height: 15rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   background:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
@@ -404,9 +453,28 @@
 }
 
 @media (max-width: 980px) {
-  .header,
-  .grid {
+  .header {
     grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featured {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "top"
+      "diagram"
+      "body"
+      "metric"
+      "stack"
+      "actions";
+  }
+
+  .featured .diagram {
+    min-height: 24rem;
   }
 }
 
@@ -422,6 +490,14 @@
 
   .card {
     min-height: auto;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured h3 {
+    font-size: clamp(2.35rem, 13vw, 3.2rem);
   }
 
   .diagramNodes {
