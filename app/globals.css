@@ -30,7 +30,7 @@
   --gold-bright: #d8ad64;
   --content-max: 92rem;
   --page-pad: clamp(1.2rem, 4vw, 4rem);
-  --section-pad: clamp(4.5rem, 8vw, 8rem);
+  --section-pad: clamp(3.6rem, 6vw, 6.25rem);
   --hairline-dark: rgba(255, 255, 255, 0.1);
   --hairline-light: rgba(25, 29, 28, 0.13);
 }
@@ -553,5 +553,65 @@ a {
 
   .hero-actions a {
     font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-content,
+  .hero-role,
+  .hero-role strong,
+  .hero-role span,
+  .hero-actions,
+  .hero-actions a {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .hero-actions a {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 2.65rem;
+    padding: 0.72rem 0.85rem;
+    text-align: center;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero-canvas {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .hero-content,
+  .hero-role,
+  .hero-role span,
+  .hero-actions {
+    width: min(100%, 18.75rem) !important;
+    max-width: calc(100vw - 2.4rem) !important;
+  }
+
+  .hero-role span {
+    display: block;
+    max-width: 30ch !important;
+    overflow-wrap: break-word;
+  }
+
+  .hero-role strong {
+    width: auto !important;
+    max-width: 9.5ch !important;
+    overflow-wrap: normal;
+  }
+
+  .hero-actions a {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: center;
+    font-size: 0.56rem;
+    letter-spacing: 0.035em;
   }
 }
