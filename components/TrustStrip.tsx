@@ -58,10 +58,9 @@ export default function TrustStrip() {
   return (
     <section className={`${styles.section} reveal-section`} id="testimonials" aria-label="Client testimonials">
       <div className={styles.shell}>
-        <div className={styles.eyebrow}>
+        <div className="section-eyebrow">
           <span />
           Client results
-          <span />
         </div>
 
         <header className={styles.header}>

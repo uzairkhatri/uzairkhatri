@@ -54,7 +54,7 @@ export default function ProjectVisual({ type, variant = "card" }: ProjectVisualP
         <div className={styles.dashboard}>
           <section className={styles.chartPanel}>
             <div className={styles.chartHeading}><span>System activity</span><em>Live</em></div>
-            <div className={styles.chart}>{data.chart.map((height, index) => <i key={`${height}-${index}`} style={{ height: `${height}%` }} />)}</div>
+            <div className={styles.chart}>{data.chart.map((height, index) => <i key={`${height}-${index}`} className="chart-bar" style={{ height: `${height}%`, ['--bar-i' as string]: index } as React.CSSProperties} />)}</div>
             <div className={styles.chartLegend}><span>Inputs</span><span>Orchestration</span><span>Delivery</span></div>
           </section>
           <aside>

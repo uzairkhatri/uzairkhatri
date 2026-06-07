@@ -1,11 +1,40 @@
+import Image from "next/image";
 import styles from "./About.module.css";
-import { BOOKING_URL } from "./siteLinks";
+import { BOOKING_URL, withBasePath } from "./siteLinks";
+import AnimatedCounter from "./AnimatedCounter";
 
 const workflow = [
   ["01", "Clarity Session", "We map the product goal, current system, constraints, and architecture risks before anyone starts building around assumptions."],
   ["02", "Architecture Blueprint", "I design the agents, APIs, queues, data stores, observability, and operational boundaries needed for production."],
   ["03", "Build or Guide", "I either build the critical path directly or work with your team as the architect reviewing decisions, code, and delivery tradeoffs."],
   ["04", "Production Handoff", "We harden the system for real users: monitoring, failure paths, performance, ownership, and scale-readiness."],
+];
+
+const engagements = [
+  {
+    tier: "01",
+    name: "The Architecture Audit",
+    timeline: "1-Week Sprint",
+    focus: "Risk Reduction",
+    desc: "A thorough review of your existing codebase, model orchestration (LangGraph/Chain), vector pipeline, and infra configuration. You receive a concrete risk analysis and system improvement blueprint.",
+    cta: "Book Audit Call",
+  },
+  {
+    tier: "02",
+    name: "Fractional Architect",
+    timeline: "Monthly Retainer",
+    focus: "Advisory & Oversight",
+    desc: "Regular architecture reviews, code reviews, and advisor syncs to keep your engineering team honest, reduce technical debt early, and guide scaling decisions as you move toward production.",
+    cta: "Discuss Retainer",
+  },
+  {
+    tier: "03",
+    name: "Critical Path Build",
+    timeline: "Project-Based",
+    focus: "Direct Execution",
+    desc: "Hands-on engineering of the most complex architectural components: orchestrators, transactional ledger pipelines, vector retrieval architectures, or highly-available deployment infrastructures.",
+    cta: "Hire for Implementation",
+  }
 ];
 
 const principles = [
@@ -80,7 +109,7 @@ export default function About() {
 
       <div className={styles.principles}>
         <header className={styles.principlesHeader}>
-          <p className={styles.label}>How I think</p>
+          <div className="section-eyebrow"><span />How I think</div>
           <h3>Strong opinions on production AI. No hedging.</h3>
         </header>
         <div>
@@ -97,7 +126,7 @@ export default function About() {
 
       <div className={styles.workflow}>
         <header className={styles.workflowHeader}>
-          <p className={styles.label}>How I work</p>
+          <div className="section-eyebrow"><span />How I work</div>
           <h3>Clear decisions before expensive code.</h3>
           <p>
             My role is to reduce architecture risk early, then keep execution honest as the system
@@ -105,12 +134,51 @@ export default function About() {
           </p>
         </header>
 
-        <div className={styles.workflowGrid}>
-          {workflow.map(([number, title, text]) => (
-            <article className={`${styles.workflowStep} reveal-item`} key={title}>
-              <span>{number}</span>
-              <h4>{title}</h4>
-              <p>{text}</p>
+        <div className={styles.workflowContent}>
+          <div className={styles.workflowGrid}>
+            {workflow.map(([number, title, text]) => (
+              <article className={`${styles.workflowStep} reveal-item`} key={title}>
+                <span>{number}</span>
+                <h4>{title}</h4>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+          <div className={`${styles.workflowVisual} reveal-item`}>
+            <Image
+              src={withBasePath("/img/profile/ai_system_architecture_3d.png")}
+              alt="AI Systems 3D Schematic Diagram"
+              width={600}
+              height={600}
+              priority
+              style={{ objectFit: "contain", borderRadius: "12px", width: "100%", height: "auto" }}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.engagements}>
+        <header className={styles.engagementsHeader}>
+          <div className="section-eyebrow"><span />Engagement Models</div>
+          <h3>Clear structures for advisory and execution.</h3>
+          <p>
+            I work in focused engagements designed to align with your technical complexity and timeline pressure.
+          </p>
+        </header>
+
+        <div className={styles.engagementsGrid}>
+          {engagements.map((item) => (
+            <article className={`${styles.engagementCard} reveal-item`} key={item.name}>
+              <div className={styles.engagementHeader}>
+                <span>{item.tier}</span>
+                <em>{item.timeline}</em>
+              </div>
+              <h4>{item.name}</h4>
+              <span className={styles.engagementFocus}>{item.focus}</span>
+              <p>{item.desc}</p>
+              <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.engagementCta}>
+                {item.cta} -&gt;
+              </a>
             </article>
           ))}
         </div>
@@ -118,7 +186,7 @@ export default function About() {
 
       <div className={styles.trackRecord}>
         <div>
-          <p className={styles.label}>The track record</p>
+          <div className="section-eyebrow"><span />The track record</div>
           <h3>
             Architecture <em>turned into</em> measurable outcomes.
           </h3>
@@ -131,36 +199,48 @@ export default function About() {
         <div className={styles.statGrid}>
           {stats.map((stat) => (
             <article className={`${styles.stat} reveal-item`} key={stat.label}>
-              <strong>{stat.value}</strong>
+              <AnimatedCounter value={stat.value} />
               <p>{stat.label}</p>
             </article>
           ))}
         </div>
       </div>
 
-      <div className={styles.stackStrip}>
-        <span>Core stack</span>
-        <div>
-          {stack.map((item) => (
-            <em key={item}>{item}</em>
-          ))}
+      <div className={styles.toolkitGrid}>
+        {/* Left Column: Core Stack */}
+        <div className={styles.toolkitBlock}>
+          <header className={styles.toolkitBlockHeader}>
+            <div className="section-eyebrow"><span />Technical Toolkit</div>
+            <h3 className={styles.toolkitTitle}>Core Stack</h3>
+            <p className={styles.toolkitDescription}>
+              Production-hardened tools and frameworks I leverage to design, build, and orchestrate resilient AI systems.
+            </p>
+          </header>
+          <div className={styles.chipGrid}>
+            {stack.map((item) => (
+              <span className={styles.chip} key={item}>{item}</span>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className={styles.credentials}>
-        <div>
-          <p className={styles.label}>Credentials</p>
-          <h3>Verified learning across AI, ML, enterprise, and backend systems.</h3>
-        </div>
-        <div className={styles.credentialGrid}>
-          {credentials.map((credential) => (
-            <article className={`${styles.credentialCard} reveal-item`} key={`${credential.issuer}-${credential.title}`}>
-              <em>{credential.mark}</em>
-              <span>{credential.issuer}</span>
-              <strong>{credential.title}</strong>
-              <p>{credential.detail}</p>
-            </article>
-          ))}
+        {/* Right Column: Credentials */}
+        <div className={styles.credentialsBlock}>
+          <header className={styles.toolkitBlockHeader}>
+            <div className="section-eyebrow"><span />Credentials</div>
+            <h3 className={styles.credentialTitle}>Certifications</h3>
+          </header>
+          <div className={styles.credentialGrid}>
+            {credentials.map((credential) => (
+              <article className={`${styles.credentialCard} reveal-item`} key={`${credential.issuer}-${credential.title}`}>
+                <div className={styles.credentialBadge}>{credential.mark}</div>
+                <div className={styles.credentialInfo}>
+                  <span className={styles.credentialIssuer}>{credential.issuer}</span>
+                  <strong className={styles.credentialCardTitle}>{credential.title}</strong>
+                  <p className={styles.credentialDetail}>{credential.detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
 

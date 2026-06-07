@@ -2,8 +2,7 @@ import Landing from "@/components/Landing";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import HeroStats from "@/components/HeroStats";
-import Manifesto from "@/components/Manifesto";
+import ManifestoAndStats from "@/components/ManifestoAndStats";
 import SelectedWork from "@/components/SelectedWork";
 import TrustStrip from "@/components/TrustStrip";
 import StickyNav from "@/components/StickyNav";
@@ -17,8 +16,7 @@ export default function Home() {
       <ScrollReveal />
       <StickyNav />
       <Landing />
-      <HeroStats />
-      <Manifesto />
+      <ManifestoAndStats />
       <SelectedWork />
       <About />
       <TrustStrip />

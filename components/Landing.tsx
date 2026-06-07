@@ -5,8 +5,13 @@ export default function Landing() {
   return (
     <section className="hero-canvas" aria-label="Uzair Khatri hero">
       <nav className="hero-nav" aria-label="Primary navigation">
-        <a href={withBasePath("/")} aria-label="Uzair Khatri home">
-          Uzair Khatri
+        <a href={withBasePath("/")} aria-label="Uzair Khatri home" style={{ display: "inline-flex", alignItems: "center", gap: "0.6rem" }}>
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: "var(--gold)" }}>
+            <rect x="2" y="2" width="28" height="28" rx="6" stroke="currentColor" strokeWidth="2.2" />
+            <path d="M10 10v7a6 6 0 0 0 12 0v-7" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" />
+            <path d="M16 2v4M16 26v4M2 16h4M26 16h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+          <span>Uzair Khatri</span>
         </a>
         <div>
           <a href="#work">Work</a>
@@ -30,6 +35,17 @@ export default function Landing() {
       </nav>
 
       <div className="hero-portrait-stage" aria-hidden="true">
+        <div className="hero-portrait-glow" />
+        <div className="hero-telemetry hero-tel-1">
+          <span className="hero-telemetry-dot" />
+          <span>fault-tolerant agents</span>
+        </div>
+        <div className="hero-telemetry hero-tel-2">
+          <span>cost-optimized inference</span>
+        </div>
+        <div className="hero-telemetry hero-tel-3">
+          <span>real-time systems</span>
+        </div>
         <span className="hero-watermark">Uzair Khatri</span>
         <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="" fill sizes="(max-width: 900px) 82vw, 42vw" priority />
       </div>

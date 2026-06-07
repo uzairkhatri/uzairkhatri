@@ -30,7 +30,10 @@ export default function Writing() {
     <section className={`${styles.section} reveal-section`} id="writing" aria-labelledby="writing-title">
       <div className={styles.shell}>
         <header className={styles.header}>
-          <p>Writing</p>
+          <div className="section-eyebrow">
+            <span />
+            Writing
+          </div>
           <h2 id="writing-title">How I think about production AI.</h2>
           <span>Short essays and architecture notes for teams building past the demo.</span>
         </header>
