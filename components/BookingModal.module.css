@@ -16,12 +16,13 @@
   max-width: 52rem;
   height: 90svh;
   max-height: 48rem;
-  background: #ffffff;
+  background: #171b1a;
+  border: 1px solid rgba(197, 155, 83, 0.18);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 
-    0 24px 48px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 24px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   animation: slide-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -35,9 +36,9 @@
   width: 2.2rem;
   height: 2.2rem;
   border-radius: 50%;
-  border: 1px solid rgba(17, 20, 24, 0.1);
-  background: #ffffff;
-  color: #111418;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #171b1a;
+  color: var(--text-primary);
   font-size: 1.6rem;
   font-weight: 300;
   display: flex;
@@ -49,8 +50,9 @@
 }
 
 .closeBtn:hover {
-  background: #111418;
-  color: #ffffff;
+  background: var(--gold);
+  color: #111418;
+  border-color: var(--gold);
   transform: rotate(90deg);
 }
 
@@ -58,7 +60,7 @@
   flex: 1;
   width: 100%;
   height: 100%;
-  background: #ffffff;
+  background: #171b1a;
   position: relative;
 }
 
@@ -70,7 +72,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background: #ffffff;
+  background: #171b1a;
   z-index: 5;
 }
 
@@ -86,7 +88,7 @@
 .loaderContainer span {
   font-family: var(--font-space-mono), monospace;
   font-size: 0.72rem;
-  color: rgba(17, 20, 24, 0.6);
+  color: var(--gold);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }

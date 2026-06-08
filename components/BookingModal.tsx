@@ -85,12 +85,16 @@ export default function BookingModal() {
             </div>
           )}
           <iframe
-            src="https://calendly.com/uz-khatri/30min?embed_domain=localhost&embed_type=inline"
+            src="https://calendly.com/uz-khatri/30min?embed_domain=localhost&embed_type=inline&background_color=171b1a&text_color=ffffff&primary_color=c59b53"
             width="100%"
             height="100%"
             frameBorder="0"
             title="Book a 30-Min Architecture Review"
-            onLoad={() => setIsLoading(false)}
+            onLoad={() => {
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 1200);
+            }}
             className={`${styles.iframe} ${isLoading ? "" : styles.iframeLoaded}`}
           />
         </div>
