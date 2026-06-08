@@ -7,6 +7,7 @@ import { BOOKING_URL } from "./siteLinks";
 export default function BookingModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadingStatus, setLoadingStatus] = useState("Establishing secure route...");
 
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
@@ -31,6 +32,31 @@ export default function BookingModal() {
       window.removeEventListener("click", handleGlobalClick);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const statuses = [
+      "Establishing secure routing node...",
+      "Resolving SSL proxy handshake...",
+      "Connecting to Calendly API...",
+      "Syncing availability buffers...",
+      "Building scheduler interface...",
+      "Active calendar synchronized."
+    ];
+
+    let index = 0;
+    setLoadingStatus(statuses[0]);
+
+    const interval = setInterval(() => {
+      index++;
+      if (index < statuses.length) {
+        setLoadingStatus(statuses[index]);
+      }
+    }, 220);
+
+    return () => clearInterval(interval);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -80,8 +106,14 @@ export default function BookingModal() {
         <div className={styles.iframeContainer}>
           {isLoading && (
             <div className={styles.loaderContainer}>
-              <div className={styles.spinner} />
-              <span>Loading secure scheduler...</span>
+              <div className={styles.premiumLoader}>
+                <div className={styles.ringOuter} />
+                <div className={styles.ringInner} />
+                <div className={styles.coreDot} />
+              </div>
+              <div className={styles.telemetryStatus}>
+                <span className={styles.statusLine}>{loadingStatus}</span>
+              </div>
             </div>
           )}
           <iframe
@@ -93,7 +125,7 @@ export default function BookingModal() {
             onLoad={() => {
               setTimeout(() => {
                 setIsLoading(false);
-              }, 1200);
+              }, 1300);
             }}
             className={`${styles.iframe} ${isLoading ? "" : styles.iframeLoaded}`}
           />
