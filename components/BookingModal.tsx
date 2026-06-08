@@ -6,6 +6,7 @@ import { BOOKING_URL } from "./siteLinks";
 
 export default function BookingModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
@@ -19,6 +20,7 @@ export default function BookingModal() {
         // Intercept calendly booking links
         if (href.includes("calendly.com") || href === BOOKING_URL) {
           e.preventDefault();
+          setIsLoading(true); // Reset state
           setIsOpen(true);
         }
       }
@@ -32,11 +34,27 @@ export default function BookingModal() {
 
   useEffect(() => {
     if (isOpen) {
+      // Prevent layout shift from scrollbar disappearing
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
       document.body.style.overflow = "hidden";
+
+      // Close on ESC key press
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setIsOpen(false);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
     } else {
+      document.body.style.paddingRight = "";
       document.body.style.overflow = "";
     }
     return () => {
+      document.body.style.paddingRight = "";
       document.body.style.overflow = "";
     };
   }, [isOpen]);
@@ -60,12 +78,20 @@ export default function BookingModal() {
           &times;
         </button>
         <div className={styles.iframeContainer}>
+          {isLoading && (
+            <div className={styles.loaderContainer}>
+              <div className={styles.spinner} />
+              <span>Loading secure scheduler...</span>
+            </div>
+          )}
           <iframe
             src="https://calendly.com/uz-khatri/30min?embed_domain=localhost&embed_type=inline"
             width="100%"
             height="100%"
             frameBorder="0"
             title="Book a 30-Min Architecture Review"
+            onLoad={() => setIsLoading(false)}
+            className={`${styles.iframe} ${isLoading ? "" : styles.iframeLoaded}`}
           />
         </div>
       </div>
