@@ -1,19 +1,13 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useState, useRef } from "react";
 import styles from "./SelectedWork.module.css";
-import { withBasePath } from "./siteLinks";
 import ProjectVisual, { type ProjectVisualType } from "./ProjectVisual";
-import SystemSpecModal, { type ProjectSpec } from "./SystemSpecModal";
-
-gsap.registerPlugin(ScrollTrigger);
+import { BOOKING_URL } from "./siteLinks";
 
 type Project = {
   number: string;
   year: string;
-  slug?: string;
   name: string;
   category: string;
   role: string;
@@ -34,14 +28,13 @@ const projects: Project[] = [
   {
     number: "01",
     year: "2024",
-    slug: "wellows",
     name: "Wellows",
     category: "AI Search Visibility Platform",
     role: "Founding Architect",
     description:
       "Designed the agent workflows, retrieval layer, backend services, and infrastructure path for production-grade AI search visibility across ChatGPT, Gemini, Perplexity, and Google AI surfaces.",
     stack: ["LangGraph", "OpenAI", "FastAPI", "Vector Search", "AWS"],
-    metric: ["3 agents", "KIVA, OPTA, and Citation Intelligence in one orchestration layer"],
+    metric: ["3 agents active", "KIVA, OPTA, and Citation Intelligence orchestration"],
     diagram: "wellows",
     challenge: "Wellows prototype worked in investor demos but lacked cost controls, async orchestration, and failure boundaries required to support concurrent enterprise users.",
     solution: "Orchestrated three specialized agents (KIVA, OPTA, and Citation Intelligence) using LangGraph and isolated error queues, ensuring failure in one did not crash the system.",
@@ -79,7 +72,7 @@ const projects: Project[] = [
     description:
       "Contributed backend architecture across cashback calculation, partner integrations, wallet flows, payment disbursement, and AI shopping assistance for a large consumer marketplace.",
     stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Payment APIs"],
-    metric: ["650+", "Brand-partner ecosystem supported through integration architecture"],
+    metric: ["650+ brands", "Brand-partner ecosystem supported through integration architecture"],
     diagram: "savyour",
     challenge: "Processing thousands of affiliate rewards events concurrently while keeping financial wallet ledgers synchronized, idempotent, and highly consistent.",
     solution: "Developed decoupled ingestion queues with database-level ACID transactions and Redis caches to handle cashback event calculation in sub-second timelines.",
@@ -98,7 +91,7 @@ const projects: Project[] = [
     description:
       "Implemented IBM FileNet P8, Case Manager, and Capture to move document-heavy insurance operations toward digital case management and paperless delivery.",
     stack: ["IBM FileNet", "Case Manager", "Capture", "Workflow Automation"],
-    metric: ["100%", "Paperless delivery path for enterprise document workflows"],
+    metric: ["100% paperless", "Paperless delivery path for enterprise document workflows"],
     diagram: "efu",
     challenge: "Migrating highly physical paper filing operations to paperless case routing for thousands of enterprise policy documents daily with strict compliance guidelines.",
     solution: "Implemented IBM FileNet Content Store with automated document ingestion and Case Manager routing pipelines, eliminating manual filing queues.",
@@ -110,137 +103,215 @@ const projects: Project[] = [
   },
 ];
 
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 18 18" aria-hidden="true">
-      <path d="M4 9h9M9.5 5.5 13 9l-3.5 3.5" />
-    </svg>
-  );
-}
+const projectTraces: Record<string, string[]> = {
+  "Wellows": [
+    "[INFO] Initializing multi-agent orchestration (KIVA + OPTA)...",
+    "[TRACE] Ingestion pipeline: Fetching Perplexity citations & search signals",
+    "[DEBUG] DB Search: Querying Vector similarity indexes...",
+    "[RESOLVED] Vector database returns 88 items (confidence > 0.91)",
+    "[TRACE] OPTA Node: Executing citation optimization via GPT-4o",
+    "[MUTATION] Updating search visibility audit cache...",
+    "[SUCCESS] Process completed in 1420ms. Gateways clear."
+  ],
+  "ClassFlow": [
+    "[INFO] Received class lifecycle event trigger (User #408)...",
+    "[LOCK] Redis Mutex: Setting lock on teacher_slot_892",
+    "[TRACE] Matchmaker agent: Scoring candidates in UTC-5 timezone",
+    "[MUTATION] Booking ledger: Writing class lifecycle matching data",
+    "[PAYMENT] Stripe transfer: Initiating partner disbursement batch",
+    "[SUCCESS] DB locks released. 0 manual operations triggered."
+  ],
+  "Savyour": [
+    "[INFO] Cashback payload received from brand partner webhook...",
+    "[TRACE] Database isolation: Starting Postgres ACID transaction",
+    "[CACHE] Redis key invalidation: cash_ledger:user_991",
+    "[TRACE] Cashback engine: Calculating reward event details (4.5% rate)",
+    "[COMMIT] Financial ledger commit completed and confirmed",
+    "[SUCCESS] Reward transaction logged. Cashback state synchronized."
+  ],
+  "EFU Life": [
+    "[INFO] Scanning high-volume paperless case directory...",
+    "[TRACE] Capture engine: FileNet metadata extraction in process",
+    "[WORKFLOW] Case Manager: Routing claims document #10928 to agent",
+    "[COMPLIANCE] Compliance rules: checking signature verification state",
+    "[ARCHIVE] Content Store: metadata index written to P8 cluster",
+    "[SUCCESS] Case route complete. compliance audit trail updated."
+  ]
+};
 
 export default function SelectedWork() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [activeSpec, setActiveSpec] = useState<ProjectSpec | null>(null);
+  const [activeTab, setActiveTab] = useState(0);
+  const [telemetryLines, setTelemetryLines] = useState<string[]>([]);
+  const activeProject = projects[activeTab];
+  const [animateIn, setAnimateIn] = useState(true);
 
+  const handleTabChange = (index: number) => {
+    if (index === activeTab) return;
+    setAnimateIn(false);
+    setTimeout(() => {
+      setActiveTab(index);
+      setAnimateIn(true);
+    }, 150);
+  };
+
+  // Telemetry loop hook
   useEffect(() => {
-    const mm = gsap.matchMedia();
+    const activeTraces = projectTraces[activeProject.name] || [];
+    setTelemetryLines([activeTraces[0]]);
 
-    mm.add("(min-width: 1051px)", () => {
-      const section = sectionRef.current;
-      const track = trackRef.current;
-      if (!section || !track) return;
+    let lineIndex = 1;
+    const interval = setInterval(() => {
+      setTelemetryLines((prev) => {
+        if (lineIndex >= activeTraces.length) {
+          lineIndex = 0;
+          return [activeTraces[0]];
+        }
+        const nextLines = [...prev, activeTraces[lineIndex]];
+        lineIndex++;
+        return nextLines;
+      });
+    }, 1200);
 
-      // Let layout settle then measure
-      const update = () => {
-        const totalScroll = track.scrollWidth - section.offsetWidth;
-        if (totalScroll <= 0) return;
-
-        const tween = gsap.to(track, {
-          x: -totalScroll,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: () => `+=${totalScroll}`,
-            pin: true,
-            scrub: 1.1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        return () => tween.kill();
-      };
-
-      // Small delay so fonts/images settle
-      const id = setTimeout(update, 80);
-      return () => clearTimeout(id);
-    });
-
-    return () => mm.revert();
-  }, []);
+    return () => clearInterval(interval);
+  }, [activeTab]);
 
   return (
-    <section
-      ref={sectionRef}
-      className={`${styles.section} reveal-section`}
-      id="work"
-      aria-labelledby="selected-work-title"
-    >
+    <section className={styles.section} id="work" aria-labelledby="work-title">
       <div className={styles.shell}>
         <header className={styles.header}>
-          <div>
-            <div className={styles.eyebrow}>
-              <span />
-              Selected work
-            </div>
-            <h2 className={styles.title} id="selected-work-title">
-              Production proof, not portfolio filler.
-            </h2>
+          <div className={styles.eyebrow}>
+            <span />
+            Selected work
           </div>
+          <h2 className={styles.title} id="work-title">
+            Production proof, not portfolio filler.
+          </h2>
           <p>
-            Four engagements where architecture had to translate into systems, operations, and
-            business continuity.
+            Explore the active architectural blueprints and verified outcome telemetry of systems built to survive scale.
           </p>
         </header>
 
-        {/* Horizontal scroll track — becomes flex row on desktop via GSAP */}
-        <div ref={trackRef} className={styles.track}>
-          <div className={`${styles.grid} ${styles.hGrid}`}>
-            {projects.map((project, index) => (
-              <article
-                className={`${styles.card} ${index === 0 ? styles.featured : ""} reveal-item`}
-                key={project.number}
+        {/* Dashboard Split Container */}
+        <div className={styles.dashboardContainer}>
+          
+          {/* Left Navigation: Vertical tabs list */}
+          <nav className={styles.tabsList} aria-label="Project architecture selector">
+            {projects.map((proj, idx) => (
+              <button
+                key={proj.number}
+                className={`${styles.tabBtn} ${idx === activeTab ? styles.tabActive : ""}`}
+                onClick={() => handleTabChange(idx)}
+                aria-selected={idx === activeTab}
+                role="tab"
               >
-                <div className={styles.cardTop}>
-                  <span>{project.number}</span>
-                  <em>{project.year}</em>
+                <div className={styles.tabHeader}>
+                  <span>{proj.number}</span>
+                  <em>{proj.year}</em>
                 </div>
-
-                <ProjectVisual type={project.diagram} variant={index === 0 ? "hero" : "card"} />
-
-                <div className={styles.cardBody}>
-                  <div className={styles.projectMeta}>
-                    <span>{project.role}</span>
-                    <span>{project.category}</span>
-                  </div>
-                  <h3>{project.name}</h3>
-                  <p>{project.description}</p>
-                </div>
-
-                <div className={styles.metric}>
-                  <strong>{project.metric[0]}</strong>
-                  <span>{project.metric[1]}</span>
-                </div>
-
-                <div className={styles.stack}>
-                  {project.stack.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
-                </div>
-
-                <div className={styles.actions}>
-                  {project.slug ? (
-                    <a href={withBasePath(`/work/${project.slug}`)}>
-                      Full case study <ArrowIcon />
-                    </a>
-                  ) : (
-                    <button onClick={() => setActiveSpec(project as any)} aria-label={`View ${project.name} specification`}>
-                      View System Spec <ArrowIcon />
-                    </button>
-                  )}
-                  <a href="#contact">
-                    Built something similar? <ArrowIcon />
-                  </a>
-                </div>
-              </article>
+                <h3>{proj.name}</h3>
+                <span className={styles.tabKicker}>{proj.category}</span>
+                <div className={styles.tabBadge}>{proj.metric[0]}</div>
+              </button>
             ))}
-          </div>
+          </nav>
+
+          {/* Right Panel: Spec Details */}
+          <article className={`${styles.specPanel} ${animateIn ? styles.fadeIn : styles.fadeOut}`}>
+            {/* Project Visual Display Header */}
+            <div className={styles.specVisualBlock}>
+              <ProjectVisual type={activeProject.diagram} variant="hero" />
+            </div>
+
+            {/* Sub-Layout Content Columns */}
+            <div className={styles.specBody}>
+              <div className={styles.specDetails}>
+                <div className={styles.specRoleLine}>
+                  <strong>{activeProject.role}</strong>
+                  <span>&bull;</span>
+                  <span>{activeProject.category}</span>
+                </div>
+                <p className={styles.specDesc}>{activeProject.description}</p>
+
+                <div className={styles.blockRow}>
+                  <div className={styles.block}>
+                    <h4>The Scale Challenge</h4>
+                    <p>{activeProject.challenge}</p>
+                  </div>
+                  <div className={styles.block}>
+                    <h4>The Architectural Solution</h4>
+                    <p>{activeProject.solution}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sidebar Technical Blueprint */}
+              <aside className={styles.specSidebar}>
+                <div className={styles.blueprintPanel}>
+                  <h4>System Blueprint</h4>
+                  <div className={styles.blueprintRow}>
+                    <strong>Orchestration</strong>
+                    <span>{activeProject.blueprint.orchestration}</span>
+                  </div>
+                  <div className={styles.blueprintRow}>
+                    <strong>Data Layer</strong>
+                    <span>{activeProject.blueprint.data}</span>
+                  </div>
+                  <div className={styles.blueprintRow}>
+                    <strong>Infrastructure</strong>
+                    <span>{activeProject.blueprint.infra}</span>
+                  </div>
+                </div>
+
+                <div className={styles.metricPanel}>
+                  <h4>Outcome Impact</h4>
+                  <strong>{activeProject.metric[0]}</strong>
+                  <span>{activeProject.metric[1]}</span>
+                </div>
+
+                <div className={styles.stackPanel}>
+                  <h4>Core Stack</h4>
+                  <div className={styles.tags}>
+                    {activeProject.stack.map((t) => (
+                      <span key={t} className={styles.stackTag}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </aside>
+            </div>
+
+            {/* Bottom Full-Width Telemetry trace */}
+            <div className={styles.traceConsole}>
+              <h4>Inline System Execution Trace</h4>
+              <div className={styles.consoleBody}>
+                <div className={styles.consoleHeader}>
+                  <span className={styles.consoleDotRed} />
+                  <span className={styles.consoleDotYellow} />
+                  <span className={styles.consoleDotGreen} />
+                  <span className={styles.consoleTitle}>telemetry_stream.log</span>
+                </div>
+                <div className={styles.consoleLines}>
+                  {telemetryLines.map((line, idx) => (
+                    <div key={idx} className={styles.consoleLine}>
+                      <span className={styles.consoleTimestamp}>[+{idx * 1.2}s]</span>{" "}
+                      <span className={styles.consoleText}>{line}</span>
+                    </div>
+                  ))}
+                  <div className={styles.consoleCursor} />
+                </div>
+              </div>
+            </div>
+
+            {/* Footer actions */}
+            <footer className={styles.specFooter}>
+              <span>NDA Protected System Architecture. Outcomes fully verified.</span>
+              <a href={BOOKING_URL} target="_blank" rel="noreferrer">
+                Discuss Similar Architecture &rarr;
+              </a>
+            </footer>
+          </article>
+
         </div>
       </div>
-      <SystemSpecModal project={activeSpec} onClose={() => setActiveSpec(null)} />
     </section>
   );
 }
-
