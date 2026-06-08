@@ -486,6 +486,49 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
   opacity: 0.26;
 }
 
+.hero-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-telemetry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid rgba(197, 155, 83, 0.22);
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  color: var(--gold);
+  background: rgba(23, 25, 29, 0.35);
+  box-shadow: 0 0.8rem 2rem rgba(23, 25, 29, 0.04);
+  font-family: var(--font-space-mono), monospace;
+  font-size: clamp(0.64rem, 0.76vw, 0.76rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.telemetry-pulse-gold {
+  position: relative;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.telemetry-pulse-gold::before {
+  content: "";
+  position: absolute;
+  inset: -0.18rem;
+  border-radius: inherit;
+  background: var(--gold);
+  opacity: 0.35;
+  animation: radar-ping 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
 .hero-role {
   display: grid;
   gap: 0.3rem;

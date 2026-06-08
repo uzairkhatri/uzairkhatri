@@ -51,9 +51,15 @@ export default function Landing() {
       </div>
 
       <div className="hero-content">
-        <div className="hero-availability">
-          <span />
-          Open to architecture advisory
+        <div className="hero-status-row">
+          <div className="hero-availability">
+            <span />
+            1 client slot open for Q3 2026
+          </div>
+          <div className="hero-telemetry-pill">
+            <span className="telemetry-pulse-gold" />
+            <span>System: Active | RTT: 42ms</span>
+          </div>
         </div>
         <div className="hero-role">
           <small>AI Systems Architect</small>

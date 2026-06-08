@@ -270,3 +270,104 @@
     gap: 0.2rem;
   }
 }
+
+.traceConsole {
+  margin-top: 1.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+}
+
+.traceConsole h3 {
+  margin: 0 0 0.8rem;
+  color: var(--gold);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.consoleBody {
+  background: #090b0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: var(--font-space-mono), monospace;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.consoleHeader {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.consoleDotRed, .consoleDotYellow, .consoleDotGreen {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+}
+
+.consoleDotRed { background: #ff5f56; }
+.consoleDotYellow { background: #ffbd2e; }
+.consoleDotGreen { background: #27c93f; }
+
+.consoleTitle {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.consoleLines {
+  padding: 1rem 1.2rem;
+  min-height: 8.5rem;
+  max-height: 12rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.consoleLine {
+  display: flex;
+  gap: 0.6rem;
+  animation: logLineFade 0.25s ease both;
+}
+
+.consoleTimestamp {
+  color: var(--gold-bright);
+  opacity: 0.75;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.consoleText {
+  color: var(--accent-green);
+  word-break: break-all;
+}
+
+.consoleCursor {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.75rem;
+  background: var(--accent-green);
+  animation: consoleBlink 1s infinite;
+  margin-top: 0.15rem;
+}
+
+@keyframes logLineFade {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes consoleBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

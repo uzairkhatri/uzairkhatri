@@ -9,6 +9,7 @@ import StickyNav from "@/components/StickyNav";
 import Writing from "@/components/Writing";
 import ScrollReveal from "@/components/ScrollReveal";
 import BookingModal from "@/components/BookingModal";
+import Diagnostics from "@/components/Diagnostics";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <SelectedWork />
       <About />
       <TrustStrip />
+      <Diagnostics />
       <Writing />
       <Contact />
       <Footer />
