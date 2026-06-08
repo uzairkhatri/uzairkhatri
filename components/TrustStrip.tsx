@@ -95,6 +95,20 @@ export default function TrustStrip() {
             ))}
           </div>
         </div>
+
+        <div className={styles.verificationBanner}>
+          <svg className={styles.lockIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          <div className={styles.bannerText}>
+            <strong>NDA Protected &amp; Verified</strong>
+            <span>References can be formally validated upon request.</span>
+          </div>
+          <a href="mailto:uzairiqbal.khatri@gmail.com?subject=Reference%20Verification%20Request&body=Hi%20Uzair%2C%0A%0AI'm%20reviewing%20your%20architecture%20portfolio%20and%20would%20like%20to%20verify%20references%20for%20your%20withheld%20NDA%20testimonials.%0A%0AThanks%2C%0A%5BMy%20Name%5D" className={styles.verifyLink}>
+            Request validation reference &rarr;
+          </a>
+        </div>
       </div>
     </section>
   );

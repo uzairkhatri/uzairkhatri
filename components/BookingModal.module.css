@@ -1,0 +1,87 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: rgba(17, 20, 24, 0.78);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  animation: fade-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 52rem;
+  height: 90svh;
+  max-height: 48rem;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 24px 48px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  animation: slide-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  z-index: 10;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(17, 20, 24, 0.1);
+  background: #ffffff;
+  color: #111418;
+  font-size: 1.6rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  background: #111418;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.iframeContainer {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(24px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@media (max-width: 620px) {
+  .overlay {
+    padding: 0.75rem;
+  }
+  .modal {
+    height: 100svh;
+    max-height: none;
+    border-radius: 12px;
+  }
+  .closeBtn {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}

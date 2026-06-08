@@ -8,6 +8,7 @@ import TrustStrip from "@/components/TrustStrip";
 import StickyNav from "@/components/StickyNav";
 import Writing from "@/components/Writing";
 import ScrollReveal from "@/components/ScrollReveal";
+import BookingModal from "@/components/BookingModal";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <Writing />
       <Contact />
       <Footer />
+      <BookingModal />
     </main>
   );
 }

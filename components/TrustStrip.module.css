@@ -1,2 +1,65 @@
 .header h2{font-size:clamp(2.6rem,5vw,5.2rem)!important;letter-spacing:-.065em!important;line-height:.92!important}@media(max-width:620px){.section{padding:3.8rem 1.2rem!important}.header h2{font-size:clamp(2.5rem,12vw,4rem)!important}.featuredQuote{font-size:clamp(1.35rem,7vw,2.1rem)!important}}
 .section{background:var(--graphite-deep);padding:var(--section-pad) var(--page-pad);color:#ffffff}.shell{max-width:var(--content-max);margin:0 auto}.header{display:grid;grid-template-columns:minmax(0,1fr) minmax(18rem,.5fr);gap:2rem;align-items:end;margin:1.3rem 0 3rem}.header h2{max-width:12ch;margin:0;font-size:clamp(3.2rem,6vw,6.5rem);font-weight:950;letter-spacing:-.08em;line-height:.88}.header p{margin:0;color:var(--dark-muted);line-height:1.7}.inner{display:grid;grid-template-columns:minmax(18rem,.8fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,5rem)}.featured{position:relative;display:flex;min-height:100%;flex-direction:column;justify-content:center;border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--gold)!important;border-radius:8px;padding:2rem 2rem 2rem 2.5rem;background:rgba(255,255,255,.02)}.featuredStars,.cardStars{color:var(--gold);letter-spacing:.08em}.featuredQuote{margin:1.5rem 0;color:#ffffff;font-family:var(--font-cormorant-garamond),Georgia,serif;font-size:clamp(1.5rem,2.5vw,2.5rem);font-style:italic;line-height:1.3}.featuredFooter{display:flex;align-items:center;gap:.8rem}.featuredAvatar{display:grid;width:2.5rem;height:2.5rem;place-items:center;border:1px solid rgba(255,255,255,0.1);border-radius:50%;font-size:.65rem;font-weight:900}.featuredMeta{display:grid;gap:.15rem}.featuredName{font-size:.7rem;font-weight:900;text-transform:uppercase}.featuredSource{color:var(--dark-muted);font-size:.65rem}.testimonialGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid rgba(255,255,255,0.08)}.card{display:flex;min-height:14rem;flex-direction:column;gap:.9rem;border-right:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);padding:1.2rem;background:rgba(255,255,255,.01)}.card:nth-child(3n){border-right:0}.cardText{display:-webkit-box;overflow:hidden;margin:0;color:var(--dark-muted);font-family:var(--font-cormorant-garamond),Georgia,serif;font-size:1.05rem;font-style:italic;line-height:1.5;-webkit-box-orient:vertical;-webkit-line-clamp:5}.cardFooter{display:grid;gap:.15rem;margin-top:auto}.cardAuthor{font-size:.65rem;font-weight:900;text-transform:uppercase}.cardSource{color:var(--dark-muted);font-size:.58rem;line-height:1.4}.cardStars{font-size:.65rem}@media(max-width:1000px){.inner,.header{grid-template-columns:1fr}.testimonialGrid{grid-template-columns:repeat(2,1fr)}.card:nth-child(3n){border-right:1px solid rgba(255,255,255,0.08)}.card:nth-child(2n){border-right:0}}@media(max-width:620px){.section{padding:4.5rem 1.2rem}.header h2{font-size:clamp(3rem,15vw,5rem)}.testimonialGrid{grid-template-columns:1fr}.card,.card:nth-child(3n){border-right:0}.featured{padding:1.5rem}}
+
+.verificationBanner {
+  margin-top: 3.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+}
+
+.lockIcon {
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--gold-bright);
+  flex-shrink: 0;
+}
+
+.bannerText {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.bannerText strong {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.bannerText span {
+  color: var(--dark-muted);
+  font-size: 0.78rem;
+}
+
+.verifyLink {
+  margin-left: auto;
+  color: var(--gold-bright);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.25s ease;
+}
+
+.verifyLink:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .verificationBanner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  .verifyLink {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+}
