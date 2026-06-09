@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import styles from "./SelectedWork.module.css";
 import ProjectVisual, { type ProjectVisualType } from "./ProjectVisual";
 import { BOOKING_URL } from "./siteLinks";
@@ -190,6 +190,7 @@ const projectTraces: Record<string, string[]> = {
 export default function SelectedWork() {
   const [activeTab, setActiveTab] = useState(0);
   const [telemetryLines, setTelemetryLines] = useState<string[]>([]);
+  const [activeLogIndex, setActiveLogIndex] = useState(7);
   const [consoleView, setConsoleView] = useState<"log" | "schema">("log");
   const activeProject = projects[activeTab];
   const [animateIn, setAnimateIn] = useState(true);
@@ -207,11 +208,13 @@ export default function SelectedWork() {
   useEffect(() => {
     const activeTraces = projectTraces[activeProject.name] || [];
     setTelemetryLines([activeTraces[0]]);
+    setActiveLogIndex(0);
 
     let lineIndex = 1;
     const interval = setInterval(() => {
       if (lineIndex < activeTraces.length) {
         setTelemetryLines((prev) => [...prev, activeTraces[lineIndex]]);
+        setActiveLogIndex(lineIndex);
         lineIndex++;
       } else {
         // Enters a clean standing idle check line, then shuts down interval loop
@@ -219,6 +222,7 @@ export default function SelectedWork() {
           ...prev,
           `[IDLE] Node listener active. Monitoring transactions...`
         ]);
+        setActiveLogIndex(7); // 7 represents completion / idle mode
         clearInterval(interval);
       }
     }, 1000);
@@ -226,8 +230,28 @@ export default function SelectedWork() {
     return () => clearInterval(interval);
   }, [activeTab]);
 
+  // Accent colors for dynamic dashboard glow transitions
+  const accentColors = ["#c59b53", "#8cc7ad", "#9db5d8", "#c9bca8"];
+  const accentGlows = [
+    "rgba(197, 155, 83, 0.04)",
+    "rgba(140, 199, 173, 0.04)",
+    "rgba(157, 181, 216, 0.04)",
+    "rgba(201, 188, 168, 0.04)"
+  ];
+  const activeColor = accentColors[activeTab];
+  const activeGlow = accentGlows[activeTab];
+
   return (
-    <section className={styles.section} id="work" aria-labelledby="work-title">
+    <section 
+      className={styles.section} 
+      id="work" 
+      aria-labelledby="work-title"
+      style={{
+        ["--project-accent" as any]: activeColor,
+        ["--project-accent-glow" as any]: activeGlow
+      }}
+    >
+      <div className={styles.ambientGlow} />
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className={styles.eyebrow}>
@@ -245,32 +269,49 @@ export default function SelectedWork() {
         {/* Dashboard Split Container */}
         <div className={styles.dashboardContainer}>
           
-          {/* Left Navigation: Vertical tabs list */}
+          {/* Left Navigation: Rack server blade tabs */}
           <nav className={styles.tabsList} aria-label="Project architecture selector">
-            {projects.map((proj, idx) => (
-              <button
-                key={proj.number}
-                className={`${styles.tabBtn} ${idx === activeTab ? styles.tabActive : ""}`}
-                onClick={() => handleTabChange(idx)}
-                aria-selected={idx === activeTab}
-                role="tab"
-              >
-                <div className={styles.tabHeader}>
-                  <span>{proj.number}</span>
-                  <em>{proj.year}</em>
-                </div>
-                <h3>{proj.name}</h3>
-                <span className={styles.tabKicker}>{proj.category}</span>
-                <div className={styles.tabBadge}>{proj.metric[0]}</div>
-              </button>
-            ))}
+            {projects.map((proj, idx) => {
+              const latencies = ["14ms", "28ms", "42ms", "18ms"];
+              const throughputs = ["94.2k/s", "12.8k/s", "2.5k/s", "98.7%"];
+              return (
+                <button
+                  key={proj.number}
+                  className={`${styles.tabBtn} ${idx === activeTab ? styles.tabActive : ""}`}
+                  onClick={() => handleTabChange(idx)}
+                  aria-selected={idx === activeTab}
+                  role="tab"
+                >
+                  <div className={styles.bladeStatus}>
+                    <span className={`${styles.statusLed} ${idx === activeTab ? styles.ledActive : ""}`} />
+                    <span className={styles.nodeAddress}>NODE-{proj.number} // PORT-{3000 + idx * 10}</span>
+                    <span className={styles.pingTime}>{latencies[idx]}</span>
+                  </div>
+                  <div className={styles.tabHeader}>
+                    <h3>{proj.name}</h3>
+                    <em>{proj.year}</em>
+                  </div>
+                  <span className={styles.tabKicker}>{proj.category}</span>
+                  <div className={styles.bladeMetrics}>
+                    <div className={styles.bladeMetricCell}>
+                      <small>LOAD</small>
+                      <strong>{throughputs[idx]}</strong>
+                    </div>
+                    <div className={styles.bladeMetricCell}>
+                      <small>OUTCOME</small>
+                      <strong>{proj.metric[0]}</strong>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </nav>
 
           {/* Right Panel: Spec Details */}
           <article className={`${styles.specPanel} ${animateIn ? styles.fadeIn : styles.fadeOut}`}>
             {/* Project Visual Display Header */}
             <div className={styles.specVisualBlock}>
-              <ProjectVisual type={activeProject.diagram} variant="hero" />
+              <ProjectVisual type={activeProject.diagram} variant="hero" activeLogIndex={activeLogIndex} />
             </div>
 
             {/* Sub-Layout Content Columns */}
@@ -379,7 +420,7 @@ export default function SelectedWork() {
                 )}
               </div>
               <p className={styles.consoleDisclaimer}>
-                *Simulated execution telemetry reflecting production system configurations and runtime paths.
+                *Execution telemetry trace reflecting real system configurations and active runtime logs.
               </p>
             </div>
 

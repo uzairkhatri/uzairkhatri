@@ -83,82 +83,152 @@
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+
+.bladeStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.58rem;
+  margin-bottom: 0.65rem;
+}
+
+.statusLed {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: inline-block;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ledActive {
+  background: var(--project-accent, var(--gold));
+  box-shadow: 0 0 8px var(--project-accent, var(--gold));
+  animation: ledPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.15); }
+}
+
+.nodeAddress {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.pingTime {
+  margin-left: auto;
+  color: var(--project-accent, var(--gold));
+  font-weight: 700;
 }
 
 .tabBtn {
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(15, 18, 17, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-left: 3px solid transparent;
   border-radius: 12px;
-  padding: 1.25rem 1.5rem;
+  padding: 1.15rem 1.35rem;
   text-align: left;
   cursor: pointer;
   color: inherit;
   font-family: inherit;
   width: 100%;
-  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(10px);
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .tabBtn:hover {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.12);
   transform: translateX(4px);
 }
 
 .tabActive {
-  background: rgba(197, 155, 83, 0.08) !important;
-  border-color: rgba(197, 155, 83, 0.4) !important;
-  border-left-color: var(--gold) !important;
-  box-shadow: inset 0 0 16px rgba(197, 155, 83, 0.04);
+  background: var(--project-accent-glow, rgba(197, 155, 83, 0.04)) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  border-left-color: var(--project-accent, var(--gold)) !important;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.tabBtn h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tabHeader em {
+  font-style: normal;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 700;
 }
 
 .tabHeader {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.28);
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  font-family: var(--font-space-mono), monospace;
-}
-
-.tabHeader span {
-  color: var(--gold);
-  font-weight: 900;
-}
-
-.tabHeader em {
-  font-style: normal;
-}
-
-.tabBtn h3 {
-  margin: 0 0 0.25rem 0;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.02em;
+  align-items: baseline;
+  margin-bottom: 0.35rem;
 }
 
 .tabKicker {
   display: block;
   font-size: 0.72rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   line-height: 1.3;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.85rem;
 }
 
-.tabBadge {
-  display: inline-block;
+.bladeMetrics {
+  display: flex;
+  gap: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 0.65rem;
+}
+
+.bladeMetricCell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.bladeMetricCell small {
   font-family: var(--font-space-mono), monospace;
-  font-size: 0.6rem;
-  color: var(--gold);
-  border: 1px solid rgba(197, 155, 83, 0.25);
-  background: rgba(197, 155, 83, 0.05);
-  border-radius: 4px;
-  padding: 0.15rem 0.45rem;
+  font-size: 0.52rem;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.05em;
   font-weight: 700;
+}
+
+.bladeMetricCell strong {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.64rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 700;
+}
+
+/* Ambient glow light background */
+.ambientGlow {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50rem;
+  height: 50rem;
+  background: radial-gradient(circle, var(--project-accent-glow, rgba(197, 155, 83, 0.04)) 0%, transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.8s ease;
 }
 
 /* Spec Panel (active card display) */

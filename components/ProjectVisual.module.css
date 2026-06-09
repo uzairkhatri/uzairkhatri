@@ -176,6 +176,119 @@
   }
 }
 
+/* Node styling */
+.nodeGroup {
+  cursor: pointer;
+}
+
+.nodeGroup rect {
+  fill: #141817;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1px;
+  transition: fill 0.22s ease, stroke 0.22s ease, filter 0.22s ease;
+}
+
+.nodeGroup text {
+  transition: fill 0.22s ease;
+}
+
+.nodeTitle {
+  fill: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: var(--font-inter), sans-serif;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.nodeSub {
+  fill: var(--text-muted);
+  font-size: 6.5px;
+  font-family: var(--font-space-mono), monospace;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* Node Hovers */
+.wellows .nodeGroup:hover rect {
+  stroke: #c59b53 !important;
+  fill: rgba(197, 155, 83, 0.08) !important;
+  filter: drop-shadow(0 0 6px rgba(197, 155, 83, 0.3));
+}
+
+.classflow .nodeGroup:hover rect {
+  stroke: #8cc7ad !important;
+  fill: rgba(140, 199, 173, 0.08) !important;
+  filter: drop-shadow(0 0 6px rgba(140, 199, 173, 0.3));
+}
+
+.savyour .nodeGroup:hover rect {
+  stroke: #9db5d8 !important;
+  fill: rgba(157, 181, 216, 0.08) !important;
+  filter: drop-shadow(0 0 6px rgba(157, 181, 216, 0.3));
+}
+
+.efu .nodeGroup:hover rect {
+  stroke: #c9bca8 !important;
+  fill: rgba(201, 188, 168, 0.08) !important;
+  filter: drop-shadow(0 0 6px rgba(201, 188, 168, 0.3));
+}
+
+/* Active nodes glowing during telemetry cycles */
+.wellows .nodeActive rect {
+  stroke: #c59b53 !important;
+  stroke-width: 1.5px !important;
+  filter: drop-shadow(0 0 8px rgba(197, 155, 83, 0.45));
+}
+
+.classflow .nodeActive rect {
+  stroke: #8cc7ad !important;
+  stroke-width: 1.5px !important;
+  filter: drop-shadow(0 0 8px rgba(140, 199, 173, 0.45));
+}
+
+.savyour .nodeActive rect {
+  stroke: #9db5d8 !important;
+  stroke-width: 1.5px !important;
+  filter: drop-shadow(0 0 8px rgba(157, 181, 216, 0.45));
+}
+
+.efu .nodeActive rect {
+  stroke: #c9bca8 !important;
+  stroke-width: 1.5px !important;
+  filter: drop-shadow(0 0 8px rgba(201, 188, 168, 0.45));
+}
+
+/* Console detail bar under diagram */
+.consoleDetailBar {
+  background: #060807;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.65rem 1rem;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  line-height: 1.4;
+  text-align: left;
+  min-height: 2.2rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.tickerPrefix {
+  font-weight: 900;
+  margin-right: 0.5rem;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.wellows .tickerPrefix { color: #c59b53; }
+.classflow .tickerPrefix { color: #8cc7ad; }
+.savyour .tickerPrefix { color: #9db5d8; }
+.efu .tickerPrefix { color: #c9bca8; }
+
+.tickerText {
+  color: rgba(255, 255, 255, 0.65);
+}
+
 /* Colors and custom themes */
 .classflow .brand > span,
 .classflow .toolbar > strong {
@@ -232,5 +345,10 @@
 
   .diagramContainer {
     padding: 0.75rem;
+  }
+
+  .consoleDetailBar {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.55rem;
   }
 }
