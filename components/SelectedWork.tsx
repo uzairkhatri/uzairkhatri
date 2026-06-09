@@ -22,6 +22,7 @@ type Project = {
     data: string;
     infra: string;
   };
+  schema: Record<string, any>;
 };
 
 const projects: Project[] = [
@@ -42,6 +43,19 @@ const projects: Project[] = [
       orchestration: "LangGraph / FastAPI / Python",
       data: "Vector Index / Ingestion pipeline",
       infra: "AWS SQS Queues / ECS Containers"
+    },
+    schema: {
+      "orchestration": {
+        "engine": "LangGraph StateGraph",
+        "nodes": ["KIVA_agent", "OPTA_agent", "Citation_Intelligence"],
+        "max_concurrency_threads": 64,
+        "state_context_store": "MemorySaver (Session Bound)"
+      },
+      "resilience": {
+        "provider_failover": "Claude-3.5-Sonnet (via AWS Bedrock)",
+        "rate_limiting_retry": "Exponential backoff with jitter",
+        "dead_letter_queue": "aws-sqs-wellows-errors"
+      }
     }
   },
   {
@@ -61,6 +75,18 @@ const projects: Project[] = [
       orchestration: "FastAPI / Python State Machine",
       data: "Redis Locks / WebSockets match feedback",
       infra: "Stripe payout system / AWS ECS"
+    },
+    schema: {
+      "matchmaker_engine": {
+        "scoring_matrix": ["timezone_offset", "historical_rating", "active_load"],
+        "lock_safety": "Redis Distributed Mutex (Redlock)",
+        "lock_ttl_seconds": 45
+      },
+      "ledger_consistency": {
+        "transaction_isolation": "PostgreSQL Serializable",
+        "payout_provider": "Stripe Custom Accounts",
+        "match_resolution": "real-time WebSocket state client"
+      }
     }
   },
   {
@@ -80,6 +106,17 @@ const projects: Project[] = [
       orchestration: "FastAPI Async Services",
       data: "PostgreSQL Ledger / Transaction Isolation",
       infra: "Partner webhook channels / AWS"
+    },
+    schema: {
+      "ledger_accounting": {
+        "idempotency_key": "x-savyour-transaction-id",
+        "isolation_level": "PostgreSQL Repeatable Read",
+        "cache_invalidation": "Redis namespaces key pattern"
+      },
+      "webhook_ingestion": {
+        "rate_limit": 2500,
+        "security_verification": "HMAC-SHA256 signature verification"
+      }
     }
   },
   {
@@ -99,6 +136,17 @@ const projects: Project[] = [
       orchestration: "IBM Case Manager Workflows",
       data: "FileNet P8 Content Repository",
       infra: "On-Premise Server High Availability clusters"
+    },
+    schema: {
+      "document_pipeline": {
+        "ingestion": "IBM Datacap capture queues",
+        "indexing_metadata": "IBM FileNet P8 Metadata schema",
+        "access_control": "LDAP Active Directory synchronized ACLs"
+      },
+      "case_routing": {
+        "workflow_engine": "IBM Process Engine PE engine",
+        "failover": "Clustered active-active database replica"
+      }
     }
   },
 ];
@@ -142,6 +190,7 @@ const projectTraces: Record<string, string[]> = {
 export default function SelectedWork() {
   const [activeTab, setActiveTab] = useState(0);
   const [telemetryLines, setTelemetryLines] = useState<string[]>([]);
+  const [consoleView, setConsoleView] = useState<"log" | "schema">("log");
   const activeProject = projects[activeTab];
   const [animateIn, setAnimateIn] = useState(true);
 
@@ -154,23 +203,25 @@ export default function SelectedWork() {
     }, 150);
   };
 
-  // Telemetry loop hook
+  // Telemetry loop hook: runs once, then enters an idle monitor standby
   useEffect(() => {
     const activeTraces = projectTraces[activeProject.name] || [];
     setTelemetryLines([activeTraces[0]]);
 
     let lineIndex = 1;
     const interval = setInterval(() => {
-      setTelemetryLines((prev) => {
-        if (lineIndex >= activeTraces.length) {
-          lineIndex = 0;
-          return [activeTraces[0]];
-        }
-        const nextLines = [...prev, activeTraces[lineIndex]];
+      if (lineIndex < activeTraces.length) {
+        setTelemetryLines((prev) => [...prev, activeTraces[lineIndex]]);
         lineIndex++;
-        return nextLines;
-      });
-    }, 1200);
+      } else {
+        // Enters a clean standing idle check line, then shuts down interval loop
+        setTelemetryLines((prev) => [
+          ...prev,
+          `[IDLE] Node listener active. Monitoring transactions...`
+        ]);
+        clearInterval(interval);
+      }
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [activeTab]);
@@ -279,26 +330,57 @@ export default function SelectedWork() {
               </aside>
             </div>
 
-            {/* Bottom Full-Width Telemetry trace */}
+            {/* Bottom Full-Width Telemetry trace / JSON Schema Switcher */}
             <div className={styles.traceConsole}>
-              <h4>Inline System Execution Trace</h4>
+              <div className={styles.consoleTabHeader}>
+                <h4>System Telemetry Console</h4>
+                <div className={styles.consoleViewSelectors}>
+                  <button 
+                    className={`${styles.consoleSelBtn} ${consoleView === "log" ? styles.consoleSelActive : ""}`}
+                    onClick={() => setConsoleView("log")}
+                  >
+                    [ Telemetry Stream ]
+                  </button>
+                  <button 
+                    className={`${styles.consoleSelBtn} ${consoleView === "schema" ? styles.consoleSelActive : ""}`}
+                    onClick={() => setConsoleView("schema")}
+                  >
+                    [ Parameter Schema ]
+                  </button>
+                </div>
+              </div>
+
               <div className={styles.consoleBody}>
                 <div className={styles.consoleHeader}>
                   <span className={styles.consoleDotRed} />
                   <span className={styles.consoleDotYellow} />
                   <span className={styles.consoleDotGreen} />
-                  <span className={styles.consoleTitle}>telemetry_stream.log</span>
+                  <span className={styles.consoleTitle}>
+                    {consoleView === "log" ? "telemetry_stream.log" : "system_parameters.json"}
+                  </span>
                 </div>
-                <div className={styles.consoleLines}>
-                  {telemetryLines.map((line, idx) => (
-                    <div key={idx} className={styles.consoleLine}>
-                      <span className={styles.consoleTimestamp}>[+{idx * 1.2}s]</span>{" "}
-                      <span className={styles.consoleText}>{line}</span>
-                    </div>
-                  ))}
-                  <div className={styles.consoleCursor} />
-                </div>
+
+                {consoleView === "log" ? (
+                  <div className={styles.consoleLines}>
+                    {telemetryLines.map((line, idx) => (
+                      <div key={idx} className={styles.consoleLine}>
+                        <span className={styles.consoleTimestamp}>[+{(idx * 1.0).toFixed(1)}s]</span>{" "}
+                        <span className={styles.consoleText}>{line}</span>
+                      </div>
+                    ))}
+                    {telemetryLines.length < (projectTraces[activeProject.name]?.length || 0) + 1 && (
+                      <div className={styles.consoleCursor} />
+                    )}
+                  </div>
+                ) : (
+                  <div className={styles.consoleJson}>
+                    <pre><code>{JSON.stringify(activeProject.schema, null, 2)}</code></pre>
+                  </div>
+                )}
               </div>
+              <p className={styles.consoleDisclaimer}>
+                *Simulated execution telemetry reflecting production system configurations and runtime paths.
+              </p>
             </div>
 
             {/* Footer actions */}

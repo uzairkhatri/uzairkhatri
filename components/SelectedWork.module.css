@@ -336,14 +336,76 @@
   padding-top: 1.6rem;
 }
 
-.traceConsole h4 {
-  margin: 0 0 0.8rem 0;
+.consoleTabHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.consoleTabHeader h4 {
+  margin: 0;
   color: var(--gold);
   font-family: var(--font-space-mono), monospace;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.consoleViewSelectors {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.consoleSelBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.68rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  user-select: none;
+}
+
+.consoleSelBtn:hover {
+  color: var(--paper);
+}
+
+.consoleSelActive {
+  color: var(--gold) !important;
+  text-shadow: 0 0 8px rgba(197, 155, 83, 0.4);
+}
+
+.consoleJson {
+  padding: 1.1rem 1.3rem;
+  min-height: 8.5rem;
+  max-height: 12rem;
+  overflow-y: auto;
+  text-align: left;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--accent-green);
+  background: #090b0a;
+}
+
+.consoleJson pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: inherit;
+}
+
+.consoleDisclaimer {
+  margin-top: 0.6rem;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: left;
 }
 
 .consoleBody {
