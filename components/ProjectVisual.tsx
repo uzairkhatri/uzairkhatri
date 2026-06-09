@@ -10,27 +10,27 @@ type ProjectVisualProps = {
 const visualData = {
   wellows: {
     brand: "Wellows",
-    title: "Orchestration Pipeline",
+    title: "Orchestration Pipeline & Guardrails",
     metric: "3 agents active",
-    tabs: ["LangGraph Flow", "Vector Search", "Provider Failover"]
+    tabs: ["LangGraph Routing", "LlamaGuard", "LLM Evaluation Loop"]
   },
   classflow: {
     brand: "ClassFlow",
     title: "Scheduler & Ledger Engine",
     metric: "0 manual ops",
-    tabs: ["Mutex Engine", "Candidate Scoring", "ACID Commits"]
+    tabs: ["Redis Redlock", "Timezone Matcher", "Serializable DB Ledger"]
   },
   savyour: {
     brand: "Savyour",
-    title: "Partner Webhook & Wallet Ledger",
+    title: "Idempotent Webhook Ingestion & Cache",
     metric: "650+ partners",
-    tabs: ["HMAC Ingest", "Redis Eviction", "Ledger Commit"]
+    tabs: ["HMAC Verification", "Bloom Filter ID", "Cache Eviction"]
   },
   efu: {
     brand: "EFU Life",
-    title: "Enterprise Document Routing",
+    title: "Enterprise Document Case Routing",
     metric: "100% paperless",
-    tabs: ["Datacap Ingestion", "FileNet Indexing", "Case Dispatch"]
+    tabs: ["OCR Datacap Queue", "FileNet Store", "AD/LDAP Access"]
   }
 };
 
@@ -39,7 +39,7 @@ function WellowsDiagram() {
     <svg className={styles.svgDiagram} viewBox="0 0 760 300" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="grid-wellows" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.015)" strokeWidth="1"/>
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.01)" strokeWidth="1"/>
         </pattern>
         <marker id="arrow-wellows" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M 0 2 L 8 5 L 0 8 z" fill="#c59b53" />
@@ -47,57 +47,100 @@ function WellowsDiagram() {
         <marker id="arrow-wellows-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M 0 2 L 8 5 L 0 8 z" fill="#00d66f" />
         </marker>
+        <marker id="arrow-wellows-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 2 L 8 5 L 0 8 z" fill="#ff5f56" />
+        </marker>
       </defs>
       <rect width="100%" height="100%" fill="url(#grid-wellows)" />
 
       {/* Connection paths */}
-      <path d="M 130 70 L 190 70" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-wellows)" />
-      <path d="M 310 70 L 370 70" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-wellows)" />
-      <path d="M 430 105 L 430 145" stroke="#00d66f" strokeWidth="1.5" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-wellows-green)" />
-      <path d="M 290 190 L 250 190" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" markerEnd="url(#arrow-wellows)" />
-      <path d="M 450 190 L 490 190" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" markerEnd="url(#arrow-wellows)" />
-      <path d="M 370 235 L 370 255" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-wellows)" />
-      <path d="M 220 200 L 220 255" stroke="#00d66f" strokeWidth="1.2" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-wellows-green)" />
-      <path d="M 520 200 L 520 255" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-wellows)" />
+      {/* Ingress -> Guardrail */}
+      <path d="M 75 70 L 75 110" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-wellows)" />
+      {/* Guardrail -> Router */}
+      <path d="M 130 130 L 170 130" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-wellows)" />
+      
+      {/* Router -> Agent Workers (LangGraph branches) */}
+      <path d="M 290 120 L 330 55" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-wellows)" />
+      <path d="M 290 130 L 330 130" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-wellows)" />
+      <path d="M 290 140 L 330 205" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-wellows)" />
 
-      {/* Nodes Row 1 */}
-      <rect x="20" y="45" width="110" height="50" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="75" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Ingestion API</text>
-      <text x="75" y="82" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">FastAPI Node</text>
+      {/* Agents -> DB / Models */}
+      <path d="M 440 50 L 480 50" stroke="#00d66f" strokeWidth="1.2" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-wellows-green)" />
+      <path d="M 440 130 L 480 130" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-wellows)" />
+      <path d="M 440 210 L 480 210" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-wellows)" />
 
-      <rect x="190" y="45" width="120" height="50" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
-      <circle cx="205" cy="70" r="3.5" fill="#c59b53" />
-      <text x="255" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Ingestion SQS</text>
-      <text x="255" y="82" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">AWS Queue Store</text>
+      {/* LLM Failover */}
+      <path d="M 540 150 L 540 190" stroke="#ff5f56" strokeWidth="1.2" strokeDasharray="3 3" markerEnd="url(#arrow-wellows-red)" />
 
-      {/* LangGraph Orchestrator */}
-      <rect x="150" y="125" width="460" height="110" rx="10" fill="rgba(197, 155, 83, 0.02)" stroke="rgba(197, 155, 83, 0.2)" strokeDasharray="6 6" />
-      <text x="165" y="145" fill="#c59b53" fontSize="8" fontWeight="950" fontFamily="var(--font-space-mono), monospace" letterSpacing="0.1em" textAnchor="start">LANGGRAPH STATE ORCHESTRATION</text>
+      {/* Feedback / Evaluation Loop */}
+      <path d="M 230 150 L 230 210" stroke="#00d66f" strokeWidth="1.5" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-wellows-green)" />
+      <path d="M 170 230 C 120 230, 120 130, 170 130" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1.2" strokeDasharray="4 4" markerEnd="url(#arrow-wellows)" />
+      
+      {/* Evaluator -> Cache Output */}
+      <path d="M 290 230 L 640 230 L 640 150" stroke="#00d66f" strokeWidth="1.5" markerEnd="url(#arrow-wellows-green)" />
+      
+      {/* Async Telemetry */}
+      <path d="M 200 110 L 75 210" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" strokeDasharray="3 3" markerEnd="url(#arrow-wellows)" />
 
-      <rect x="170" y="165" width="100" height="50" rx="6" fill="#151918" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="220" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">KIVA Agent</text>
-      <text x="220" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Keyword Intel</text>
+      {/* Nodes */}
+      {/* Ingress Gateway */}
+      <rect x="20" y="30" width="110" height="40" rx="6" fill="#141817" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="75" y="48" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Ingestion Gateway</text>
+      <text x="75" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">FastAPI Node</text>
 
-      <rect x="330" y="165" width="100" height="50" rx="6" fill="#151918" stroke="rgba(197, 155, 83, 0.3)" />
-      <text x="380" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">OPTA Agent</text>
-      <text x="380" y="200" fill="#d8ad64" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Audit Parser</text>
+      {/* Guardrails (LlamaGuard) */}
+      <rect x="20" y="110" width="110" height="40" rx="6" fill="#241d1a" stroke="rgba(197, 155, 83, 0.3)" />
+      <circle cx="32" cy="130" r="3" fill="#c59b53" />
+      <text x="77" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">LlamaGuard Node</text>
+      <text x="77" y="140" fill="#c59b53" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Content Safety</text>
 
-      <rect x="490" y="165" width="100" height="50" rx="6" fill="#151918" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="540" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Citation Agent</text>
-      <text x="540" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">LLM Monitor</text>
+      {/* LangGraph Router */}
+      <rect x="170" y="110" width="120" height="40" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="230" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">LangGraph Router</text>
+      <text x="230" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">State Orchestrator</text>
 
-      {/* Row 3 Nodes */}
-      <rect x="160" y="255" width="120" height="40" rx="6" fill="#121615" stroke="rgba(255, 255, 255, 0.06)" />
-      <text x="220" y="274" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">LLM Provider</text>
-      <text x="220" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">AWS Bedrock / API</text>
+      {/* Worker 1: KIVA Agent */}
+      <rect x="330" y="30" width="110" height="40" rx="6" fill="#141817" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="48" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">KIVA Agent</text>
+      <text x="385" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Keyword Classifier</text>
 
-      <rect x="310" y="255" width="120" height="40" rx="6" fill="#121615" stroke="rgba(0, 214, 111, 0.2)" />
-      <text x="370" y="274" fill="#00d66f" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Vector Database</text>
-      <text x="370" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">PGVector Index</text>
+      {/* Worker 2: OPTA Agent */}
+      <rect x="330" y="110" width="110" height="40" rx="6" fill="#141817" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">OPTA Agent</text>
+      <text x="385" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Technical Extractor</text>
 
-      <rect x="490" y="255" width="110" height="40" rx="6" fill="#241b1b" stroke="rgba(255, 95, 86, 0.2)" />
-      <text x="545" y="274" fill="#ff5f56" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">DLQ Queue</text>
-      <text x="545" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">AWS SQS Errors</text>
+      {/* Worker 3: Citation Intelligence */}
+      <rect x="330" y="190" width="110" height="40" rx="6" fill="#141817" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="208" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Citation Intel</text>
+      <text x="385" y="220" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">LLM Brand Monitor</text>
+
+      {/* Data Layers & Provider Node */}
+      <rect x="480" y="30" width="120" height="40" rx="6" fill="#121615" stroke="rgba(0, 214, 111, 0.2)" />
+      <text x="540" y="48" fill="#00d66f" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">PGVector Index</text>
+      <text x="540" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Vector Ingestion</text>
+
+      <rect x="480" y="110" width="120" height="40" rx="6" fill="#121615" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="540" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">OpenAI GPT-4o</text>
+      <text x="540" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Primary LLM Node</text>
+
+      <rect x="480" y="190" width="120" height="40" rx="6" fill="#241b1b" stroke="rgba(255, 95, 86, 0.2)" />
+      <text x="540" y="208" fill="#ff5f56" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">AWS Bedrock Sonnet</text>
+      <text x="540" y="220" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">RateLimit Fallback</text>
+
+      {/* LLM Evaluation Loop Node */}
+      <rect x="170" y="210" width="120" height="40" rx="6" fill="#121615" stroke="rgba(0, 214, 111, 0.2)" />
+      <text x="230" y="228" fill="#00d66f" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">LLM Judge / Evaluator</text>
+      <text x="230" y="240" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Confidence &gt; 0.85</text>
+
+      {/* Telemetry Endpoint */}
+      <rect x="20" y="210" width="110" height="40" rx="6" fill="#141817" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="75" y="228" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">LangSmith / Arize</text>
+      <text x="75" y="240" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Async Tracer</text>
+
+      {/* Output Cache */}
+      <rect x="630" y="110" width="110" height="40" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="685" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Redis Ingestion Cache</text>
+      <text x="685" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Audited Responses</text>
     </svg>
   );
 }
@@ -107,7 +150,7 @@ function ClassFlowDiagram() {
     <svg className={styles.svgDiagram} viewBox="0 0 760 300" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="grid-classflow" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.015)" strokeWidth="1"/>
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.01)" strokeWidth="1"/>
         </pattern>
         <marker id="arrow-classflow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M 0 2 L 8 5 L 0 8 z" fill="#8cc7ad" />
@@ -119,57 +162,82 @@ function ClassFlowDiagram() {
       <rect width="100%" height="100%" fill="url(#grid-classflow)" />
 
       {/* Connectors */}
-      <path d="M 130 70 L 190 70" stroke="#8cc7ad" strokeWidth="1.5" markerEnd="url(#arrow-classflow)" />
-      <path d="M 310 70 L 370 70" stroke="#8cc7ad" strokeWidth="1.5" markerEnd="url(#arrow-classflow)" />
-      <path d="M 430 105 L 430 145" stroke="#8cc7ad" strokeWidth="1.5" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-classflow)" />
-      <path d="M 290 190 L 250 190" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" markerEnd="url(#arrow-classflow)" />
-      <path d="M 450 190 L 490 190" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" markerEnd="url(#arrow-classflow)" />
-      <path d="M 370 235 L 370 255" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-classflow-gold)" />
-      <path d="M 220 200 L 220 255" stroke="#8cc7ad" strokeWidth="1.2" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-classflow)" />
-      <path d="M 520 200 L 520 255" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-classflow-gold)" />
+      <path d="M 75 70 L 75 110" stroke="#8cc7ad" strokeWidth="1.5" markerEnd="url(#arrow-classflow)" />
+      <path d="M 130 130 L 170 130" stroke="#8cc7ad" strokeWidth="1.5" markerEnd="url(#arrow-classflow)" />
+      
+      {/* Router -> Matchmaker paths */}
+      <path d="M 290 120 L 330 55" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-classflow)" />
+      <path d="M 290 130 L 330 130" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-classflow)" />
+      <path d="M 290 140 L 330 205" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-classflow)" />
 
-      {/* Nodes Row 1 */}
-      <rect x="20" y="45" width="110" height="50" rx="6" fill="#18211e" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="75" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Lifecycle Event</text>
-      <text x="75" y="82" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">WS / API Trigger</text>
+      {/* Matchers -> DB / Ledger */}
+      <path d="M 440 50 L 480 50" stroke="#00d66f" strokeWidth="1.2" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-classflow-gold)" />
+      <path d="M 440 130 L 480 130" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-classflow-gold)" />
+      <path d="M 440 210 L 480 210" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-classflow-gold)" />
 
-      <rect x="190" y="45" width="120" height="50" rx="6" fill="#18211e" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="250" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">FastAPI Gateway</text>
-      <text x="250" y="82" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">State Orchestrator</text>
+      {/* Ledger -> Payout */}
+      <path d="M 600 130 L 630 130" stroke="#8cc7ad" strokeWidth="1.5" markerEnd="url(#arrow-classflow)" />
 
-      <rect x="370" y="45" width="120" height="50" rx="6" fill="#18211e" stroke="rgba(140, 199, 173, 0.3)" />
-      <circle cx="385" cy="70" r="3.5" fill="#8cc7ad" />
-      <text x="435" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Redis Redlock</text>
-      <text x="435" y="82" fill="#8cc7ad" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Distributed Lock</text>
+      {/* Cache Eviction feedback */}
+      <path d="M 230 150 L 230 210" stroke="#8cc7ad" strokeWidth="1.5" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-classflow)" />
+      <path d="M 170 230 C 120 230, 120 130, 170 130" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1.2" strokeDasharray="4 4" markerEnd="url(#arrow-classflow)" />
 
-      {/* Pipeline Box */}
-      <rect x="150" y="125" width="460" height="110" rx="10" fill="rgba(140, 199, 173, 0.02)" stroke="rgba(140, 199, 173, 0.2)" strokeDasharray="6 6" />
-      <text x="165" y="145" fill="#8cc7ad" fontSize="8" fontWeight="950" fontFamily="var(--font-space-mono), monospace" letterSpacing="0.1em" textAnchor="start">LOCK-SAFE AUTONOMOUS MATCHMAKER</text>
+      {/* Nodes */}
+      {/* Event Trigger */}
+      <rect x="20" y="30" width="110" height="40" rx="6" fill="#141816" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="75" y="48" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">WS Class Event</text>
+      <text x="75" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Realtime Gateway</text>
 
-      <rect x="170" y="165" width="100" height="50" rx="6" fill="#141a18" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="220" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Timezone Filter</text>
-      <text x="220" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Candidate Query</text>
+      {/* Redis Redlock */}
+      <rect x="20" y="110" width="110" height="40" rx="6" fill="#18211e" stroke="rgba(140, 199, 173, 0.3)" />
+      <circle cx="32" cy="130" r="3" fill="#8cc7ad" />
+      <text x="77" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Redis Redlock</text>
+      <text x="77" y="140" fill="#8cc7ad" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Distributed Mutex</text>
 
-      <rect x="290" y="165" width="160" height="50" rx="6" fill="#141a18" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="370" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Dynamic Scoring</text>
-      <text x="370" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Active Load / Rating</text>
+      {/* State Machine Router */}
+      <rect x="170" y="110" width="120" height="40" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="230" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Scheduler State</text>
+      <text x="230" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Match Execution Graph</text>
 
-      <rect x="490" y="165" width="100" height="50" rx="6" fill="#141a18" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="540" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Payout Broker</text>
-      <text x="540" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Stripe Custom</text>
+      {/* KIVA Timezone Matcher */}
+      <rect x="330" y="30" width="110" height="40" rx="6" fill="#141816" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="48" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Timezone Matcher</text>
+      <text x="385" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">UTC Offset Scoping</text>
 
-      {/* Row 3 Nodes */}
-      <rect x="160" y="255" width="120" height="40" rx="6" fill="#121615" stroke="rgba(255, 255, 255, 0.06)" />
-      <text x="220" y="274" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">WebSocket State</text>
-      <text x="220" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Client Broadcast</text>
+      {/* Active Load Balance */}
+      <rect x="330" y="110" width="110" height="40" rx="6" fill="#141816" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Load Scorer</text>
+      <text x="385" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Historical Ratings</text>
 
-      <rect x="310" y="255" width="120" height="40" rx="6" fill="#121615" stroke="rgba(197, 155, 83, 0.2)" />
-      <text x="370" y="274" fill="var(--gold-bright)" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">PostgreSQL DB</text>
-      <text x="370" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Serializable ACID</text>
+      {/* Ingestion Queue */}
+      <rect x="330" y="190" width="110" height="40" rx="6" fill="#141816" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="208" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Ingestion Celery</text>
+      <text x="385" y="220" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Redis Task Queue</text>
 
-      <rect x="490" y="255" width="110" height="40" rx="6" fill="#121615" stroke="rgba(255, 255, 255, 0.06)" />
-      <text x="545" y="274" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Stripe custom</text>
-      <text x="545" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Partner payout</text>
+      {/* Postgres Serializable */}
+      <rect x="480" y="30" width="120" height="40" rx="6" fill="#121615" stroke="rgba(197, 155, 83, 0.2)" />
+      <text x="540" y="48" fill="var(--gold-bright)" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">PostgreSQL Database</text>
+      <text x="540" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Serializable ACID</text>
+
+      {/* Idempotent Ledger */}
+      <rect x="480" y="110" width="120" height="40" rx="6" fill="#121615" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="540" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Double-Entry Ledger</text>
+      <text x="540" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Deduplication Key</text>
+
+      {/* Stripe Disbursement */}
+      <rect x="480" y="190" width="120" height="40" rx="6" fill="#121615" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="540" y="208" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Stripe Custom</text>
+      <text x="540" y="220" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Disbursement API</text>
+
+      {/* Cache Eviction */}
+      <rect x="170" y="210" width="120" height="40" rx="6" fill="#121615" stroke="rgba(140, 199, 173, 0.2)" />
+      <text x="230" y="228" fill="#8cc7ad" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Cache Eviction</text>
+      <text x="230" y="240" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Redis Mutex Release</text>
+
+      {/* Output Client Broadcast */}
+      <rect x="630" y="110" width="110" height="40" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="685" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">WS State Dispatch</text>
+      <text x="685" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Client Broadcasts</text>
     </svg>
   );
 }
@@ -179,7 +247,7 @@ function SavyourDiagram() {
     <svg className={styles.svgDiagram} viewBox="0 0 760 300" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="grid-savyour" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.015)" strokeWidth="1"/>
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.01)" strokeWidth="1"/>
         </pattern>
         <marker id="arrow-savyour" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M 0 2 L 8 5 L 0 8 z" fill="#9db5d8" />
@@ -191,57 +259,82 @@ function SavyourDiagram() {
       <rect width="100%" height="100%" fill="url(#grid-savyour)" />
 
       {/* Connectors */}
-      <path d="M 130 70 L 190 70" stroke="#9db5d8" strokeWidth="1.5" markerEnd="url(#arrow-savyour)" />
-      <path d="M 310 70 L 370 70" stroke="#9db5d8" strokeWidth="1.5" markerEnd="url(#arrow-savyour)" />
-      <path d="M 430 105 L 430 145" stroke="#9db5d8" strokeWidth="1.5" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-savyour)" />
-      <path d="M 290 190 L 250 190" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" markerEnd="url(#arrow-savyour)" />
-      <path d="M 450 190 L 490 190" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" markerEnd="url(#arrow-savyour)" />
-      <path d="M 370 235 L 370 255" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-savyour-gold)" />
-      <path d="M 220 200 L 220 255" stroke="#9db5d8" strokeWidth="1.2" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-savyour)" />
-      <path d="M 520 200 L 520 255" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-savyour-gold)" />
+      <path d="M 75 70 L 75 110" stroke="#9db5d8" strokeWidth="1.5" markerEnd="url(#arrow-savyour)" />
+      <path d="M 130 130 L 170 130" stroke="#9db5d8" strokeWidth="1.5" markerEnd="url(#arrow-savyour)" />
+      
+      {/* Router paths */}
+      <path d="M 290 120 L 330 55" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-savyour)" />
+      <path d="M 290 130 L 330 130" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-savyour)" />
+      <path d="M 290 140 L 330 205" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-savyour)" />
 
-      {/* Nodes Row 1 */}
-      <rect x="20" y="45" width="110" height="50" rx="6" fill="#171f26" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="75" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Partner Webhook</text>
-      <text x="75" y="82" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Affiliate Event</text>
+      {/* Workers -> DB / Cache */}
+      <path d="M 440 50 L 480 50" stroke="#00d66f" strokeWidth="1.2" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-savyour-gold)" />
+      <path d="M 440 130 L 480 130" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-savyour-gold)" />
+      <path d="M 440 210 L 480 210" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-savyour-gold)" />
 
-      <rect x="190" y="45" width="120" height="50" rx="6" fill="#171f26" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="250" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Ingestion Gateway</text>
-      <text x="250" y="82" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">HMAC Verified</text>
+      {/* DB -> Output */}
+      <path d="M 600 130 L 630 130" stroke="#9db5d8" strokeWidth="1.5" markerEnd="url(#arrow-savyour)" />
 
-      <rect x="370" y="45" width="120" height="50" rx="6" fill="#171f26" stroke="rgba(157, 181, 216, 0.3)" />
-      <circle cx="385" cy="70" r="3.5" fill="#9db5d8" />
-      <text x="435" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Decoupled Queue</text>
-      <text x="435" y="82" fill="#9db5d8" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Redis Cache Buffer</text>
+      {/* Cache Eviction feedbacks */}
+      <path d="M 230 150 L 230 210" stroke="#9db5d8" strokeWidth="1.5" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-savyour)" />
+      <path d="M 170 230 C 120 230, 120 130, 170 130" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1.2" strokeDasharray="4 4" markerEnd="url(#arrow-savyour)" />
 
-      {/* Calculation & Settlement Box */}
-      <rect x="150" y="125" width="460" height="110" rx="10" fill="rgba(157, 181, 216, 0.02)" stroke="rgba(157, 181, 216, 0.2)" strokeDasharray="6 6" />
-      <text x="165" y="145" fill="#9db5d8" fontSize="8" fontWeight="950" fontFamily="var(--font-space-mono), monospace" letterSpacing="0.1em" textAnchor="start">CASHBACK LEDGER & CALCULATION ENGINE</text>
+      {/* Nodes */}
+      {/* Webhook Ingress */}
+      <rect x="20" y="30" width="110" height="40" rx="6" fill="#14181a" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="75" y="48" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Partner Webhook</text>
+      <text x="75" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">HMAC-SHA256 Signed</text>
 
-      <rect x="170" y="165" width="100" height="50" rx="6" fill="#12161a" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="220" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Redis Eviction</text>
-      <text x="220" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Wallet Namespace</text>
+      {/* HMAC & Rate Limiter */}
+      <rect x="20" y="110" width="110" height="40" rx="6" fill="#171f26" stroke="rgba(157, 181, 216, 0.3)" />
+      <circle cx="32" cy="130" r="3" fill="#9db5d8" />
+      <text x="77" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Nginx Ingress</text>
+      <text x="77" y="140" fill="#9db5d8" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">RateLimit (2500/s)</text>
 
-      <rect x="290" y="165" width="160" height="50" rx="6" fill="#12161a" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="370" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Cashback Calc</text>
-      <text x="370" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Brand Rate Matrix</text>
+      {/* Ingestion Router */}
+      <rect x="170" y="110" width="120" height="40" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="230" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Ingestion Router</text>
+      <text x="230" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Validation Gate</text>
 
-      <rect x="490" y="165" width="100" height="50" rx="6" fill="#12161a" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="540" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Idempotence</text>
-      <text x="540" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">UUID Deduplication</text>
+      {/* Bloom Filter */}
+      <rect x="330" y="30" width="110" height="40" rx="6" fill="#14181a" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="48" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Bloom Filter</text>
+      <text x="385" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Deduplication Key</text>
 
-      {/* Row 3 Nodes */}
-      <rect x="160" y="255" width="120" height="40" rx="6" fill="#0f1214" stroke="rgba(255, 255, 255, 0.06)" />
-      <text x="220" y="274" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">User Wallet API</text>
-      <text x="220" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Instant State Sync</text>
+      {/* Rewards Calculator */}
+      <rect x="330" y="110" width="110" height="40" rx="6" fill="#14181a" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Calculation Engine</text>
+      <text x="385" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Base & Campaign Rate</text>
 
-      <rect x="310" y="255" width="120" height="40" rx="6" fill="#0f1214" stroke="rgba(197, 155, 83, 0.2)" />
-      <text x="370" y="274" fill="var(--gold-bright)" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">PostgreSQL DB</text>
-      <text x="370" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Repeatable Read</text>
+      {/* AWS SQS Queue Buffer */}
+      <rect x="330" y="190" width="110" height="40" rx="6" fill="#14181a" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="208" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">SQS Ingest Buffer</text>
+      <text x="385" y="220" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Decoupled Queue</text>
 
-      <rect x="490" y="255" width="110" height="40" rx="6" fill="#0f1214" stroke="rgba(255, 255, 255, 0.06)" />
-      <text x="545" y="274" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Settlement Service</text>
-      <text x="545" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Batch Payouts</text>
+      {/* Redis Balance Cache */}
+      <rect x="480" y="30" width="120" height="40" rx="6" fill="#121615" stroke="rgba(0, 214, 111, 0.2)" />
+      <text x="540" y="48" fill="#00d66f" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Redis Cache Eviction</text>
+      <text x="540" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">User Wallet Namespace</text>
+
+      {/* Postgres Repeatable Read */}
+      <rect x="480" y="110" width="120" height="40" rx="6" fill="#121615" stroke="rgba(197, 155, 83, 0.2)" />
+      <text x="540" y="128" fill="var(--gold-bright)" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">PostgreSQL Database</text>
+      <text x="540" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Repeatable Read ACID</text>
+
+      {/* Idempotent Ledger Transaction */}
+      <rect x="480" y="190" width="120" height="40" rx="6" fill="#121615" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="540" y="208" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Double-Entry Ledger</text>
+      <text x="540" y="220" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Balance Adjustment</text>
+
+      {/* Cache Evict Lock */}
+      <rect x="170" y="210" width="120" height="40" rx="6" fill="#121615" stroke="rgba(157, 181, 216, 0.2)" />
+      <text x="230" y="228" fill="#9db5d8" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Deduplication Sync</text>
+      <text x="230" y="240" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Cache Invalidation</text>
+
+      {/* Output Wallet Update */}
+      <rect x="630" y="110" width="110" height="40" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="685" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Wallet Balance Sync</text>
+      <text x="685" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Instant Settlement</text>
     </svg>
   );
 }
@@ -251,7 +344,7 @@ function EFULifeDiagram() {
     <svg className={styles.svgDiagram} viewBox="0 0 760 300" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="grid-efu" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.015)" strokeWidth="1"/>
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.01)" strokeWidth="1"/>
         </pattern>
         <marker id="arrow-efu" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M 0 2 L 8 5 L 0 8 z" fill="#c9bca8" />
@@ -263,57 +356,82 @@ function EFULifeDiagram() {
       <rect width="100%" height="100%" fill="url(#grid-efu)" />
 
       {/* Connectors */}
-      <path d="M 130 70 L 190 70" stroke="#c9bca8" strokeWidth="1.5" markerEnd="url(#arrow-efu)" />
-      <path d="M 310 70 L 370 70" stroke="#c9bca8" strokeWidth="1.5" markerEnd="url(#arrow-efu)" />
-      <path d="M 430 105 L 430 145" stroke="#c9bca8" strokeWidth="1.5" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-efu)" />
-      <path d="M 290 190 L 250 190" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" markerEnd="url(#arrow-efu)" />
-      <path d="M 450 190 L 490 190" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" markerEnd="url(#arrow-efu)" />
-      <path d="M 370 235 L 370 255" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-efu-gold)" />
-      <path d="M 220 200 L 220 255" stroke="#c9bca8" strokeWidth="1.2" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-efu)" />
-      <path d="M 520 200 L 520 255" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-efu-gold)" />
+      <path d="M 75 70 L 75 110" stroke="#c9bca8" strokeWidth="1.5" markerEnd="url(#arrow-efu)" />
+      <path d="M 130 130 L 170 130" stroke="#c9bca8" strokeWidth="1.5" markerEnd="url(#arrow-efu)" />
+      
+      {/* Route paths */}
+      <path d="M 290 120 L 330 55" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-efu)" />
+      <path d="M 290 130 L 330 130" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-efu)" />
+      <path d="M 290 140 L 330 205" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.2" markerEnd="url(#arrow-efu)" />
 
-      {/* Nodes Row 1 */}
-      <rect x="20" y="45" width="110" height="50" rx="6" fill="#242220" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="75" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Physical Doc Scan</text>
-      <text x="75" y="82" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">High-Vol Batch Ingest</text>
+      {/* Workers -> DB / FileNet */}
+      <path d="M 440 50 L 480 50" stroke="#00d66f" strokeWidth="1.2" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-efu-gold)" />
+      <path d="M 440 130 L 480 130" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-efu-gold)" />
+      <path d="M 440 210 L 480 210" stroke="#c59b53" strokeWidth="1.5" markerEnd="url(#arrow-efu-gold)" />
 
-      <rect x="190" y="45" width="120" height="50" rx="6" fill="#242220" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="250" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">IBM Datacap Queue</text>
-      <text x="250" y="82" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">OCR / Indexing</text>
+      {/* DB -> Output */}
+      <path d="M 600 130 L 630 130" stroke="#c9bca8" strokeWidth="1.5" markerEnd="url(#arrow-efu)" />
 
-      <rect x="370" y="45" width="120" height="50" rx="6" fill="#242220" stroke="rgba(201, 188, 168, 0.3)" />
-      <circle cx="385" cy="70" r="3.5" fill="#c9bca8" />
-      <text x="435" y="68" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">FileNet Content Engine</text>
-      <text x="435" y="82" fill="#c9bca8" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Metadata Schema</text>
+      {/* LDAP verification feedback */}
+      <path d="M 230 150 L 230 210" stroke="#c9bca8" strokeWidth="1.5" strokeDasharray="4 4" className={styles.flowLine} markerEnd="url(#arrow-efu)" />
+      <path d="M 170 230 C 120 230, 120 130, 170 130" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1.2" strokeDasharray="4 4" markerEnd="url(#arrow-efu)" />
 
-      {/* Workflow Engine Container */}
-      <rect x="150" y="125" width="460" height="110" rx="10" fill="rgba(201, 188, 168, 0.02)" stroke="rgba(201, 188, 168, 0.2)" strokeDasharray="6 6" />
-      <text x="165" y="145" fill="#c9bca8" fontSize="8" fontWeight="950" fontFamily="var(--font-space-mono), monospace" letterSpacing="0.1em" textAnchor="start">IBM PROCESS & CASE WORKFLOW ROUTING</text>
+      {/* Nodes */}
+      {/* Physical scan Ingress */}
+      <rect x="20" y="30" width="110" height="40" rx="6" fill="#1f1c19" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="75" y="48" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Physical Scanner</text>
+      <text x="75" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">High-Vol PDF Ingestion</text>
 
-      <rect x="170" y="165" width="100" height="50" rx="6" fill="#1a1816" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="220" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Active Directory</text>
-      <text x="220" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">LDAP Sync ACL</text>
+      {/* IBM Datacap */}
+      <rect x="20" y="110" width="110" height="40" rx="6" fill="#242220" stroke="rgba(201, 188, 168, 0.3)" />
+      <circle cx="32" cy="130" r="3" fill="#c9bca8" />
+      <text x="77" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">IBM Datacap Queue</text>
+      <text x="77" y="140" fill="#c9bca8" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">OCR / Queue Store</text>
 
-      <rect x="290" y="165" width="160" height="50" rx="6" fill="#1a1816" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="370" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Routing Rules</text>
-      <text x="370" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Priority Dispatch Engine</text>
+      {/* IBM Case Router */}
+      <rect x="170" y="110" width="120" height="40" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="230" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Case Router PE</text>
+      <text x="230" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">IBM Process Engine</text>
 
-      <rect x="490" y="165" width="100" height="50" rx="6" fill="#1a1816" stroke="rgba(255, 255, 255, 0.08)" />
-      <text x="540" y="188" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Compliance check</text>
-      <text x="540" y="200" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Electronic Audit</text>
+      {/* LDAP Access checks */}
+      <rect x="330" y="30" width="110" height="40" rx="6" fill="#1f1c19" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="48" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">LDAP AD Sync</text>
+      <text x="385" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Access Control List</text>
 
-      {/* Row 3 Nodes */}
-      <rect x="160" y="255" width="120" height="40" rx="6" fill="#121110" stroke="rgba(255, 255, 255, 0.06)" />
-      <text x="220" y="274" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Case client</text>
-      <text x="220" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Workplace XT portal</text>
+      {/* Underwriting Queues */}
+      <rect x="330" y="110" width="110" height="40" rx="6" fill="#1f1c19" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Dispatch Rules</text>
+      <text x="385" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Underwriter Routing</text>
 
-      <rect x="310" y="255" width="120" height="40" rx="6" fill="#121110" stroke="rgba(197, 155, 83, 0.2)" />
-      <text x="370" y="274" fill="var(--gold-bright)" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">DB Clustered Stack</text>
-      <text x="370" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Active-Active Sync</text>
+      {/* Capture Indexes */}
+      <rect x="330" y="190" width="110" height="40" rx="6" fill="#1f1c19" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="385" y="208" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Capture Indexes</text>
+      <text x="385" y="220" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Document Metadata</text>
 
-      <rect x="490" y="255" width="110" height="40" rx="6" fill="#121110" stroke="rgba(255, 255, 255, 0.06)" />
-      <text x="545" y="274" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">P8 Storage</text>
-      <text x="545" y="286" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Distributed replica</text>
+      {/* FileNet P8 Content Store */}
+      <rect x="480" y="30" width="120" height="40" rx="6" fill="#121615" stroke="rgba(0, 214, 111, 0.2)" />
+      <text x="540" y="48" fill="#00d66f" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">FileNet P8 Store</text>
+      <text x="540" y="60" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Clustered HA Repo</text>
+
+      {/* Database Clustered replicas */}
+      <rect x="480" y="110" width="120" height="40" rx="6" fill="#121615" stroke="rgba(197, 155, 83, 0.2)" />
+      <text x="540" y="128" fill="var(--gold-bright)" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">PostgreSQL Replica</text>
+      <text x="540" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Active-Active Sync</text>
+
+      {/* Compliance Audited log */}
+      <rect x="480" y="190" width="120" height="40" rx="6" fill="#121615" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="540" y="208" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Audit Trail Logger</text>
+      <text x="540" y="220" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Electronic Verification</text>
+
+      {/* LDAP ACL verification */}
+      <rect x="170" y="210" width="120" height="40" rx="6" fill="#121615" stroke="rgba(201, 188, 168, 0.2)" />
+      <text x="230" y="228" fill="#c9bca8" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">LDAP ACL Verify</text>
+      <text x="230" y="240" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Security Groups</text>
+
+      {/* Workplace XT Portal */}
+      <rect x="630" y="110" width="110" height="40" rx="6" fill="#1b211f" stroke="rgba(255, 255, 255, 0.08)" />
+      <text x="685" y="128" fill="#ffffff" fontSize="10" fontWeight="700" fontFamily="var(--font-inter), sans-serif" textAnchor="middle">Workplace XT UI</text>
+      <text x="685" y="140" fill="var(--text-muted)" fontSize="7" fontFamily="var(--font-space-mono), monospace" textAnchor="middle">Underwriting Case Dispatch</text>
     </svg>
   );
 }
