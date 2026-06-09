@@ -38,14 +38,46 @@ const engagements = [
 ];
 
 const principles = [
-  "Most AI systems fail around the model, not inside it.",
-  "A demo without observability, retries, and cost control is not production.",
-  "Agents need owners, limits, state, and failure paths before they need more tools.",
-  "Architecture is only useful when the team can operate it under pressure.",
-  "The best AI system is not the flashiest one; it is the one the business can trust.",
-  "If the team cannot debug it at 2am, the architecture is not finished.",
-  "Cost, latency, and failure states are product decisions, not backend details.",
-  "A system is only production-ready when ownership is clear after launch.",
+  {
+    rule: "01",
+    core: "Most AI systems fail around the model, not inside it.",
+    impact: "Vulnerabilities lie in state orchestration, rate-limiting, database lock-safety, and external integrations—not the LLM itself."
+  },
+  {
+    rule: "02",
+    core: "A demo without observability, retries, and cost control is not production.",
+    impact: "Unmonitored agent prompts lead to silent token leakage, loop regression, and runaway API costs."
+  },
+  {
+    rule: "03",
+    core: "Agents need owners, limits, state, and failure paths before they need more tools.",
+    impact: "Adding external tools to unconstrained agent loops only compounds runtime errors and state mutation loss."
+  },
+  {
+    rule: "04",
+    core: "Architecture is only useful when the team can operate it under pressure.",
+    impact: "A design is only complete if your on-call engineering team can trace, isolate, and debug its event graph under load."
+  },
+  {
+    rule: "05",
+    core: "The best AI system is not the flashiest one; it is the one the business can trust.",
+    impact: "Consistency, latency thresholds, and idempotency guarantees are what validate enterprise utility."
+  },
+  {
+    rule: "06",
+    core: "If the team cannot debug it at 2am, the architecture is not finished.",
+    impact: "Multi-agent systems must export structured telemetry traces and transaction logs, not black-box console strings."
+  },
+  {
+    rule: "07",
+    core: "Cost, latency, and failure states are product decisions, not backend details.",
+    impact: "How the system responds when model APIs fail or latency spikes directly defines user retention and margin."
+  },
+  {
+    rule: "08",
+    core: "A system is only production-ready when ownership is clear after launch.",
+    impact: "Clear alert escalation policies, telemetry thresholds, and runbooks are required to operate agent systems."
+  }
 ];
 
 const stats = [
@@ -112,14 +144,21 @@ export default function About() {
           <div className="section-eyebrow"><span />How I think</div>
           <h3>Strong opinions on production AI. No hedging.</h3>
         </header>
-        <div>
-          {principles.map((principle, index) => (
-            <blockquote
-              className={`${index === 0 ? styles.featuredPrinciple : ""} reveal-item`}
-              key={principle}
+        <div className={styles.principlesGrid}>
+          {principles.map((item) => (
+            <article
+              className={`${styles.principleCard} reveal-item`}
+              key={item.rule}
             >
-              {principle}
-            </blockquote>
+              <header className={styles.cardHeader}>
+                <span className={styles.ruleBadge}>RULE {item.rule}</span>
+                <span className={styles.glowDot} />
+              </header>
+              <blockquote>&ldquo;{item.core}&rdquo;</blockquote>
+              <p className={styles.impactLine}>
+                <span>Operational Impact:</span> {item.impact}
+              </p>
+            </article>
           ))}
         </div>
       </div>
