@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./SelectedWork.module.css";
 import ProjectVisual, { type ProjectVisualType } from "./ProjectVisual";
 import { BOOKING_URL } from "./siteLinks";
@@ -187,21 +188,47 @@ const projectTraces: Record<string, string[]> = {
   ]
 };
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.35,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      staggerChildren: 0.06,
+      delayChildren: 0.05
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -15,
+    transition: {
+      duration: 0.25,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number]
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.28, ease: "easeOut" as const }
+  }
+};
+
 export default function SelectedWork() {
   const [activeTab, setActiveTab] = useState(0);
   const [telemetryLines, setTelemetryLines] = useState<string[]>([]);
   const [activeLogIndex, setActiveLogIndex] = useState(7);
   const [consoleView, setConsoleView] = useState<"log" | "schema">("log");
   const activeProject = projects[activeTab];
-  const [animateIn, setAnimateIn] = useState(true);
 
   const handleTabChange = (index: number) => {
     if (index === activeTab) return;
-    setAnimateIn(false);
-    setTimeout(() => {
-      setActiveTab(index);
-      setAnimateIn(true);
-    }, 150);
+    setActiveTab(index);
   };
 
   // Telemetry loop hook: runs once, then enters an idle monitor standby
@@ -254,14 +281,16 @@ export default function SelectedWork() {
       <div className={styles.ambientGlow} />
       <div className={styles.shell}>
         <header className={styles.header}>
-          <div className={styles.eyebrow}>
-            <span />
-            Selected work
+          <div className={styles.headerLeft}>
+            <div className={styles.eyebrow}>
+              <span />
+              Selected work
+            </div>
+            <h2 className={styles.title} id="work-title">
+              Production proof, not portfolio filler.
+            </h2>
           </div>
-          <h2 className={styles.title} id="work-title">
-            Production proof, not portfolio filler.
-          </h2>
-          <p>
+          <p className={styles.headerDesc}>
             Explore the active architectural blueprints and verified outcome telemetry of systems built to survive scale.
           </p>
         </header>
@@ -282,6 +311,20 @@ export default function SelectedWork() {
                   aria-selected={idx === activeTab}
                   role="tab"
                 >
+                  {idx === activeTab && (
+                    <motion.div
+                      layoutId="activeBladeBackground"
+                      className={styles.activeTabGlow}
+                      style={{
+                        background: activeColor === "#c59b53" ? "rgba(197, 155, 83, 0.05)" : 
+                                    activeColor === "#8cc7ad" ? "rgba(140, 199, 173, 0.05)" : 
+                                    activeColor === "#9db5d8" ? "rgba(157, 181, 216, 0.05)" : 
+                                    "rgba(201, 188, 168, 0.05)",
+                        borderLeft: `3px solid ${activeColor}`
+                      }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                   <div className={styles.bladeStatus}>
                     <span className={`${styles.statusLed} ${idx === activeTab ? styles.ledActive : ""}`} />
                     <span className={styles.nodeAddress}>NODE-{proj.number} // PORT-{3000 + idx * 10}</span>
@@ -307,131 +350,140 @@ export default function SelectedWork() {
             })}
           </nav>
 
-          {/* Right Panel: Spec Details */}
-          <article className={`${styles.specPanel} ${animateIn ? styles.fadeIn : styles.fadeOut}`}>
-            {/* Project Visual Display Header */}
-            <div className={styles.specVisualBlock}>
-              <ProjectVisual type={activeProject.diagram} variant="hero" activeLogIndex={activeLogIndex} />
-            </div>
+          {/* Right Panel: Spec Details with dynamic Framer Motion exit/entry */}
+          <AnimatePresence mode="wait">
+            <motion.article 
+              key={activeProject.name}
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className={styles.specPanel}
+            >
+              {/* Project Visual Display Header */}
+              <motion.div className={styles.specVisualBlock} variants={itemVariants}>
+                <ProjectVisual type={activeProject.diagram} variant="hero" activeLogIndex={activeLogIndex} />
+              </motion.div>
 
-            {/* Sub-Layout Content Columns */}
-            <div className={styles.specBody}>
-              <div className={styles.specDetails}>
-                <div className={styles.specRoleLine}>
-                  <strong>{activeProject.role}</strong>
-                  <span>&bull;</span>
-                  <span>{activeProject.category}</span>
-                </div>
-                <p className={styles.specDesc}>{activeProject.description}</p>
+              {/* Sub-Layout Content Columns */}
+              <div className={styles.specBody}>
+                <motion.div className={styles.specDetails} variants={itemVariants}>
+                  <div className={styles.specRoleLine}>
+                    <strong>{activeProject.role}</strong>
+                    <span>&bull;</span>
+                    <span>{activeProject.category}</span>
+                  </div>
+                  <p className={styles.specDesc}>{activeProject.description}</p>
 
-                <div className={styles.blockRow}>
-                  <div className={styles.block}>
-                    <h4>The Scale Challenge</h4>
-                    <p>{activeProject.challenge}</p>
+                  <div className={styles.blockRow}>
+                    <div className={styles.block}>
+                      <h4>The Scale Challenge</h4>
+                      <p>{activeProject.challenge}</p>
+                    </div>
+                    <div className={styles.block}>
+                      <h4>The Architectural Solution</h4>
+                      <p>{activeProject.solution}</p>
+                    </div>
                   </div>
-                  <div className={styles.block}>
-                    <h4>The Architectural Solution</h4>
-                    <p>{activeProject.solution}</p>
+                </motion.div>
+
+                {/* Sidebar Technical Blueprint */}
+                <motion.aside className={styles.specSidebar} variants={itemVariants}>
+                  <div className={styles.blueprintPanel}>
+                    <h4>System Blueprint</h4>
+                    <div className={styles.blueprintRow}>
+                      <strong>Orchestration</strong>
+                      <span>{activeProject.blueprint.orchestration}</span>
+                    </div>
+                    <div className={styles.blueprintRow}>
+                      <strong>Data Layer</strong>
+                      <span>{activeProject.blueprint.data}</span>
+                    </div>
+                    <div className={styles.blueprintRow}>
+                      <strong>Infrastructure</strong>
+                      <span>{activeProject.blueprint.infra}</span>
+                    </div>
                   </div>
-                </div>
+
+                  <div className={styles.metricPanel}>
+                    <h4>Outcome Impact</h4>
+                    <strong>{activeProject.metric[0]}</strong>
+                    <span>{activeProject.metric[1]}</span>
+                  </div>
+
+                  <div className={styles.stackPanel}>
+                    <h4>Core Stack</h4>
+                    <div className={styles.tags}>
+                      {activeProject.stack.map((t) => (
+                        <span key={t} className={styles.stackTag}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.aside>
               </div>
 
-              {/* Sidebar Technical Blueprint */}
-              <aside className={styles.specSidebar}>
-                <div className={styles.blueprintPanel}>
-                  <h4>System Blueprint</h4>
-                  <div className={styles.blueprintRow}>
-                    <strong>Orchestration</strong>
-                    <span>{activeProject.blueprint.orchestration}</span>
-                  </div>
-                  <div className={styles.blueprintRow}>
-                    <strong>Data Layer</strong>
-                    <span>{activeProject.blueprint.data}</span>
-                  </div>
-                  <div className={styles.blueprintRow}>
-                    <strong>Infrastructure</strong>
-                    <span>{activeProject.blueprint.infra}</span>
-                  </div>
-                </div>
-
-                <div className={styles.metricPanel}>
-                  <h4>Outcome Impact</h4>
-                  <strong>{activeProject.metric[0]}</strong>
-                  <span>{activeProject.metric[1]}</span>
-                </div>
-
-                <div className={styles.stackPanel}>
-                  <h4>Core Stack</h4>
-                  <div className={styles.tags}>
-                    {activeProject.stack.map((t) => (
-                      <span key={t} className={styles.stackTag}>{t}</span>
-                    ))}
+              {/* Bottom Full-Width Telemetry trace / JSON Schema Switcher */}
+              <motion.div className={styles.traceConsole} variants={itemVariants}>
+                <div className={styles.consoleTabHeader}>
+                  <h4>System Telemetry Console</h4>
+                  <div className={styles.consoleViewSelectors}>
+                    <button 
+                      className={`${styles.consoleSelBtn} ${consoleView === "log" ? styles.consoleSelActive : ""}`}
+                      onClick={() => setConsoleView("log")}
+                    >
+                      [ Telemetry Stream ]
+                    </button>
+                    <button 
+                      className={`${styles.consoleSelBtn} ${consoleView === "schema" ? styles.consoleSelActive : ""}`}
+                      onClick={() => setConsoleView("schema")}
+                    >
+                      [ Parameter Schema ]
+                    </button>
                   </div>
                 </div>
-              </aside>
-            </div>
 
-            {/* Bottom Full-Width Telemetry trace / JSON Schema Switcher */}
-            <div className={styles.traceConsole}>
-              <div className={styles.consoleTabHeader}>
-                <h4>System Telemetry Console</h4>
-                <div className={styles.consoleViewSelectors}>
-                  <button 
-                    className={`${styles.consoleSelBtn} ${consoleView === "log" ? styles.consoleSelActive : ""}`}
-                    onClick={() => setConsoleView("log")}
-                  >
-                    [ Telemetry Stream ]
-                  </button>
-                  <button 
-                    className={`${styles.consoleSelBtn} ${consoleView === "schema" ? styles.consoleSelActive : ""}`}
-                    onClick={() => setConsoleView("schema")}
-                  >
-                    [ Parameter Schema ]
-                  </button>
-                </div>
-              </div>
-
-              <div className={styles.consoleBody}>
-                <div className={styles.consoleHeader}>
-                  <span className={styles.consoleDotRed} />
-                  <span className={styles.consoleDotYellow} />
-                  <span className={styles.consoleDotGreen} />
-                  <span className={styles.consoleTitle}>
-                    {consoleView === "log" ? "telemetry_stream.log" : "system_parameters.json"}
-                  </span>
-                </div>
-
-                {consoleView === "log" ? (
-                  <div className={styles.consoleLines}>
-                    {telemetryLines.map((line, idx) => (
-                      <div key={idx} className={styles.consoleLine}>
-                        <span className={styles.consoleTimestamp}>[+{(idx * 1.0).toFixed(1)}s]</span>{" "}
-                        <span className={styles.consoleText}>{line}</span>
-                      </div>
-                    ))}
-                    {telemetryLines.length < (projectTraces[activeProject.name]?.length || 0) + 1 && (
-                      <div className={styles.consoleCursor} />
-                    )}
+                <div className={styles.consoleBody}>
+                  <div className={styles.consoleHeader}>
+                    <span className={styles.consoleDotRed} />
+                    <span className={styles.consoleDotYellow} />
+                    <span className={styles.consoleDotGreen} />
+                    <span className={styles.consoleTitle}>
+                      {consoleView === "log" ? "telemetry_stream.log" : "system_parameters.json"}
+                    </span>
                   </div>
-                ) : (
-                  <div className={styles.consoleJson}>
-                    <pre><code>{JSON.stringify(activeProject.schema, null, 2)}</code></pre>
-                  </div>
-                )}
-              </div>
-              <p className={styles.consoleDisclaimer}>
-                *Execution telemetry trace reflecting real system configurations and active runtime logs.
-              </p>
-            </div>
 
-            {/* Footer actions */}
-            <footer className={styles.specFooter}>
-              <span>NDA Protected System Architecture. Outcomes fully verified.</span>
-              <a href={BOOKING_URL} target="_blank" rel="noreferrer">
-                Discuss Similar Architecture &rarr;
-              </a>
-            </footer>
-          </article>
+                  {consoleView === "log" ? (
+                    <div className={styles.consoleLines}>
+                      {telemetryLines.map((line, idx) => (
+                        <div key={idx} className={styles.consoleLine}>
+                          <span className={styles.consoleTimestamp}>[+{(idx * 1.0).toFixed(1)}s]</span>{" "}
+                          <span className={styles.consoleText}>{line}</span>
+                        </div>
+                      ))}
+                      {telemetryLines.length < (projectTraces[activeProject.name]?.length || 0) + 1 && (
+                        <div className={styles.consoleCursor} />
+                      )}
+                    </div>
+                  ) : (
+                    <div className={styles.consoleJson}>
+                      <pre><code>{JSON.stringify(activeProject.schema, null, 2)}</code></pre>
+                    </div>
+                  )}
+                </div>
+                <p className={styles.consoleDisclaimer}>
+                  *Execution telemetry trace reflecting real system configurations and active runtime logs.
+                </p>
+              </motion.div>
+
+              {/* Footer actions */}
+              <motion.footer className={styles.specFooter} variants={itemVariants}>
+                <span>NDA Protected System Architecture. Outcomes fully verified.</span>
+                <a href={BOOKING_URL} target="_blank" rel="noreferrer">
+                  Discuss Similar Architecture &rarr;
+                </a>
+              </motion.footer>
+            </motion.article>
+          </AnimatePresence>
 
         </div>
       </div>
