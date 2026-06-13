@@ -1,9 +1,46 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { BOOKING_URL, withBasePath } from "./siteLinks";
 
 export default function Landing() {
+  const badge1Ref = useRef<HTMLDivElement>(null);
+  const badge2Ref = useRef<HTMLDivElement>(null);
+  const badge3Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    const onScroll = () => {
+      if (!active) return;
+      const scrollY = window.scrollY;
+
+      window.requestAnimationFrame(() => {
+        if (!active) return;
+        if (badge1Ref.current) {
+          badge1Ref.current.style.transform = `translate3d(0, ${scrollY * -0.16}px, 0)`;
+        }
+        if (badge2Ref.current) {
+          badge2Ref.current.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0)`;
+        }
+        if (badge3Ref.current) {
+          badge3Ref.current.style.transform = `translate3d(0, ${scrollY * -0.07}px, 0)`;
+        }
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      active = false;
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
     <section className="hero-canvas" aria-label="Uzair Khatri hero">
+      <div className="hero-grid-3d" aria-hidden="true" />
+      
       <nav className="hero-nav" aria-label="Primary navigation">
         <a href={withBasePath("/")} aria-label="Uzair Khatri home" style={{ display: "inline-flex", alignItems: "center", gap: "0.6rem" }}>
           <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: "var(--gold)" }}>
@@ -36,16 +73,26 @@ export default function Landing() {
 
       <div className="hero-portrait-stage" aria-hidden="true">
         <div className="hero-portrait-glow" />
-        <div className="hero-telemetry hero-tel-1">
-          <span className="hero-telemetry-dot" />
-          <span>fault-tolerant agents</span>
+        
+        <div ref={badge1Ref} className="hero-tel-wrapper-1">
+          <div className="hero-telemetry hero-tel-1">
+            <span className="hero-telemetry-dot" />
+            <span>fault-tolerant agents</span>
+          </div>
         </div>
-        <div className="hero-telemetry hero-tel-2">
-          <span>cost-optimized inference</span>
+
+        <div ref={badge2Ref} className="hero-tel-wrapper-2">
+          <div className="hero-telemetry hero-tel-2">
+            <span>cost-optimized inference</span>
+          </div>
         </div>
-        <div className="hero-telemetry hero-tel-3">
-          <span>real-time systems</span>
+
+        <div ref={badge3Ref} className="hero-tel-wrapper-3">
+          <div className="hero-telemetry hero-tel-3">
+            <span>real-time systems</span>
+          </div>
         </div>
+
         <span className="hero-watermark">Uzair Khatri</span>
         <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="" fill sizes="(max-width: 900px) 82vw, 42vw" priority />
       </div>

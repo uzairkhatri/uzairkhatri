@@ -507,7 +507,20 @@
   border-radius: 8px;
   overflow: hidden;
   font-family: var(--font-space-mono), monospace;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(0, 214, 111, 0.03);
+  position: relative;
+}
+
+.consoleBody::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+  z-index: 10;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.8;
 }
 
 .consoleHeader {
@@ -560,6 +573,7 @@
   opacity: 0.75;
   flex-shrink: 0;
   user-select: none;
+  white-space: nowrap;
 }
 
 .consoleText {

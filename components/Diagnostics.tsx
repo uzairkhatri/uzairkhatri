@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./Diagnostics.module.css";
 import { BOOKING_URL } from "./siteLinks";
 import gsap from "gsap";
+import { useTiltAndGlow } from "./useTiltAndGlow";
 
 type Question = {
   id: string;
@@ -63,6 +64,34 @@ const questions: Question[] = [
     ],
   },
 ];
+
+function OptionCard({
+  opt,
+  selected,
+  onClick,
+}: {
+  opt: typeof questions[0]["options"][0];
+  selected: boolean;
+  onClick: () => void;
+}) {
+  const tiltGlow = useTiltAndGlow({ maxTilt: 5, scale: 1.01 });
+  return (
+    <button
+      ref={tiltGlow.ref}
+      onMouseMove={tiltGlow.onMouseMove}
+      onMouseLeave={tiltGlow.onMouseLeave}
+      style={tiltGlow.style}
+      className={`${styles.optionCard} ${selected ? styles.optionSelected : ""}`}
+      onClick={onClick}
+    >
+      <div className={styles.optionRadio} />
+      <div className={styles.optionText}>
+        <strong>{opt.label}</strong>
+        <span>{opt.description}</span>
+      </div>
+    </button>
+  );
+}
 
 export default function Diagnostics() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -289,19 +318,12 @@ Please review this with me during our architecture session.`;
 
                 <div className={styles.optionsGrid}>
                   {currentQuestion.options.map((opt) => (
-                    <button
+                    <OptionCard
                       key={opt.value}
-                      className={`${styles.optionCard} ${
-                        selections[currentQuestion.id] === opt.value ? styles.optionSelected : ""
-                      }`}
+                      opt={opt}
+                      selected={selections[currentQuestion.id] === opt.value}
                       onClick={() => handleSelect(currentQuestion.id, opt.value)}
-                    >
-                      <div className={styles.optionRadio} />
-                      <div className={styles.optionText}>
-                        <strong>{opt.label}</strong>
-                        <span>{opt.description}</span>
-                      </div>
-                    </button>
+                    />
                   ))}
                 </div>
               </div>

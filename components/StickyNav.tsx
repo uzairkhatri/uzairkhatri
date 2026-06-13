@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import styles from "./StickyNav.module.css";
 import { BOOKING_URL, withBasePath } from "./siteLinks";
 
@@ -19,8 +20,12 @@ export default function StickyNav() {
   }, []);
 
   return (
-    <nav
-      className={`${styles.nav} ${visible ? styles.visible : ""}`}
+    <motion.nav
+      initial={{ x: "-50%", y: -15, opacity: 0, scale: 0.96 }}
+      animate={visible ? { x: "-50%", y: 0, opacity: 1, scale: 1 } : { x: "-50%", y: -15, opacity: 0, scale: 0.96 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      style={{ pointerEvents: visible ? "auto" : "none" }}
+      className={styles.nav}
       aria-label="Sticky navigation"
     >
       <a href={withBasePath("/")} className={styles.brand} aria-label="Uzair Khatri home" style={{ display: "inline-flex", alignItems: "center", gap: "0.6rem" }}>
@@ -47,6 +52,6 @@ export default function StickyNav() {
       >
         Book Call
       </a>
-    </nav>
+    </motion.nav>
   );
 }

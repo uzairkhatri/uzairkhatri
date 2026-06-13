@@ -63,3 +63,21 @@
     width: 100%;
   }
 }
+
+.cardLocation {
+  color: var(--gold-bright);
+  font-weight: 500;
+  margin-left: 0.35rem;
+  text-transform: none;
+}
+
+.starRating {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.starIcon {
+  width: 0.68rem;
+  height: 0.68rem;
+  color: var(--gold);
+}

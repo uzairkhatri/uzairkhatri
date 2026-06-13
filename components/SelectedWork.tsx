@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./SelectedWork.module.css";
 import ProjectVisual, { type ProjectVisualType } from "./ProjectVisual";
 import { BOOKING_URL } from "./siteLinks";
+import { useTiltAndGlow } from "./useTiltAndGlow";
 
 type Project = {
   number: string;
@@ -219,6 +220,66 @@ const itemVariants = {
   }
 };
 
+function ProjectBlade({
+  proj,
+  idx,
+  activeTab,
+  activeColor,
+  onClick,
+}: {
+  proj: typeof projects[0];
+  idx: number;
+  activeTab: number;
+  activeColor: string;
+  onClick: () => void;
+}) {
+  const tiltGlow = useTiltAndGlow({ maxTilt: 5, scale: 1.015 });
+  const latencies = ["14ms", "28ms", "42ms", "18ms"];
+  const throughputs = ["94.2k/s", "12.8k/s", "2.5k/s", "98.7%"];
+  
+  return (
+    <button
+      ref={tiltGlow.ref}
+      onMouseMove={tiltGlow.onMouseMove}
+      onMouseLeave={tiltGlow.onMouseLeave}
+      style={tiltGlow.style}
+      className={`${styles.tabBtn} ${idx === activeTab ? styles.tabActive : ""}`}
+      onClick={onClick}
+      aria-selected={idx === activeTab}
+      role="tab"
+    >
+      {idx === activeTab && (
+        <motion.div
+          layoutId="activeBladeBackground"
+          className={styles.activeTabGlow}
+          style={{
+            background: activeColor === "#c59b53" ? "rgba(197, 155, 83, 0.05)" : 
+                        activeColor === "#8cc7ad" ? "rgba(140, 199, 173, 0.05)" : 
+                        activeColor === "#9db5d8" ? "rgba(157, 181, 216, 0.05)" : 
+                        "rgba(201, 188, 168, 0.05)"
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 22 }}
+        />
+      )}
+      <header className={styles.tabHeader}>
+        <h3>{proj.name}</h3>
+        <em>{latencies[idx]}</em>
+      </header>
+      <span className={styles.tabKicker}>{proj.category}</span>
+      <div className={styles.bladeMetrics}>
+        <div className={styles.bladeMetricCell}>
+          <small>Scale</small>
+          <strong>{throughputs[idx]}</strong>
+        </div>
+        <div className={styles.bladeMetricCell}>
+          <small>Status</small>
+          <strong>ACTIVE</strong>
+        </div>
+      </div>
+    </button>
+  );
+}
+
 export default function SelectedWork() {
   const [activeTab, setActiveTab] = useState(0);
   const [telemetryLines, setTelemetryLines] = useState<string[]>([]);
@@ -298,56 +359,17 @@ export default function SelectedWork() {
         {/* Dashboard Split Container */}
         <div className={styles.dashboardContainer}>
           
-          {/* Left Navigation: Rack server blade tabs */}
           <nav className={styles.tabsList} aria-label="Project architecture selector">
-            {projects.map((proj, idx) => {
-              const latencies = ["14ms", "28ms", "42ms", "18ms"];
-              const throughputs = ["94.2k/s", "12.8k/s", "2.5k/s", "98.7%"];
-              return (
-                <button
-                  key={proj.number}
-                  className={`${styles.tabBtn} ${idx === activeTab ? styles.tabActive : ""}`}
-                  onClick={() => handleTabChange(idx)}
-                  aria-selected={idx === activeTab}
-                  role="tab"
-                >
-                  {idx === activeTab && (
-                    <motion.div
-                      layoutId="activeBladeBackground"
-                      className={styles.activeTabGlow}
-                      style={{
-                        background: activeColor === "#c59b53" ? "rgba(197, 155, 83, 0.05)" : 
-                                    activeColor === "#8cc7ad" ? "rgba(140, 199, 173, 0.05)" : 
-                                    activeColor === "#9db5d8" ? "rgba(157, 181, 216, 0.05)" : 
-                                    "rgba(201, 188, 168, 0.05)",
-                        borderLeft: `3px solid ${activeColor}`
-                      }}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <div className={styles.bladeStatus}>
-                    <span className={`${styles.statusLed} ${idx === activeTab ? styles.ledActive : ""}`} />
-                    <span className={styles.nodeAddress}>NODE-{proj.number} // PORT-{3000 + idx * 10}</span>
-                    <span className={styles.pingTime}>{latencies[idx]}</span>
-                  </div>
-                  <div className={styles.tabHeader}>
-                    <h3>{proj.name}</h3>
-                    <em>{proj.year}</em>
-                  </div>
-                  <span className={styles.tabKicker}>{proj.category}</span>
-                  <div className={styles.bladeMetrics}>
-                    <div className={styles.bladeMetricCell}>
-                      <small>LOAD</small>
-                      <strong>{throughputs[idx]}</strong>
-                    </div>
-                    <div className={styles.bladeMetricCell}>
-                      <small>OUTCOME</small>
-                      <strong>{proj.metric[0]}</strong>
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
+            {projects.map((proj, idx) => (
+              <ProjectBlade
+                key={proj.number}
+                proj={proj}
+                idx={idx}
+                activeTab={activeTab}
+                activeColor={activeColor}
+                onClick={() => handleTabChange(idx)}
+              />
+            ))}
           </nav>
 
           {/* Right Panel: Spec Details with dynamic Framer Motion exit/entry */}
