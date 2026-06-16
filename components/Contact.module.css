@@ -1,2 +1,150 @@
 .left h2{font-size:clamp(3rem,5.8vw,5.8rem)!important;letter-spacing:-.07em!important;line-height:.88!important}.shell{gap:clamp(2.5rem,6vw,6rem)!important}.actions a{white-space:normal;text-align:center}@media(max-width:620px){.section{padding:3.8rem 1.2rem!important}.left h2{font-size:clamp(2.65rem,13vw,4.05rem)!important}.copy{font-size:.95rem!important}.contactCard h3{font-size:clamp(1.7rem,8vw,2.5rem)!important}.links strong{overflow-wrap:anywhere}}
 .section{background:var(--graphite-deep);padding:var(--section-pad) var(--page-pad);color:#fff}.shell{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(20rem,.65fr);gap:clamp(3rem,8vw,8rem);max-width:var(--content-max);margin:0 auto}.left,.right{display:grid;align-content:center}.kicker{display:flex;align-items:center;gap:.7rem;margin:0 0 1.2rem;color:var(--gold);font-size:.67rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}.kicker span{width:2rem;height:1px;background:var(--gold)}.left h2{max-width:10ch;margin:0;font-size:clamp(3.5rem,7vw,7rem);font-weight:950;letter-spacing:-.085em;line-height:.85}.copy{max-width:40rem;margin:1.5rem 0 0;color:var(--dark-muted);font-size:1rem;line-height:1.75}.fitList{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.5rem}.fitList span{border:1px solid var(--hairline-dark);border-radius:999px;padding:.45rem .65rem;color:rgba(255,255,255,.52);font-size:.64rem;font-weight:800}.actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}.actions a{display:inline-flex;min-height:3rem;align-items:center;gap:.5rem;border:1px solid var(--gold);border-radius:999px;padding:0 1rem;color:var(--gold-bright);font-size:.66rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.actions .primary{background:var(--gold);color:#17120b}.actions svg,.links svg{width:1rem;fill:none;stroke:currentColor;stroke-width:2}.right{gap:1rem}.contactCard{border-top:1px solid var(--gold);padding:1.5rem 0}.contactCard p{margin:0 0 .8rem;color:var(--gold);font-size:.62rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.contactCard h3{max-width:18ch;margin:0;font-size:clamp(1.8rem,3vw,3rem);letter-spacing:-.055em;line-height:1}.contactCard span{display:block;margin-top:1rem;color:var(--dark-muted);font-size:.84rem;line-height:1.65}.links{display:grid}.links a{display:grid;grid-template-columns:5rem 1fr auto;align-items:center;gap:1rem;border-top:1px solid var(--hairline-dark);padding:1rem 0}.links span{color:rgba(255,255,255,.3);font-size:.62rem;font-weight:900;text-transform:uppercase}.links strong{font-size:.78rem}.timezone{margin:0;color:rgba(255,255,255,.38);font-size:.7rem;line-height:1.6}@media(max-width:900px){.shell{grid-template-columns:1fr}.left h2{max-width:12ch}}@media(max-width:620px){.section{padding:4.5rem 1.2rem}.left h2{font-size:clamp(3.4rem,16vw,5rem)}.actions a{width:100%;justify-content:center}.links a{grid-template-columns:1fr auto}.links span{grid-column:1/-1}}
+
+/* Contact Form Styles */
+.form {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+@media (max-width: 480px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
+.formGroup {
+  position: relative;
+}
+.input,
+.textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.72rem 0.95rem;
+  color: #fff;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.82rem;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  outline: none;
+}
+.input:hover,
+.textarea:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.input:focus,
+.textarea:focus {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(197, 155, 83, 0.15);
+}
+.textarea {
+  resize: vertical;
+}
+.submitBtn {
+  display: inline-flex;
+  min-height: 2.85rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 0 1.5rem;
+  color: #1a1008;
+  background: var(--gold);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 0.4rem;
+}
+.submitBtn:hover {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 155, 83, 0.25);
+}
+.submitBtn:disabled {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.05);
+  color: var(--dark-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Success State Styles */
+.formSuccess {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  background: rgba(16, 20, 19, 0.3);
+  border: 1px dashed rgba(197, 155, 83, 0.25);
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+.successIconStage {
+  position: relative;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.2rem;
+}
+.successPulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.15;
+  animation: success-ping 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.successCheck {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--gold);
+  z-index: 2;
+}
+.formSuccess strong {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.formSuccess p {
+  font-size: 0.82rem;
+  color: var(--dark-muted);
+  max-width: 28ch;
+  margin: 0 0 1.5rem;
+  line-height: 1.45;
+}
+.resetFormBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.64rem;
+  font-family: var(--font-space-mono), monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.resetFormBtn:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+@keyframes success-ping {
+  0% { transform: scale(1); opacity: 0.25; }
+  80% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1.8); opacity: 0; }
+}

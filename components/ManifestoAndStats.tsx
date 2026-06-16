@@ -83,6 +83,16 @@ export default function ManifestoAndStats() {
                 <AnimatedCounter value="10+" />
               </strong>
               <span className={styles.highlightLabel}>years of architecture experience</span>
+              <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
+                <defs>
+                  <linearGradient id="mini-grad-highlight" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="var(--gold)" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path d="M 0,22 Q 25,10 50,18 T 100,2" fill="none" stroke="var(--gold)" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M 0,22 Q 25,10 50,18 T 100,2 L 100,30 L 0,30 Z" fill="url(#mini-grad-highlight)" />
+              </svg>
             </div>
 
             {/* 2x2 Grid */}
@@ -92,24 +102,64 @@ export default function ManifestoAndStats() {
                   <AnimatedCounter value="25+" />
                 </strong>
                 <span className={styles.linkLabel}>production-deployed systems</span>
+                <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
+                  <defs>
+                    <linearGradient id="mini-grad-1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.2" />
+                      <stop offset="100%" stopColor="var(--gold)" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 0,25 Q 20,20 40,8 T 80,14 T 100,2" fill="none" stroke="var(--gold)" strokeWidth="1.2" strokeLinecap="round" />
+                  <path d="M 0,25 Q 20,20 40,8 T 80,14 T 100,2 L 100,30 L 0,30 Z" fill="url(#mini-grad-1)" />
+                </svg>
               </div>
               <div className={styles.gridItem}>
                 <strong className={styles.gridValue}>
                   <AnimatedCounter value="95%" />
                 </strong>
                 <span className={styles.linkLabel}>success rate under peak load</span>
+                <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
+                  <defs>
+                    <linearGradient id="mini-grad-2" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.2" />
+                      <stop offset="100%" stopColor="var(--gold)" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 0,18 Q 30,12 60,24 T 100,8" fill="none" stroke="var(--gold)" strokeWidth="1.2" strokeLinecap="round" />
+                  <path d="M 0,18 Q 30,12 60,24 T 100,8 L 100,30 L 0,30 Z" fill="url(#mini-grad-2)" />
+                </svg>
               </div>
               <div className={styles.gridItem}>
                 <strong className={styles.gridValue}>
                   <AnimatedCounter value="3" />
                 </strong>
                 <span className={styles.linkLabel}>active named ai agents</span>
+                <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
+                  <defs>
+                    <linearGradient id="mini-grad-3" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.2" />
+                      <stop offset="100%" stopColor="var(--gold)" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 0,28 Q 25,22 50,8 T 100,16" fill="none" stroke="var(--gold)" strokeWidth="1.2" strokeLinecap="round" />
+                  <path d="M 0,28 Q 25,22 50,8 T 100,16 L 100,30 L 0,30 Z" fill="url(#mini-grad-3)" />
+                </svg>
               </div>
               <div className={styles.gridItem}>
                 <strong className={styles.gridValue}>
                   <AnimatedCounter value="0" />
                 </strong>
                 <span className={styles.linkLabel}>unproven prototype demos</span>
+                <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
+                  <defs>
+                    <linearGradient id="mini-grad-4" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.2" />
+                      <stop offset="100%" stopColor="var(--gold)" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 0,4 Q 40,6 80,4 T 100,26" fill="none" stroke="var(--gold)" strokeWidth="1.2" strokeLinecap="round" />
+                  <path d="M 0,4 Q 40,6 80,4 T 100,26 L 100,30 L 0,30 Z" fill="url(#mini-grad-4)" />
+                </svg>
               </div>
             </div>
           </div>

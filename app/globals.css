@@ -346,10 +346,10 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
 }
 
 .hero-portrait-stage img {
-  z-index: 1;
+  z-index: 6;
   object-fit: contain;
-  object-position: center bottom;
-  transform: scale(0.99);
+  object-position: 72% bottom !important;
+  transform: translate3d(18%, 0, 0) scale(0.99) !important;
   filter: saturate(0.92) contrast(1.05);
 }
 
@@ -742,8 +742,14 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
   }
 
   .hero-watermark,
-  .hero-telemetry {
+  .hero-telemetry,
+  .hero-nav-cta {
     display: none !important;
+  }
+
+  .hero-portrait-stage img {
+    transform: scale(0.99) !important;
+    object-position: center bottom !important;
   }
 
   .hero-content {
@@ -897,5 +903,236 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
     justify-content: center;
     font-size: 0.56rem;
     letter-spacing: 0.035em;
+  }
+}
+
+/* ── Google Stitch Dashboard Overlay Styling ───────── */
+.hero-portrait-stage {
+  width: min(44rem, 50vw) !important;
+}
+
+.hero-portrait-nodes-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+@keyframes node-glowing {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px var(--gold));
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.25);
+    filter: drop-shadow(0 0 6px var(--gold-bright));
+    opacity: 1;
+  }
+}
+
+.node-pulse {
+  transform-origin: center;
+  animation: node-glowing 3s infinite ease-in-out;
+}
+
+.hero-node-pill {
+  position: absolute;
+  z-index: 8;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  background: rgba(16, 20, 19, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.58rem;
+  text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-node-pill:hover {
+  background: rgba(20, 24, 23, 0.95);
+  transform: translateY(-1px);
+}
+
+/* Far-left pills */
+.fn-gateway, .fn-broker, .fn-storage {
+  border-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.52rem;
+}
+
+/* Middle pills */
+.mid-route, .mid-trigger, .mid-telemetry, .mid-queue {
+  border-color: rgba(197, 155, 83, 0.35);
+  color: var(--gold-bright);
+}
+
+.mid-route:hover, .mid-trigger:hover, .mid-telemetry:hover, .mid-queue:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(197, 155, 83, 0.15);
+}
+
+.node-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.gold-pulse {
+  background: var(--gold);
+  box-shadow: 0 0 6px var(--gold);
+  animation: telemetry-pulse 2s infinite ease-in-out;
+}
+
+/* Telemetry Dashboard Cards */
+.hero-telemetry-card {
+  position: absolute;
+  z-index: 8;
+  width: 9.5rem;
+  background: rgba(16, 20, 19, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.6rem;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.02),
+    0 12px 28px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: var(--font-inter), sans-serif;
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-telemetry-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.hero-telemetry-card.rt-tasks:hover {
+  border-color: rgba(0, 214, 111, 0.3);
+}
+
+.hero-telemetry-card.rt-load:hover {
+  border-color: rgba(197, 155, 83, 0.3);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.58rem;
+  color: var(--text-muted);
+  font-family: var(--font-space-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.card-header strong {
+  font-size: 0.64rem;
+  color: var(--text-primary);
+}
+
+/* Mini Bar Chart */
+.mini-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 24px;
+  margin-top: 0.45rem;
+}
+
+.mini-bar-chart span {
+  width: 9%;
+  background: var(--gold);
+  border-radius: 1px 1px 0 0;
+  opacity: 0.85;
+  transition: height 0.4s ease;
+}
+
+.mini-bar-chart.green-bars span {
+  background: var(--accent-green);
+}
+
+.mini-chart-svg {
+  width: 100%;
+  height: 24px;
+  margin-top: 0.45rem;
+  overflow: visible;
+}
+
+/* Operational Status Progress Bars */
+.progress-group {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.45rem;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.52rem;
+  color: var(--text-secondary);
+}
+
+.progress-label span {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+}
+
+.progress-label strong {
+  font-family: var(--font-space-mono), monospace;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-track span {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  border-radius: inherit;
+}
+
+.rt-load .progress-group:first-of-type .progress-track span {
+  background: var(--accent-green);
+}
+
+/* Responsive Overrides for Dashboards */
+@media (max-width: 980px) {
+  .hero-telemetry-card {
+    width: 8.5rem;
+    padding: 0.5rem;
+  }
+  .rt-tasks {
+    right: -6% !important;
+  }
+  .rt-load {
+    right: -8% !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-node-pill,
+  .hero-telemetry-card,
+  .hero-portrait-nodes-overlay {
+    display: none !important;
   }
 }

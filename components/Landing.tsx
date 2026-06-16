@@ -1,42 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { BOOKING_URL, withBasePath } from "./siteLinks";
 
 export default function Landing() {
-  const badge1Ref = useRef<HTMLDivElement>(null);
-  const badge2Ref = useRef<HTMLDivElement>(null);
-  const badge3Ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let active = true;
-
-    const onScroll = () => {
-      if (!active) return;
-      const scrollY = window.scrollY;
-
-      window.requestAnimationFrame(() => {
-        if (!active) return;
-        if (badge1Ref.current) {
-          badge1Ref.current.style.transform = `translate3d(0, ${scrollY * -0.16}px, 0)`;
-        }
-        if (badge2Ref.current) {
-          badge2Ref.current.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0)`;
-        }
-        if (badge3Ref.current) {
-          badge3Ref.current.style.transform = `translate3d(0, ${scrollY * -0.07}px, 0)`;
-        }
-      });
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      active = false;
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
-
   return (
     <section className="hero-canvas" aria-label="Uzair Khatri hero">
       <div className="hero-grid-3d" aria-hidden="true" />
@@ -74,27 +41,70 @@ export default function Landing() {
       <div className="hero-portrait-stage" aria-hidden="true">
         <div className="hero-portrait-glow" />
         
-        <div ref={badge1Ref} className="hero-tel-wrapper-1">
-          <div className="hero-telemetry hero-tel-1">
-            <span className="hero-telemetry-dot" />
-            <span>fault-tolerant agents</span>
-          </div>
-        </div>
+        {/* SVG connection lines spanning the entire stage using percentage-based paths */}
+        <svg className="hero-portrait-nodes-overlay" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          {/* Paths connecting Far-Left nodes (x=10) to Middle nodes (x=16) */}
+          <path d="M 10 23 C 13 23, 13 12, 16 12" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 23 C 13 23, 13 27, 16 27" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          
+          <path d="M 10 41 C 13 41, 13 27, 16 27" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 41 C 13 41, 13 42, 16 42" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          
+          <path d="M 10 59 C 13 59, 13 42, 16 42" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 59 C 13 59, 13 57, 16 57" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
 
-        <div ref={badge2Ref} className="hero-tel-wrapper-2">
-          <div className="hero-telemetry hero-tel-2">
-            <span>cost-optimized inference</span>
-          </div>
-        </div>
+          {/* Paths from Middle nodes right-edge (x=28) towards center x=70 (behind shifted portrait) */}
+          <path d="M 28 12 H 36 C 48 12, 52 32, 70 32" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
+          <path d="M 28 27 H 36 C 48 27, 52 36, 70 36" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.6" fill="none" />
+          <path d="M 28 42 H 70" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
+          <path d="M 28 57 H 36 C 48 57, 52 48, 70 48" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
 
-        <div ref={badge3Ref} className="hero-tel-wrapper-3">
-          <div className="hero-telemetry hero-tel-3">
-            <span>real-time systems</span>
-          </div>
-        </div>
+          {/* Mini node circles */}
+          <circle cx="16" cy="12" r="0.6" fill="var(--gold)" />
+          <circle cx="16" cy="27" r="0.6" fill="var(--gold)" />
+          <circle cx="16" cy="42" r="0.6" fill="var(--gold)" />
+          <circle cx="16" cy="57" r="0.6" fill="var(--gold)" />
+          <circle cx="10" cy="23" r="0.6" fill="var(--gold)" />
+          <circle cx="10" cy="41" r="0.6" fill="var(--gold)" />
+          <circle cx="10" cy="59" r="0.6" fill="var(--gold)" />
+
+          <circle cx="70" cy="32" r="0.8" fill="var(--gold)" className="node-pulse" />
+          <circle cx="70" cy="36" r="0.8" fill="var(--gold)" className="node-pulse" />
+          <circle cx="70" cy="42" r="0.8" fill="var(--gold)" className="node-pulse" />
+          <circle cx="70" cy="48" r="0.8" fill="var(--gold)" className="node-pulse" />
+        </svg>
 
         <span className="hero-watermark">Uzair Khatri</span>
-        <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="" fill sizes="(max-width: 900px) 82vw, 42vw" priority />
+        
+        {/* Absolute capsules for the left-hand nodes (gateway, broker, storage) shifted left */}
+        <div className="hero-node-pill fn-gateway" style={{ top: "21.5%", left: "0%" }}>
+          <span className="node-indicator gold-pulse" />
+          <span>gateway</span>
+        </div>
+        <div className="hero-node-pill fn-broker" style={{ top: "39.5%", left: "0%" }}>
+          <span className="node-indicator gold-pulse" />
+          <span>broker</span>
+        </div>
+        <div className="hero-node-pill fn-storage" style={{ top: "57.5%", left: "0%" }}>
+          <span className="node-indicator gold-pulse" />
+          <span>storage</span>
+        </div>
+
+        {/* Middle route pills shifted left to 16% so they reside strictly to the left of the face */}
+        <div className="hero-node-pill mid-route" style={{ top: "10.5%", left: "16%" }}>
+          <span>Ingestion Routing</span>
+        </div>
+        <div className="hero-node-pill mid-trigger" style={{ top: "25.5%", left: "16%" }}>
+          <span>Trigger Event</span>
+        </div>
+        <div className="hero-node-pill mid-telemetry" style={{ top: "40.5%", left: "16%" }}>
+          <span>Telemetry Layer</span>
+        </div>
+        <div className="hero-node-pill mid-queue" style={{ top: "55.5%", left: "16%" }}>
+          <span>Pipeline Queue</span>
+        </div>
+
+        <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Iqbal - AI Systems Architect" fill sizes="(max-width: 900px) 82vw, 42vw" priority />
       </div>
 
       <div className="hero-content">
