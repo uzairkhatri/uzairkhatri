@@ -81,3 +81,48 @@
   height: 0.68rem;
   color: var(--gold);
 }
+
+.marqueeContainer {
+  width: calc(100% + 2 * var(--page-pad));
+  position: relative;
+  margin-left: calc(-1 * var(--page-pad));
+  margin-right: calc(-1 * var(--page-pad));
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.015);
+  border-top: 1px solid var(--hairline-dark);
+  border-bottom: 1px solid var(--hairline-dark);
+  padding: 1rem 0;
+  margin-bottom: 3.5rem;
+  display: flex;
+}
+
+.marqueeTrack {
+  display: flex;
+  white-space: nowrap;
+  gap: 2.5rem;
+  animation: marqueeLoop 30s linear infinite;
+  will-change: transform;
+}
+
+.marqueeTrack span {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+}
+
+.marqueeDot {
+  color: var(--gold) !important;
+}
+
+@keyframes marqueeLoop {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+

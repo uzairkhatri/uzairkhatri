@@ -1,0 +1,221 @@
+.section {
+  position: relative;
+  background: var(--graphite-deep);
+  color: #ffffff;
+  padding: var(--section-pad) var(--page-pad);
+  border-top: 1px solid var(--hairline-dark);
+}
+
+.shell {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 4rem;
+  max-width: 48rem;
+}
+
+.header h2 {
+  margin: 1.3rem 0 1rem;
+  font-size: clamp(2.4rem, 4.8vw, 4.5rem);
+  font-weight: 850;
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+}
+
+.header p {
+  margin: 0;
+  color: var(--dark-muted);
+  line-height: 1.6;
+}
+
+.timelineContainer {
+  position: relative;
+  padding-left: 8.5rem;
+}
+
+.timelineSpine {
+  position: absolute;
+  left: 3rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--gold) 0%,
+    rgba(255, 255, 255, 0.05) 90%
+  );
+  z-index: 1;
+}
+
+.timelineList {
+  display: grid;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.timelineItem {
+  position: relative;
+  display: flex;
+  gap: 2.5rem;
+}
+
+.timelineNode {
+  position: absolute;
+  left: -8.5rem;
+  width: 6.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: 1.25rem;
+}
+
+.nodeCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--graphite-deep);
+  border: 1px solid var(--gold);
+  box-shadow: 0 0 16px rgba(216, 173, 100, 0.12);
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.nodeYear {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.85rem;
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+
+.timelineItem:hover .nodeCircle {
+  border-color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.timelineCard {
+  flex: 1;
+  background: rgba(25, 29, 28, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 8px 32px rgba(0, 0, 0, 0.25);
+  transform-style: preserve-3d;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.timelineCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    250px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(216, 173, 100, 0.12),
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.timelineCard:hover {
+  border-color: rgba(197, 155, 83, 0.35);
+  background: rgba(25, 29, 28, 0.6);
+}
+
+.timelineCard:hover::before {
+  opacity: 1;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 1;
+}
+
+.cardHeader h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.itemFocus {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.68rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.itemDescription {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  z-index: 1;
+}
+
+.itemYearMobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .timelineContainer {
+    padding-left: 2rem;
+  }
+  
+  .timelineSpine {
+    display: block;
+    left: 0.85rem;
+  }
+  
+  .timelineNode {
+    display: flex;
+    left: -2rem;
+    width: 2.2rem;
+    justify-content: center;
+    padding-top: 1.1rem;
+  }
+
+  .nodeCircle {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-width: 1px;
+  }
+
+  .nodeYear {
+    font-size: 0.64rem;
+  }
+  
+  .itemYearMobile {
+    display: none;
+  }
+  
+  .timelineCard {
+    padding: 1.5rem;
+  }
+
+  .header h2 {
+    font-size: clamp(1.6rem, 6.5vw, 2.2rem) !important;
+  }
+}

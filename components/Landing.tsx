@@ -1,23 +1,77 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { BOOKING_URL, withBasePath } from "./siteLinks";
+import Logo from "./Logo";
 
 export default function Landing() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const heroElement = heroRef.current;
+    if (!heroElement || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let frameId: number;
+    let isVisible = true;
+
+    // Stop requestAnimationFrame loop when scrolled out of view to preserve resources
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          tick();
+        } else {
+          cancelAnimationFrame(frameId);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(heroElement);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      targetX = e.clientX / innerWidth - 0.5;
+      targetY = e.clientY / innerHeight - 0.5;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    const tick = () => {
+      if (!isVisible) return;
+
+      currentX += (targetX - currentX) * 0.05;
+      currentY += (targetY - currentY) * 0.05;
+
+      heroElement.style.setProperty("--mx", currentX.toFixed(4));
+      heroElement.style.setProperty("--my", currentY.toFixed(4));
+
+      frameId = requestAnimationFrame(tick);
+    };
+
+    tick();
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(frameId);
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <section className="hero-canvas" aria-label="Uzair Khatri hero">
+    <section ref={heroRef} className="hero-canvas" aria-label="Uzair Khatri hero">
       <div className="hero-grid-3d" aria-hidden="true" />
       
       <nav className="hero-nav" aria-label="Primary navigation">
-        <a href={withBasePath("/")} aria-label="Uzair Khatri home" style={{ display: "inline-flex", alignItems: "center", gap: "0.6rem" }}>
-          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: "var(--gold)" }}>
-            <rect x="2" y="2" width="28" height="28" rx="6" stroke="currentColor" strokeWidth="2.2" />
-            <path d="M10 10v7a6 6 0 0 0 12 0v-7" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" />
-            <path d="M16 2v4M16 26v4M2 16h4M26 16h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          </svg>
-          <span>Uzair Khatri</span>
+        <a href={withBasePath("/")} aria-label="Uzair Khatri home" style={{ border: "none", paddingBottom: 0, textDecoration: "none" }}>
+          <Logo />
         </a>
-        <div>
+        <div className="desktop-nav-links">
           <a href="#work">Work</a>
           <a href="#writing">Writing</a>
           <a href="#about">About</a>
@@ -33,31 +87,87 @@ export default function Landing() {
             </svg>
           </a>
           <a className="hero-nav-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
-            Book Architecture Call
+            <span className="cta-text-primary">Free Review</span>
+            <span className="cta-text-hover" aria-hidden="true">Free Review</span>
           </a>
         </div>
+        <button
+          className="mobile-menu-toggle"
+          onClick={() => setMobileMenuOpen(true)}
+          aria-label="Open navigation menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+
+        {mobileMenuOpen && (
+          <div className="mobile-menu-overlay">
+            <div className="mobile-menu-header">
+              <Logo compact={true} />
+              <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+            <nav className="mobile-menu-links">
+              <a href="#work" onClick={() => setMobileMenuOpen(false)}>Work</a>
+              <a href="#writing" onClick={() => setMobileMenuOpen(false)}>Writing</a>
+              <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+              <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-3d-double" style={{ fontSize: "1rem", padding: "0.8rem 1.8rem" }}>
+                <span className="btn-3d-text-primary">Free Architecture Review</span>
+              </a>
+            </nav>
+            <div className="mobile-menu-footer">
+              <a href="https://github.com/UzairKhatri" target="_blank" rel="noreferrer" onClick={() => setMobileMenuOpen(false)}>GitHub</a>
+              <a href="https://www.linkedin.com/in/uzair-khatri" target="_blank" rel="noreferrer" onClick={() => setMobileMenuOpen(false)}>LinkedIn</a>
+            </div>
+          </div>
+        )}
       </nav>
 
       <div className="hero-portrait-stage" aria-hidden="true">
         <div className="hero-portrait-glow" />
+        <div className="hero-portrait-hud" />
         
         {/* SVG connection lines spanning the entire stage using percentage-based paths */}
         <svg className="hero-portrait-nodes-overlay" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           {/* Paths connecting Far-Left nodes (x=10) to Middle nodes (x=16) */}
           <path d="M 10 23 C 13 23, 13 12, 16 12" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 23 C 13 23, 13 12, 16 12" className="pulse-path pulse-delay-1" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
+          
           <path d="M 10 23 C 13 23, 13 27, 16 27" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 23 C 13 23, 13 27, 16 27" className="pulse-path pulse-delay-2" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
           
           <path d="M 10 41 C 13 41, 13 27, 16 27" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 41 C 13 41, 13 27, 16 27" className="pulse-path pulse-delay-3" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
+          
           <path d="M 10 41 C 13 41, 13 42, 16 42" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 41 C 13 41, 13 42, 16 42" className="pulse-path pulse-delay-4" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
           
           <path d="M 10 59 C 13 59, 13 42, 16 42" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 59 C 13 59, 13 42, 16 42" className="pulse-path pulse-delay-1" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
+          
           <path d="M 10 59 C 13 59, 13 57, 16 57" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
+          <path d="M 10 59 C 13 59, 13 57, 16 57" className="pulse-path pulse-delay-2" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
 
           {/* Paths from Middle nodes right-edge (x=28) towards center x=70 (behind shifted portrait) */}
           <path d="M 28 12 H 36 C 48 12, 52 32, 70 32" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
+          <path d="M 28 12 H 36 C 48 12, 52 32, 70 32" className="pulse-path pulse-delay-3" stroke="var(--gold-bright)" strokeWidth="0.6" fill="none" />
+          
           <path d="M 28 27 H 36 C 48 27, 52 36, 70 36" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.6" fill="none" />
+          <path d="M 28 27 H 36 C 48 27, 52 36, 70 36" className="pulse-path pulse-delay-4" stroke="var(--gold-bright)" strokeWidth="0.6" fill="none" />
+          
           <path d="M 28 42 H 70" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
+          <path d="M 28 42 H 70" className="pulse-path pulse-delay-1" stroke="var(--gold-bright)" strokeWidth="0.6" fill="none" />
+          
           <path d="M 28 57 H 36 C 48 57, 52 48, 70 48" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
+          <path d="M 28 57 H 36 C 48 57, 52 48, 70 48" className="pulse-path pulse-delay-2" stroke="var(--gold-bright)" strokeWidth="0.6" fill="none" />
 
           {/* Mini node circles */}
           <circle cx="16" cy="12" r="0.6" fill="var(--gold)" />
@@ -109,10 +219,6 @@ export default function Landing() {
 
       <div className="hero-content">
         <div className="hero-status-row">
-          <div className="hero-availability">
-            <span />
-            1 client slot open for Q3 2026
-          </div>
           <div className="hero-telemetry-pill">
             <span className="telemetry-pulse-gold" />
             <span>System: Active | RTT: 42ms</span>
@@ -127,12 +233,13 @@ export default function Landing() {
           </span>
         </div>
         <div className="hero-actions" aria-label="Hero actions">
-          <a href={BOOKING_URL} target="_blank" rel="noreferrer">
-            Book a 30-Min Architecture Review -&gt;
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-3d-double">
+            <span className="btn-3d-text-primary">Schedule a Free AI Architecture Review &rarr;</span>
+            <span className="btn-3d-text-hover" aria-hidden="true">Schedule a Free AI Architecture Review &rarr;</span>
           </a>
           <a href="#work">View Production Work</a>
         </div>
-        <p className="hero-microcopy">Free. No pitch. Just clarity on your system.</p>
+        <p className="hero-microcopy">30 Minutes &bull; No Sales Pitch &bull; Actionable Recommendations</p>
       </div>
     </section>
   );

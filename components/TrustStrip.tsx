@@ -83,6 +83,37 @@ function TestimonialCard({ author, quote, source, location }: { author: string; 
 export default function TrustStrip() {
   return (
     <section className={`${styles.section} reveal-section`} id="testimonials" aria-label="Client testimonials">
+      <div className={styles.marqueeContainer}>
+        <div className={styles.marqueeTrack}>
+          <span>SYSTEM RELIABILITY</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>AGENTIC INFRASTRUCTURE</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>LARGE-SCALE INGESTION</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>COLD-START OPTIMIZATION</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>FAULT TOLERANCE</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>HIGH THROUGHPUT</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          
+          {/* Duplicate set for seamless looping */}
+          <span>SYSTEM RELIABILITY</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>AGENTIC INFRASTRUCTURE</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>LARGE-SCALE INGESTION</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>COLD-START OPTIMIZATION</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>FAULT TOLERANCE</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+          <span>HIGH THROUGHPUT</span>
+          <span className={styles.marqueeDot}>&bull;</span>
+        </div>
+      </div>
+
       <div className={styles.shell}>
         <div className="section-eyebrow">
           <span />

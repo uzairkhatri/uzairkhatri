@@ -1,8 +1,13 @@
+"use client";
+
 import styles from "./ManifestoAndStats.module.css";
 import AnimatedCounter from "./AnimatedCounter";
 import { BOOKING_URL } from "./siteLinks";
+import { useTiltAndGlow } from "./useTiltAndGlow";
 
 export default function ManifestoAndStats() {
+  const tiltGlow = useTiltAndGlow({ maxTilt: 10, scale: 1.015 });
+
   return (
     <section className={`${styles.section} reveal-section`} aria-label="Manifesto & production track record dashboard">
       <div className={styles.shell}>
@@ -17,7 +22,14 @@ export default function ManifestoAndStats() {
             <h2>Most AI systems fail around the model, not inside it.</h2>
             <span>I design the layer that makes the model survivable.</span>
           </div>
-          <div className={styles.systemMap} aria-hidden="true">
+          <div 
+            ref={tiltGlow.ref}
+            onMouseMove={tiltGlow.onMouseMove}
+            onMouseLeave={tiltGlow.onMouseLeave}
+            style={tiltGlow.style}
+            className={styles.systemMap} 
+            aria-hidden="true"
+          >
             <span className={styles.orbitOuter} />
             <span className={styles.orbitMiddle} />
             <span className={styles.orbitInner} />
@@ -47,7 +59,7 @@ export default function ManifestoAndStats() {
               Over 10 years of experience designing high-throughput infrastructure, orchestrating multi-agent runtimes, and deploying resilient systems that survive real-world traffic.
             </p>
             <a href={BOOKING_URL} className={styles.cta} target="_blank" rel="noreferrer">
-              Talk to expert &rarr;
+              Schedule a Free AI Architecture Review &rarr;
             </a>
             
             <div className={styles.graphContainer} aria-hidden="true">

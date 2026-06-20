@@ -424,7 +424,7 @@ Please review this with me during our architecture session.`;
                       rel="noreferrer"
                       className={styles.bookReviewCta}
                     >
-                      Book 30-Min Vulnerability Review &rarr;
+                      Schedule a Free AI Architecture Review &rarr;
                     </a>
                     <button
                       className={styles.copyReportBtn}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono, Outfit, Cormorant_Garamond } from "next/font/google";
 import "@/app/globals.css";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,9 +43,11 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${inter.variable} ${spaceMono.variable} ${outfit.variable} ${cormorantGaramond.variable}`}
       >
+        <ScrollProgress />
         {children}
       </body>
     </html>
   );
 }
+
 
