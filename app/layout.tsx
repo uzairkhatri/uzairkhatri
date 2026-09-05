@@ -27,6 +27,7 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://uzairkhatri.github.io"),
   title: "Uzair Khatri | AI Systems Architect",
   description:
     "Uzair Khatri helps founders, CTOs, and product teams turn AI prototypes into production systems through agentic workflows, LLM platforms, backend architecture, and scalable cloud infrastructure."
@@ -49,5 +50,4 @@ export default function RootLayout({
     </html>
   );
 }
-
 
