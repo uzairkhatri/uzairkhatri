@@ -9,18 +9,18 @@ export default function ManifestoAndStats() {
   const tiltGlow = useTiltAndGlow({ maxTilt: 10, scale: 1.015 });
 
   return (
-    <section className={`${styles.section} reveal-section`} aria-label="Manifesto & production track record dashboard">
+    <section className={`${styles.section} reveal-section`} aria-label="AI production proof and positioning">
       <div className={styles.shell}>
         
-        {/* Left Column: The Pitch (Manifesto) & Orbit Map */}
+        {/* Left Column: The Pitch (Positioning) & Orbit Map */}
         <div className={styles.leftColumn}>
           <div className={`section-eyebrow ${styles.eyebrow}`}>
             <span />
-            Manifesto
+            Positioning
           </div>
           <div className={styles.copy}>
-            <h2>Most AI systems fail around the model, not inside it.</h2>
-            <span>I design the layer that makes the model survivable.</span>
+            <h2>The model is rarely the system. It is the stress point.</h2>
+            <span>I design the architecture around it so the product survives real users.</span>
           </div>
           <div 
             ref={tiltGlow.ref}
@@ -54,12 +54,12 @@ export default function ManifestoAndStats() {
           </div>
           
           <div className={styles.context}>
-            <h3 className={styles.title}>Proven Track Record of Production Scale</h3>
+            <h3 className={styles.title}>Proof from systems that had to keep running.</h3>
             <p className={styles.description}>
-              Over 10 years of experience designing high-throughput infrastructure, orchestrating multi-agent runtimes, and deploying resilient systems that survive real-world traffic.
+              Fourteen-plus years across AI products, enterprise workflows, fintech ledgers, and high-throughput backend systems where reliability mattered after the demo ended.
             </p>
             <a href={BOOKING_URL} className={styles.cta} target="_blank" rel="noreferrer">
-              Schedule a Free AI Architecture Review &rarr;
+              Request Architecture Review &rarr;
             </a>
             
             <div className={styles.graphContainer} aria-hidden="true">
@@ -92,9 +92,9 @@ export default function ManifestoAndStats() {
             {/* Highlight Metric */}
             <div className={styles.highlightStat}>
               <strong className={styles.highlightValue}>
-                <AnimatedCounter value="10+" />
+                <AnimatedCounter value="14+" />
               </strong>
-              <span className={styles.highlightLabel}>years of architecture experience</span>
+              <span className={styles.highlightLabel}>years turning complexity into operating systems</span>
               <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                 <defs>
                   <linearGradient id="mini-grad-highlight" x1="0" y1="0" x2="0" y2="1">
@@ -113,7 +113,7 @@ export default function ManifestoAndStats() {
                 <strong className={styles.gridValue}>
                   <AnimatedCounter value="25+" />
                 </strong>
-                <span className={styles.linkLabel}>production-deployed systems</span>
+                <span className={styles.linkLabel}>systems shipped beyond prototype state</span>
                 <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                   <defs>
                     <linearGradient id="mini-grad-1" x1="0" y1="0" x2="0" y2="1">
@@ -129,7 +129,7 @@ export default function ManifestoAndStats() {
                 <strong className={styles.gridValue}>
                   <AnimatedCounter value="95%" />
                 </strong>
-                <span className={styles.linkLabel}>success rate under peak load</span>
+                <span className={styles.linkLabel}>target reliability under peak load</span>
                 <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                   <defs>
                     <linearGradient id="mini-grad-2" x1="0" y1="0" x2="0" y2="1">
@@ -145,7 +145,7 @@ export default function ManifestoAndStats() {
                 <strong className={styles.gridValue}>
                   <AnimatedCounter value="3" />
                 </strong>
-                <span className={styles.linkLabel}>active named ai agents</span>
+                <span className={styles.linkLabel}>named agents orchestrated in production paths</span>
                 <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                   <defs>
                     <linearGradient id="mini-grad-3" x1="0" y1="0" x2="0" y2="1">
@@ -161,7 +161,7 @@ export default function ManifestoAndStats() {
                 <strong className={styles.gridValue}>
                   <AnimatedCounter value="0" />
                 </strong>
-                <span className={styles.linkLabel}>unproven prototype demos</span>
+                <span className={styles.linkLabel}>tolerance for theater without operating proof</span>
                 <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                   <defs>
                     <linearGradient id="mini-grad-4" x1="0" y1="0" x2="0" y2="1">
@@ -181,3 +181,6 @@ export default function ManifestoAndStats() {
     </section>
   );
 }
+
+
+

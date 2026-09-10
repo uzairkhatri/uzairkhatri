@@ -48,7 +48,7 @@
   font-family: var(--font-outfit), var(--font-inter), sans-serif;
   font-size: clamp(2.3rem, 4.2vw, 4.4rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   line-height: 0.9;
 }
 
@@ -69,7 +69,7 @@
   justify-self: start;
   overflow: visible; /* Changed from hidden to allow Z-axis floating elements to render above boundaries */
   border: 1px solid rgba(17, 20, 24, 0.08);
-  border-radius: 1.4rem;
+  border-radius: 8px;
   background:
     radial-gradient(circle at 50% 50%, rgba(197, 155, 83, 0.14), transparent 22%),
     radial-gradient(circle at 70% 25%, rgba(17, 20, 24, 0.04), transparent 16rem),
@@ -88,7 +88,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 1.3rem;
+  border-radius: 8px;
   background-image:
     linear-gradient(rgba(17, 20, 24, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(17, 20, 24, 0.035) 1px, transparent 1px);
@@ -107,7 +107,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 1.3rem;
+  border-radius: 8px;
   background: conic-gradient(from 0deg, rgba(197, 155, 83, 0.05) 0deg, transparent 80deg);
   transform-origin: center center;
   animation: rotate-cw-3d-glow 12s infinite linear;
@@ -312,7 +312,7 @@
   font-weight: 800;
   line-height: 0.95;
   color: var(--ink);
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .description {
@@ -391,7 +391,7 @@
   font-family: var(--font-inter), sans-serif;
   font-size: clamp(3.8rem, 7.5vw, 6.2rem);
   font-weight: 950;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
   line-height: 0.85;
 }
 
@@ -400,7 +400,7 @@
   font-family: var(--font-inter), sans-serif;
   font-size: 0.78rem;
   font-weight: 450;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   line-height: 1.35;
   text-transform: lowercase;
 }
@@ -426,7 +426,7 @@
   font-family: var(--font-inter), sans-serif;
   font-size: clamp(2rem, 3.8vw, 3rem);
   font-weight: 950;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 0.95;
 }
 
@@ -435,7 +435,7 @@
   font-family: var(--font-inter), sans-serif;
   font-size: 0.72rem;
   font-weight: 450;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   line-height: 1.35;
   text-transform: lowercase;
 }
@@ -560,4 +560,54 @@
   height: 38px;
   margin-top: 0.85rem;
   max-width: 320px;
+}
+/* Final responsive polish */
+@media (max-width: 620px) {
+  .section {
+    padding-top: 3rem;
+    padding-bottom: 3.2rem;
+  }
+
+  .shell,
+  .leftColumn,
+  .rightColumn,
+  .context,
+  .metricsStage {
+    gap: 1.5rem;
+  }
+
+  .rightColumn {
+    padding-top: 3rem;
+  }
+
+  .systemMap {
+    width: min(100%, 18.5rem);
+    margin-top: 0.2rem;
+  }
+
+  .graphContainer,
+  .miniSparkline {
+    display: none;
+  }
+
+  .metricsStage {
+    margin-top: 0.4rem;
+  }
+
+  .highlightStat {
+    padding-bottom: 1.15rem;
+  }
+
+  .highlightValue {
+    font-size: clamp(3rem, 14vw, 4.4rem);
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+
+  .gridValue {
+    font-size: clamp(1.65rem, 8vw, 2.35rem);
+  }
 }

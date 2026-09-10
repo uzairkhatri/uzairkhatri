@@ -16,6 +16,7 @@ type Project = {
   description: string;
   stack: string[];
   metric: [string, string];
+  metrics: { label: string; value: string }[];
   diagram: ProjectVisualType;
   challenge: string;
   solution: string;
@@ -38,6 +39,11 @@ const projects: Project[] = [
       "Designed the agent workflows, retrieval layer, backend services, and infrastructure path for production-grade AI search visibility across ChatGPT, Gemini, Perplexity, and Google AI surfaces.",
     stack: ["LangGraph", "OpenAI", "FastAPI", "Vector Search", "AWS"],
     metric: ["3 agents active", "KIVA, OPTA, and Citation Intelligence orchestration"],
+    metrics: [
+      { label: "Runtime", value: "LangGraph" },
+      { label: "Safety", value: "Guardrails" },
+      { label: "Tracing", value: "LangSmith" }
+    ],
     diagram: "wellows",
     challenge: "Wellows prototype worked in investor demos but lacked cost controls, async orchestration, and failure boundaries required to support concurrent enterprise users.",
     solution: "Orchestrated three specialized agents (KIVA, OPTA, and Citation Intelligence) using LangGraph and isolated error queues, ensuring failure in one did not crash the system.",
@@ -70,6 +76,11 @@ const projects: Project[] = [
       "Architected scheduling, teacher matching, payment disbursement, quality scoring, and real-time class lifecycle systems as one coordinated operational platform.",
     stack: ["Agentic AI", "FastAPI", "Stripe", "WebSockets", "Redis"],
     metric: ["0 manual ops", "Scheduling and payment workflows moved into automated system paths"],
+    metrics: [
+      { label: "Locks", value: "Redis" },
+      { label: "Payments", value: "Stripe" },
+      { label: "State", value: "Realtime" }
+    ],
     diagram: "classflow",
     challenge: "Moving online learning operations from high-friction manual teacher matching and scheduling runs to a completely autonomous, lock-safe orchestration engine.",
     solution: "Designed an automated teacher matchmaking pipeline utilizing dynamic scoring and timezone resolution with real-time class state machines.",
@@ -101,6 +112,11 @@ const projects: Project[] = [
       "Contributed backend architecture across cashback calculation, partner integrations, wallet flows, payment disbursement, and AI shopping assistance for a large consumer marketplace.",
     stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Payment APIs"],
     metric: ["650+ brands", "Brand-partner ecosystem supported through integration architecture"],
+    metrics: [
+      { label: "Ledger", value: "ACID" },
+      { label: "Events", value: "Webhooks" },
+      { label: "Cache", value: "Redis" }
+    ],
     diagram: "savyour",
     challenge: "Processing thousands of affiliate rewards events concurrently while keeping financial wallet ledgers synchronized, idempotent, and highly consistent.",
     solution: "Developed decoupled ingestion queues with database-level ACID transactions and Redis caches to handle cashback event calculation in sub-second timelines.",
@@ -131,6 +147,11 @@ const projects: Project[] = [
       "Implemented IBM FileNet P8, Case Manager, and Capture to move document-heavy insurance operations toward digital case management and paperless delivery.",
     stack: ["IBM FileNet", "Case Manager", "Capture", "Workflow Automation"],
     metric: ["100% paperless", "Paperless delivery path for enterprise document workflows"],
+    metrics: [
+      { label: "Workflow", value: "Case P8" },
+      { label: "Capture", value: "Datacap" },
+      { label: "Access", value: "LDAP" }
+    ],
     diagram: "efu",
     challenge: "Migrating highly physical paper filing operations to paperless case routing for thousands of enterprise policy documents daily with strict compliance guidelines.",
     solution: "Implemented IBM FileNet Content Store with automated document ingestion and Case Manager routing pipelines, eliminating manual filing queues.",
@@ -234,8 +255,12 @@ function ProjectBlade({
   onClick: () => void;
 }) {
   const tiltGlow = useTiltAndGlow({ maxTilt: 5, scale: 1.015 });
-  const latencies = ["14ms", "28ms", "42ms", "18ms"];
-  const throughputs = ["94.2k/s", "12.8k/s", "2.5k/s", "98.7%"];
+  const bladeSpecs = [
+    { spec: "Multi-Agent", spine: "LangGraph" },
+    { spec: "Real-Time Engine", spine: "Redis / Celery" },
+    { spec: "Financial Ledger", spine: "PostgreSQL ACID" },
+    { spec: "Enterprise ECM", spine: "IBM FileNet" },
+  ];
   
   return (
     <button
@@ -263,17 +288,17 @@ function ProjectBlade({
       )}
       <header className={styles.tabHeader}>
         <h3>{proj.name}</h3>
-        <em>{latencies[idx]}</em>
+        <em>{proj.year}</em>
       </header>
       <span className={styles.tabKicker}>{proj.category}</span>
       <div className={styles.bladeMetrics}>
         <div className={styles.bladeMetricCell}>
-          <small>Scale</small>
-          <strong>{throughputs[idx]}</strong>
+          <small>Architecture</small>
+          <strong>{bladeSpecs[idx].spec}</strong>
         </div>
         <div className={styles.bladeMetricCell}>
-          <small>Status</small>
-          <strong>ACTIVE</strong>
+          <small>Core Spine</small>
+          <strong>{bladeSpecs[idx].spine}</strong>
         </div>
       </div>
     </button>
@@ -352,7 +377,7 @@ export default function SelectedWork() {
             </h2>
           </div>
           <p className={styles.headerDesc}>
-            Explore the active architectural blueprints and verified outcome telemetry of systems built to survive scale.
+            Explore public-safe architecture summaries, system decisions, and outcome signals from products built beyond demo state.
           </p>
         </header>
 
@@ -385,6 +410,15 @@ export default function SelectedWork() {
               {/* Project Visual Display Header */}
               <motion.div className={styles.specVisualBlock} variants={itemVariants}>
                 <ProjectVisual type={activeProject.diagram} variant="hero" activeLogIndex={activeLogIndex} />
+              </motion.div>
+
+              <motion.div className={styles.architectureMetrics} variants={itemVariants}>
+                {activeProject.metrics.map((item) => (
+                  <div className={styles.architectureMetric} key={item.label}>
+                    <span>{item.label}</span>
+                    <strong>{item.value}</strong>
+                  </div>
+                ))}
               </motion.div>
 
               {/* Sub-Layout Content Columns */}
@@ -447,19 +481,19 @@ export default function SelectedWork() {
               {/* Bottom Full-Width Telemetry trace / JSON Schema Switcher */}
               <motion.div className={styles.traceConsole} variants={itemVariants}>
                 <div className={styles.consoleTabHeader}>
-                  <h4>System Telemetry Console</h4>
+                  <h4>Architecture Evidence</h4>
                   <div className={styles.consoleViewSelectors}>
                     <button 
                       className={`${styles.consoleSelBtn} ${consoleView === "log" ? styles.consoleSelActive : ""}`}
                       onClick={() => setConsoleView("log")}
                     >
-                      [ Telemetry Stream ]
+                      Trace
                     </button>
                     <button 
                       className={`${styles.consoleSelBtn} ${consoleView === "schema" ? styles.consoleSelActive : ""}`}
                       onClick={() => setConsoleView("schema")}
                     >
-                      [ Parameter Schema ]
+                      Schema
                     </button>
                   </div>
                 </div>
@@ -493,13 +527,13 @@ export default function SelectedWork() {
                   )}
                 </div>
                 <p className={styles.consoleDisclaimer}>
-                  *Execution telemetry trace reflecting real system configurations and active runtime logs.
+                  Representative architecture notes based on project role and public-safe details.
                 </p>
               </motion.div>
 
               {/* Footer actions */}
               <motion.footer className={styles.specFooter} variants={itemVariants}>
-                <span>NDA Protected System Architecture. Outcomes fully verified.</span>
+                <span>NDA-aware architecture notes. Public details summarized carefully.</span>
                 <a href={BOOKING_URL} target="_blank" rel="noreferrer">
                   Discuss Similar Architecture &rarr;
                 </a>
@@ -512,3 +546,4 @@ export default function SelectedWork() {
     </section>
   );
 }
+

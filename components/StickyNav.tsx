@@ -35,7 +35,7 @@ export default function StickyNav() {
 
       <div className={styles.links}>
         <a href="#work">Work</a>
-        <a href="#writing">Writing</a>
+        <a href="#method">Method</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
@@ -46,9 +46,10 @@ export default function StickyNav() {
         target="_blank"
         rel="noreferrer"
       >
-        <span className={styles.ctaTextPrimary}>Free Review</span>
-        <span className={styles.ctaTextHover} aria-hidden="true">Free Review</span>
+        <span className={styles.ctaTextPrimary}>Request Review</span>
+        <span className={styles.ctaTextHover} aria-hidden="true">Request Review</span>
       </a>
     </motion.nav>
   );
 }
+

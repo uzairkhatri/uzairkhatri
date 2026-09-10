@@ -20,7 +20,7 @@
   color: rgba(255, 255, 255, 0.025);
   font-size: clamp(6rem, 15vw, 15rem);
   font-weight: 950;
-  letter-spacing: -.1em;
+  letter-spacing: 0;
   line-height: 1;
   pointer-events: none;
 }
@@ -62,7 +62,7 @@
   margin: 0;
   font-size: clamp(2rem, 4vw, 3.8rem);
   font-weight: 850;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
   line-height: 1.05;
   color: #ffffff;
 }
@@ -140,7 +140,7 @@
   background: rgba(15, 18, 17, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-left: 3px solid transparent;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.15rem 1.35rem;
   text-align: left;
   cursor: pointer;
@@ -167,7 +167,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 4px 24px rgba(0, 0, 0, 0.2);
   pointer-events: none;
@@ -178,7 +178,7 @@
   font-size: 1.25rem;
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1.1;
 }
 
@@ -258,7 +258,7 @@
 .specPanel {
   background: rgba(255, 255, 255, 0.015);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: clamp(1.2rem, 2.5vw, 2rem);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   display: flex;
@@ -278,10 +278,62 @@
 }
 
 .specVisualBlock {
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: var(--graphite-deep);
+}
+
+.architectureMetrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: -0.65rem;
+}
+
+.architectureMetric {
+  position: relative;
+  min-height: 4.6rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.038), rgba(255, 255, 255, 0.012)),
+    rgba(10, 12, 11, 0.8);
+  overflow: hidden;
+}
+
+.architectureMetric::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--project-accent, var(--gold)) 42%, transparent), transparent) top / 100% 1px no-repeat,
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--project-accent, var(--gold)) 16%, transparent), transparent 40%);
+  pointer-events: none;
+}
+
+.architectureMetric span,
+.architectureMetric strong {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-family: var(--font-space-mono), monospace;
+}
+
+.architectureMetric span {
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.36);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.architectureMetric strong {
+  color: #fff;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.1;
 }
 
 /* Body splits */
@@ -396,7 +448,7 @@
   font-family: var(--font-space-mono), monospace;
   font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1.2;
 }
 
@@ -689,7 +741,65 @@
     gap: 0.2rem;
   }
 
+  .architectureMetrics {
+    grid-template-columns: 1fr;
+  }
+
   .title {
     font-size: clamp(1.6rem, 6.5vw, 2.2rem) !important;
+  }
+}
+/* Final responsive polish */
+@media (max-width: 620px) {
+  .section {
+    padding-top: 3.2rem;
+    padding-bottom: 3.4rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .dashboardContainer,
+  .specPanel,
+  .specBody,
+  .specSidebar {
+    gap: 1.2rem;
+  }
+
+  .tabsList {
+    padding-bottom: 0.2rem;
+  }
+
+  .specPanel {
+    padding: 1rem;
+  }
+
+  .architectureMetrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .architectureMetric {
+    min-height: auto;
+    padding: 0.65rem 0.55rem;
+  }
+
+  .architectureMetric span {
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+  }
+
+  .architectureMetric strong {
+    font-size: 0.84rem;
+    overflow-wrap: anywhere;
+  }
+
+  .traceConsole {
+    display: none;
+  }
+
+  .specFooter {
+    align-items: flex-start;
   }
 }

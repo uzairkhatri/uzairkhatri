@@ -5,6 +5,7 @@ node_modules/
 .env*.local
 .next-server*.log
 responsive-check/
+.tmp-responsive/
 .claude/
 
 Thumbs.db

@@ -32,7 +32,7 @@
 .window {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
+  border-radius: 8px;
   background: radial-gradient(circle at 85% 10%, rgba(197, 155, 83, 0.12), transparent 18rem), #151918;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.22);
   width: 100%;
@@ -77,7 +77,7 @@
 
 .brand strong {
   font-size: 0.72rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
@@ -306,7 +306,7 @@
 }
 
 .hero .window {
-  border-radius: 1rem;
+  border-radius: 8px;
 }
 
 .hero .window header {
@@ -352,3 +352,4 @@
     font-size: 0.55rem;
   }
 }
+

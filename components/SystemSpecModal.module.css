@@ -17,7 +17,7 @@
   max-height: calc(100svh - 3rem);
   flex-direction: column;
   border: 1px solid rgba(216, 173, 100, 0.16);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--graphite-deep);
   box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.7);
   overflow: hidden;
@@ -82,7 +82,7 @@
   color: #ffffff;
   font-size: clamp(2rem, 3.5vw, 3.2rem);
   font-weight: 400;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1.1;
 }
 
@@ -168,7 +168,7 @@
   font-family: var(--font-space-mono), monospace;
   font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1.2;
 }
 
@@ -371,3 +371,4 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+

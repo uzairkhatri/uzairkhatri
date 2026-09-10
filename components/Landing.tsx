@@ -73,7 +73,7 @@ export default function Landing() {
         </a>
         <div className="desktop-nav-links">
           <a href="#work">Work</a>
-          <a href="#writing">Writing</a>
+          <a href="#method">Method</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a className="hero-nav-icon" href="https://github.com/UzairKhatri" aria-label="GitHub profile" target="_blank" rel="noreferrer">
@@ -87,8 +87,7 @@ export default function Landing() {
             </svg>
           </a>
           <a className="hero-nav-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
-            <span className="cta-text-primary">Free Review</span>
-            <span className="cta-text-hover" aria-hidden="true">Free Review</span>
+            <span className="cta-text-primary">Request Review</span>
           </a>
         </div>
         <button
@@ -116,11 +115,11 @@ export default function Landing() {
             </div>
             <nav className="mobile-menu-links">
               <a href="#work" onClick={() => setMobileMenuOpen(false)}>Work</a>
-              <a href="#writing" onClick={() => setMobileMenuOpen(false)}>Writing</a>
+              <a href="#method" onClick={() => setMobileMenuOpen(false)}>Method</a>
               <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
               <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
               <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-3d-double" style={{ fontSize: "1rem", padding: "0.8rem 1.8rem" }}>
-                <span className="btn-3d-text-primary">Free Architecture Review</span>
+                <span className="btn-3d-text-primary">Request Architecture Review</span>
               </a>
             </nav>
             <div className="mobile-menu-footer">
@@ -133,114 +132,68 @@ export default function Landing() {
 
       <div className="hero-portrait-stage" aria-hidden="true">
         <div className="hero-portrait-glow" />
-        <div className="hero-portrait-hud" />
-        
-        {/* SVG connection lines spanning the entire stage using percentage-based paths */}
-        <svg className="hero-portrait-nodes-overlay" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          {/* Paths connecting Far-Left nodes (x=10) to Middle nodes (x=16) */}
-          <path d="M 10 23 C 13 23, 13 12, 16 12" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
-          <path d="M 10 23 C 13 23, 13 12, 16 12" className="pulse-path pulse-delay-1" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
-          
-          <path d="M 10 23 C 13 23, 13 27, 16 27" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
-          <path d="M 10 23 C 13 23, 13 27, 16 27" className="pulse-path pulse-delay-2" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
-          
-          <path d="M 10 41 C 13 41, 13 27, 16 27" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
-          <path d="M 10 41 C 13 41, 13 27, 16 27" className="pulse-path pulse-delay-3" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
-          
-          <path d="M 10 41 C 13 41, 13 42, 16 42" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
-          <path d="M 10 41 C 13 41, 13 42, 16 42" className="pulse-path pulse-delay-4" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
-          
-          <path d="M 10 59 C 13 59, 13 42, 16 42" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
-          <path d="M 10 59 C 13 59, 13 42, 16 42" className="pulse-path pulse-delay-1" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
-          
-          <path d="M 10 59 C 13 59, 13 57, 16 57" stroke="var(--gold)" strokeWidth="0.35" strokeOpacity="0.4" fill="none" strokeDasharray="1 1" />
-          <path d="M 10 59 C 13 59, 13 57, 16 57" className="pulse-path pulse-delay-2" stroke="var(--gold-bright)" strokeWidth="0.5" fill="none" />
+        <div className="hero-blueprint-grid" />
 
-          {/* Paths from Middle nodes right-edge (x=28) towards center x=70 (behind shifted portrait) */}
-          <path d="M 28 12 H 36 C 48 12, 52 32, 70 32" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
-          <path d="M 28 12 H 36 C 48 12, 52 32, 70 32" className="pulse-path pulse-delay-3" stroke="var(--gold-bright)" strokeWidth="0.6" fill="none" />
-          
-          <path d="M 28 27 H 36 C 48 27, 52 36, 70 36" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.6" fill="none" />
-          <path d="M 28 27 H 36 C 48 27, 52 36, 70 36" className="pulse-path pulse-delay-4" stroke="var(--gold-bright)" strokeWidth="0.6" fill="none" />
-          
-          <path d="M 28 42 H 70" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
-          <path d="M 28 42 H 70" className="pulse-path pulse-delay-1" stroke="var(--gold-bright)" strokeWidth="0.6" fill="none" />
-          
-          <path d="M 28 57 H 36 C 48 57, 52 48, 70 48" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.5" fill="none" />
-          <path d="M 28 57 H 36 C 48 57, 52 48, 70 48" className="pulse-path pulse-delay-2" stroke="var(--gold-bright)" strokeWidth="0.6" fill="none" />
+        {/* Docked Executive Architecture HUD Cards */}
+        <div className="hero-hud-card hud-top-left">
+          <div className="hud-card-header">
+            <span className="hud-status-dot gold" />
+            <span className="hud-card-tag">SYSTEM RUNTIME</span>
+          </div>
+          <strong className="hud-card-title">LangGraph Multi-Agent</strong>
+          <span className="hud-card-sub">State Graphs &bull; Error Isolation</span>
+        </div>
 
-          {/* Mini node circles */}
-          <circle cx="16" cy="12" r="0.6" fill="var(--gold)" />
-          <circle cx="16" cy="27" r="0.6" fill="var(--gold)" />
-          <circle cx="16" cy="42" r="0.6" fill="var(--gold)" />
-          <circle cx="16" cy="57" r="0.6" fill="var(--gold)" />
-          <circle cx="10" cy="23" r="0.6" fill="var(--gold)" />
-          <circle cx="10" cy="41" r="0.6" fill="var(--gold)" />
-          <circle cx="10" cy="59" r="0.6" fill="var(--gold)" />
-
-          <circle cx="70" cy="32" r="0.8" fill="var(--gold)" className="node-pulse" />
-          <circle cx="70" cy="36" r="0.8" fill="var(--gold)" className="node-pulse" />
-          <circle cx="70" cy="42" r="0.8" fill="var(--gold)" className="node-pulse" />
-          <circle cx="70" cy="48" r="0.8" fill="var(--gold)" className="node-pulse" />
-        </svg>
+        <div className="hero-hud-card hud-bottom-left">
+          <div className="hud-card-header">
+            <span className="hud-status-dot green" />
+            <span className="hud-card-tag">PRODUCTION INFRA</span>
+          </div>
+          <strong className="hud-card-title">FastAPI &bull; Vector &bull; AWS</strong>
+          <span className="hud-card-sub">Queue Buffering &bull; Latency Limits</span>
+        </div>
 
         <span className="hero-watermark">Uzair Khatri</span>
-        
-        {/* Absolute capsules for the left-hand nodes (gateway, broker, storage) shifted left */}
-        <div className="hero-node-pill fn-gateway" style={{ top: "21.5%", left: "0%" }}>
-          <span className="node-indicator gold-pulse" />
-          <span>gateway</span>
-        </div>
-        <div className="hero-node-pill fn-broker" style={{ top: "39.5%", left: "0%" }}>
-          <span className="node-indicator gold-pulse" />
-          <span>broker</span>
-        </div>
-        <div className="hero-node-pill fn-storage" style={{ top: "57.5%", left: "0%" }}>
-          <span className="node-indicator gold-pulse" />
-          <span>storage</span>
-        </div>
-
-        {/* Middle route pills shifted left to 16% so they reside strictly to the left of the face */}
-        <div className="hero-node-pill mid-route" style={{ top: "10.5%", left: "16%" }}>
-          <span>Ingestion Routing</span>
-        </div>
-        <div className="hero-node-pill mid-trigger" style={{ top: "25.5%", left: "16%" }}>
-          <span>Trigger Event</span>
-        </div>
-        <div className="hero-node-pill mid-telemetry" style={{ top: "40.5%", left: "16%" }}>
-          <span>Telemetry Layer</span>
-        </div>
-        <div className="hero-node-pill mid-queue" style={{ top: "55.5%", left: "16%" }}>
-          <span>Pipeline Queue</span>
-        </div>
-
-        <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Iqbal - AI Systems Architect" fill sizes="(max-width: 900px) 82vw, 42vw" priority />
+        <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Khatri - AI Production Architect" fill sizes="(max-width: 900px) 82vw, 42vw" priority />
       </div>
 
       <div className="hero-content">
         <div className="hero-status-row">
           <div className="hero-telemetry-pill">
             <span className="telemetry-pulse-gold" />
-            <span>System: Active | RTT: 42ms</span>
+            <span>Systems Scope: Agent Runtimes &bull; Retrieval &bull; Cloud Infrastructure</span>
           </div>
         </div>
         <div className="hero-role">
-          <small>AI Systems Architect</small>
-          <strong>I help AI products survive production.</strong>
+          <small>AI Production Architect</small>
+          <h2>
+            <span>Fragile AI</span>
+            <span>rebuilt for</span>
+            <span>production.</span>
+          </h2>
           <span>
-            I design the systems, agents, and infrastructure that keep AI products reliable under
-            real users, real traffic, and real business pressure.
+            I turn promising AI prototypes into reliable systems with agent runtimes,
+            guardrails, tracing, queues, cost controls, and cloud paths your team can operate.
           </span>
         </div>
         <div className="hero-actions" aria-label="Hero actions">
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-3d-double">
-            <span className="btn-3d-text-primary">Schedule a Free AI Architecture Review &rarr;</span>
-            <span className="btn-3d-text-hover" aria-hidden="true">Schedule a Free AI Architecture Review &rarr;</span>
+            <span className="btn-3d-text-primary">Request Architecture Review &rarr;</span>
           </a>
           <a href="#work">View Production Work</a>
         </div>
-        <p className="hero-microcopy">30 Minutes &bull; No Sales Pitch &bull; Actionable Recommendations</p>
+        <div className="hero-proof-row" aria-label="Proof points">
+          <span>14+ years in architecture</span>
+          <span>agentic production systems</span>
+          <span>operator-grade handoff</span>
+        </div>
+        <p className="hero-microcopy">30 minutes &bull; architecture pressure test &bull; concrete next moves</p>
       </div>
     </section>
   );
 }
+
+
+
+
+

@@ -8,14 +8,14 @@ const links = [
   ["Email", EMAIL_URL, EMAIL_ADDRESS],
   ["LinkedIn", "https://www.linkedin.com/in/uzair-khatri", "Connect professionally"],
   ["GitHub", "https://github.com/UzairKhatri", "Review technical work"],
-  ["Resume", withBasePath("/Uzair%20Iqbal%20%E2%80%94%20CV.pdf"), "Download CV / Resume"],
+  ["Resume", withBasePath("/Uzair-Iqbal-AI-Architect-CV.pdf"), "Download CV (Uzair Iqbal — PDF)"],
 ];
 
 const engagementTypes = [
-  "Moving an AI prototype into production",
-  "Designing agentic workflows",
-  "Scaling backend architecture",
-  "Reducing architecture debt",
+  "AI prototype to production",
+  "Agent workflow design",
+  "Backend scaling",
+  "Architecture risk review",
 ];
 
 function ArrowIcon() {
@@ -47,11 +47,10 @@ export default function Contact() {
             <span />
             Contact
           </p>
-          <h2 id="contact-title">Moving AI from prototype to production?</h2>
+          <h2 id="contact-title">Ready to make the system real?</h2>
           <p className={styles.copy}>
-            Bring me in before architecture debt becomes product debt. I help teams clarify the
-            system, reduce technical risk, and design the backend, agent, and infrastructure
-            decisions that make AI products reliable at scale.
+            Bring me in when the prototype is promising and the architecture needs senior production judgment:
+            runtime design, data boundaries, observability, queues, cost control, and handoff.
           </p>
 
           <div className={styles.fitList} aria-label="Best fit for">
@@ -62,7 +61,7 @@ export default function Contact() {
 
           <div className={styles.actions}>
             <a className={styles.primary} href={BOOKING_URL} target="_blank" rel="noreferrer">
-              Book Architecture Call
+              Request Architecture Review
               <ArrowIcon />
             </a>
             <a className={styles.secondary} href="#work">
@@ -75,7 +74,7 @@ export default function Contact() {
         <div className={styles.right}>
           <div className={styles.contactCard}>
             <p>Start here</p>
-            <h3>Send the context. I&apos;ll tell you what needs pressure-testing.</h3>
+            <h3>Send the context. I&apos;ll pressure-test the shape of the system.</h3>
             
             {status === "success" ? (
               <div className={styles.formSuccess}>
@@ -85,8 +84,8 @@ export default function Contact() {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                <strong>System Context Transmitted.</strong>
-                <p>I will analyze your details and respond within 24 hours.</p>
+                <strong>Message received.</strong>
+                <p>I&apos;ll review the context and respond within 24 hours.</p>
                 <button onClick={() => setStatus("idle")} className={styles.resetFormBtn}>
                   Send another message
                 </button>
@@ -117,7 +116,7 @@ export default function Contact() {
                 </div>
                 <div className={styles.formGroup}>
                   <textarea
-                    placeholder="Tell me about your system (e.g. concurrent user targets, model providers, bottleneck details...)"
+                    placeholder="What is built, what is breaking, and what has to scale?"
                     required
                     rows={3}
                     value={formState.message}
@@ -126,7 +125,7 @@ export default function Contact() {
                   />
                 </div>
                 <button type="submit" disabled={status === "submitting"} className={styles.submitBtn}>
-                  {status === "submitting" ? "Transmitting Context..." : "Claim System Review →"}
+                  {status === "submitting" ? "Sending..." : "Send Context"}
                 </button>
               </form>
             )}
@@ -149,11 +148,11 @@ export default function Contact() {
           </div>
 
           <p className={styles.timezone}>
-            Based in Karachi, Pakistan. Available globally, async-friendly. I respond to architecture
-            enquiries within 24 hours.
+            Based in Karachi (PKT / UTC+5). Available for Dubai/GCC (GST) and global remote architecture engagements. Enquiries answered within 24 hours.
           </p>
         </div>
       </div>
     </section>
   );
 }
+

@@ -87,7 +87,7 @@ export default function Logo({ compact = false, className = "" }: LogoProps) {
       {/* Typography / Wordmark Section */}
       <div className={styles.textContainer}>
         <span className={styles.brandName}>
-          <span className={styles.goldText}>Uzair</span>
+          <span className={styles.goldText}>Uzair</span>{" "}
           <span className={styles.whiteText}>Khatri</span>
         </span>
         {!compact && (
