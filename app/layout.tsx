@@ -27,7 +27,7 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://uzairkhatri.dev"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://uzairkhatri.github.io"),
   title: {
     default: "Uzair Khatri | AI Production Architect",
     template: "%s | Uzair Khatri",
@@ -98,5 +98,8 @@ export default function RootLayout({
   );
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/main
