@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./SelectedWork.module.css";
 import ProjectVisual, { type ProjectVisualType } from "./ProjectVisual";
-import { BOOKING_URL } from "./siteLinks";
+import { BOOKING_URL, withBasePath } from "./siteLinks";
 import { useTiltAndGlow } from "./useTiltAndGlow";
 
 type Project = {
@@ -20,6 +20,7 @@ type Project = {
   diagram: ProjectVisualType;
   challenge: string;
   solution: string;
+  caseStudyUrl?: string;
   blueprint: {
     orchestration: string;
     data: string;
@@ -35,6 +36,7 @@ const projects: Project[] = [
     name: "Wellows",
     category: "AI Search Visibility Platform",
     role: "Founding Architect",
+    caseStudyUrl: "/work/wellows",
     description:
       "Designed the agent workflows, retrieval layer, backend services, and infrastructure path for production-grade AI search visibility across ChatGPT, Gemini, Perplexity, and Google AI surfaces.",
     stack: ["LangGraph", "OpenAI", "FastAPI", "Vector Search", "AWS"],
@@ -72,6 +74,7 @@ const projects: Project[] = [
     name: "ClassFlow",
     category: "Agentic Online Learning Platform",
     role: "Lead Architect",
+    caseStudyUrl: "/work/classflow",
     description:
       "Architected scheduling, teacher matching, payment disbursement, quality scoring, and real-time class lifecycle systems as one coordinated operational platform.",
     stack: ["Agentic AI", "FastAPI", "Stripe", "WebSockets", "Redis"],
@@ -108,6 +111,7 @@ const projects: Project[] = [
     name: "Savyour",
     category: "Fintech Cashback Platform",
     role: "Solutions Architect",
+    caseStudyUrl: "/work/savyour",
     description:
       "Contributed backend architecture across cashback calculation, partner integrations, wallet flows, payment disbursement, and AI shopping assistance for a large consumer marketplace.",
     stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Payment APIs"],
@@ -425,9 +429,16 @@ export default function SelectedWork() {
               <div className={styles.specBody}>
                 <motion.div className={styles.specDetails} variants={itemVariants}>
                   <div className={styles.specRoleLine}>
-                    <strong>{activeProject.role}</strong>
-                    <span>&bull;</span>
-                    <span>{activeProject.category}</span>
+                    <div className={styles.roleMeta}>
+                      <strong>{activeProject.role}</strong>
+                      <span>&bull;</span>
+                      <span>{activeProject.category}</span>
+                    </div>
+                    {activeProject.caseStudyUrl && (
+                      <a href={withBasePath(activeProject.caseStudyUrl)} className={styles.caseStudyLink}>
+                        Read Architecture RFC &rarr;
+                      </a>
+                    )}
                   </div>
                   <p className={styles.specDesc}>{activeProject.description}</p>
 
@@ -534,9 +545,16 @@ export default function SelectedWork() {
               {/* Footer actions */}
               <motion.footer className={styles.specFooter} variants={itemVariants}>
                 <span>NDA-aware architecture notes. Public details summarized carefully.</span>
-                <a href={BOOKING_URL} target="_blank" rel="noreferrer">
-                  Discuss Similar Architecture &rarr;
-                </a>
+                <div className={styles.specFooterLinks}>
+                  {activeProject.caseStudyUrl && (
+                    <a href={withBasePath(activeProject.caseStudyUrl)} className={styles.specRfcBtn}>
+                      Open Case Study RFC &rarr;
+                    </a>
+                  )}
+                  <a href={BOOKING_URL} target="_blank" rel="noreferrer">
+                    Discuss Similar Architecture &rarr;
+                  </a>
+                </div>
               </motion.footer>
             </motion.article>
           </AnimatePresence>

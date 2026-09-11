@@ -10,8 +10,6 @@ import TrustStrip from "@/components/TrustStrip";
 import StickyNav from "@/components/StickyNav";
 import ScrollReveal from "@/components/ScrollReveal";
 import BookingModal from "@/components/BookingModal";
-import Diagnostics from "@/components/Diagnostics";
-
 export default function Home() {
   return (
     <main>
@@ -25,7 +23,6 @@ export default function Home() {
       <About />
       <Timeline />
       <TrustStrip />
-      <Diagnostics />
       <Contact />
       <Footer />
       <BookingModal />
