@@ -1,0 +1,9 @@
+# Security Policy for uzairkhatri.com
+# RFC 9116: A File Format to Aid in Security Vulnerability Disclosure
+
+Contact: mailto:hello@uzairkhatri.com
+Contact: mailto:uz.khatri@gmail.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://uzairkhatri.com/.well-known/security.txt
+Policy: https://uzairkhatri.com/
