@@ -537,14 +537,18 @@ export default function SelectedWork() {
                     </div>
                   )}
                 </div>
-                <p className={styles.consoleDisclaimer}>
-                  Representative architecture notes based on project role and public-safe details.
-                </p>
               </motion.div>
 
               {/* Footer actions */}
               <motion.footer className={styles.specFooter} variants={itemVariants}>
-                <span>NDA-aware architecture notes. Public details summarized carefully.</span>
+                <span className={styles.ndaFootnote}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: "inline-block", verticalAlign: "-2px", marginRight: "5px", opacity: 0.7 }}>
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="16" x2="12" y2="12" />
+                    <line x1="12" y1="8" x2="12.01" y2="8" />
+                  </svg>
+                  Public details summarized under mutual NDA
+                </span>
                 <div className={styles.specFooterLinks}>
                   {activeProject.caseStudyUrl && (
                     <a href={withBasePath(activeProject.caseStudyUrl)} className={styles.specRfcBtn}>

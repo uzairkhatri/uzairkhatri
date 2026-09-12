@@ -3,45 +3,45 @@ import styles from "./TrustStrip.module.css";
 const testimonials = [
   {
     quote:
-      "We had a critical issue that several other developers could not solve. Uzair resolved it cleanly within an hour. Exceptional problem-solving ability.",
-    author: "Stacy",
-    location: "Saskatoon, Canada",
-    source: "Founder - Custom Platform Recovery",
+      "We had an extremely complex custom platform with significant technical issues. Uzair stepped in, stabilised the system, and delivered new features. Highly dependable.",
+    author: "Ronak",
+    location: "United States",
+    source: "Platform Owner — Long-term System Build",
   },
   {
     quote:
       "One of the most efficient engineers I have worked with: fast execution, clean delivery, and zero unnecessary back-and-forth.",
-    author: "Upwork Client",
+    author: "Product Lead",
     location: "Saskatoon, Canada",
-    source: "Product Lead - AI Product Delivery",
+    source: "AI Product Delivery",
   },
   {
     quote:
       "Uzair delivers exactly what he promises, on time, with strong communication throughout. A true professional.",
     author: "Arad",
     location: "Sarajevo, Bosnia",
-    source: "Operations Lead - Remote Engineering",
-  },
-  {
-    quote:
-      "Fantastic to work with: collaborative, solution-oriented, and someone who genuinely takes ownership instead of just completing tasks.",
-    author: "Upwork Client",
-    location: "Sarajevo, Bosnia",
-    source: "Startup Team - Product Engineering",
-  },
-  {
-    quote:
-      "We had an extremely complex custom platform with significant technical issues. Uzair stepped in, stabilised the system, and delivered new features. Highly dependable.",
-    author: "Ronak",
-    location: "United States",
-    source: "Platform Owner - Long-term System Build",
+    source: "Operations Lead — Remote Engineering",
   },
   {
     quote:
       "Uzair has been a tremendous help across multiple projects. Reliable, technically strong, and someone we kept rehiring because he consistently delivered.",
-    author: "Upwork Client",
+    author: "Agency Partner",
     location: "United Kingdom",
-    source: "Agency Partner - Multi-project Delivery",
+    source: "Multi-project Delivery Partner",
+  },
+  {
+    quote:
+      "Fantastic to work with: collaborative, solution-oriented, and someone who genuinely takes ownership instead of just completing tasks.",
+    author: "Startup Team",
+    location: "Sarajevo, Bosnia",
+    source: "Product Engineering Collaboration",
+  },
+  {
+    quote:
+      "Exceptional engineer. Strong technical depth, proactive communication, and the kind of person you trust with business-critical work.",
+    author: "Enterprise Partner",
+    location: "United States",
+    source: "NDA Partner — Architecture Advisory (Founder, name withheld)",
   },
 ];
 
@@ -134,14 +134,13 @@ export default function TrustStrip() {
               <StarRating />
             </div>
             <blockquote className={styles.featuredQuote}>
-              &ldquo;Exceptional engineer. Strong technical depth, proactive communication, and the
-              kind of person you trust with business-critical work.&rdquo;
+              &ldquo;We had a critical issue that several other developers could not solve. Uzair resolved it cleanly within an hour. Exceptional problem-solving ability.&rdquo;
             </blockquote>
             <footer className={styles.featuredFooter}>
-              <div className={styles.featuredAvatar}>NW</div>
+              <div className={styles.featuredAvatar}>SK</div>
               <div className={styles.featuredMeta}>
-                <span className={styles.featuredName}>Founder</span>
-                <span className={styles.featuredSource}>Name withheld - Architecture Advisory</span>
+                <span className={styles.featuredName}>Stacy &bull; Saskatoon, Canada</span>
+                <span className={styles.featuredSource}>Founder &mdash; Custom Platform Recovery</span>
               </div>
             </footer>
           </div>

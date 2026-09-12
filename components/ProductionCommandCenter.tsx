@@ -55,10 +55,15 @@ export default function ProductionCommandCenter() {
             <div className="section-eyebrow"><span />Signature system</div>
             <h2 id="command-center-title">A production command center for your AI idea.</h2>
           </div>
-          <p>
-            I audit the four layers that decide whether an AI product can survive customers:
-            prototype behavior, agent runtime, data memory, and operations.
-          </p>
+          <div className={styles.headerContent}>
+            <p>
+              I audit the four layers that decide whether an AI product can survive customers:
+              prototype behavior, agent runtime, data memory, and operations.
+            </p>
+            <a href="#work" className={styles.skipToWork}>
+              Jump to Case Studies &darr;
+            </a>
+          </div>
         </header>
 
         <div className={styles.console} style={{ ["--active-offset" as any]: pathOffset }}>

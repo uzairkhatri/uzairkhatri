@@ -30,10 +30,10 @@ const capabilities: Capability[] = [
     tags: ["Multi-Tenant", "Stripe Connect", "Redis Redlock", "FastAPI / Python", "AWS ECS / RDS"]
   },
   {
-    tag: "04 / Modern Frontend",
-    title: "Full-Stack Web Development",
-    desc: "Architecting high-performance Next.js 15 web applications with React 19, TypeScript, server-side streaming, 3D Canvas visualizers, and sub-50ms edge content delivery.",
-    tags: ["Next.js 15", "React 19", "TypeScript", "Three.js", "Cloudflare Edge"]
+    tag: "04 / App Layer",
+    title: "Production Web Platforms & App Layer",
+    desc: "Applying the same rigorous systems discipline to the client delivery surface. High-throughput Next.js 15 App Router, React 19 server-side streaming, real-time UI states, and sub-50ms global edge delivery.",
+    tags: ["Next.js 15", "React 19", "Edge Streaming", "Real-Time UI", "Cloudflare"]
   }
 ];
 
@@ -52,8 +52,8 @@ const faqs: FAQ[] = [
     answer: "SaaS applications require rigorous data integrity and concurrency guarantees. I design multi-tenant cloud backends in Python (FastAPI) and Node.js, utilizing Redis Redlock distributed mutexes to eliminate race conditions, Celery/SQS worker queues for asynchronous load buffering, and Stripe Connect automated payout ledgers."
   },
   {
-    question: "What is your approach to modern full-stack web development?",
-    answer: "I build production web applications using Next.js 15 with the App Router, React 19 Server Components, TypeScript, and Tailwind/Vanilla CSS Modules. Sites are optimized for sub-50ms global Time-to-First-Byte (TTFB) via Cloudflare Edge delivery, paired with custom 3D WebGL/Three.js interactive visuals."
+    question: "How do you approach the application layer and frontend for AI systems?",
+    answer: "An AI architecture is only as reliable as the interface delivering it. I engineer high-performance web platforms using Next.js 15 App Router, React 19 Server Components, and edge streaming. Interfaces are built for sub-50ms TTFB, optimistic state transitions, and responsive visualization of complex agent telemetry."
   },
   {
     question: "What are agentic AI workflows and how do they benefit enterprises?",

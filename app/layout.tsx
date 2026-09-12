@@ -111,6 +111,11 @@ export default function RootLayout({
           type="image/webp"
           fetchPriority="high"
         />
+        {/* Preconnect to Calendly to eliminate DNS/SSL handshake latency on review modal */}
+        <link rel="preconnect" href="https://calendly.com" />
+        <link rel="preconnect" href="https://assets.calendly.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://calendly.com" />
+        <link rel="dns-prefetch" href="https://assets.calendly.com" />
         <JsonLd />
       </head>
       <body

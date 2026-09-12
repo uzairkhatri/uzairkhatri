@@ -14,6 +14,13 @@
     },
     "cloudflare-observability": {
       "serverUrl": "https://observability.mcp.cloudflare.com/mcp"
+    },
+    "google-analytics": {
+      "command": "node",
+      "args": ["d:/xamp/htdocs/uzairkhatri/.agents/ga4_server.mjs"],
+      "env": {
+        "GA4_PROPERTY_ID": "553870935"
+      }
     }
   }
 }

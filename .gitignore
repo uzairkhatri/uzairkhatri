@@ -13,3 +13,5 @@ Thumbs.db
 /dist/
 .vinext/
 .wrangler/
+.agents/ga-credentials.json
+.agents/*credentials*.json
