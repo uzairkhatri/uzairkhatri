@@ -117,7 +117,7 @@ export default function BookingModal() {
             </div>
           )}
           <iframe
-            src="https://calendly.com/uz-khatri/30min?embed_domain=localhost&embed_type=inline&background_color=171b1a&text_color=ffffff&primary_color=c59b53"
+            src="https://calendly.com/uz-khatri/30min?embed_domain=uzairkhatri.com&embed_type=inline&background_color=171b1a&text_color=ffffff&primary_color=c59b53"
             width="100%"
             height="100%"
             frameBorder="0"

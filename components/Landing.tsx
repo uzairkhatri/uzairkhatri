@@ -153,8 +153,7 @@ export default function Landing() {
           <span className="hud-card-sub">Queue Buffering &bull; Latency Limits</span>
         </div>
 
-        <span className="hero-watermark">Uzair Khatri</span>
-        <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Khatri - AI Production Architect" fill sizes="(max-width: 900px) 82vw, 42vw" priority />
+        <Image src={withBasePath("/img/profile/hero-portrait.webp")} alt="Uzair Khatri - AI Production Architect" fill sizes="(max-width: 900px) 82vw, 42vw" priority fetchPriority="high" />
       </div>
 
       <div className="hero-content">

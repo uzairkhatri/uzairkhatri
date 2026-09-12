@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import FeaturedLanding from "@/components/FeaturedLanding";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 
-const image = "https://uzairkhatri.github.io/uzairkhatri/linkedin-featured/services.png";
+const image = "https://uzairkhatri.com/linkedin-featured/services.png";
 
 export const metadata: Metadata = {
-  title: "AI Systems & Software Architecture Services | Uzair Khatri",
-  description: "Production-ready AI agents, RAG platforms, workflow automation, backend architecture, and cloud-native systems designed by Uzair Khatri.",
-  openGraph: { title: "AI Systems Built for Production", description: "From AI prototype to reliable business system.", url: "https://uzairkhatri.github.io/uzairkhatri/services/ai-systems/", images: [{ url: image, width: 1200, height: 627 }] },
+  title: "AI Services, SaaS & Software Architecture",
+  description: "Production-ready AI services, agentic workflows, scalable SaaS application architecture, and high-performance web systems designed by Uzair Khatri.",
+  alternates: {
+    canonical: "https://uzairkhatri.com/services/ai-systems/",
+  },
+  openGraph: { title: "AI Systems Built for Production", description: "From AI prototype to reliable business system.", url: "https://uzairkhatri.com/services/ai-systems/", images: [{ url: image, width: 1200, height: 627 }] },
   twitter: { card: "summary_large_image", title: "AI Systems Built for Production", description: "From AI prototype to reliable business system.", images: [image] },
 };
 

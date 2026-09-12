@@ -4,9 +4,12 @@ import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 
 export const metadata: Metadata = {
-  title: "Wellows Case Study | Uzair Khatri",
+  title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
   description:
-    "How I designed the production AI architecture for Wellows, a multi-agent search visibility platform with KIVA, OPTA, and Citation Intelligence operating across LLM ecosystems.",
+    "How Uzair Khatri designed the production AI services and multi-agent workflow architecture for Wellows, coordinating KIVA, OPTA, and Citation Intelligence with LangGraph and vector search.",
+  alternates: {
+    canonical: "https://uzairkhatri.com/work/wellows/",
+  },
 };
 
 function BackIcon() {

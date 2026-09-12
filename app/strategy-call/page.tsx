@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import FeaturedLanding from "@/components/FeaturedLanding";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 
-const image = "https://uzairkhatri.github.io/uzairkhatri/linkedin-featured/strategy-call.png";
+const image = "https://uzairkhatri.com/linkedin-featured/strategy-call.png";
 
 export const metadata: Metadata = {
-  title: "Book an AI Architecture Strategy Call | Uzair Khatri",
-  description: "A focused 30-minute conversation about your AI workflow, architecture bottleneck, or unreliable production system.",
-  openGraph: { title: "Let’s Solve Your AI Workflow", description: "Bring one difficult AI or architecture problem. Leave with a clearer direction.", url: "https://uzairkhatri.github.io/uzairkhatri/strategy-call/", images: [{ url: image, width: 1200, height: 627 }] },
-  twitter: { card: "summary_large_image", title: "Let’s Solve Your AI Workflow", description: "Bring one difficult AI or architecture problem. Leave with a clearer direction.", images: [image] },
+  title: "Book an AI Architecture Strategy Call",
+  description: "A focused 30-minute conversation about your AI services, SaaS application bottlenecks, or AI workflow architecture.",
+  alternates: {
+    canonical: "https://uzairkhatri.com/strategy-call/",
+  },
+  openGraph: { title: "Let’s Solve Your AI Workflow & SaaS Architecture", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Leave with a concrete engineering plan.", url: "https://uzairkhatri.com/strategy-call/", images: [{ url: image, width: 1200, height: 627 }] },
+  twitter: { card: "summary_large_image", title: "Let’s Solve Your AI Workflow & SaaS Architecture", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Leave with a concrete engineering plan.", images: [image] },
 };
 
 export default function StrategyCall() {

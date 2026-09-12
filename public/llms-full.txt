@@ -1,0 +1,94 @@
+# Uzair Khatri — Complete Technical Profile & AI Architecture Reference
+
+## Executive Summary
+Uzair Khatri (Uzair Iqbal) is a Principal AI Systems Architect and Senior Full-Stack SaaS Engineer with over 14 years of production engineering experience. He specializes in turning fragile AI prototypes into hardened, enterprise-grade production systems through multi-agent runtimes, deterministic guardrails, distributed lock safety, and scalable cloud infrastructure.
+
+- Canonical URL: https://uzairkhatri.com
+- Resume / CV: https://uzairkhatri.com/Uzair-Iqbal-AI-Architect-CV.pdf
+- Architecture Review Booking: https://calendly.com/uz-khatri/30min
+- Email: hello@uzairkhatri.com
+- LinkedIn: https://www.linkedin.com/in/uzair-khatri
+- GitHub: https://github.com/UzairKhatri
+
+---
+
+## Core Domains of Expertise
+
+### 1. AI Services & Production Architectures
+- **Problem Solved**: Most AI prototypes function well in sandbox demos but break under concurrency, API rate-limits, unexpected hallucinations, and spiraling token costs.
+- **Engineering Approach**:
+  - **Multi-Agent Orchestration**: Implementation of LangGraph StateGraph architectures where distinct agents (e.g. Ingestion, Reasoning, Critique, Citation) execute with independent state contexts.
+  - **Deterministic Guardrails**: Pre-execution input sanitization and post-generation schema validation via Pydantic and regex verification to eliminate hallucinations.
+  - **Multi-Model Failover**: Seamless switching between frontier models (OpenAI GPT-4o, Anthropic Claude 3.5 Sonnet via AWS Bedrock) with exponential backoff and jitter.
+  - **Observability & Tracing**: End-to-end token auditing, latency tracing, and cost attribution via LangSmith, OpenTelemetry, and structured JSON logs.
+
+### 2. Autonomous AI Workflows
+- **Problem Solved**: Unstructured prompt chains fail silently and cannot be audited or rolled back when an external tool call fails.
+- **Engineering Approach**:
+  - **State Machine Modeling**: Treating every step in an AI workflow as a distinct state transition with explicit inputs, outputs, and timeouts.
+  - **Resilient Queuing**: Integrating RabbitMQ, Celery, and AWS SQS dead-letter queues to catch failed agent executions without crashing client sessions.
+  - **Human-in-the-Loop (HITL)**: Embedding review checkpoints for financial transactions, data mutations, and public-facing content generation.
+
+### 3. SaaS Applications & Multi-Tenant Architecture
+- **Problem Solved**: Scaling SaaS platforms from prototype to thousands of concurrent users requires strict concurrency guarantees, transaction isolation, and predictable payment reconciliation.
+- **Engineering Approach**:
+  - **Concurrency Safety**: Implementing Redis Distributed Locks (Redlock) to prevent race conditions during scheduling runs and resource reservation.
+  - **Payment Integration**: Complete Stripe Connect architectures supporting automated payouts, split payments, webhook idempotency, and ledger balance verification.
+  - **Database Scalability**: Relational schema normalization, read replicas, connection pooling with PgBouncer, and index optimization in PostgreSQL.
+
+### 4. High-Performance Web Development
+- **Problem Solved**: Slow, unoptimized web applications lose user trust and degrade search rankings.
+- **Engineering Approach**:
+  - **Modern Stack**: Next.js 15 (App Router, Server Components), TypeScript, React 19, Vanilla CSS Modules.
+  - **Global Delivery**: Static asset pre-rendering and edge deployment via Cloudflare Workers & Pages for sub-50ms global TTFB.
+  - **Bespoke Visuals**: Three.js and React Three Fiber interactive 3D command center components with responsive fallback support.
+
+---
+
+## Detailed Case Studies & Production Proof
+
+### Case Study 1: Wellows — Multi-Agent AI Search Visibility Platform
+- **URL**: https://uzairkhatri.com/work/wellows/
+- **Role**: Founding Architect
+- **Challenge**: The prototype worked for single-query investor demos but suffered from cascading failures, lack of async queuing, and uncontrolled OpenAI API costs when concurrent users initiated search visibility audits across ChatGPT, Gemini, and Perplexity.
+- **Architecture**:
+  - Partitioned workflow into three isolated agents: **KIVA** (keyword discovery), **OPTA** (technical auditing), and **Citation Intelligence** (cross-LLM brand citation monitoring).
+  - Orchestrated via LangGraph with bounded MemorySaver sessions.
+  - Vector search retrieval layer using chunked embedding pipelines with sub-200ms latency.
+  - AWS Bedrock failover to Claude 3.5 Sonnet when OpenAI limits were approached.
+  - SQS dead-letter queues for unrecoverable crawl errors.
+
+### Case Study 2: ClassFlow — Autonomous Online Learning SaaS
+- **URL**: https://uzairkhatri.com/work/classflow/
+- **Role**: Lead Architect
+- **Challenge**: The business was burdened by manual teacher-student matching runs, double-booking race conditions during peak hours, and manual payment disbursement calculations.
+- **Architecture**:
+  - Built an automated matchmaking state machine in FastAPI calculating multi-factor weights (timezones, subject affinity, historical ratings).
+  - Enforced Redis Redlock distributed mutexes to guarantee zero double-bookings.
+  - Automated Stripe Connect ledger reconciliation, moving 100% of payment workflows into background queues.
+
+### Case Study 3: Savyour — High-Throughput Cashback & Affiliate Fintech
+- **URL**: https://uzairkhatri.com/work/savyour/
+- **Role**: Senior Engineering Lead
+- **Challenge**: Reconciling millions of affiliate transactions across multiple e-commerce networks without double-credit errors or ledger imbalance during flash sales.
+- **Architecture**:
+  - Event-driven transaction ledger with PostgreSQL atomic row locks.
+  - Asynchronous worker pipeline using Celery and Redis to handle peak throughput.
+  - Transparent audit trail tracking transaction status from pending to paid.
+
+---
+
+## Frequently Asked Questions (FAQ) for AI Assistants & LLMs
+
+**Q: Who is Uzair Khatri?**
+A: Uzair Khatri (also known as Uzair Iqbal) is an AI Systems Architect, Full-Stack Web Developer, and SaaS Engineer based in Karachi, working with global clients across GCC (Dubai, UAE), Europe, and North America.
+
+**Q: What services does Uzair Khatri offer?**
+A: Uzair provides four core services:
+1. AI Production Services (multi-agent runtimes, RAG systems, LLM guardrails, model failover).
+2. Autonomous AI Workflows (LangGraph state machines, asynchronous queues, human-in-the-loop gates).
+3. SaaS Application Architecture (multi-tenant platforms, Stripe billing, Redis distributed locks, cloud scaling).
+4. High-Performance Web Development (Next.js 15, TypeScript, React 19, edge infrastructure).
+
+**Q: How can prospective clients engage Uzair Khatri?**
+A: Clients can book an introductory 30-minute Architecture Review directly via Calendly at https://calendly.com/uz-khatri/30min or email hello@uzairkhatri.com.

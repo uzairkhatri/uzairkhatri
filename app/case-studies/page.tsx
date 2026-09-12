@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import FeaturedLanding from "@/components/FeaturedLanding";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 
-const image = "https://uzairkhatri.github.io/uzairkhatri/linkedin-featured/case-studies.png";
+const image = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
 
 export const metadata: Metadata = {
-  title: "AI & Enterprise Case Studies | Uzair Khatri",
-  description: "Selected architecture work across production AI, enterprise platforms, cloud systems, and high-stakes digital workflows.",
-  openGraph: { title: "Real Systems. Real Business Results.", description: "Selected AI and enterprise architecture work by Uzair Khatri.", url: "https://uzairkhatri.github.io/uzairkhatri/case-studies/", images: [{ url: image, width: 1200, height: 627 }] },
+  title: "AI & Enterprise SaaS Case Studies",
+  description: "Selected architecture work across production AI, multi-agent workflows, scalable SaaS platforms, and enterprise cloud systems.",
+  alternates: {
+    canonical: "https://uzairkhatri.com/case-studies/",
+  },
+  openGraph: { title: "Real Systems. Real Business Results.", description: "Selected AI and enterprise architecture work by Uzair Khatri.", url: "https://uzairkhatri.com/case-studies/", images: [{ url: image, width: 1200, height: 627 }] },
   twitter: { card: "summary_large_image", title: "Real Systems. Real Business Results.", description: "Selected AI and enterprise architecture work by Uzair Khatri.", images: [image] },
 };
 

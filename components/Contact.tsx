@@ -33,10 +33,35 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
-    setTimeout(() => {
+
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/mqaeveoq";
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+          _subject: `Architecture Inquiry from ${formState.name} (uzairkhatri.com)`
+        })
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormState({ name: "", email: "", message: "" });
+      } else {
+        // Fallback to mailto link
+        window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formState.message)}`;
+        setStatus("success");
+      }
+    } catch {
+      window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formState.message)}`;
       setStatus("success");
-      setFormState({ name: "", email: "", message: "" });
-    }, 1500);
+    }
   };
 
   return (

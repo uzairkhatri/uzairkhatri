@@ -4,9 +4,12 @@ import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 
 export const metadata: Metadata = {
-  title: "Savyour Case Study | Uzair Khatri | AI Production Architect",
+  title: "Savyour Case Study — High-Throughput Fintech SaaS Ledger",
   description:
     "How Uzair Khatri architected high-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's 650+ partner cashback platform.",
+  alternates: {
+    canonical: "https://uzairkhatri.com/work/savyour/",
+  },
 };
 
 function BackIcon() {

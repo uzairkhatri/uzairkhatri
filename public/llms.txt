@@ -1,0 +1,48 @@
+# Uzair Khatri — AI Systems Architect & Full-Stack SaaS Engineer
+
+> Principal AI Systems Architect and SaaS Engineer specializing in enterprise AI services, autonomous AI workflows, multi-agent runtimes, scalable SaaS applications, and high-performance web development.
+
+- Website: https://uzairkhatri.com
+- Full Documentation: https://uzairkhatri.com/llms-full.txt
+- Booking: https://calendly.com/uz-khatri/30min
+- Email: hello@uzairkhatri.com
+- LinkedIn: https://www.linkedin.com/in/uzair-khatri
+- GitHub: https://github.com/UzairKhatri
+- Location: Karachi (PKT / UTC+5) • Available for Dubai / GCC (GST) and Global Remote Engagements
+
+## Core Capabilities & Services
+
+### 1. AI Services & Production Architectures
+- **Multi-Agent Systems**: Orchestrates LangGraph state machines, coordinating specialized agents with isolated task boundaries.
+- **RAG & Vector Search**: Hybrid dense/sparse vector search, semantic chunking, and verifiable source citations.
+- **Resilience & Failover**: Automatic fallback across OpenAI, Anthropic, and AWS Bedrock with exponential backoff and jitter.
+- **Guardrails & Cost Controls**: Deterministic validation gates, token budget rate-limiting, and LangSmith/OpenTelemetry tracing.
+
+### 2. Autonomous AI Workflows
+- **Deterministic State Machines**: Moving fragile prompt loops into stateful, audit-trailed workflow engines.
+- **Asynchronous Queuing**: RabbitMQ, Celery, and AWS SQS dead-letter queues preventing cascading agent failures.
+- **Human-in-the-Loop Review**: Granular approval checkpoints for critical actions, financial disbursements, and external outputs.
+
+### 3. SaaS Applications & Cloud Engineering
+- **Multi-Tenant Architecture**: Concurrency-safe systems with Redis Redlock distributed mutexes.
+- **Financial Ledgers**: Stripe Connect automated payouts, dispute handling, and transaction reconciliation.
+- **Backend & Cloud**: Python (FastAPI), Node.js, PostgreSQL relational scaling, Docker, Kubernetes, AWS (ECS, SQS, Bedrock, S3).
+
+### 4. High-Performance Web Development
+- **Modern Frameworks**: Next.js 15 (App Router, Server Components), React 19, TypeScript.
+- **Edge Deployment**: Sub-50ms global delivery via Cloudflare Edge Network.
+- **Interactive Experiences**: Bespoke dark UI, dynamic telemetry monitors, and Three.js / React Three Fiber visualizers.
+
+## Representative Case Studies
+
+- **Wellows (AI Search Visibility Platform)**: Designed multi-agent architecture (KIVA, OPTA, Citation Intelligence) using LangGraph and vector search to monitor brand visibility across ChatGPT, Gemini, and Perplexity.
+  - Link: https://uzairkhatri.com/work/wellows/
+- **ClassFlow (Agentic Online Learning SaaS)**: Architected automated tutor-student matching with dynamic timezone scoring, Redis distributed locks, and automated Stripe payout reconciliation.
+  - Link: https://uzairkhatri.com/work/classflow/
+- **Savyour (High-Throughput Fintech Ledger)**: Engineered cashback ledger balancing, affiliate attribution pipelines, and Redis caching for high-concurrency commercial transactions.
+  - Link: https://uzairkhatri.com/work/savyour/
+
+## Contact & Engagements
+
+- Book 30-Minute Architecture Review: https://calendly.com/uz-khatri/30min
+- Direct Inquiry: hello@uzairkhatri.com

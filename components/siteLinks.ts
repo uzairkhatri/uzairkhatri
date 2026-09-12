@@ -1,6 +1,6 @@
 export const BOOKING_URL = "https://calendly.com/uz-khatri/30min";
 
-export const EMAIL_ADDRESS = "hello@uzairkhatri.dev";
+export const EMAIL_ADDRESS = "hello@uzairkhatri.com";
 
 export const EMAIL_URL = `mailto:${EMAIL_ADDRESS}`;
 

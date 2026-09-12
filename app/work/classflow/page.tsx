@@ -4,9 +4,12 @@ import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 
 export const metadata: Metadata = {
-  title: "ClassFlow Case Study | Uzair Khatri | AI Production Architect",
+  title: "ClassFlow Case Study — Autonomous SaaS Platform Architecture",
   description:
-    "How Uzair Khatri architected an autonomous learning platform unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe ledger reconciliation.",
+    "How Uzair Khatri architected ClassFlow: an autonomous SaaS application unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe ledger reconciliation.",
+  alternates: {
+    canonical: "https://uzairkhatri.com/work/classflow/",
+  },
 };
 
 function BackIcon() {

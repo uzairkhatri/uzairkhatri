@@ -10,10 +10,14 @@ import TrustStrip from "@/components/TrustStrip";
 import StickyNav from "@/components/StickyNav";
 import ScrollReveal from "@/components/ScrollReveal";
 import BookingModal from "@/components/BookingModal";
+import AEOQuestions from "@/components/AEOQuestions";
+
 export default function Home() {
   return (
     <main>
-      <h1 className="sr-only">Uzair Khatri AI production architect portfolio</h1>
+      <h1 className="sr-only">
+        Uzair Khatri | AI Services, SaaS Applications, Autonomous AI Workflows & Web Development Architect
+      </h1>
       <ScrollReveal />
       <StickyNav />
       <Landing />
@@ -23,6 +27,7 @@ export default function Home() {
       <About />
       <Timeline />
       <TrustStrip />
+      <AEOQuestions />
       <Contact />
       <Footer />
       <BookingModal />

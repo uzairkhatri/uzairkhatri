@@ -34,10 +34,11 @@ export default function StickyNav() {
       </a>
 
       <div className={styles.links}>
-        <a href="#work">Work</a>
-        <a href="#method">Method</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href={withBasePath("/#work")}>Work</a>
+        <a href={withBasePath("/services/ai-systems/")}>Services</a>
+        <a href={withBasePath("/case-studies/")}>Case Studies</a>
+        <a href={withBasePath("/#about")}>About</a>
+        <a href={withBasePath("/#contact")}>Contact</a>
       </div>
 
       <a
