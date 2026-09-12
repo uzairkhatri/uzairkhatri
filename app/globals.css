@@ -1717,8 +1717,14 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
 }
 
 /* Ensure sticky navigation never overlaps section headers when navigating */
+html {
+  scroll-padding-top: 6rem;
+}
+
 section[id],
 div[id],
-article[id] {
-  scroll-margin-top: 5.5rem;
+article[id],
+h2[id],
+h3[id] {
+  scroll-margin-top: 6rem !important;
 }

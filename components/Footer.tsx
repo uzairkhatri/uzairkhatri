@@ -27,7 +27,7 @@ export default function Footer() {
             <Logo compact={true} />
             <div className={styles.statusBadge}>
               <span className={styles.statusDot} aria-hidden="true" />
-              <span>Available for Select Q1–Q2 Builds</span>
+              <span>Available for contract & advisory roles</span>
             </div>
           </div>
 

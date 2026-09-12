@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import styles from "./StickyNav.module.css";
 import { BOOKING_URL, withBasePath } from "./siteLinks";
@@ -8,12 +8,35 @@ import Logo from "./Logo";
 
 export default function StickyNav() {
   const [visible, setVisible] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const threshold = window.innerHeight * 0.75;
+    let ticking = false;
 
     const onScroll = () => {
-      setVisible(window.scrollY > threshold);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentY = window.scrollY;
+          const heroThreshold = window.innerHeight * 0.65;
+          const docHeight = document.documentElement.scrollHeight;
+          const isNearFooter = window.innerHeight + currentY >= docHeight - 160;
+
+          if (currentY <= heroThreshold || isNearFooter) {
+            // Above hero threshold or near footer: hide to avoid duplicate nav or overlapping footer
+            setVisible(false);
+          } else if (currentY < lastScrollY.current - 4) {
+            // Scrolling UP: reveal nav
+            setVisible(true);
+          } else if (currentY > lastScrollY.current + 8) {
+            // Scrolling DOWN: auto-hide so it never obscures headings, cards, or quotes while reading
+            setVisible(false);
+          }
+
+          lastScrollY.current = currentY;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -22,14 +45,23 @@ export default function StickyNav() {
 
   return (
     <motion.nav
-      initial={{ x: "-50%", y: -15, opacity: 0, scale: 0.96 }}
-      animate={visible ? { x: "-50%", y: 0, opacity: 1, scale: 1 } : { x: "-50%", y: -15, opacity: 0, scale: 0.96 }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      initial={{ x: "-50%", y: -24, opacity: 0, scale: 0.97 }}
+      animate={
+        visible
+          ? { x: "-50%", y: 0, opacity: 1, scale: 1 }
+          : { x: "-50%", y: -24, opacity: 0, scale: 0.97 }
+      }
+      transition={{ type: "spring", stiffness: 320, damping: 26 }}
       style={{ pointerEvents: visible ? "auto" : "none" }}
       className={styles.nav}
       aria-label="Sticky navigation"
     >
-      <a href={withBasePath("/")} className={styles.brand} aria-label="Uzair Khatri home" style={{ textDecoration: "none" }}>
+      <a
+        href={withBasePath("/")}
+        className={styles.brand}
+        aria-label="Uzair Khatri home"
+        style={{ textDecoration: "none" }}
+      >
         <Logo compact={true} />
       </a>
 
@@ -48,9 +80,10 @@ export default function StickyNav() {
         rel="noreferrer"
       >
         <span className={styles.ctaTextPrimary}>Request Review</span>
-        <span className={styles.ctaTextHover} aria-hidden="true">Request Review</span>
+        <span className={styles.ctaTextHover} aria-hidden="true">
+          Request Review
+        </span>
       </a>
     </motion.nav>
   );
 }
-
