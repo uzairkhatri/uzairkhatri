@@ -3,12 +3,26 @@ import styles from "../wellows/page.module.css";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 
+const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
+
 export const metadata: Metadata = {
   title: "ClassFlow Case Study — Autonomous SaaS Platform Architecture",
   description:
     "How Uzair Khatri architected ClassFlow: an autonomous SaaS application unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe ledger reconciliation.",
   alternates: {
     canonical: "https://uzairkhatri.com/work/classflow/",
+  },
+  openGraph: {
+    title: "ClassFlow Case Study — Autonomous SaaS Platform Architecture",
+    description: "Autonomous SaaS platform architecture unifying dynamic matchmaking, Redis Redlock concurrency, and Stripe Connect automated ledgers.",
+    url: "https://uzairkhatri.com/work/classflow/",
+    images: [{ url: ogImage, width: 1200, height: 627, alt: "ClassFlow Architecture Case Study" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ClassFlow Case Study — Autonomous SaaS Platform Architecture",
+    description: "Autonomous SaaS platform architecture unifying dynamic matchmaking, Redis Redlock concurrency, and Stripe Connect automated ledgers.",
+    images: [ogImage],
   },
 };
 
@@ -112,7 +126,9 @@ export default function ClassFlowCaseStudy() {
               <span className={styles.tag}>12-week delivery</span>
               <span className={styles.tag}>Lead Architect</span>
             </div>
-            <h1 className={styles.heroTitle}>ClassFlow</h1>
+            <h1 className={styles.heroTitle}>
+              ClassFlow <span style={{ display: "block", fontSize: "0.5em", color: "var(--gold-bright)", fontWeight: 700, marginTop: "0.35rem", letterSpacing: "0.02em" }}>Autonomous SaaS Platform Architecture</span>
+            </h1>
             <p className={styles.heroSub}>Autonomous Online Learning Platform</p>
             <p className={styles.heroDesc}>
               How I designed an enterprise operations engine unifying real-time teacher matchmaking,

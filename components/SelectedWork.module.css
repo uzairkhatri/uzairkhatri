@@ -127,7 +127,7 @@
 }
 
 .nodeAddress {
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .pingTime {
@@ -186,7 +186,7 @@
   font-style: normal;
   font-family: var(--font-space-mono), monospace;
   font-size: 0.62rem;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.65);
   font-weight: 700;
 }
 
@@ -227,7 +227,7 @@
 .bladeMetricCell small {
   font-family: var(--font-space-mono), monospace;
   font-size: 0.52rem;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.65);
   letter-spacing: 0.05em;
   font-weight: 700;
 }
@@ -323,7 +323,7 @@
 
 .architectureMetric span {
   margin-bottom: 0.5rem;
-  color: rgba(255, 255, 255, 0.36);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 0.58rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -448,7 +448,7 @@
 
 .blueprintPanel h4, .metricPanel h4, .stackPanel h4 {
   margin: 0 0 0.8rem 0;
-  color: rgba(255, 255, 255, 0.36);
+  color: rgba(255, 255, 255, 0.72);
   font-family: var(--font-space-mono), monospace;
   font-size: 0.62rem;
   font-weight: 700;

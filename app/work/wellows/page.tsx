@@ -3,12 +3,26 @@ import styles from "./page.module.css";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 
+const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
+
 export const metadata: Metadata = {
   title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
   description:
     "How Uzair Khatri designed the production AI services and multi-agent workflow architecture for Wellows, coordinating KIVA, OPTA, and Citation Intelligence with LangGraph and vector search.",
   alternates: {
     canonical: "https://uzairkhatri.com/work/wellows/",
+  },
+  openGraph: {
+    title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
+    description: "Production AI services and multi-agent workflow architecture coordinating KIVA, OPTA, and Citation Intelligence with LangGraph.",
+    url: "https://uzairkhatri.com/work/wellows/",
+    images: [{ url: ogImage, width: 1200, height: 627, alt: "Wellows Architecture Case Study" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
+    description: "Production AI services and multi-agent workflow architecture coordinating KIVA, OPTA, and Citation Intelligence with LangGraph.",
+    images: [ogImage],
   },
 };
 
@@ -112,7 +126,9 @@ export default function WellowsCaseStudy() {
               <span className={styles.tag}>11-week delivery</span>
               <span className={styles.tag}>Founding Architect</span>
             </div>
-            <h1 className={styles.heroTitle}>Wellows</h1>
+            <h1 className={styles.heroTitle}>
+              Wellows <span style={{ display: "block", fontSize: "0.5em", color: "var(--gold-bright)", fontWeight: 700, marginTop: "0.35rem", letterSpacing: "0.02em" }}>Multi-Agent AI Workflow Architecture</span>
+            </h1>
             <p className={styles.heroSub}>AI Search Visibility Platform</p>
             <p className={styles.heroDesc}>
               How I designed the production architecture for a multi-agent platform tracking brand

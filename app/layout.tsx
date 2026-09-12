@@ -8,24 +8,28 @@ import JsonLd from "@/components/JsonLd";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-space-mono",
+  display: "swap",
 });
 
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
+  display: "swap",
 });
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "600"],
   style: ["normal", "italic"],
   variable: "--font-cormorant-garamond",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -100,6 +104,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/img/profile/hero-portrait.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
         <JsonLd />
       </head>
       <body
@@ -108,12 +119,12 @@ export default function RootLayout({
       >
         {/* Google tag (gtag.js) */}
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-1LXS5Z6GJ6"
         />
         <Script
           id="google-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

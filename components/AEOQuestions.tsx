@@ -1,6 +1,7 @@
 import styles from "./AEOQuestions.module.css";
 import Link from "next/link";
 import { BOOKING_URL, withBasePath } from "./siteLinks";
+import { FaqJsonLd } from "./JsonLd";
 
 interface Capability {
   tag: string;
@@ -67,6 +68,7 @@ const faqs: FAQ[] = [
 export default function AEOQuestions() {
   return (
     <section className={styles.section} id="capabilities" aria-label="Capabilities and FAQ">
+      <FaqJsonLd />
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className={styles.eyebrow}>

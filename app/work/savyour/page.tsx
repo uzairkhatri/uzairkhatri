@@ -3,12 +3,26 @@ import styles from "../wellows/page.module.css";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 
+const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
+
 export const metadata: Metadata = {
   title: "Savyour Case Study — High-Throughput Fintech SaaS Ledger",
   description:
     "How Uzair Khatri architected high-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's 650+ partner cashback platform.",
   alternates: {
     canonical: "https://uzairkhatri.com/work/savyour/",
+  },
+  openGraph: {
+    title: "Savyour Case Study — High-Throughput Fintech SaaS Ledger",
+    description: "High-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's cashback platform.",
+    url: "https://uzairkhatri.com/work/savyour/",
+    images: [{ url: ogImage, width: 1200, height: 627, alt: "Savyour Architecture Case Study" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Savyour Case Study — High-Throughput Fintech SaaS Ledger",
+    description: "High-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's cashback platform.",
+    images: [ogImage],
   },
 };
 
@@ -113,7 +127,9 @@ export default function SavyourCaseStudy() {
               <span className={styles.tag}>14-week delivery</span>
               <span className={styles.tag}>Solutions Architect</span>
             </div>
-            <h1 className={styles.heroTitle}>Savyour</h1>
+            <h1 className={styles.heroTitle}>
+              Savyour <span style={{ display: "block", fontSize: "0.5em", color: "var(--gold-bright)", fontWeight: 700, marginTop: "0.35rem", letterSpacing: "0.02em" }}>High-Throughput Fintech SaaS Ledger</span>
+            </h1>
             <p className={styles.heroSub}>Enterprise Cashback &amp; Affiliate Ecosystem</p>
             <p className={styles.heroDesc}>
               How I architected high-throughput webhook ingestion, double-entry financial ledgers,
