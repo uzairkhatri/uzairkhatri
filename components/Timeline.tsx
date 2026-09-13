@@ -27,17 +27,17 @@ const timelineData = [
   },
   {
     year: "2018",
-    role: "Senior Laravel Engineer",
+    role: "Senior Backend Systems Engineer",
     focus: "Monolith Refactoring & Partner Integration",
     description:
       "Refactored complex commercial monolithic backends, optimizing affiliate ledgers, API caching, and Postgres transaction performance for brand ecosystems.",
   },
   {
     year: "2015",
-    role: "PHP Full Stack Developer",
-    focus: "Database Systems & Transaction Flows",
+    role: "Backend Systems Engineer",
+    focus: "Relational Schemas & Transaction Flows",
     description:
-      "Built custom web applications, relational schemas, and payment flow integrations for early enterprise portals and commercial clients.",
+      "Engineered early transactional database schemas, custom backend architectures, and automated payment integrations for high-availability enterprise web portals.",
   },
 ];
 

@@ -158,6 +158,7 @@ export default function BookingModal() {
             height="100%"
             frameBorder="0"
             title="Book a 30-Min Architecture Review"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             onLoad={() => setIsLoading(false)}
             className={`${styles.iframe} ${isLoading ? "" : styles.iframeLoaded}`}
           />

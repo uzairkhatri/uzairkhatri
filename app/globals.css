@@ -956,10 +956,11 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
 
   .hero-portrait-stage {
     position: relative !important;
+    grid-row: 3 !important;
     width: min(22rem, 80vw) !important;
     height: 32svh !important;
     min-height: 14.5rem !important;
-    margin-top: 0.4rem !important;
+    margin-top: 1.25rem !important;
     margin-bottom: 0 !important;
     justify-self: center !important;
     z-index: 2 !important;
@@ -979,7 +980,7 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
   }
 
   .hero-content {
-    grid-row: 3 !important;
+    grid-row: 2 !important;
     width: calc(100vw - 2rem);
     max-width: calc(100vw - 2rem);
     justify-self: center;
@@ -989,7 +990,7 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     border-radius: 8px !important;
-    margin-top: -3.8rem !important;
+    margin-top: 0.5rem !important;
     margin-bottom: 0 !important;
     z-index: 3 !important;
   }

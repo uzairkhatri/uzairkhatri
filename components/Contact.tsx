@@ -27,14 +27,22 @@ function ArrowIcon() {
 }
 
 export default function Contact() {
-  const [formState, setFormState] = useState({ name: "", email: "", message: "" });
+  const [formState, setFormState] = useState({ name: "", email: "", message: "", _gotcha: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check: If filled by automated bot, fake success silently without hitting API
+    if (formState._gotcha) {
+      setStatus("success");
+      setFormState({ name: "", email: "", message: "", _gotcha: "" });
+      return;
+    }
+
     setStatus("submitting");
 
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/mqaeveoq";
+    const endpoint = withBasePath("/api/contact");
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -43,16 +51,16 @@ export default function Contact() {
           Accept: "application/json"
         },
         body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          message: formState.message,
-          _subject: `Architecture Inquiry from ${formState.name} (uzairkhatri.com)`
+          name: formState.name.slice(0, 100),
+          email: formState.email.slice(0, 100),
+          message: formState.message.slice(0, 3000),
+          _gotcha: formState._gotcha,
         })
       });
 
       if (response.ok) {
         setStatus("success");
-        setFormState({ name: "", email: "", message: "" });
+        setFormState({ name: "", email: "", message: "", _gotcha: "" });
       } else {
         // Fallback to mailto link
         window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formState.message)}`;
@@ -117,12 +125,24 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className={styles.form}>
+                {/* Honeypot field for anti-bot spam defense */}
+                <input
+                  type="text"
+                  name="_gotcha"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  style={{ display: "none" }}
+                  value={formState._gotcha}
+                  onChange={(e) => setFormState({ ...formState, _gotcha: e.target.value })}
+                  aria-hidden="true"
+                />
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <input
                       type="text"
                       placeholder="Name"
                       required
+                      maxLength={100}
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       className={styles.input}
@@ -133,6 +153,7 @@ export default function Contact() {
                       type="email"
                       placeholder="Email"
                       required
+                      maxLength={100}
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                       className={styles.input}
@@ -143,6 +164,7 @@ export default function Contact() {
                   <textarea
                     placeholder="What is built, what is breaking, and what has to scale?"
                     required
+                    maxLength={3000}
                     rows={3}
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}

@@ -1,9 +1,17 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "uzairkhatri-creative-portfolio",
+  "name": "uzairkhatri",
+  "main": "worker/index.ts",
   "compatibility_date": "2026-09-11",
   "assets": {
     "directory": "out",
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
+    "binding": "ASSETS"
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "uz.khatri@gmail.com"
+    }
+  ]
 }

@@ -29,10 +29,10 @@ export default function CaseStudies() {
     sectionTitle="Different systems. The same standard of engineering judgment."
     sectionIntro="Some client details remain confidential. These summaries focus on the architecture problem, my responsibility, and the operational result."
     cards={[
-      {eyebrow:"AI platform / Wellows",title:"Multi-agent search visibility platform",text:"Designed a production architecture for keyword intelligence, technical auditing, and citation monitoring across LLM ecosystems.",href:withBasePath("/work/wellows/"),linkLabel:"Read full case study"},
+      {eyebrow:"AI platform / Wellows",title:"Multi-agent search visibility platform",text:"Designed a production architecture for keyword intelligence, technical auditing, and citation monitoring across LLM ecosystems with LangGraph.",href:withBasePath("/work/wellows/"),linkLabel:"Read full case study"},
+      {eyebrow:"Agentic SaaS / ClassFlow",title:"Autonomous learning platform & distributed locks",text:"Architected dynamic instructor matchmaking (<100ms), Redis Redlock distributed mutexes, real-time WebSockets, and automated Stripe Connect payouts.",href:withBasePath("/work/classflow/"),linkLabel:"Read full case study"},
+      {eyebrow:"Fintech & Ledgers / Savyour",title:"High-concurrency rewards & transaction safety",text:"Engineered decoupled event ingestion, Redis caching, and PostgreSQL ACID transaction boundaries to process partner affiliate conversions in sub-second timelines.",href:withBasePath("/work/savyour/"),linkLabel:"Read case study"},
       {eyebrow:"Insurance / Core systems",title:"Enterprise architecture for regulated workflows",text:"Architecture experience supporting core platforms at EFU Life and Jubilee Life, where data integrity, auditability, integration, and continuity were non-negotiable."},
-      {eyebrow:"SaaS / Intelligent workflow",title:"From disconnected automation to an operable product",text:"Defined service boundaries, typed APIs, async processing, failure isolation, and cloud controls so product teams could ship without inheriting hidden operational risk."},
-      {eyebrow:"WordPress / Product engineering",title:"Reliable behavior across complex ecosystems",text:"Solved production issues spanning recurring data, page builders, checkout behavior, integrations, and compatibility while protecting existing customer workflows."},
     ]}
     stepsEyebrow="How I evaluate the work"
     stepsTitle="The result is more than code shipped."

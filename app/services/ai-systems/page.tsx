@@ -19,20 +19,20 @@ export default function AISystemsServices() {
     eyebrow="AI systems & software architecture"
     title={<>Turn ambitious AI ideas into <em>operable systems.</em></>}
     intro="I help founders, CTOs, and product teams design and deliver AI agents, RAG platforms, intelligent workflows, and cloud-native backends that can survive real traffic, real failures, and real business expectations."
-    proof="12+ years across enterprise architecture, Java and Spring, Python and FastAPI, AWS, Kubernetes, and production AI delivery."
+    proof="14+ years across enterprise systems, backend architecture, Python and FastAPI, AWS, and production AI delivery."
     primaryLabel="Discuss your system"
     primaryHref={BOOKING_URL}
     secondaryLabel="See selected work"
     secondaryHref={withBasePath("/case-studies/")}
-    stats={[{value:"12+",label:"Years designing enterprise systems"},{value:"AI → Cloud",label:"Architecture across the full delivery path"},{value:"Production",label:"Reliability, security, cost, and observability built in"}]}
-    sectionEyebrow="Where I create leverage"
-    sectionTitle="Architecture that closes the gap between demo and delivery."
-    sectionIntro="The work begins with the business constraint, not the model. Every engagement produces clear technical decisions, a delivery path, and an operating model your team can own."
+    stats={[{value:"14+",label:"Years designing enterprise systems"},{value:"AI → Cloud",label:"Architecture across the full delivery path"},{value:"Production",label:"Reliability, security, cost, and observability built in"}]}
+    sectionEyebrow="Structured Engagements"
+    sectionTitle="High-leverage architecture services for founders and CTOs."
+    sectionIntro="Every engagement produces concrete technical decisions, code boundaries, and an operating model your engineering team can own long after the engagement ends."
     cards={[
-      {eyebrow:"01 / Agentic systems",title:"AI agents that complete real workflows",text:"Multi-agent orchestration, tool integration, human approval paths, retries, state management, and measurable task completion."},
-      {eyebrow:"02 / Grounded intelligence",title:"RAG and knowledge platforms",text:"Ingestion, retrieval, citations, evaluation, access controls, and observability designed around trustworthy answers."},
-      {eyebrow:"03 / Enterprise backbone",title:"Backend and integration architecture",text:"Typed APIs, event-driven workflows, service boundaries, legacy integration, and migration plans that reduce operational risk."},
-      {eyebrow:"04 / Production operations",title:"Cloud, reliability, and cost controls",text:"AWS and Kubernetes architecture, queues, scaling, failure isolation, monitoring, security boundaries, and predictable AI spend."},
+      {eyebrow:"01 / Diagnostic & Risk Audit",title:"Production AI & Architecture Review",text:"A focused 2-week deep dive into your prototype or running system: isolating hallucination vectors, rate-limit bottlenecks, state corruption risks, and token cost leakages."},
+      {eyebrow:"02 / Agentic Engineering",title:"Multi-Agent Runtimes & State Architecture",text:"Designing fault-isolated agent coordination with LangGraph, structured memory contracts, dead-letter retry queues, deterministic guardrails, and human review gates."},
+      {eyebrow:"03 / Platform Infrastructure",title:"High-Throughput Backends & Concurrency Safety",text:"Engineering distributed cloud backends with Redis Redlock mutexes, async Celery/SQS workers, ACID database isolation, and Stripe automated ledgers."},
+      {eyebrow:"04 / Strategic Advisory",title:"Fractional AI Systems Architect & Governance",text:"Senior architectural leadership for funded startups and enterprises: model failover paths via AWS Bedrock, cost governance, observability, and team handoff."},
     ]}
     stepsEyebrow="A focused engagement"
     stepsTitle="From unclear problem to executable system plan."

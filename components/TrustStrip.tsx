@@ -25,9 +25,9 @@ const testimonials = [
   {
     quote:
       "Uzair has been a tremendous help across multiple projects. Reliable, technically strong, and someone we kept rehiring because he consistently delivered.",
-    author: "Agency Partner",
+    author: "Technical Partner",
     location: "United Kingdom",
-    source: "Multi-project Delivery Partner",
+    source: "Multi-project Systems Delivery Partner",
   },
   {
     quote:
@@ -123,8 +123,8 @@ export default function TrustStrip() {
         <header className={styles.header}>
           <h2>Trusted when the system has to work.</h2>
           <p>
-            Verified feedback from Upwork clients alongside NDA-protected enterprise partners.
-            References available upon request.
+            Verified feedback from technology founders, CTOs, and enterprise partners.
+            Client references available upon request.
           </p>
         </header>
 
