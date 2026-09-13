@@ -58,7 +58,8 @@ export default function Contact() {
         body: JSON.stringify({
           name: formState.name.slice(0, 100),
           email: formState.email.slice(0, 100),
-          message: formattedMessage,
+          message: formState.message.slice(0, 3000),
+          stage: projectStage,
           _gotcha: formState._gotcha,
         })
       });
