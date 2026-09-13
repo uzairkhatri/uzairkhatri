@@ -412,6 +412,18 @@
   padding-top: 1.4rem;
 }
 
+.blockKicker {
+  display: inline-block;
+  color: var(--gold-bright);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  opacity: 0.9;
+}
+
 .block h4 {
   margin: 0 0 0.5rem 0;
   color: var(--gold);

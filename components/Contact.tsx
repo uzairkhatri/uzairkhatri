@@ -26,7 +26,10 @@ function ArrowIcon() {
   );
 }
 
+const projectStages = ["Idea", "Prototype", "In Production", "Existing System"] as const;
+
 export default function Contact() {
+  const [projectStage, setProjectStage] = useState<string>("Prototype");
   const [formState, setFormState] = useState({ name: "", email: "", message: "", _gotcha: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
@@ -43,6 +46,8 @@ export default function Contact() {
     setStatus("submitting");
 
     const endpoint = withBasePath("/api/contact");
+    const formattedMessage = `[Project Stage: ${projectStage}]\n\n${formState.message.slice(0, 3000)}`;
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -53,7 +58,7 @@ export default function Contact() {
         body: JSON.stringify({
           name: formState.name.slice(0, 100),
           email: formState.email.slice(0, 100),
-          message: formState.message.slice(0, 3000),
+          message: formattedMessage,
           _gotcha: formState._gotcha,
         })
       });
@@ -63,11 +68,11 @@ export default function Contact() {
         setFormState({ name: "", email: "", message: "", _gotcha: "" });
       } else {
         // Fallback to mailto link
-        window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formState.message)}`;
+        window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry (" + projectStage + ") from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formattedMessage)}`;
         setStatus("success");
       }
     } catch {
-      window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formState.message)}`;
+      window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry (" + projectStage + ") from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formattedMessage)}`;
       setStatus("success");
     }
   };
@@ -160,6 +165,24 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+                <div className={styles.stageSelectorGroup}>
+                  <span className={styles.stageLabel}>Project Stage</span>
+                  <div className={styles.stageButtons} role="radiogroup" aria-label="Project stage">
+                    {projectStages.map((stage) => (
+                      <button
+                        key={stage}
+                        type="button"
+                        className={`${styles.stageBtn} ${projectStage === stage ? styles.stageBtnActive : ""}`}
+                        onClick={() => setProjectStage(stage)}
+                        aria-checked={projectStage === stage}
+                        role="radio"
+                      >
+                        {stage}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className={styles.formGroup}>
                   <textarea
                     placeholder="What is built, what is breaking, and what has to scale?"

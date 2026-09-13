@@ -444,10 +444,12 @@ export default function SelectedWork() {
 
                   <div className={styles.blockRow}>
                     <div className={styles.block}>
+                      <span className={styles.blockKicker}>01 / Problem</span>
                       <h4>The Scale Challenge</h4>
                       <p>{activeProject.challenge}</p>
                     </div>
                     <div className={styles.block}>
+                      <span className={styles.blockKicker}>02 / Architecture</span>
                       <h4>The Architectural Solution</h4>
                       <p>{activeProject.solution}</p>
                     </div>
@@ -473,6 +475,7 @@ export default function SelectedWork() {
                   </div>
 
                   <div className={styles.metricPanel}>
+                    <span className={styles.blockKicker}>03 / Outcome</span>
                     <h4>Outcome Impact</h4>
                     <strong>{activeProject.metric[0]}</strong>
                     <span>{activeProject.metric[1]}</span>

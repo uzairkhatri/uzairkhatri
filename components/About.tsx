@@ -32,11 +32,11 @@ export default function About() {
     <section id="about" className={`${styles.section} reveal-section`} aria-labelledby="about-title">
       <div className={styles.shell}>
         <header className={styles.header}>
-          <div className="section-eyebrow"><span />How I think</div>
-          <h2 id="about-title">Strong opinions. Clean architecture. No theater.</h2>
+          <div className="section-eyebrow"><span />Philosophy &amp; Practice</div>
+          <h2 id="about-title">What I believe about AI systems.</h2>
           <p>
-            I work best with founders and engineering teams who already have a promising AI idea,
-            but need the system underneath it to become reliable, traceable, and operable.
+            I work alongside founders and engineering teams who have a promising AI idea,
+            turning fragile prototypes into dependable, traceable, and operable production assets.
           </p>
         </header>
 
@@ -48,6 +48,17 @@ export default function About() {
               <p>{item.body}</p>
             </article>
           ))}
+        </div>
+
+        {/* Human Collaboration Statement */}
+        <div className={`${styles.collaborationBanner} reveal-item`}>
+          <div className={styles.collabHeader}>
+            <span className={styles.collabDot} />
+            <strong className={styles.collabTitle}>How I work with engineering teams</strong>
+          </div>
+          <p className={styles.collabText}>
+            I don&apos;t drop black-box code and vanish. I embed alongside your lead engineers, establish resilient patterns directly in pull requests, and leave your team with full architectural ownership, observability dashboards, and clear operational runbooks.
+          </p>
         </div>
 
         <div className={styles.processPanel}>

@@ -126,11 +126,11 @@ export default function Landing() {
         <div className="hero-portrait-glow" />
         <div className="hero-blueprint-grid" />
 
-        {/* Docked Executive Architecture HUD Cards */}
+        {/* Minimalist Executive Architecture HUD Callouts */}
         <div className="hero-hud-card hud-top-left">
           <div className="hud-card-header">
             <span className="hud-status-dot gold" />
-            <span className="hud-card-tag">SYSTEM RUNTIME</span>
+            <span className="hud-card-tag">AGENT RUNTIME</span>
           </div>
           <strong className="hud-card-title">LangGraph Multi-Agent</strong>
           <span className="hud-card-sub">State Graphs &bull; Error Isolation</span>
@@ -141,44 +141,43 @@ export default function Landing() {
             <span className="hud-status-dot green" />
             <span className="hud-card-tag">PRODUCTION INFRA</span>
           </div>
-          <strong className="hud-card-title">FastAPI &bull; Vector &bull; AWS</strong>
-          <span className="hud-card-sub">Queue Buffering &bull; Latency Limits</span>
+          <strong className="hud-card-title">FastAPI &bull; Redis &bull; AWS</strong>
+          <span className="hud-card-sub">Queue Buffering &bull; Distributed Locks</span>
         </div>
 
-        <Image src={withBasePath("/img/profile/hero-portrait.webp")} alt="Uzair Khatri - AI Production Architect" fill sizes="(max-width: 900px) 82vw, 42vw" priority fetchPriority="high" />
+        <Image src={withBasePath("/img/profile/hero-portrait.webp")} alt="Uzair Khatri - AI Systems Architect" fill sizes="(max-width: 900px) 82vw, 42vw" priority fetchPriority="high" />
       </div>
 
       <div className="hero-content">
-        <div className="hero-status-row">
-          <div className="hero-telemetry-pill">
-            <span className="telemetry-pulse-gold" />
-            <span>Systems Scope: Agent Runtimes &bull; Retrieval &bull; Cloud Infrastructure</span>
-          </div>
+        <div className="hero-identity-row">
+          <span className="hero-identity-name">Uzair Khatri</span>
+          <span className="hero-identity-sep">&bull;</span>
+          <span className="hero-identity-role">AI Systems Architect</span>
         </div>
+
         <div className="hero-role">
-          <small>AI Production Architect</small>
           <h2>
-            <span>Fragile AI</span>
-            <span>rebuilt for</span>
-            <span>production.</span>
+            <span>Fragile AI.</span>
+            <span>Rebuilt for</span>
+            <span>Production.</span>
           </h2>
-          <span>
-            I turn promising AI prototypes into reliable systems with agent runtimes,
-            guardrails, tracing, queues, cost controls, and cloud paths your team can operate.
-          </span>
+          <p className="hero-thesis">
+            I architect production AI systems, multi-agent runtimes, and enterprise cloud backends that stay reliable beyond the demo.
+          </p>
         </div>
+
         <div className="hero-actions" aria-label="Hero actions">
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-3d-double">
-            <span className="btn-3d-text-primary">Request Architecture Review &rarr;</span>
+            <span className="btn-3d-text-primary">Discuss a Project</span>
           </a>
-          <a href="#work">View Production Work</a>
+          <a href="#work" className="hero-secondary-btn">View Production Work &rarr;</a>
         </div>
+
         <div className="hero-proof-row" aria-label="Proof points">
-          <span>14+ years in architecture</span>
-          <span>agentic production systems</span>
-          <span>operator-grade handoff</span>
+          <span>14+ Years in Architecture</span>
+          <span>Agentic Multi-Agent Systems</span>
+          <span>Operator-Grade Handoff</span>
         </div>
-        <p className="hero-microcopy">30 minutes &bull; architecture pressure test &bull; concrete next moves</p>
       </div>
     </section>
   );

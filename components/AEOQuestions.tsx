@@ -13,27 +13,27 @@ interface Capability {
 const capabilities: Capability[] = [
   {
     tag: "01 / Production AI",
-    title: "AI Services & Architectures",
+    title: "Production AI Systems",
     desc: "Transforming prototype LLM prompts into resilient enterprise systems. Specializing in multi-agent LangGraph runtimes, hybrid vector search (RAG), Pydantic deterministic guardrails, and model failover routines.",
     tags: ["LangGraph", "Vector RAG", "OpenAI / Claude", "Bedrock Failover", "LangSmith"]
   },
   {
-    tag: "02 / Agentic Operations",
-    title: "Autonomous AI Workflows",
-    desc: "Designing stateful, fault-isolated agent workflows with structured memory contracts, asynchronous worker queues, dead-letter retry buffers, and human-in-the-loop review gates.",
+    tag: "02 / Systems Topology",
+    title: "Enterprise Architecture",
+    desc: "Designing stateful, fault-isolated agent workflows and microservice topologies with structured memory contracts, asynchronous worker queues, dead-letter retry buffers, and comprehensive audit trails.",
     tags: ["State Machines", "Celery / Redis", "Dead-Letter Queues", "HITL Review", "Async Buses"]
   },
   {
-    tag: "03 / Scalable Platforms",
-    title: "SaaS Applications & Backends",
-    desc: "Engineering multi-tenant SaaS platforms with distributed concurrency safety (Redis Redlock), automated Stripe Connect payout reconciliation, high-throughput Postgres schemas, and cloud deployment.",
-    tags: ["Multi-Tenant", "Stripe Connect", "Redis Redlock", "FastAPI / Python", "AWS ECS / RDS"]
+    tag: "03 / 0 to 1 Execution",
+    title: "AI Product Engineering",
+    desc: "Engineering high-leverage AI products from 0 to 1 with distributed concurrency safety, automated monetization/billing ledgers, high-throughput database schemas, and intuitive operator controls.",
+    tags: ["Product 0 to 1", "Stripe Connect", "Redis Redlock", "FastAPI / Python", "AWS ECS / RDS"]
   },
   {
-    tag: "04 / App Layer",
-    title: "Production Web Platforms & App Layer",
-    desc: "Applying the same rigorous systems discipline to the client delivery surface. High-throughput Next.js 15 App Router, React 19 server-side streaming, real-time UI states, and sub-50ms global edge delivery.",
-    tags: ["Next.js 15", "React 19", "Edge Streaming", "Real-Time UI", "Cloudflare"]
+    tag: "04 / Cloud & Edge",
+    title: "Cloud & Platform Architecture",
+    desc: "Hardening platforms on AWS and modern cloud edge. High-throughput Next.js and FastAPI runtimes, Redis caching, global edge distribution, automated CI/CD, and sub-50ms latency.",
+    tags: ["AWS Cloud", "Edge Delivery", "Next.js / Python", "Sub-50ms TTFB", "Cloudflare"]
   }
 ];
 
@@ -73,13 +73,13 @@ export default function AEOQuestions() {
         <header className={styles.header}>
           <div className={styles.eyebrow}>
             <span className={styles.eyebrowDot} />
-            Specialized Engineering
+            High-Leverage Impact
           </div>
           <h2 className={styles.title}>
-            Core Capabilities: AI Services, SaaS & Web Engineering
+            Where I Create the Most Value
           </h2>
           <p className={styles.subtitle}>
-            Senior architectural judgment across four high-leverage domains, closing the gap between prototype demos and dependable enterprise production.
+            Senior architectural judgment across four high-stakes domains—closing the gap between promising AI prototypes and dependable enterprise production.
           </p>
         </header>
 

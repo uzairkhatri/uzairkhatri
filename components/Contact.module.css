@@ -150,6 +150,53 @@
   gap: 0.8rem;
 }
 
+.stageSelectorGroup {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.2rem 0;
+}
+
+.stageLabel {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stageButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.stageBtn {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.72);
+  padding: 0.38rem 0.82rem;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stageBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.stageBtnActive {
+  background: rgba(197, 155, 83, 0.16) !important;
+  border-color: var(--gold-bright) !important;
+  color: var(--gold-bright) !important;
+  box-shadow: 0 0 10px rgba(197, 155, 83, 0.2);
+}
+
 .input,
 .textarea {
   width: 100%;
