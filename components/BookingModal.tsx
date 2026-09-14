@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./BookingModal.module.css";
 import { BOOKING_URL } from "./siteLinks";
+import { trackBookingClick } from "./analytics";
 
 const CALENDLY_EMBED_URL =
   "https://calendly.com/uz-khatri/30min?embed_domain=uzairkhatri.com&embed_type=inline&background_color=171b1a&text_color=ffffff&primary_color=c59b53";
@@ -44,6 +45,8 @@ export default function BookingModal() {
         const href = target.getAttribute("href") || "";
         if (href.includes("calendly.com") || href === BOOKING_URL) {
           e.preventDefault();
+          const source = target.getAttribute("data-source") || target.innerText.trim().slice(0, 50) || "calendly_cta";
+          trackBookingClick(source);
           setIsLoading(true);
           setIsOpen(true);
         }

@@ -1,4 +1,5 @@
 import styles from "./TrustStrip.module.css";
+import { EMAIL_ADDRESS } from "./siteLinks";
 
 const testimonials = [
   {
@@ -161,7 +162,7 @@ export default function TrustStrip() {
             <strong>NDA Protected &amp; Verified</strong>
             <span>References can be formally validated upon request.</span>
           </div>
-          <a href="mailto:uzairiqbal.khatri@gmail.com?subject=Reference%20Verification%20Request&body=Hi%20Uzair%2C%0A%0AI'm%20reviewing%20your%20architecture%20portfolio%20and%20would%20like%20to%20verify%20references%20for%20your%20withheld%20NDA%20testimonials.%0A%0AThanks%2C%0A%5BMy%20Name%5D" className={styles.verifyLink}>
+          <a href={`mailto:${EMAIL_ADDRESS}?subject=Reference%20Verification%20Request&body=Hi%20Uzair%2C%0A%0AI'm%20reviewing%20your%20architecture%20portfolio%20and%20would%20like%20to%20verify%20references%20for%20your%20withheld%20NDA%20testimonials.%0A%0AThanks%2C%0A%5BMy%20Name%5D`} className={styles.verifyLink}>
             Request validation reference &rarr;
           </a>
         </div>

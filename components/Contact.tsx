@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./Contact.module.css";
 import { BOOKING_URL, EMAIL_ADDRESS, EMAIL_URL, withBasePath } from "./siteLinks";
+import { trackLeadSubmission, trackBookingClick } from "./analytics";
 
 const links = [
   ["Email", EMAIL_URL, EMAIL_ADDRESS],
@@ -65,14 +66,17 @@ export default function Contact() {
       });
 
       if (response.ok) {
+        trackLeadSubmission(projectStage, "api_contact");
         setStatus("success");
         setFormState({ name: "", email: "", message: "", _gotcha: "" });
       } else {
+        trackLeadSubmission(projectStage, "mailto_fallback");
         // Fallback to mailto link
         window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry (" + projectStage + ") from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formattedMessage)}`;
         setStatus("success");
       }
     } catch {
+      trackLeadSubmission(projectStage, "mailto_fallback");
       window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry (" + projectStage + ") from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formattedMessage)}`;
       setStatus("success");
     }
@@ -99,7 +103,13 @@ export default function Contact() {
           </div>
 
           <div className={styles.actions}>
-            <a className={styles.primary} href={BOOKING_URL} target="_blank" rel="noreferrer">
+            <a 
+              className={styles.primary} 
+              href={BOOKING_URL} 
+              target="_blank" 
+              rel="noreferrer"
+              onClick={() => trackBookingClick("contact_section")}
+            >
               Request Architecture Review
               <ArrowIcon />
             </a>

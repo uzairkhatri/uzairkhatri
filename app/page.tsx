@@ -6,10 +6,12 @@ import Footer from "@/components/Footer";
 import ManifestoAndStats from "@/components/ManifestoAndStats";
 import SelectedWork from "@/components/SelectedWork";
 import ProductionCommandCenter from "@/components/ProductionCommandCenter";
+import EngagementModels from "@/components/EngagementModels";
 import TrustStrip from "@/components/TrustStrip";
 import StickyNav from "@/components/StickyNav";
 import ScrollReveal from "@/components/ScrollReveal";
 import BookingModal from "@/components/BookingModal";
+import MobileActionBar from "@/components/MobileActionBar";
 import AEOQuestions from "@/components/AEOQuestions";
 
 export default function Home() {
@@ -25,12 +27,14 @@ export default function Home() {
       <SelectedWork />
       <ProductionCommandCenter />
       <About />
+      <EngagementModels />
       <Timeline />
       <TrustStrip />
       <AEOQuestions />
       <Contact />
       <Footer />
       <BookingModal />
+      <MobileActionBar />
     </main>
   );
 }
