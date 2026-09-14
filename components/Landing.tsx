@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { BOOKING_URL, withBasePath } from "./siteLinks";
+import { BOOKING_URL, CV_URL, withBasePath } from "./siteLinks";
 import Logo from "./Logo";
 
 export default function Landing() {
@@ -76,6 +76,7 @@ export default function Landing() {
           <a href={withBasePath("/services/ai-systems/")}>Services</a>
           <a href={withBasePath("/case-studies/")}>Case Studies</a>
           <a href={withBasePath("/#about")}>About</a>
+          <a href={CV_URL} target="_blank" rel="noreferrer" title="Download Resume / CV (PDF)">CV</a>
           <a href={withBasePath("/#contact")}>Contact</a>
           <a className="hero-nav-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
             <span className="cta-text-primary">Request Review</span>
@@ -109,6 +110,7 @@ export default function Landing() {
               <a href={withBasePath("/services/ai-systems/")} onClick={() => setMobileMenuOpen(false)}>Services</a>
               <a href={withBasePath("/case-studies/")} onClick={() => setMobileMenuOpen(false)}>Case Studies</a>
               <a href={withBasePath("/#about")} onClick={() => setMobileMenuOpen(false)}>About</a>
+              <a href={CV_URL} target="_blank" rel="noreferrer" onClick={() => setMobileMenuOpen(false)}>CV / Resume (PDF)</a>
               <a href={withBasePath("/#contact")} onClick={() => setMobileMenuOpen(false)}>Contact</a>
               <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-3d-double" style={{ fontSize: "1rem", padding: "0.8rem 1.8rem" }}>
                 <span className="btn-3d-text-primary">Request Architecture Review</span>

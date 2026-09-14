@@ -11,3 +11,4 @@ export function withBasePath(path: string) {
   if (path === "/") return BASE_PATH;
   return `${BASE_PATH}${path}`;
 }
+export const CV_URL = withBasePath("/Uzair-Iqbal-AI-Architect-CV.pdf");

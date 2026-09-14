@@ -4,6 +4,7 @@ import Timeline from "@/components/Timeline";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ManifestoAndStats from "@/components/ManifestoAndStats";
+import EcosystemLogos from "@/components/EcosystemLogos";
 import SelectedWork from "@/components/SelectedWork";
 import ProductionCommandCenter from "@/components/ProductionCommandCenter";
 import EngagementModels from "@/components/EngagementModels";
@@ -23,6 +24,7 @@ export default function Home() {
       <ScrollReveal />
       <StickyNav />
       <Landing />
+      <EcosystemLogos />
       <ManifestoAndStats />
       <SelectedWork />
       <ProductionCommandCenter />

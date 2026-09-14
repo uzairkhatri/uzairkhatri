@@ -80,10 +80,10 @@ export const metadata: Metadata = {
       "Enterprise AI services, multi-agent AI workflows, resilient SaaS application architecture, and high-performance web development by Uzair Khatri.",
     images: [
       {
-        url: "/img/profile/hero-portrait.png",
+        url: "/img/og-image.png",
         width: 1200,
-        height: 630,
-        alt: "Uzair Khatri — AI Production Architect",
+        height: 627,
+        alt: "Uzair Khatri — AI Production Architect & SaaS Engineer",
       },
     ],
   },
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
     title: "Uzair Khatri | AI Production Architect & SaaS Engineer",
     description:
       "Enterprise AI services, multi-agent AI workflows, resilient SaaS application architecture, and high-performance web development.",
-    images: ["/img/profile/hero-portrait.png"],
+    images: ["/img/og-image.png"],
   },
 };
 

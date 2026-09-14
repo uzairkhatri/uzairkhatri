@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import styles from "./StickyNav.module.css";
-import { BOOKING_URL, withBasePath } from "./siteLinks";
+import { BOOKING_URL, CV_URL, withBasePath } from "./siteLinks";
 import Logo from "./Logo";
 
 export default function StickyNav() {
@@ -70,6 +70,7 @@ export default function StickyNav() {
         <a href={withBasePath("/services/ai-systems/")}>Services</a>
         <a href={withBasePath("/case-studies/")}>Case Studies</a>
         <a href={withBasePath("/#about")}>About</a>
+        <a href={CV_URL} target="_blank" rel="noreferrer" title="Download Resume / CV (PDF)">CV</a>
         <a href={withBasePath("/#contact")}>Contact</a>
       </div>
 

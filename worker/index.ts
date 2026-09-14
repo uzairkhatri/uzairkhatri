@@ -27,6 +27,11 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
+    // Instant /book shortlink redirect to Calendly booking calendar
+    if (url.pathname === "/book" || url.pathname === "/book/") {
+      return Response.redirect("https://calendly.com/uz-khatri/30min", 302);
+    }
+
     if (url.pathname === "/api/contact" && request.method === "POST") {
       try {
         const body = (await request.json()) as {
