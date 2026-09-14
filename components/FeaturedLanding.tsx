@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import styles from "./FeaturedLanding.module.css";
-import { BOOKING_URL, EMAIL_URL, withBasePath } from "./siteLinks";
+import { BOOKING_URL, CV_URL, EMAIL_URL, withBasePath } from "./siteLinks";
 import Logo from "./Logo";
 
 type Stat = { value: string; label: string };
@@ -64,7 +64,8 @@ export default function FeaturedLanding({
           <a href={withBasePath("/services/ai-systems/")}>Services</a>
           <a href={withBasePath("/case-studies/")}>Case Studies</a>
           <a href={withBasePath("/#work")}>Work</a>
-          <a href={BOOKING_URL} target="_blank" rel="noreferrer">Book a call</a>
+          <a href={CV_URL} target="_blank" rel="noreferrer">CV</a>
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.navCta}>Book a call</a>
         </div>
       </nav>
 

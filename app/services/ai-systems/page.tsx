@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import FeaturedLanding from "@/components/FeaturedLanding";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 const image = "https://uzairkhatri.com/linkedin-featured/services.png";
 
@@ -15,7 +16,15 @@ export const metadata: Metadata = {
 };
 
 export default function AISystemsServices() {
-  return <FeaturedLanding
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "https://uzairkhatri.com/" },
+          { name: "Services", url: "https://uzairkhatri.com/services/ai-systems/" },
+        ]}
+      />
+      <FeaturedLanding
     eyebrow="AI systems & software architecture"
     title={<>Turn ambitious AI ideas into <em>operable systems.</em></>}
     intro="I help founders, CTOs, and product teams design and deliver AI agents, RAG platforms, intelligent workflows, and cloud-native backends that can survive real traffic, real failures, and real business expectations."
@@ -44,5 +53,7 @@ export default function AISystemsServices() {
     ]}
     closingTitle="Bring me the workflow that should work better."
     closingText="In 30 minutes, we will identify the strongest solution direction, the risks that matter, and the next practical step."
-  />;
+  />
+    </>
+  );
 }

@@ -164,6 +164,68 @@ export function FaqJsonLd() {
   );
 }
 
+export function BreadcrumbJsonLd({
+  items,
+}: {
+  items: { name: string; url: string }[];
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url,
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function TechArticleJsonLd({
+  title,
+  description,
+  url,
+  image,
+}: {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": title,
+    "description": description,
+    "url": url,
+    "image": image || "https://uzairkhatri.com/linkedin-featured/case-studies.png",
+    "author": {
+      "@type": "Person",
+      "@id": "https://uzairkhatri.com/#person",
+      "name": "Uzair Khatri",
+    },
+    "publisher": {
+      "@type": "Person",
+      "@id": "https://uzairkhatri.com/#person",
+      "name": "Uzair Khatri",
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export default function JsonLd({ includeFaq = false }: { includeFaq?: boolean }) {
   return (
     <>

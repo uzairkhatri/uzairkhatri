@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import styles from "../wellows/page.module.css";
-import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
+import { BOOKING_URL, CV_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
+import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
 const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
 
@@ -108,14 +109,35 @@ const outcomes = [
 export default function ClassFlowCaseStudy() {
   return (
     <div className={styles.page}>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "https://uzairkhatri.com/" },
+          { name: "Selected Work", url: "https://uzairkhatri.com/#work" },
+          { name: "ClassFlow Case Study", url: "https://uzairkhatri.com/work/classflow/" },
+        ]}
+      />
+      <TechArticleJsonLd
+        title="ClassFlow Case Study — Autonomous SaaS Platform Architecture"
+        description="How Uzair Khatri architected ClassFlow: an autonomous SaaS application unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe ledger reconciliation."
+        url="https://uzairkhatri.com/work/classflow/"
+        image="https://uzairkhatri.com/linkedin-featured/case-studies.png"
+      />
       <nav className={styles.topNav}>
         <a href={withBasePath("/")} className={styles.back}>
           <BackIcon />
           Uzair Khatri
         </a>
-        <a href={withBasePath("/#work")} className={styles.backWork}>
-          All work
-        </a>
+        <div className={styles.topNavRight}>
+          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
+            CV
+          </a>
+          <a href={withBasePath("/#work")} className={styles.topNavLink}>
+            All work
+          </a>
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
+            Book call
+          </a>
+        </div>
       </nav>
 
       <header className={styles.hero}>

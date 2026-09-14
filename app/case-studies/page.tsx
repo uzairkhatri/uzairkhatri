@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import FeaturedLanding from "@/components/FeaturedLanding";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 const image = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
 
@@ -15,7 +16,15 @@ export const metadata: Metadata = {
 };
 
 export default function CaseStudies() {
-  return <FeaturedLanding
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "https://uzairkhatri.com/" },
+          { name: "Case Studies", url: "https://uzairkhatri.com/case-studies/" },
+        ]}
+      />
+      <FeaturedLanding
     eyebrow="Selected work"
     title={<>Real systems. <em>Real operating constraints.</em></>}
     intro="A selection of architecture work where reliability, integration, speed, security, and business outcomes mattered more than a polished demo."
@@ -44,5 +53,7 @@ export default function CaseStudies() {
     ]}
     closingTitle="Your system can become the next strong case study."
     closingText="If the problem is technically difficult, integration-heavy, or stuck between prototype and production, let’s map the path forward."
-  />;
+  />
+    </>
+  );
 }
