@@ -8,7 +8,7 @@
 
 Agentic AI · RAG · LLM applications · FastAPI · Enterprise architecture · AWS · Kubernetes
 
-[Website](https://uzairkhatri.com) · [LinkedIn](https://www.linkedin.com/in/uzair-khatri/) · [Production AI Playbook](https://uzairkhatri.com/ai-playbook/) · [Architecture Strategy Call](https://uzairkhatri.com/strategy-call/)
+[Website](https://uzairkhatri.com) · [LinkedIn](https://www.linkedin.com/in/uzair-khatri/) · [Production AI Playbook](https://uzairkhatri.com/ai-playbook/) · [Book a Strategy Call](https://calendly.com/uz-khatri/30min)
 
 </div>
 
@@ -89,7 +89,7 @@ I am most useful when a team has:
 - an existing engineering team that needs senior architecture direction, or
 - a complex AI product where integration, security and operational constraints matter.
 
-**[See selected work](https://uzairkhatri.com/case-studies/)** · **[Explore services](https://uzairkhatri.com/services/ai-systems/)** · **[Book an architecture strategy call](https://uzairkhatri.com/strategy-call/)**
+**[See selected work](https://uzairkhatri.com/case-studies/)** · **[Explore services](https://uzairkhatri.com/services/ai-systems/)** · **[Book a 30-minute strategy call](https://calendly.com/uz-khatri/30min)**
 
 ---
 
