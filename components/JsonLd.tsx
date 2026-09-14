@@ -10,7 +10,8 @@ const personSchema = {
   "email": "mailto:hello@uzairkhatri.com",
   "sameAs": [
     "https://www.linkedin.com/in/uzair-khatri",
-    "https://github.com/UzairKhatri"
+    "https://github.com/UzairKhatri",
+    "https://dev.to/uzairkhatri"
   ],
   "knowsAbout": [
     "AI Services",
@@ -226,12 +227,30 @@ export function TechArticleJsonLd({
   );
 }
 
+const profilePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://uzairkhatri.com/#profilepage",
+  "url": "https://uzairkhatri.com",
+  "name": "Uzair Khatri | AI Production Architect & SaaS Engineer",
+  "isPartOf": {
+    "@id": "https://uzairkhatri.com/#website"
+  },
+  "mainEntity": {
+    "@id": "https://uzairkhatri.com/#person"
+  }
+};
+
 export default function JsonLd({ includeFaq = false }: { includeFaq?: boolean }) {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
       />
       <script
         type="application/ld+json"

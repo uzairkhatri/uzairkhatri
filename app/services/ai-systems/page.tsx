@@ -38,10 +38,10 @@ export default function AISystemsServices() {
     sectionTitle="High-leverage architecture services for founders and CTOs."
     sectionIntro="Every engagement produces concrete technical decisions, code boundaries, and an operating model your engineering team can own long after the engagement ends."
     cards={[
-      {eyebrow:"01 / Diagnostic & Risk Audit",title:"Production AI & Architecture Review",text:"A focused 2-week deep dive into your prototype or running system: isolating hallucination vectors, rate-limit bottlenecks, state corruption risks, and token cost leakages."},
-      {eyebrow:"02 / Agentic Engineering",title:"Multi-Agent Runtimes & State Architecture",text:"Designing fault-isolated agent coordination with LangGraph, structured memory contracts, dead-letter retry queues, deterministic guardrails, and human review gates."},
-      {eyebrow:"03 / Platform Infrastructure",title:"High-Throughput Backends & Concurrency Safety",text:"Engineering distributed cloud backends with Redis Redlock mutexes, async Celery/SQS workers, ACID database isolation, and Stripe automated ledgers."},
-      {eyebrow:"04 / Strategic Advisory",title:"Fractional AI Systems Architect & Governance",text:"Senior architectural leadership for funded startups and enterprises: model failover paths via AWS Bedrock, cost governance, observability, and team handoff."},
+      {eyebrow:"01 / Diagnostic & Risk Audit",title:"Production AI & Architecture Review",text:"A focused 2-week deep dive into your prototype or running system: isolating hallucination vectors, rate-limit bottlenecks, state corruption risks, and token cost leakages.",href:withBasePath("/services/ai-audit/"),linkLabel:"Explore AI Diagnostic Sprint"},
+      {eyebrow:"02 / Agentic Engineering",title:"Multi-Agent Runtimes & State Architecture",text:"Designing fault-isolated agent coordination with LangGraph, structured memory contracts, dead-letter retry queues, deterministic guardrails, and human review gates.",href:withBasePath("/services/ai-agents/"),linkLabel:"Explore Multi-Agent Runtimes"},
+      {eyebrow:"03 / Platform Infrastructure",title:"High-Throughput Backends & Concurrency Safety",text:"Engineering distributed cloud backends with Redis Redlock mutexes, async Celery/SQS workers, ACID database isolation, and Stripe automated ledgers.",href:withBasePath("/services/saas-architecture/"),linkLabel:"Explore SaaS Architecture"},
+      {eyebrow:"04 / Strategic Advisory",title:"Fractional AI Systems Architect & Governance",text:"Senior architectural leadership for funded startups and enterprises: model failover paths via AWS Bedrock, cost governance, observability, and team handoff.",href:BOOKING_URL,linkLabel:"Book Advisory Call"},
     ]}
     stepsEyebrow="A focused engagement"
     stepsTitle="From unclear problem to executable system plan."
