@@ -49,24 +49,24 @@ interface FAQ {
 
 const faqs: FAQ[] = [
   {
-    question: "What specific AI services does Uzair Khatri provide?",
-    answer: "I provide end-to-end AI systems architecture: multi-agent runtime design using LangGraph, RAG and hybrid vector search pipelines, deterministic schema guardrails to prevent hallucination, multi-model failover between OpenAI and Anthropic Claude via AWS Bedrock, and cost-observability dashboards with LangSmith."
+    question: "Can you work with an AI system or codebase we already have in production?",
+    answer: "Yes. A substantial portion of my work involves stabilizing systems that already have users but suffer from hallucinations, rate-limit failures, latency spikes, or runaway token costs. We isolate the architectural failure points without forcing a disruptive ground-up rewrite."
   },
   {
-    question: "How do you build and architect scalable SaaS applications?",
-    answer: "SaaS applications require rigorous data integrity and concurrency guarantees. I design multi-tenant cloud backends in Python (FastAPI) and Node.js, utilizing Redis Redlock distributed mutexes to eliminate race conditions, Celery/SQS worker queues for asynchronous load buffering, and Stripe Connect automated payout ledgers."
+    question: "Do you build the system directly or only provide high-level architecture advisory?",
+    answer: "Both, depending on your team's needs. In dedicated Build engagements, I write production code—submitting PRs for agent state graphs, vector retrieval, and Redis concurrency locks. In Advisory sprints or fractional retainers, I review architecture specs, enforce boundaries, and mentor lead engineers through complex decisions."
   },
   {
-    question: "How do you approach the application layer and frontend for AI systems?",
-    answer: "An AI architecture is only as reliable as the interface delivering it. I engineer high-performance web platforms using Next.js 15 App Router, React 19 Server Components, and edge streaming. Interfaces are built for sub-50ms TTFB, optimistic state transitions, and responsive visualization of complex agent telemetry."
+    question: "How do you embed with our existing engineering team?",
+    answer: "I embed directly into your GitHub/GitLab repositories, pull requests, and Slack channels. I work alongside your CTO and senior backend engineers, establishing rigorous patterns and leaving your team with complete code ownership, telemetry dashboards, and clear operational runbooks."
   },
   {
-    question: "What are agentic AI workflows and how do they benefit enterprises?",
-    answer: "Agentic AI workflows replace fragile single-prompt chains with coordinated, specialized agents (e.g. data ingestion, reasoning, validation, and citation). Each agent operates within strict memory contracts, retry limits, and dead-letter queues so an error in one component never crashes the customer-facing application."
+    question: "What stage is the best time to bring you in?",
+    answer: "The two highest-ROI moments are: (1) Prototype-to-Production—when your demo works and you need to harden state, queues, cost controls, and security before launch, and (2) Scale Bottleneck—when real customer load exposes concurrency flaws, dropped jobs, or high model failure rates."
   },
   {
-    question: "How can we start an engagement or architecture review?",
-    answer: "You can book an introductory 30-minute Architecture Review session directly via Calendly or email hello@uzairkhatri.com. We will pressure-test your current system, identify failure risks, and outline a concrete production roadmap."
+    question: "How does an initial engagement start?",
+    answer: "We begin with a focused 30-minute architecture strategy session to discuss your system constraints and bottlenecks. From there, we either execute a 1–2 week Architecture Audit or structure a 4–8 week critical-path build."
   }
 ];
 
@@ -104,10 +104,10 @@ export default function AEOQuestions() {
 
         <div className={styles.faqContainer}>
           <h3 className={styles.faqTitle}>
-            Frequently Asked Questions (AEO & Architecture Insights)
+            Frequently Asked Questions (Engagement &amp; Delivery)
           </h3>
-          {faqs.map((faq, idx) => (
-            <details key={faq.question} className={styles.faqItem} open={idx === 0}>
+          {faqs.map((faq) => (
+            <details key={faq.question} className={styles.faqItem}>
               <summary className={styles.faqSummary}>{faq.question}</summary>
               <div className={styles.faqBody}>
                 <p>{faq.answer}</p>

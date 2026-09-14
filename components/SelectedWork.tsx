@@ -411,6 +411,15 @@ export default function SelectedWork() {
               exit="exit"
               className={styles.specPanel}
             >
+              {/* Clear Business Context Header */}
+              <motion.div className={styles.projectContextBanner} variants={itemVariants}>
+                <div className={styles.projectContextTop}>
+                  <h3 className={styles.projectNameTitle}>{activeProject.name} &bull; {activeProject.category}</h3>
+                  <span className={styles.projectRolePill}>{activeProject.role}</span>
+                </div>
+                <p className={styles.projectSummaryLine}>{activeProject.description}</p>
+              </motion.div>
+
               {/* Project Visual Display Header */}
               <motion.div className={styles.specVisualBlock} variants={itemVariants}>
                 <ProjectVisual type={activeProject.diagram} variant="hero" activeLogIndex={activeLogIndex} />

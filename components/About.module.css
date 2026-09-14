@@ -168,16 +168,38 @@
 .processGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
+  position: relative;
 }
 
 .processStep {
+  position: relative;
   display: grid;
   align-content: start;
   gap: 0.75rem;
   min-height: 14rem;
-  border-top: 1px solid rgba(216, 173, 100, 0.44);
-  padding-top: 1.05rem;
+  border-top: 2px solid rgba(216, 173, 100, 0.55);
+  padding-top: 1.25rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.processStep:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: -0.75rem;
+  right: -0.95rem;
+  color: var(--gold-bright);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.95rem;
+  font-weight: 800;
+  z-index: 2;
+  background: #131716;
+  padding: 0 0.3rem;
+}
+
+.processStep:hover {
+  border-top-color: var(--gold-bright);
+  transform: translateY(-2px);
 }
 
 .processStep h4 {

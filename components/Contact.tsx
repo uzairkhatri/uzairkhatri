@@ -112,7 +112,7 @@ export default function Contact() {
               Book 30-Min Architecture Call &rarr;
             </a>
             <a className={styles.secondary} href="#contact-card">
-              Or send project details below &darr;
+              Prefer async? Tell me about your project &darr;
             </a>
           </div>
         </div>

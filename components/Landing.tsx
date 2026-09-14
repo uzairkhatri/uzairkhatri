@@ -127,26 +127,6 @@ export default function Landing() {
       <div className="hero-portrait-stage" aria-hidden="true">
         <div className="hero-portrait-glow" />
         <div className="hero-blueprint-grid" />
-
-        {/* Minimalist Executive Architecture HUD Callouts */}
-        <div className="hero-hud-card hud-top-left">
-          <div className="hud-card-header">
-            <span className="hud-status-dot gold" />
-            <span className="hud-card-tag">AGENT RUNTIME</span>
-          </div>
-          <strong className="hud-card-title">LangGraph Multi-Agent</strong>
-          <span className="hud-card-sub">State Graphs &bull; Error Isolation</span>
-        </div>
-
-        <div className="hero-hud-card hud-bottom-left">
-          <div className="hud-card-header">
-            <span className="hud-status-dot green" />
-            <span className="hud-card-tag">PRODUCTION INFRA</span>
-          </div>
-          <strong className="hud-card-title">FastAPI &bull; Redis &bull; AWS</strong>
-          <span className="hud-card-sub">Queue Buffering &bull; Distributed Locks</span>
-        </div>
-
         <Image src={withBasePath("/img/profile/hero-portrait.webp")} alt="Uzair Khatri - AI Systems Architect" fill sizes="(max-width: 900px) 82vw, 42vw" priority fetchPriority="high" />
       </div>
 
