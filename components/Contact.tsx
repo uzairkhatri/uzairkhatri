@@ -88,12 +88,11 @@ export default function Contact() {
         <div className={styles.left}>
           <p className={styles.kicker}>
             <span />
-            Contact
+            Architecture Review
           </p>
-          <h2 id="contact-title">Ready to make the system real?</h2>
+          <h2 id="contact-title">Have an AI system that needs to actually work?</h2>
           <p className={styles.copy}>
-            Bring me in when the prototype is promising and the architecture needs senior production judgment:
-            runtime design, data boundaries, observability, queues, cost control, and handoff.
+            Whether you&apos;re moving from prototype to production or fixing an AI system that&apos;s already struggling, let&apos;s review the architecture: runtime boundaries, memory state, concurrency safety, and cost controls.
           </p>
 
           <div className={styles.fitList} aria-label="Best fit for">
@@ -110,17 +109,15 @@ export default function Contact() {
               rel="noreferrer"
               onClick={() => trackBookingClick("contact_section")}
             >
-              Request Architecture Review
-              <ArrowIcon />
+              Book 30-Min Architecture Call &rarr;
             </a>
-            <a className={styles.secondary} href="#work">
-              View Production Proof
-              <ArrowIcon />
+            <a className={styles.secondary} href="#contact-card">
+              Or send project details below &darr;
             </a>
           </div>
         </div>
 
-        <div className={styles.right}>
+        <div className={styles.right} id="contact-card">
           <div className={styles.contactCard}>
             <p>Start here</p>
             <h3>Send the context. I&apos;ll pressure-test the shape of the system.</h3>

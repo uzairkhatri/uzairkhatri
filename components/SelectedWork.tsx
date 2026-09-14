@@ -377,11 +377,11 @@ export default function SelectedWork() {
               Selected work
             </div>
             <h2 className={styles.title} id="work-title">
-              Production proof, not portfolio filler.
+              Selected Work
             </h2>
           </div>
           <p className={styles.headerDesc}>
-            Explore public-safe architecture summaries, system decisions, and outcome signals from products built beyond demo state.
+            Production architectures, multi-agent runtimes, and scalable platforms engineered to survive real customer traffic.
           </p>
         </header>
 

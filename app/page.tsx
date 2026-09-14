@@ -8,6 +8,7 @@ import EcosystemLogos from "@/components/EcosystemLogos";
 import SelectedWork from "@/components/SelectedWork";
 import ProductionCommandCenter from "@/components/ProductionCommandCenter";
 import EngagementModels from "@/components/EngagementModels";
+import WorkingWithUzair from "@/components/WorkingWithUzair";
 import TrustStrip from "@/components/TrustStrip";
 import StickyNav from "@/components/StickyNav";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -31,6 +32,7 @@ export default function Home() {
       <About />
       <EngagementModels />
       <Timeline />
+      <WorkingWithUzair />
       <TrustStrip />
       <AEOQuestions />
       <Contact />

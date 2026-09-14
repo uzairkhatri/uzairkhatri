@@ -122,10 +122,9 @@ export default function TrustStrip() {
         </div>
 
         <header className={styles.header}>
-          <h2>Trusted when the system has to work.</h2>
+          <h2>Client Results &amp; References</h2>
           <p>
-            Verified feedback from technology founders, CTOs, and enterprise partners.
-            Client references available upon request.
+            Verified feedback from technology founders, CTOs, and enterprise partners whose production systems had to perform.
           </p>
         </header>
 

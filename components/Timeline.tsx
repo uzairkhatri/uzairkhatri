@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTiltAndGlow } from "./useTiltAndGlow";
 import styles from "./Timeline.module.css";
 
@@ -41,7 +42,7 @@ const timelineData = [
   },
 ];
 
-function TimelineCard({ item, index }: { item: typeof timelineData[0]; index: number }) {
+function TimelineCard({ item, index, isLast }: { item: typeof timelineData[0]; index: number; isLast: boolean }) {
   const tiltGlow = useTiltAndGlow({ maxTilt: 5, scale: 1.01 });
 
   return (
@@ -51,7 +52,7 @@ function TimelineCard({ item, index }: { item: typeof timelineData[0]; index: nu
         <div className={styles.nodeCircle}>
           <span className={styles.nodeYear}>{item.year}</span>
         </div>
-        {index < timelineData.length - 1 && <div className={styles.nodeConnector} />}
+        {!isLast && <div className={styles.nodeConnector} />}
       </div>
 
       {/* Card Content with tilt/glow */}
@@ -74,17 +75,20 @@ function TimelineCard({ item, index }: { item: typeof timelineData[0]; index: nu
 }
 
 export default function Timeline() {
+  const [showAll, setShowAll] = useState(false);
+  const displayedItems = showAll ? timelineData : timelineData.slice(0, 3);
+
   return (
     <section className={`${styles.section} reveal-section`} id="timeline" aria-label="Professional evolution timeline">
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className="section-eyebrow">
             <span />
-            Evolution Timeline
+            Track Record
           </div>
-          <h2>Architects sell thinking. Here is the track record.</h2>
+          <h2>Selected Experience</h2>
           <p>
-            A decade-long progression from writing early transaction models to building production-grade agentic AI mainframe infrastructures.
+            A 14-year engineering progression from transactional database architectures to scalable, enterprise multi-agent runtimes.
           </p>
         </header>
 
@@ -93,9 +97,28 @@ export default function Timeline() {
           <div className={styles.timelineSpine} aria-hidden="true" />
           
           <div className={styles.timelineList}>
-            {timelineData.map((item, idx) => (
-              <TimelineCard key={item.year} item={item} index={idx} />
+            {displayedItems.map((item, idx) => (
+              <TimelineCard 
+                key={item.year} 
+                item={item} 
+                index={idx} 
+                isLast={idx === displayedItems.length - 1} 
+              />
             ))}
+          </div>
+
+          <div className={styles.expandContainer}>
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className={styles.expandBtn}
+              aria-expanded={showAll}
+            >
+              {showAll ? (
+                <>Collapse Earlier History &uarr;</>
+              ) : (
+                <>View Full 14-Year Timeline (2015&ndash;2020) &darr;</>
+              )}
+            </button>
           </div>
         </div>
       </div>

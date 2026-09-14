@@ -6,35 +6,40 @@ import { FaqJsonLd } from "./JsonLd";
 interface Capability {
   tag: string;
   title: string;
+  pillars: string;
   desc: string;
-  tags: string[];
+  serviceHref: string;
 }
 
 const capabilities: Capability[] = [
   {
     tag: "01 / Production AI",
-    title: "Production AI Systems",
-    desc: "Transforming prototype LLM prompts into resilient enterprise systems. Specializing in multi-agent LangGraph runtimes, hybrid vector search (RAG), Pydantic deterministic guardrails, and model failover routines.",
-    tags: ["LangGraph", "Vector RAG", "OpenAI / Claude", "Bedrock Failover", "LangSmith"]
+    title: "Production AI Architecture",
+    pillars: "Agents · RAG · Evaluation · Observability",
+    desc: "Turning fragile AI prototypes into hardened systems that operate reliably at enterprise scale with deterministic schema guardrails.",
+    serviceHref: "/services/ai-systems/",
   },
   {
     tag: "02 / Systems Topology",
-    title: "Enterprise Architecture",
-    desc: "Designing stateful, fault-isolated agent workflows and microservice topologies with structured memory contracts, asynchronous worker queues, dead-letter retry buffers, and comprehensive audit trails.",
-    tags: ["State Machines", "Celery / Redis", "Dead-Letter Queues", "HITL Review", "Async Buses"]
+    title: "Enterprise Systems Topology",
+    pillars: "State Machines · Queues · Failover · Audit",
+    desc: "Structuring microservices and multi-agent workflows with strict memory boundaries, asynchronous worker queues, and automated recovery.",
+    serviceHref: "/services/ai-systems/",
   },
   {
     tag: "03 / 0 to 1 Execution",
     title: "AI Product Engineering",
-    desc: "Engineering high-leverage AI products from 0 to 1 with distributed concurrency safety, automated monetization/billing ledgers, high-throughput database schemas, and intuitive operator controls.",
-    tags: ["Product 0 to 1", "Stripe Connect", "Redis Redlock", "FastAPI / Python", "AWS ECS / RDS"]
+    pillars: "0 to 1 Build · Concurrency Locks · Ledgers",
+    desc: "Shipping resilient, monetizable SaaS platforms with distributed concurrency safety, transactional ledger balance, and intuitive controls.",
+    serviceHref: "/services/ai-systems/",
   },
   {
     tag: "04 / Cloud & Edge",
-    title: "Cloud & Platform Architecture",
-    desc: "Hardening platforms on AWS and modern cloud edge. High-throughput Next.js and FastAPI runtimes, Redis caching, global edge distribution, automated CI/CD, and sub-50ms latency.",
-    tags: ["AWS Cloud", "Edge Delivery", "Next.js / Python", "Sub-50ms TTFB", "Cloudflare"]
-  }
+    title: "Cloud & Platform Infrastructure",
+    pillars: "AWS Cloud · Edge Delivery · Sub-50ms TTFB",
+    desc: "Deploying high-throughput Next.js and FastAPI runtimes with global edge caching, automated CI/CD pipelines, and enterprise SLA compliance.",
+    serviceHref: "/services/ai-systems/",
+  },
 ];
 
 interface FAQ {
@@ -76,7 +81,7 @@ export default function AEOQuestions() {
             High-Leverage Impact
           </div>
           <h2 className={styles.title}>
-            Where I Create the Most Value
+            Core Architectural Services
           </h2>
           <p className={styles.subtitle}>
             Senior architectural judgment across four high-stakes domains—closing the gap between promising AI prototypes and dependable enterprise production.
@@ -88,14 +93,11 @@ export default function AEOQuestions() {
             <article key={cap.title} className={styles.card}>
               <div className={styles.cardTag}>{cap.tag}</div>
               <h3 className={styles.cardTitle}>{cap.title}</h3>
+              <div className={styles.cardPillars}>{cap.pillars}</div>
               <p className={styles.cardDesc}>{cap.desc}</p>
-              <div className={styles.tagList}>
-                {cap.tags.map((t) => (
-                  <span key={t} className={styles.tag}>
-                    {t}
-                  </span>
-                ))}
-              </div>
+              <Link href={withBasePath(cap.serviceHref)} className={styles.serviceLink}>
+                Explore service &rarr;
+              </Link>
             </article>
           ))}
         </div>

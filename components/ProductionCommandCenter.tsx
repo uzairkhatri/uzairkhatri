@@ -52,13 +52,13 @@ export default function ProductionCommandCenter() {
       <div className={styles.shell}>
         <header className={styles.header}>
           <div>
-            <div className="section-eyebrow"><span />Signature system</div>
-            <h2 id="command-center-title">A production command center for your AI idea.</h2>
+            <div className="section-eyebrow"><span />System Architecture</div>
+            <h2 id="command-center-title">The Four Production Layers</h2>
           </div>
           <div className={styles.headerContent}>
             <p>
-              I audit the four layers that decide whether an AI product can survive customers:
-              prototype behavior, agent runtime, data memory, and operations.
+              I audit and harden the four layers that determine whether an AI product can survive customer traffic:
+              prototype integrity, agent runtime boundaries, data contracts, and operational failovers.
             </p>
             <a href="#work" className={styles.skipToWork}>
               Jump to Case Studies &darr;

@@ -93,10 +93,36 @@
 }
 
 .cardDesc {
-  font-size: 0.9rem;
-  color: #9ca3af;
-  line-height: 1.55;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
   margin-bottom: 1.25rem;
+}
+
+.cardPillars {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #c59b53;
+  margin-bottom: 0.85rem;
+  text-transform: uppercase;
+}
+
+.serviceLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #c59b53;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.serviceLink:hover {
+  color: #ffffff;
+  gap: 0.65rem;
 }
 
 .tagList {
