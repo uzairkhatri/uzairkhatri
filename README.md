@@ -30,9 +30,9 @@ I'm an AI Solutions Architect and senior software engineer with **12+ years in s
 
 | Project | What it demonstrates |
 |---|---|
+| **[production-ai-readiness](https://github.com/uzairkhatri/production-ai-readiness)** | Open-source CLI that audits AI/LLM repositories across **8 production-readiness dimensions**, with evidence-based findings, scoring, SARIF and CI/PR gates. |
 | **[fastapi-ai-team](https://github.com/uzairkhatri/fastapi-ai-team)** | Bounded AI engineering workflows with **11 specialist agents and 7 reusable skills**, designed around repository context, verification and reviewable PR handoff. |
 | **[claude-fastapi-pack](https://github.com/uzairkhatri/claude-fastapi-pack)** | FastAPI architecture and review guardrails for API design, async/SQLAlchemy code, migrations and PR verification. |
-| **[uzairkhatri.com](https://uzairkhatri.com)** | Production AI architecture portfolio, selected work, engineering principles and practical field notes. |
 
 **[Explore selected work →](https://uzairkhatri.com/case-studies/)**
 
@@ -68,13 +68,13 @@ Public work I use to explore practical patterns for building and operating AI-as
 
 | Project | Focus | Evidence |
 |---|---|---|
+| **[production-ai-readiness](https://github.com/uzairkhatri/production-ai-readiness)** | Production AI readiness auditing, evidence locations, weighted scoring, SARIF and PR/CI gates | Runnable Python CLI, tests and GitHub Actions |
 | **[fastapi-ai-team](https://github.com/uzairkhatri/fastapi-ai-team)** | Bounded engineering agents, specialist responsibilities, verification and PR handoff | Public repository, agent definitions, skills and workflows |
 | **[claude-fastapi-pack](https://github.com/uzairkhatri/claude-fastapi-pack)** | FastAPI architecture guardrails, async review, migrations and API/PR verification | Public repository, reusable agents and commands |
-| **[uzairkhatri.com](https://uzairkhatri.com)** | Production AI architecture, case studies, services and technical field notes | Public source and live website |
 
 > I keep client and employer repositories confidential. This profile highlights only work that is appropriate to share publicly.
 
-**Next:** I am expanding this portfolio with production-focused reference implementations around AI readiness, RAG and agent architecture.
+**Latest build:** [Production AI Readiness](https://github.com/uzairkhatri/production-ai-readiness) turns production-readiness checks into a runnable CLI and CI/PR gate rather than a checklist.
 
 ---
 
