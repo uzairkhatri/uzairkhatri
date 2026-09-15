@@ -4,98 +4,181 @@
 
 ### Production AI Systems Architect
 
-**I turn fragile AI prototypes into reliable production systems.**
+**Fragile AI. Rebuilt for Production.**
 
-Agentic AI · RAG · LLM applications · FastAPI · Enterprise architecture · AWS · Kubernetes
+I design and build the systems around AI models: agent orchestration, retrieval, evaluation, guardrails, observability, enterprise integration and cloud infrastructure.
 
-[Website](https://uzairkhatri.com) · [LinkedIn](https://www.linkedin.com/in/uzair-khatri/) · [Production AI Playbook](https://uzairkhatri.com/ai-playbook/) · [Book a Strategy Call](https://calendly.com/uz-khatri/30min)
+[**View My Work**](https://uzairkhatri.com/case-studies/) · [**Book a 30-Min Strategy Call**](https://calendly.com/uz-khatri/30min) · [Website](https://uzairkhatri.com) · [LinkedIn](https://www.linkedin.com/in/uzair-khatri/)
 
 </div>
 
 ---
 
-## What I build
+## 👋 Hi, I'm Uzair
 
-I work at the point where promising AI prototypes meet production constraints: reliability, retrieval quality, guardrails, observability, integrations, cost, security, and scale.
+I'm an AI Solutions Architect and senior software engineer with **12+ years in software architecture and engineering**, focused on taking AI products from promising prototypes to systems teams can operate with confidence.
 
-My focus is not adding an LLM to a product. It is designing the **system around the model** so engineering teams can operate it with confidence.
+> **The model is rarely the system. It's the stress point.**
 
-| Focus | What that means in production |
+| **Production AI** | **Enterprise Architecture** | **AI Engineering** | **Cloud Native** |
+|---|---|---|---|
+| Agents · RAG · Evaluation | Distributed systems · Integrations | Python · FastAPI · Java | AWS · Kubernetes · Docker |
+
+---
+
+## 🚀 Featured Engineering
+
+| Project | What it demonstrates |
 |---|---|
-| **Agentic AI systems** | Tool boundaries, orchestration, state, failure handling, human-in-the-loop workflows |
-| **RAG & knowledge systems** | Retrieval architecture, grounding, evaluation, citations, relevance and latency |
-| **AI platform architecture** | APIs, queues, caching, observability, security, cost controls and deployment |
-| **Enterprise integration** | Existing services, data boundaries, authentication, workflows and operational constraints |
-| **Engineering guardrails** | Tests, review gates, security checks and repeatable agent workflows |
+| **[fastapi-ai-team](https://github.com/uzairkhatri/fastapi-ai-team)** | Bounded AI engineering workflows with **11 specialist agents and 7 reusable skills**, designed around repository context, verification and reviewable PR handoff. |
+| **[claude-fastapi-pack](https://github.com/uzairkhatri/claude-fastapi-pack)** | FastAPI architecture and review guardrails for API design, async/SQLAlchemy code, migrations and PR verification. |
+| **[uzairkhatri.com](https://uzairkhatri.com)** | Production AI architecture portfolio, selected work, engineering principles and practical field notes. |
 
-## Featured engineering
+**[Explore selected work →](https://uzairkhatri.com/case-studies/)**
 
-### [fastapi-ai-team](https://github.com/uzairkhatri/fastapi-ai-team)
-**An AI-powered FastAPI engineering team: 11 agents, 7 skills, one workflow from requirement to reviewable PR.**
+---
 
-The project explores bounded engineering agents for backend implementation, database changes, testing, security review, performance analysis and PR creation. The emphasis is on explicit responsibilities, repository-aware execution and reviewable output rather than unrestricted autonomy.
+## 🧱 The Four Production Layers
 
-### [claude-fastapi-pack](https://github.com/uzairkhatri/claude-fastapi-pack)
-**Architecture and review guardrails for production FastAPI development with Claude Code.**
+My working model for AI systems that have to survive real users, real data and real failure modes.
 
-Reusable agents and commands for API design, async/SQLAlchemy review, migration safety, architecture enforcement and PR verification.
-
-### [uzairkhatri.com](https://uzairkhatri.com)
-**My production AI architecture portfolio and field notes.**
-
-Selected work, architecture principles, engagement models and practical guidance for taking AI systems beyond the demo.
-
-## How I think about production AI
+| Layer | Responsibility |
+|---|---|
+| **4 · Application** | Product workflows, UX, business rules and human interaction |
+| **3 · Orchestration** | Agents, tools, memory, routing, approvals and guardrails |
+| **2 · Intelligence** | Models, RAG, retrieval, reranking, evaluation and reasoning |
+| **1 · Infrastructure** | APIs, data, compute, observability, security and deployment |
 
 ```text
-Useful model
-    ↓
-Reliable retrieval + context
-    ↓
-Bounded tools + orchestration
-    ↓
-Evaluation + guardrails
-    ↓
-Observability + failure handling
-    ↓
-Production system
+┌──────────────────────────────────────────────────────┐
+│  4. APPLICATION     Product · UX · Business Workflow │
+├──────────────────────────────────────────────────────┤
+│  3. ORCHESTRATION   Agents · Tools · Memory · Gates  │
+├──────────────────────────────────────────────────────┤
+│  2. INTELLIGENCE    Models · RAG · Eval · Reasoning  │
+├──────────────────────────────────────────────────────┤
+│  1. INFRASTRUCTURE  Data · Compute · Observe · Deploy│
+└──────────────────────────────────────────────────────┘
 ```
 
-A capable model is only one component. The engineering around it determines whether the product remains useful when traffic, messy data, failures, permissions and real users arrive.
+**AI isn't just a model. It's a system.** Each layer needs explicit engineering, verification and operational ownership.
 
-## Current areas of interest
+[Read the Production AI Playbook →](https://uzairkhatri.com/ai-playbook/)
 
-- Production agent architectures and bounded autonomy
-- RAG evaluation and retrieval quality
-- LLM observability, reliability and cost controls
-- AI-assisted software engineering with deterministic verification
-- FastAPI and Python services for AI products
-- Cloud-native architecture on AWS and Kubernetes
+---
 
-## Selected stack
+## 🎯 Current Focus
 
-**AI / LLM:** OpenAI · Claude · Gemini · RAG · agentic workflows · evaluation  
-**Backend:** Python · FastAPI · Java · Spring Boot · REST APIs  
-**Data:** PostgreSQL · SQLAlchemy · vector retrieval · caching  
-**Platform:** AWS · Kubernetes · Docker · CI/CD · observability  
-**Architecture:** distributed systems · enterprise integrations · security · scalability
+- **Agentic AI Systems** — bounded agents, tool contracts, state, memory and human approval
+- **RAG & Knowledge Systems** — retrieval quality, grounding, reranking, citations and evaluation
+- **LLMOps & Observability** — traces, quality signals, failure analysis, cost and reliability
+- **Production Architecture** — scalable APIs, security boundaries, queues, caching and deployment
+- **AI Engineering Workflows** — agent-assisted development with deterministic verification
 
-## Work with me
+---
 
-I am most useful when a team has:
+## 🔧 Selected Engineering Contributions
 
-- an AI prototype that now needs production architecture,
-- a RAG or agent system that is unreliable or difficult to evaluate,
-- an existing engineering team that needs senior architecture direction, or
-- a complex AI product where integration, security and operational constraints matter.
+Recent public work in **Sugar Calendar**, focused on page-builder integrations, recurring-event behavior, AI integrations and production hardening.
 
-**[See selected work](https://uzairkhatri.com/case-studies/)** · **[Explore services](https://uzairkhatri.com/services/ai-systems/)** · **[Book a 30-minute strategy call](https://calendly.com/uz-khatri/30min)**
+| PR | Contribution | Area |
+|---|---|---|
+| [#803](https://github.com/awesomemotive/sugarcalendar-plugin/pull/803) | Native WPBakery Events Calendar and Events List elements | Builder Integration |
+| [#783](https://github.com/awesomemotive/sugarcalendar-plugin/pull/783) | Native Divi Events Calendar and Events List modules | Builder Integration |
+| [#741](https://github.com/awesomemotive/sugarcalendar-plugin/pull/741) | Recurring-event support for Elementor Theme Builder | Recurring Events |
+| [#724](https://github.com/awesomemotive/sugarcalendar-plugin/pull/724) | WPBakery event content/excerpt handling | WordPress |
+| [#720](https://github.com/awesomemotive/sugarcalendar-plugin/pull/720) | Recurring-event support for Divi Theme Builder | Recurring Events |
+| [#718](https://github.com/awesomemotive/sugarcalendar-plugin/pull/718) | WPBakery recurring-event backend editor fix | Builder Integration |
+| [#667](https://github.com/awesomemotive/sugarcalendar-plugin/pull/667) | Recurring events in Elementor Loop Grid | Elementor |
+| [#644](https://github.com/awesomemotive/sugarcalendar-plugin/pull/644) | AI/MCP Tools integration and Abilities API work | AI Integration |
+| [#630](https://github.com/awesomemotive/sugarcalendar-plugin/pull/630) | Free-ticket checkout without payment setup | Product Engineering |
+
+[View Sugar Calendar repository →](https://github.com/awesomemotive/sugarcalendar-plugin)
+
+---
+
+## 🧰 Tech Stack
+
+| | |
+|---|---|
+| **AI / LLM** | OpenAI · Claude · Gemini · RAG · Agentic Workflows · Evaluation |
+| **Backend** | Python · FastAPI · Java · Spring Boot · REST APIs |
+| **Data** | PostgreSQL · SQLAlchemy · Vector Retrieval · Caching |
+| **Cloud / Platform** | AWS · Kubernetes · Docker · CI/CD · Observability |
+| **Architecture** | Distributed Systems · Enterprise Integrations · Security · Scalability |
+| **Engineering** | Git · GitHub · Testing · Code Review · Architecture Decision Records |
+
+---
+
+## 🧪 How I Approach Production AI
+
+```text
+Prototype
+   │
+   ▼
+Define failure modes
+   │
+   ▼
+Design boundaries + architecture
+   │
+   ▼
+Build retrieval / agents / integrations
+   │
+   ▼
+Evaluate + attack assumptions
+   │
+   ▼
+Add observability + operational controls
+   │
+   ▼
+Production
+```
+
+For security-critical and reliability-sensitive work, I prefer asking AI to **try to break the solution** rather than merely confirm that it works. Tests and explicit verification gates—not agent confidence—decide when work is ready.
+
+---
+
+## 📚 Production AI Field Notes
+
+Topics I write and build around:
+
+- Why AI agents fail after the demo
+- Guardrails vs. better prompting
+- Production RAG and retrieval quality
+- Evaluation before scale
+- Architecture decisions before expensive code
+- AI-assisted engineering with bounded autonomy
+
+**[Read the Production AI Playbook →](https://uzairkhatri.com/ai-playbook/)** · **[Follow on LinkedIn →](https://www.linkedin.com/in/uzair-khatri/)**
+
+---
+
+## 🎓 Selected Certification
+
+**IBM — Machine Learning with Python**
+
+I keep certifications secondary to production evidence: architecture decisions, shipped systems, open-source work and verifiable engineering contributions.
+
+---
+
+## 🤝 Work With Me
+
+I am most useful when:
+
+- an AI prototype needs to become a reliable production system;
+- a RAG or agent system is difficult to trust, evaluate or operate;
+- an engineering team needs senior AI/system architecture direction;
+- a product needs deep enterprise integrations, security or cloud architecture.
+
+### Have an AI system that needs to actually work?
+
+[**View Selected Work**](https://uzairkhatri.com/case-studies/) · [**Explore Services**](https://uzairkhatri.com/services/ai-systems/) · [**Book a 30-Min Strategy Call**](https://calendly.com/uz-khatri/30min)
 
 ---
 
 <div align="center">
 
-**Fragile AI. Rebuilt for production.**
+**Production AI · Agentic Systems · RAG · Enterprise Architecture**
 
 [uzairkhatri.com](https://uzairkhatri.com)
 
