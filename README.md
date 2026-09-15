@@ -42,24 +42,9 @@ I'm an AI Solutions Architect and senior software engineer with **12+ years in s
 
 My working model for AI systems that have to survive real users, real data and real failure modes.
 
-| Layer | Responsibility |
-|---|---|
-| **4 · Application** | Product workflows, UX, business rules and human interaction |
-| **3 · Orchestration** | Agents, tools, memory, routing, approvals and guardrails |
-| **2 · Intelligence** | Models, RAG, retrieval, reranking, evaluation and reasoning |
-| **1 · Infrastructure** | APIs, data, compute, observability, security and deployment |
-
-```text
-┌──────────────────────────────────────────────────────┐
-│  4. APPLICATION     Product · UX · Business Workflow │
-├──────────────────────────────────────────────────────┤
-│  3. ORCHESTRATION   Agents · Tools · Memory · Gates  │
-├──────────────────────────────────────────────────────┤
-│  2. INTELLIGENCE    Models · RAG · Eval · Reasoning  │
-├──────────────────────────────────────────────────────┤
-│  1. INFRASTRUCTURE  Data · Compute · Observe · Deploy│
-└──────────────────────────────────────────────────────┘
-```
+<p align="center">
+  <img src="./assets/four-production-layers.svg" alt="Uzair Khatri Four Production Layers architecture framework" width="100%" />
+</p>
 
 **AI isn't just a model. It's a system.** Each layer needs explicit engineering, verification and operational ownership.
 
@@ -103,6 +88,22 @@ Public work I use to explore practical patterns for building and operating AI-as
 | **Cloud / Platform** | AWS · Kubernetes · Docker · CI/CD · Observability |
 | **Architecture** | Distributed Systems · Enterprise Integrations · Security · Scalability |
 | **Engineering** | Git · GitHub · Testing · Code Review · Architecture Decision Records |
+
+---
+
+## 🧩 Public Project Architecture
+
+### FastAPI AI Team
+
+<p align="center">
+  <img src="./assets/fastapi-ai-team-architecture.svg" alt="FastAPI AI Team architecture" width="100%" />
+</p>
+
+### Claude FastAPI Pack
+
+<p align="center">
+  <img src="./assets/claude-fastapi-pack.svg" alt="Claude FastAPI Pack engineering guardrails" width="100%" />
+</p>
 
 ---
 
