@@ -75,6 +75,7 @@ export default function Landing() {
           <a href={withBasePath("/#work")}>Work</a>
           <a href={withBasePath("/services/ai-systems/")}>Services</a>
           <a href={withBasePath("/case-studies/")}>Case Studies</a>
+          <a href={withBasePath("/insights/")}>Insights</a>
           <a href={withBasePath("/#about")}>About</a>
           <a href={CV_URL} target="_blank" rel="noreferrer" title="Download Resume / CV (PDF)">CV</a>
           <a href={withBasePath("/#contact")}>Contact</a>
@@ -109,6 +110,7 @@ export default function Landing() {
               <a href={withBasePath("/#work")} onClick={() => setMobileMenuOpen(false)}>Work</a>
               <a href={withBasePath("/services/ai-systems/")} onClick={() => setMobileMenuOpen(false)}>Services</a>
               <a href={withBasePath("/case-studies/")} onClick={() => setMobileMenuOpen(false)}>Case Studies</a>
+              <a href={withBasePath("/insights/")} onClick={() => setMobileMenuOpen(false)}>Insights</a>
               <a href={withBasePath("/#about")} onClick={() => setMobileMenuOpen(false)}>About</a>
               <a href={CV_URL} target="_blank" rel="noreferrer" onClick={() => setMobileMenuOpen(false)}>CV / Resume (PDF)</a>
               <a href={withBasePath("/#contact")} onClick={() => setMobileMenuOpen(false)}>Contact</a>

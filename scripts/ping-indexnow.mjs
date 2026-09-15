@@ -15,6 +15,11 @@ const urlList = [
   "https://uzairkhatri.com/book/",
   "https://uzairkhatri.com/strategy-call/",
   "https://uzairkhatri.com/ai-playbook/",
+  "https://uzairkhatri.com/insights/",
+  "https://uzairkhatri.com/insights/production-ai-architecture/",
+  "https://uzairkhatri.com/insights/ai-agent-guardrails/",
+  "https://uzairkhatri.com/insights/rag-production-checklist/",
+  "https://uzairkhatri.com/insights/ai-agent-evaluation/",
 ];
 
 async function pingIndexNow() {

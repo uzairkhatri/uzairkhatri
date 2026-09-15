@@ -319,6 +319,129 @@
   line-height: 1.7;
 }
 
+.constraintsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.constraintCard {
+  background: var(--graphite-card);
+  border: 1px solid var(--hairline-dark);
+  padding: 1.6rem;
+  border-radius: 6px;
+  display: grid;
+  gap: 0.5rem;
+  transition: border-color 0.2s ease;
+}
+
+.constraintCard:hover {
+  border-color: rgba(197, 155, 83, 0.4);
+}
+
+.constraintLabel {
+  color: var(--gold-bright);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.constraintCard h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.constraintCard p {
+  margin: 0;
+  color: var(--dark-muted);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.failureGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.failureCard {
+  background: #0e1211;
+  border: 1px solid var(--hairline-dark);
+  border-radius: 6px;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  display: grid;
+  gap: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.failureCard:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--gold);
+}
+
+.failureHeader {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.failureTag {
+  color: #e57373;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.failureCard h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+}
+
+.failureRow {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.failureLabel {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.defenseLabel {
+  color: var(--gold-bright);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.failureRow p {
+  margin: 0;
+  color: var(--dark-muted);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
 .diagram {
   border: 1px solid var(--hairline-dark);
   background: #0d100f;
@@ -622,6 +745,12 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .decisionGrid {
+    grid-template-columns: 1fr;
+  }
+  .constraintsGrid {
+    grid-template-columns: 1fr;
+  }
+  .failureGrid {
     grid-template-columns: 1fr;
   }
 }

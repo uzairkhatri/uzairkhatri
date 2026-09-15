@@ -74,6 +74,51 @@ const decisions = [
   },
 ];
 
+const constraints = [
+  {
+    label: "Latency SLA",
+    title: "<100ms Heuristic Matchmaking",
+    text: "Students required instantaneous instructor matching across dynamic availability matrices without incurring slow sequential database table scans.",
+  },
+  {
+    label: "Concurrency Safety",
+    title: "Zero Double-Booking Tolerance",
+    text: "During opening flash surges, multiple users checking out the same time slot had to be resolved deterministically without human operator intervention.",
+  },
+  {
+    label: "Financial Precision",
+    title: "Idempotent Automated Ledgers",
+    text: "Automating hundreds of daily instructor payouts via Stripe Connect required absolute idempotency to prevent duplicate transfers or ledger drift.",
+  },
+];
+
+const failureModes = [
+  {
+    tag: "Failure Mode 01",
+    title: "Concurrent Checkout Race Condition",
+    impact: "Two students clicking 'Book' within 50ms of each other both getting charged for a single instructor seat.",
+    defense: "Redis Redlock distributed mutex. An atomic 45-second reservation hold is acquired before entering the checkout tunnel; concurrent requests fail fast with an immediate 'slot held by another student' state.",
+  },
+  {
+    tag: "Failure Mode 02",
+    title: "Stripe Webhook Delivery Drops & Retries",
+    impact: "Unreliable network conditions dropping Stripe payment confirmation webhooks or sending duplicate events.",
+    defense: "HMAC signature verification combined with an idempotent transactional outbox pattern in PostgreSQL. Duplicate webhook payloads match existing event IDs and return 200 OK without re-triggering payouts.",
+  },
+  {
+    tag: "Failure Mode 03",
+    title: "Live WebSocket Connection Drops",
+    impact: "Transient client network disconnects causing ongoing classes to prematurely trigger abandonment or non-attendance penalties.",
+    defense: "Graceful 90-second heartbeat reconnection window stored in Redis. Session timers remain authoritative on the server, resuming seamlessly upon client reconnection.",
+  },
+  {
+    tag: "Failure Mode 04",
+    title: "Database Lock Contention at Peak Surge",
+    impact: "Sudden surges locking the instructor schedule table, causing connection starvation and 504 Gateway Timeouts.",
+    defense: "PgBouncer connection pooling with read-replica routing for availability search, isolating write-heavy transaction commits behind serialized row-level locks.",
+  },
+];
+
 const timeline = [
   ["Week 1-2", "Architecture and operational discovery. Audited teacher scheduling workflows, identified race condition vectors, and formalized the state machine spec."],
   ["Week 3-4", "Built the dynamic matchmaking algorithm: timezone resolution matrix, instructor scoring criteria, and fast ranking pipeline."],
@@ -128,11 +173,14 @@ export default function ClassFlowCaseStudy() {
           Uzair Khatri
         </a>
         <div className={styles.topNavRight}>
-          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
-            CV
+          <a href={withBasePath("/insights/")} className={styles.topNavLink}>
+            Insights
           </a>
           <a href={withBasePath("/#work")} className={styles.topNavLink}>
             All work
+          </a>
+          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
+            CV
           </a>
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
             Book call
@@ -193,9 +241,31 @@ export default function ClassFlowCaseStudy() {
         </div>
       </section>
 
-      <section className={styles.sectionDark} aria-label="Architecture decisions">
+      <section className={styles.sectionDark} aria-label="Operating constraints">
         <div className={styles.sectionInner}>
-          <p className={styles.eyebrowLight}>Architecture decisions</p>
+          <p className={styles.eyebrowLight}>Operating constraints</p>
+          <h2 className={styles.sectionTitleLight}>
+            The operational requirements that dictated the architecture.
+          </h2>
+          <p className={styles.sectionDescLight}>
+            Scaling a live educational platform with concurrent payments leaves no room for loose
+            consistency. These constraints shaped our database transaction model and locking design.
+          </p>
+          <div className={styles.constraintsGrid}>
+            {constraints.map((c) => (
+              <div className={styles.constraintCard} key={c.label}>
+                <span className={styles.constraintLabel}>{c.label}</span>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section} aria-label="Architecture decisions">
+        <div className={styles.sectionInner}>
+          <p className={styles.eyebrow}>Architecture decisions</p>
           <h2 className={styles.sectionTitleLight}>
             Designing for absolute consistency and sub-second execution.
           </h2>
@@ -287,6 +357,37 @@ export default function ClassFlowCaseStudy() {
               Lock-safe by design. Any concurrent booking collision is caught at the Redis mutex layer
               before touching the database or processing a credit card transaction.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section} aria-label="Failure modes and defenses">
+        <div className={styles.sectionInner}>
+          <p className={styles.eyebrow}>Failure modes & defenses</p>
+          <h2 className={styles.sectionTitle}>
+            How distributed concurrency failures are caught and neutralized.
+          </h2>
+          <p className={styles.sectionDesc}>
+            High-concurrency platforms break at the seams when race conditions occur. These are the critical
+            failure modes stress-tested before launch and the exact safeguards built to handle them.
+          </p>
+          <div className={styles.failureGrid}>
+            {failureModes.map((f) => (
+              <article className={styles.failureCard} key={f.tag}>
+                <div className={styles.failureHeader}>
+                  <span className={styles.failureTag}>{f.tag}</span>
+                  <h3>{f.title}</h3>
+                </div>
+                <div className={styles.failureRow}>
+                  <span className={styles.failureLabel}>Concurrency Risk</span>
+                  <p>{f.impact}</p>
+                </div>
+                <div className={styles.failureRow}>
+                  <span className={styles.defenseLabel}>Architectural Safeguard</span>
+                  <p>{f.defense}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

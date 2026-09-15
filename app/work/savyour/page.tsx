@@ -74,6 +74,51 @@ const decisions = [
   },
 ];
 
+const constraints = [
+  {
+    label: "Latency SLA",
+    title: "<50ms P95 Balance Lookups",
+    text: "Consumer mobile app users expected real-time wallet balance displays, preventing expensive dynamic balance aggregations on every user screen load.",
+  },
+  {
+    label: "Ledger Consistency",
+    title: "Double-Entry Balance Accounting",
+    text: "Zero financial discrepancy tolerance across millions of historical user reward line items and merchant commission credits.",
+  },
+  {
+    label: "Throughput Resilience",
+    title: "Burst Ingestion Capacity",
+    text: "Mega-sale campaigns (11.11 / Black Friday) generated 5,000+ simultaneous webhook hits from partner networks that could not be dropped or delayed.",
+  },
+];
+
+const failureModes = [
+  {
+    tag: "Failure Mode 01",
+    title: "Duplicate Affiliate Conversion Webhooks",
+    impact: "Network retries from merchant affiliate networks crediting the consumer's wallet multiple times for a single order.",
+    defense: "HMAC request signature verification coupled with atomic Redis idempotent key caches (7-day TTL). Duplicate requests resolve to cached 200 OK without reaching the database.",
+  },
+  {
+    tag: "Failure Mode 02",
+    title: "Database Lock Contention on Balances",
+    impact: "Multiple cashback events trying to mutate the same user's balance row concurrently, leading to transaction rollbacks.",
+    defense: "Immutable append-only ledger architecture. New transactions write new credit/debit journal rows with zero row locks on user profiles, with balances projected asynchronously.",
+  },
+  {
+    tag: "Failure Mode 03",
+    title: "Redis Eviction & Cache Stampede",
+    impact: "Sudden cache invalidation on popular brand commission rates triggering hundreds of simultaneous PostgreSQL queries.",
+    defense: "Hierarchical cache warming with probabilistic early expiration (XFetch) and distributed mutex locking on cache misses to ensure only one worker re-queries PostgreSQL.",
+  },
+  {
+    tag: "Failure Mode 04",
+    title: "Order Return Fraud & Chargebacks",
+    impact: "Consumers collecting cashback and immediately cancelling the purchase on the merchant's store.",
+    defense: "Two-phase settlement state machine (Pending -> Verified -> Cleared). Cashback remains locked in escrow until the merchant's return dispute window expires.",
+  },
+];
+
 const timeline = [
   ["Week 1-2", "Financial architecture and risk discovery. Audited affiliate webhook endpoints, mapped double-credit vulnerabilities, and designed the immutable ledger schema."],
   ["Week 3-4", "Built the idempotent ingestion gateway: HMAC validation, Redis atomic deduplication locks, and high-throughput SQS ingestion buffers."],
@@ -129,11 +174,14 @@ export default function SavyourCaseStudy() {
           Uzair Khatri
         </a>
         <div className={styles.topNavRight}>
-          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
-            CV
+          <a href={withBasePath("/insights/")} className={styles.topNavLink}>
+            Insights
           </a>
           <a href={withBasePath("/#work")} className={styles.topNavLink}>
             All work
+          </a>
+          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
+            CV
           </a>
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
             Book call
@@ -193,9 +241,31 @@ export default function SavyourCaseStudy() {
         </div>
       </section>
 
-      <section className={styles.sectionDark} aria-label="Architecture decisions">
+      <section className={styles.sectionDark} aria-label="Operating constraints">
         <div className={styles.sectionInner}>
-          <p className={styles.eyebrowLight}>Architecture decisions</p>
+          <p className={styles.eyebrowLight}>Operating constraints</p>
+          <h2 className={styles.sectionTitleLight}>
+            The financial rules that governed every database transaction.
+          </h2>
+          <p className={styles.sectionDescLight}>
+            When an application handles real money, architectural shortcuts result in regulatory penalties
+            and balance corruption. These constraints defined our technical boundaries.
+          </p>
+          <div className={styles.constraintsGrid}>
+            {constraints.map((c) => (
+              <div className={styles.constraintCard} key={c.label}>
+                <span className={styles.constraintLabel}>{c.label}</span>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section} aria-label="Architecture decisions">
+        <div className={styles.sectionInner}>
+          <p className={styles.eyebrow}>Architecture decisions</p>
           <h2 className={styles.sectionTitleLight}>
             Designing for zero financial drift and high-throughput ingestion.
           </h2>
@@ -287,6 +357,37 @@ export default function SavyourCaseStudy() {
               Double-entry consistency guaranteed. Balance queries never read arbitrary mutable columns;
               they verify the sum of signed credit/debit entries across auditable ledger accounts.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section} aria-label="Failure modes and defenses">
+        <div className={styles.sectionInner}>
+          <p className={styles.eyebrow}>Failure modes & defenses</p>
+          <h2 className={styles.sectionTitle}>
+            How financial edge cases and ingestion failures are neutralized.
+          </h2>
+          <p className={styles.sectionDesc}>
+            Financial ledgers cannot rely on optimistic assumptions. These are the worst-case failure
+            scenarios pressure-tested during implementation and the concrete defenses engineered into the backend.
+          </p>
+          <div className={styles.failureGrid}>
+            {failureModes.map((f) => (
+              <article className={styles.failureCard} key={f.tag}>
+                <div className={styles.failureHeader}>
+                  <span className={styles.failureTag}>{f.tag}</span>
+                  <h3>{f.title}</h3>
+                </div>
+                <div className={styles.failureRow}>
+                  <span className={styles.failureLabel}>Financial Risk</span>
+                  <p>{f.impact}</p>
+                </div>
+                <div className={styles.failureRow}>
+                  <span className={styles.defenseLabel}>Architectural Defense</span>
+                  <p>{f.defense}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

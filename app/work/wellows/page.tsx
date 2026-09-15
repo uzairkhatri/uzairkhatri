@@ -74,6 +74,51 @@ const decisions = [
   },
 ];
 
+const constraints = [
+  {
+    label: "Latency SLA",
+    title: "<200ms Vector Retrieval",
+    text: "Brand monitoring queries demanded immediate sub-second dashboard rendering, precluding naive, synchronous multi-LLM re-ranking on the critical user path.",
+  },
+  {
+    label: "Tenant Cost Governance",
+    title: "Strict Token Spend Caps",
+    text: "Continuous automated web crawling and citation audits could easily balloon API costs if agent loops ran unbounded without strict token quotas and deterministic cycle limits.",
+  },
+  {
+    label: "Failure Isolation",
+    title: "Zero Shared Mutable State",
+    text: "A transient timeout or hallucination in the keyword discovery agent (KIVA) could not be allowed to corrupt memory or interrupt ongoing citation audits (OPTA).",
+  },
+];
+
+const failureModes = [
+  {
+    tag: "Failure Mode 01",
+    title: "Model Hallucination & Schema Drift",
+    impact: "An LLM returning unstructured markdown or omitting required schema keys would crash the downstream frontend dashboard.",
+    defense: "Strict Pydantic JSON schema contracts enforced on every agent step. If validation fails, LangGraph triggers an automated correction prompt with lowered temperature before routing to human fallback.",
+  },
+  {
+    tag: "Failure Mode 02",
+    title: "Third-Party Rate Limits (HTTP 429)",
+    impact: "Concurrent enterprise brand audits overwhelming OpenAI or Perplexity rate limits, causing pipeline abortion and data loss.",
+    defense: "Decoupled asynchronous worker queues using AWS SQS and Celery with exponential backoff and jitter, combined with automated model failover via AWS Bedrock.",
+  },
+  {
+    tag: "Failure Mode 03",
+    title: "Cascading Multi-Agent Deadlocks",
+    impact: "One slow or stuck agent blocking the entire evaluation graph, leaving user requests hanging indefinitely.",
+    defense: "Independent circuit breakers per agent. If an agent fails after 3 retry cycles, the orchestrator issues a partial result flag, saves checkpoints, and completes the remaining workflow.",
+  },
+  {
+    tag: "Failure Mode 04",
+    title: "Vector Retrieval Context Poisoning",
+    impact: "Outdated crawl snippets or redundant competitive brand mentions polluting the LLM context window with high noise.",
+    defense: "Semantic deduplication, chunked ingestion pipelines with TTL expiration, and cross-encoder re-ranking ensuring only the top-5 verified citations enter the prompt.",
+  },
+];
+
 const timeline = [
   ["Week 1-2", "Architecture clarity session. Mapped product goals, user flows, constraints, and the three agent contracts before implementation."],
   ["Week 3-4", "Built KIVA: keyword intelligence engine, vector ingestion pipeline, OpenAI integration, and production output schema."],
@@ -128,11 +173,14 @@ export default function WellowsCaseStudy() {
           Uzair Khatri
         </a>
         <div className={styles.topNavRight}>
-          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
-            CV
+          <a href={withBasePath("/insights/")} className={styles.topNavLink}>
+            Insights
           </a>
           <a href={withBasePath("/#work")} className={styles.topNavLink}>
             All work
+          </a>
+          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
+            CV
           </a>
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
             Book call
@@ -189,6 +237,28 @@ export default function WellowsCaseStudy() {
               responsibilities, a shared retrieval layer, async processing, typed APIs, and
               production operating controls.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.sectionDark} aria-label="Operating constraints">
+        <div className={styles.sectionInner}>
+          <p className={styles.eyebrowLight}>Operating constraints</p>
+          <h2 className={styles.sectionTitleLight}>
+            The non-negotiable boundaries before writing code.
+          </h2>
+          <p className={styles.sectionDescLight}>
+            Prototypes ignore limits. Production architectures are defined by them. These three
+            constraints anchored every architectural choice we made.
+          </p>
+          <div className={styles.constraintsGrid}>
+            {constraints.map((c) => (
+              <div className={styles.constraintCard} key={c.label}>
+                <span className={styles.constraintLabel}>{c.label}</span>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -288,6 +358,37 @@ export default function WellowsCaseStudy() {
               logic. A timeout in Citation Intelligence does not block KIVA from completing its
               task.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section} aria-label="Failure modes and defenses">
+        <div className={styles.sectionInner}>
+          <p className={styles.eyebrow}>Failure modes & defenses</p>
+          <h2 className={styles.sectionTitle}>
+            Where naive AI systems break — and how this architecture survives.
+          </h2>
+          <p className={styles.sectionDesc}>
+            A resilient AI system is engineered around worst-case execution. These are the primary failure
+            vectors identified during pressure-testing and the deterministic defenses built to neutralize them.
+          </p>
+          <div className={styles.failureGrid}>
+            {failureModes.map((f) => (
+              <article className={styles.failureCard} key={f.tag}>
+                <div className={styles.failureHeader}>
+                  <span className={styles.failureTag}>{f.tag}</span>
+                  <h3>{f.title}</h3>
+                </div>
+                <div className={styles.failureRow}>
+                  <span className={styles.failureLabel}>Production Impact</span>
+                  <p>{f.impact}</p>
+                </div>
+                <div className={styles.failureRow}>
+                  <span className={styles.defenseLabel}>Architectural Defense</span>
+                  <p>{f.defense}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
