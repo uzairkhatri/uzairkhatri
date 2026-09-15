@@ -19,16 +19,6 @@ const ecosystems: EcosystemBrand[] = [
     ),
   },
   {
-    name: "Jubilee Life",
-    domain: "Regulated Workflows",
-    icon: ({ className }) => (
-      <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
-        <rect x="3" y="3" width="18" height="18" rx="3" />
-        <path d="M7 12h10M12 7v10" />
-      </svg>
-    ),
-  },
-  {
     name: "Savyour",
     domain: "60k+ DAU Fintech Platform",
     icon: ({ className }) => (
