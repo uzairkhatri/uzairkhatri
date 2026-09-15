@@ -7,22 +7,22 @@ import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
 
 export const metadata: Metadata = {
-  title: "ClassFlow Case Study — Autonomous SaaS Platform Architecture",
+  title: "ClassFlow Case Study — Live Tutoring Marketplace Architecture",
   description:
-    "How Uzair Khatri architected ClassFlow: an autonomous SaaS application unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe ledger reconciliation.",
+    "How Uzair Khatri architected ClassFlow: an automated live tutoring marketplace unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe payouts.",
   alternates: {
     canonical: "https://uzairkhatri.com/work/classflow/",
   },
   openGraph: {
-    title: "ClassFlow Case Study — Autonomous SaaS Platform Architecture",
-    description: "Autonomous SaaS platform architecture unifying dynamic matchmaking, Redis Redlock concurrency, and Stripe Connect automated ledgers.",
+    title: "ClassFlow Case Study — Live Tutoring Marketplace Architecture",
+    description: "Live tutoring marketplace platform architecture unifying dynamic matchmaking, Redis Redlock concurrency, and Stripe Connect automated ledgers.",
     url: "https://uzairkhatri.com/work/classflow/",
     images: [{ url: ogImage, width: 1200, height: 627, alt: "ClassFlow Architecture Case Study" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ClassFlow Case Study — Autonomous SaaS Platform Architecture",
-    description: "Autonomous SaaS platform architecture unifying dynamic matchmaking, Redis Redlock concurrency, and Stripe Connect automated ledgers.",
+    title: "ClassFlow Case Study — Live Tutoring Marketplace Architecture",
+    description: "Live tutoring marketplace platform architecture unifying dynamic matchmaking, Redis Redlock concurrency, and Stripe Connect automated ledgers.",
     images: [ogImage],
   },
 };
@@ -162,8 +162,8 @@ export default function ClassFlowCaseStudy() {
         ]}
       />
       <TechArticleJsonLd
-        title="ClassFlow Case Study — Autonomous SaaS Platform Architecture"
-        description="How Uzair Khatri architected ClassFlow: an autonomous SaaS application unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe ledger reconciliation."
+        title="ClassFlow Case Study — Live Tutoring Marketplace Architecture"
+        description="How Uzair Khatri architected ClassFlow: an automated live tutoring marketplace unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe payouts."
         url="https://uzairkhatri.com/work/classflow/"
         image="https://uzairkhatri.com/linkedin-featured/case-studies.png"
       />
@@ -192,18 +192,18 @@ export default function ClassFlowCaseStudy() {
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
             <div className={styles.heroMeta}>
-              <span className={styles.tag}>Agentic AI / EdTech</span>
+              <span className={styles.tag}>Live Tutoring / EdTech SaaS</span>
               <span className={styles.tag}>12-week delivery</span>
               <span className={styles.tag}>Lead Architect</span>
             </div>
             <h1 className={styles.heroTitle}>
-              ClassFlow <span style={{ display: "block", fontSize: "0.5em", color: "var(--gold-bright)", fontWeight: 700, marginTop: "0.35rem", letterSpacing: "0.02em" }}>Autonomous SaaS Platform Architecture</span>
+              ClassFlow <span style={{ display: "block", fontSize: "0.5em", color: "var(--gold-bright)", fontWeight: 700, marginTop: "0.35rem", letterSpacing: "0.02em" }}>Live Tutoring Marketplace Architecture</span>
             </h1>
-            <p className={styles.heroSub}>Autonomous Online Learning Platform</p>
+            <p className={styles.heroSub}>Automated Global Tutoring &amp; Scheduling Engine</p>
             <p className={styles.heroDesc}>
-              How I designed an enterprise operations engine unifying real-time teacher matchmaking,
-              distributed lock safety with Redis Redlock, and automated Stripe Connect payouts — eliminating
-              100% of manual scheduling workflows.
+              How I architected a high-concurrency education marketplace unifying sub-100ms tutor matchmaking across global timezones,
+              distributed lock safety with Redis Redlock to eliminate double-booking, and automated Stripe Connect teacher payouts — eliminating
+              100% of manual scheduling operations.
             </p>
             <div className={styles.heroFacts}>
               <span><strong>0</strong> manual ops</span>

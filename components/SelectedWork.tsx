@@ -72,21 +72,21 @@ const projects: Project[] = [
     number: "02",
     year: "2024",
     name: "ClassFlow",
-    category: "Agentic Online Learning Platform",
+    category: "Live Tutoring Marketplace SaaS",
     role: "Lead Architect",
     caseStudyUrl: "/work/classflow",
     description:
-      "Architected scheduling, teacher matching, payment disbursement, quality scoring, and real-time class lifecycle systems as one coordinated operational platform.",
-    stack: ["Agentic AI", "FastAPI", "Stripe", "WebSockets", "Redis"],
-    metric: ["0 manual ops", "Scheduling and payment workflows moved into automated system paths"],
+      "Architected automated tutor matching across global timezones, Redis concurrency locks to eliminate double-booking, and automated Stripe teacher payouts.",
+    stack: ["FastAPI", "Redis Redlock", "Stripe Connect", "WebSockets", "PostgreSQL"],
+    metric: ["0 manual ops", "Scheduling and payment reconciliation automated end-to-end"],
     metrics: [
       { label: "Locks", value: "Redis" },
       { label: "Payments", value: "Stripe" },
       { label: "State", value: "Realtime" }
     ],
     diagram: "classflow",
-    challenge: "Moving online learning operations from high-friction manual teacher matching and scheduling runs to a completely autonomous, lock-safe orchestration engine.",
-    solution: "Designed an automated teacher matchmaking pipeline utilizing dynamic scoring and timezone resolution with real-time class state machines.",
+    challenge: "Online tutoring operations suffered from manual scheduling bottlenecks across 14 timezones and concurrent double-booking conflicts during peak enrollment surges.",
+    solution: "Engineered an autonomous matchmaking engine with sub-100ms timezone heuristic scoring, Redis Redlock concurrency holds, and automated Stripe Connect disbursements.",
     blueprint: {
       orchestration: "FastAPI / Python State Machine",
       data: "Redis Locks / WebSockets match feedback",
@@ -261,7 +261,7 @@ function ProjectBlade({
   const tiltGlow = useTiltAndGlow({ maxTilt: 5, scale: 1.015 });
   const bladeSpecs = [
     { spec: "Multi-Agent", spine: "LangGraph" },
-    { spec: "Real-Time Engine", spine: "Redis / Celery" },
+    { spec: "Live Scheduling & Locks", spine: "Redis Redlock / Stripe" },
     { spec: "Financial Ledger", spine: "PostgreSQL ACID" },
     { spec: "Enterprise ECM", spine: "IBM FileNet" },
   ];

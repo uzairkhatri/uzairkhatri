@@ -37,7 +37,7 @@
 
 - **Wellows (AI Search Visibility Platform)**: Designed multi-agent architecture (KIVA, OPTA, Citation Intelligence) using LangGraph and vector search to monitor brand visibility across ChatGPT, Gemini, and Perplexity.
   - Link: https://uzairkhatri.com/work/wellows/
-- **ClassFlow (Agentic Online Learning SaaS)**: Architected automated tutor-student matching with dynamic timezone scoring, Redis distributed locks, and automated Stripe payout reconciliation.
+- **ClassFlow (Live Tutoring Marketplace SaaS)**: Architected automated tutor matching across global timezones (<100ms), Redis Redlock concurrency locks to eliminate double-booking, and automated Stripe Connect teacher payouts.
   - Link: https://uzairkhatri.com/work/classflow/
 - **Savyour (High-Throughput Fintech Ledger)**: Engineered cashback ledger balancing, affiliate attribution pipelines, and Redis caching for high-concurrency commercial transactions.
   - Link: https://uzairkhatri.com/work/savyour/
