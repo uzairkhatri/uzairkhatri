@@ -77,23 +77,19 @@ My working model for AI systems that have to survive real users, real data and r
 
 ---
 
-## 🔧 Selected Engineering Contributions
+## 🧪 Production AI Projects & Experiments
 
-Recent public work in **Sugar Calendar**, focused on page-builder integrations, recurring-event behavior, AI integrations and production hardening.
+Public work I use to explore practical patterns for building and operating AI-assisted systems.
 
-| PR | Contribution | Area |
+| Project | Focus | Evidence |
 |---|---|---|
-| [#803](https://github.com/awesomemotive/sugarcalendar-plugin/pull/803) | Native WPBakery Events Calendar and Events List elements | Builder Integration |
-| [#783](https://github.com/awesomemotive/sugarcalendar-plugin/pull/783) | Native Divi Events Calendar and Events List modules | Builder Integration |
-| [#741](https://github.com/awesomemotive/sugarcalendar-plugin/pull/741) | Recurring-event support for Elementor Theme Builder | Recurring Events |
-| [#724](https://github.com/awesomemotive/sugarcalendar-plugin/pull/724) | WPBakery event content/excerpt handling | WordPress |
-| [#720](https://github.com/awesomemotive/sugarcalendar-plugin/pull/720) | Recurring-event support for Divi Theme Builder | Recurring Events |
-| [#718](https://github.com/awesomemotive/sugarcalendar-plugin/pull/718) | WPBakery recurring-event backend editor fix | Builder Integration |
-| [#667](https://github.com/awesomemotive/sugarcalendar-plugin/pull/667) | Recurring events in Elementor Loop Grid | Elementor |
-| [#644](https://github.com/awesomemotive/sugarcalendar-plugin/pull/644) | AI/MCP Tools integration and Abilities API work | AI Integration |
-| [#630](https://github.com/awesomemotive/sugarcalendar-plugin/pull/630) | Free-ticket checkout without payment setup | Product Engineering |
+| **[fastapi-ai-team](https://github.com/uzairkhatri/fastapi-ai-team)** | Bounded engineering agents, specialist responsibilities, verification and PR handoff | Public repository, agent definitions, skills and workflows |
+| **[claude-fastapi-pack](https://github.com/uzairkhatri/claude-fastapi-pack)** | FastAPI architecture guardrails, async review, migrations and API/PR verification | Public repository, reusable agents and commands |
+| **[uzairkhatri.com](https://uzairkhatri.com)** | Production AI architecture, case studies, services and technical field notes | Public source and live website |
 
-[View Sugar Calendar repository →](https://github.com/awesomemotive/sugarcalendar-plugin)
+> I keep client and employer repositories confidential. This profile highlights only work that is appropriate to share publicly.
+
+**Next:** I am expanding this portfolio with production-focused reference implementations around AI readiness, RAG and agent architecture.
 
 ---
 
