@@ -28,6 +28,16 @@ I'm an AI Solutions Architect and senior software engineer with **12+ years in s
 
 ## 🚀 Featured Engineering
 
+### 🔎 [Production RAG Reference](https://github.com/uzairkhatri/production-rag-reference)
+
+**Build RAG systems you can measure, trace and change without rewriting the application.**
+
+Provider-independent FastAPI reference architecture covering ingestion, hybrid retrieval, reranking, grounded citations, evaluation and operational controls.
+
+**Proof:** runnable local mode · optional OpenAI adapter · Recall@5 + MRR regression gate · citations · trace IDs · retries/timeouts · token controls · tests · CI · Docker
+
+[Repository →](https://github.com/uzairkhatri/production-rag-reference) · [Demo →](https://github.com/uzairkhatri/production-rag-reference/blob/main/docs/demo.md)
+
 ### 🛡️ [Production AI Readiness](https://github.com/uzairkhatri/production-ai-readiness)
 
 **Catch production AI risks before the PR merges.**
@@ -94,6 +104,12 @@ My working model for AI systems that have to survive real users, real data and r
 ---
 
 ## 🧩 Architecture Proof
+
+### Production RAG Reference
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/uzairkhatri/production-rag-reference/main/docs/assets/architecture.svg" alt="Production RAG Reference architecture" width="100%" />
+</p>
 
 ### FastAPI AI Team
 
