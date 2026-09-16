@@ -3,6 +3,7 @@ import { BOOKING_URL, EMAIL_URL, withBasePath } from "./siteLinks";
 import Logo from "./Logo";
 
 const navLinks = [
+  { label: "Insights", href: withBasePath("/insights/") },
   { label: "Services", href: withBasePath("/services/ai-systems/") },
   { label: "Case Studies", href: withBasePath("/case-studies/") },
   { label: "Playbook", href: withBasePath("/ai-playbook/") },

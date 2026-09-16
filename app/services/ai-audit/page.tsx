@@ -40,7 +40,7 @@ export default function AIAuditServicePage() {
         eyebrow="Diagnostic Sprint / Architecture Review"
         title={<>Find the failure points in your AI system <em>before your customers do.</em></>}
         intro="A focused 2-week architectural diagnostic for founders, CTOs, and engineering leaders: isolating hallucination vectors, API rate-limit bottlenecks, token cost leaks, and state corruption risks in your prototype or live product."
-        proof="14+ years across mission-critical enterprise systems, regulated insurance platforms (EFU Life, Jubilee Life), and high-throughput production AI applications."
+        proof="14+ years across mission-critical enterprise systems, regulated insurance platforms (EFU Life), and high-throughput production AI applications."
         primaryLabel="Book Diagnostic Review"
         primaryHref={BOOKING_URL}
         secondaryLabel="Review All Services"
