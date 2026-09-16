@@ -28,11 +28,29 @@ I'm an AI Solutions Architect and senior software engineer with **12+ years in s
 
 ## 🚀 Featured Engineering
 
-| Project | What it demonstrates |
-|---|---|
-| **[production-ai-readiness](https://github.com/uzairkhatri/production-ai-readiness)** | Open-source CLI that audits AI/LLM repositories across **8 production-readiness dimensions**, with evidence-based findings, scoring, SARIF and CI/PR gates. |
-| **[fastapi-ai-team](https://github.com/uzairkhatri/fastapi-ai-team)** | Bounded AI engineering workflows with **11 specialist agents and 7 reusable skills**, designed around repository context, verification and reviewable PR handoff. |
-| **[claude-fastapi-pack](https://github.com/uzairkhatri/claude-fastapi-pack)** | FastAPI architecture and review guardrails for API design, async/SQLAlchemy code, migrations and PR verification. |
+### 🛡️ [Production AI Readiness](https://github.com/uzairkhatri/production-ai-readiness)
+
+**Catch production AI risks before the PR merges.**
+
+A deterministic Python CLI that audits AI/LLM repositories across **8 readiness dimensions** and turns the findings into reviewable engineering evidence.
+
+`Evaluation` · `Observability` · `Guardrails` · `RAG Quality` · `Security & PII` · `Reliability` · `Cost Controls` · `Human Oversight`
+
+**Proof:** runnable CLI · tests · evidence locations · weighted scoring · JSON/Markdown/SARIF · GitHub Actions PR gate · demo applications
+
+[Repository →](https://github.com/uzairkhatri/production-ai-readiness) · [Demo →](https://github.com/uzairkhatri/production-ai-readiness/blob/main/docs/demo.md)
+
+### 🤖 [FastAPI AI Team](https://github.com/uzairkhatri/fastapi-ai-team)
+
+Bounded AI engineering workflow with **11 specialist agents and 7 reusable skills**, designed around repository context, explicit responsibilities, verification and reviewable PR handoff.
+
+**Proof:** public agent definitions · reusable skills · architecture workflow · examples
+
+### ⚙️ [Claude FastAPI Pack](https://github.com/uzairkhatri/claude-fastapi-pack)
+
+FastAPI engineering guardrails for architecture, API design, async/SQLAlchemy code, migrations and PR review.
+
+**Proof:** reusable agents · commands · explicit human-review boundary
 
 **[Explore selected work →](https://uzairkhatri.com/case-studies/)**
 
@@ -62,22 +80,6 @@ My working model for AI systems that have to survive real users, real data and r
 
 ---
 
-## 🧪 Production AI Projects & Experiments
-
-Public work I use to explore practical patterns for building and operating AI-assisted systems.
-
-| Project | Focus | Evidence |
-|---|---|---|
-| **[production-ai-readiness](https://github.com/uzairkhatri/production-ai-readiness)** | Production AI readiness auditing, evidence locations, weighted scoring, SARIF and PR/CI gates | Runnable Python CLI, tests and GitHub Actions |
-| **[fastapi-ai-team](https://github.com/uzairkhatri/fastapi-ai-team)** | Bounded engineering agents, specialist responsibilities, verification and PR handoff | Public repository, agent definitions, skills and workflows |
-| **[claude-fastapi-pack](https://github.com/uzairkhatri/claude-fastapi-pack)** | FastAPI architecture guardrails, async review, migrations and API/PR verification | Public repository, reusable agents and commands |
-
-> I keep client and employer repositories confidential. This profile highlights only work that is appropriate to share publicly.
-
-**Latest build:** [Production AI Readiness](https://github.com/uzairkhatri/production-ai-readiness) turns production-readiness checks into a runnable CLI and CI/PR gate rather than a checklist.
-
----
-
 ## 🧰 Tech Stack
 
 | | |
@@ -91,7 +93,7 @@ Public work I use to explore practical patterns for building and operating AI-as
 
 ---
 
-## 🧩 Public Project Architecture
+## 🧩 Architecture Proof
 
 ### FastAPI AI Team
 
