@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="420" viewBox="0 0 1400 420" role="img" aria-labelledby="title desc">
+  <title id="title">Uzair Khatri — Production AI Systems Architect</title>
+  <desc id="desc">Professional GitHub profile banner focused on production AI systems architecture.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#07111f"/>
+      <stop offset="0.58" stop-color="#0b1628"/>
+      <stop offset="1" stop-color="#07101b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="82%" cy="48%" r="58%">
+      <stop stop-color="#1e5ea8" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#1e5ea8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#4da3ff" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#4da3ff" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#4da3ff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="420" rx="24" fill="url(#bg)"/>
+  <rect width="1400" height="420" rx="24" fill="url(#glow)"/>
+  <g opacity=".22" stroke="#4da3ff" fill="none" stroke-width="1.5">
+    <path d="M940 72h104l38 38h178"/>
+    <path d="M900 340h130l44-44h196"/>
+    <path d="M1060 145h70l34 34h122"/>
+    <circle cx="1044" cy="72" r="4" fill="#4da3ff"/>
+    <circle cx="1074" cy="296" r="4" fill="#4da3ff"/>
+    <circle cx="1130" cy="145" r="4" fill="#4da3ff"/>
+  </g>
+  <g opacity=".12">
+    <circle cx="1190" cy="210" r="118" fill="none" stroke="#70b7ff"/>
+    <circle cx="1190" cy="210" r="82" fill="none" stroke="#70b7ff"/>
+    <circle cx="1190" cy="210" r="46" fill="none" stroke="#70b7ff"/>
+    <path d="M1072 210h236M1190 92v236" stroke="#70b7ff"/>
+  </g>
+  <text x="78" y="104" fill="#8abfff" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" letter-spacing="3">PRODUCTION AI SYSTEMS ARCHITECT</text>
+  <text x="78" y="180" fill="#ffffff" font-family="Arial,Helvetica,sans-serif" font-size="60" font-weight="700">Uzair Khatri</text>
+  <text x="78" y="246" fill="#d7e2f0" font-family="Arial,Helvetica,sans-serif" font-size="30">I turn fragile AI prototypes into production systems.</text>
+  <rect x="78" y="286" width="72" height="4" rx="2" fill="#4da3ff"/>
+  <text x="78" y="338" fill="#91a8c0" font-family="Arial,Helvetica,sans-serif" font-size="18">Agentic AI  ·  Production RAG  ·  AI Platforms  ·  Enterprise Architecture  ·  LLMOps</text>
+  <rect x="78" y="372" width="760" height="1" fill="url(#line)"/>
+  <rect x="1" y="1" width="1398" height="418" rx="23" fill="none" stroke="#28415f" stroke-opacity=".72"/>
+</svg>
