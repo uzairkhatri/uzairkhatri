@@ -1,12 +1,8 @@
+<p align="center">
+  <img src="./assets/profile-hero.svg" alt="Uzair Khatri — Production AI Systems Architect" width="100%" />
+</p>
+
 <div align="center">
-
-# Uzair Khatri
-
-### Production AI Systems Architect
-
-**I turn fragile AI prototypes into production systems.**
-
-Agentic AI · Production RAG · AI Platforms · Enterprise Architecture · LLMOps
 
 [**Website**](https://uzairkhatri.com) · [**Selected Work**](https://uzairkhatri.com/case-studies/) · [**LinkedIn**](https://www.linkedin.com/in/uzair-khatri/) · [**Book a Strategy Call**](https://calendly.com/uz-khatri/30min)
 
