@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "./page.module.css";
-import { BOOKING_URL, CV_URL, withBasePath } from "@/components/siteLinks";
+import SubPageNav from "@/components/SubPageNav";
+import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
@@ -9,37 +10,30 @@ const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
 export const metadata: Metadata = {
   title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
   description:
-    "How Uzair Khatri designed the production AI services and multi-agent workflow architecture for Wellows, coordinating KIVA, OPTA, and Citation Intelligence with LangGraph and vector search.",
+    "How Uzair Khatri designed the production AI services and multi-agent workflow architecture for Wellows, an LLM search visibility platform measuring brand citations across ChatGPT, Gemini, Perplexity, and Google AI, then closing gaps through automated content and technical remediation.",
   alternates: {
     canonical: "https://uzairkhatri.com/work/wellows/",
   },
   openGraph: {
     title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
-    description: "Production AI services and multi-agent workflow architecture coordinating KIVA, OPTA, and Citation Intelligence with LangGraph.",
+    description: "An LLM search visibility platform that measures brand citations in AI answers, then closes the gaps through automated remediation. Multi-agent architecture on LangGraph.",
     url: "https://uzairkhatri.com/work/wellows/",
     images: [{ url: ogImage, width: 1200, height: 627, alt: "Wellows Architecture Case Study" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
-    description: "Production AI services and multi-agent workflow architecture coordinating KIVA, OPTA, and Citation Intelligence with LangGraph.",
+    description: "An LLM search visibility platform that measures brand citations in AI answers, then closes the gaps through automated remediation. Multi-agent architecture on LangGraph.",
     images: [ogImage],
   },
 };
 
-function BackIcon() {
-  return (
-    <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M11 4 6 9l5 5" />
-    </svg>
-  );
-}
 
 const decisions = [
   {
     title: "Multi-agent over monolith",
     problem:
-      "A single AI pipeline for keyword discovery, technical auditing, and brand citation monitoring would share failure modes. One model hallucination or rate-limit would block everything.",
+      "A single AI pipeline for citation monitoring, technical auditing, and content drafting would share failure modes. One model hallucination or rate-limit would block everything.",
     decision:
       "Designed three specialized agents with isolated responsibilities, separate retry logic, and a shared retrieval layer. Failure in one agent does not propagate to the rest of the system.",
     tradeoff:
@@ -53,6 +47,15 @@ const decisions = [
       "Built a vector search layer with chunked ingestion pipelines. Agents query the same store while new data is ingested asynchronously.",
     tradeoff:
       "Requires careful chunk sizing and embedding consistency. Paid off in sub-200ms retrieval latency at query time.",
+  },
+  {
+    title: "Remediation grounded in the same retrieval layer as the audit",
+    problem:
+      "Measuring a visibility gap is only half the product. Drafting content to close that gap without the brand corpus and citation findings produced output that contradicted the platform's own analysis.",
+    decision:
+      "Pointed KIVA at the same Qdrant store the monitoring agents query, so every draft is grounded in the crawl artifacts and citation history that identified the gap in the first place.",
+    tradeoff:
+      "Remediation inherits the retrieval layer's freshness constraints, but measurement and fix stay consistent and one ingestion pipeline serves both.",
   },
   {
     title: "FastAPI for the agent API surface",
@@ -83,12 +86,12 @@ const constraints = [
   {
     label: "Tenant Cost Governance",
     title: "Strict Token Spend Caps",
-    text: "Continuous automated web crawling and citation audits could easily balloon API costs if agent loops ran unbounded without strict token quotas and deterministic cycle limits.",
+    text: "Continuous crawling, citation audits, and remediation content at 10K+ articles a month could easily balloon API costs if agent loops ran unbounded without strict token quotas and deterministic cycle limits.",
   },
   {
     label: "Failure Isolation",
     title: "Zero Shared Mutable State",
-    text: "A transient timeout or hallucination in the keyword discovery agent (KIVA) could not be allowed to corrupt memory or interrupt ongoing citation audits (OPTA).",
+    text: "A transient timeout or hallucination in the content drafting agent (KIVA) could not be allowed to corrupt memory or interrupt ongoing technical audits (OPTA).",
   },
 ];
 
@@ -121,7 +124,7 @@ const failureModes = [
 
 const timeline = [
   ["Week 1-2", "Architecture clarity session. Mapped product goals, user flows, constraints, and the three agent contracts before implementation."],
-  ["Week 3-4", "Built KIVA: keyword intelligence engine, vector ingestion pipeline, OpenAI integration, and production output schema."],
+  ["Week 3-4", "Built KIVA: the writing assistant drafting remediation content against retrieved brand context, plus the vector ingestion pipeline, OpenAI integration, and production output schema."],
   ["Week 5-6", "Built OPTA: technical audit agent, crawler integration, remediation output format, and LangGraph orchestration wiring."],
   ["Week 7-8", "Built Citation Intelligence: multi-LLM monitoring across ChatGPT, Gemini, and Perplexity with sentiment diff logic."],
   ["Week 9-10", "Production hardening: retry logic, cost controls, observability dashboards, load testing, and FastAPI contract finalization."],
@@ -146,8 +149,8 @@ const outcomes = [
   },
   {
     value: "10K+",
-    label: "Concurrent-request target",
-    note: "Load-tested target capacity with SQS queue depth and ECS auto-scaling validated before handoff.",
+    label: "Articles generated per month",
+    note: "Automated remediation output, grounded against the shared Qdrant retrieval layer and processed through SQS-backed generation, review, and publishing services.",
   },
 ];
 
@@ -163,30 +166,11 @@ export default function WellowsCaseStudy() {
       />
       <TechArticleJsonLd
         title="Wellows Case Study — Multi-Agent AI Workflow Architecture"
-        description="How Uzair Khatri designed the production AI services and multi-agent workflow architecture for Wellows, coordinating KIVA, OPTA, and Citation Intelligence with LangGraph and vector search."
+        description="How Uzair Khatri designed the production AI services and multi-agent workflow architecture for Wellows, an LLM search visibility platform measuring brand citations across ChatGPT, Gemini, Perplexity, and Google AI, then closing gaps through automated content and technical remediation."
         url="https://uzairkhatri.com/work/wellows/"
         image="https://uzairkhatri.com/linkedin-featured/case-studies.png"
       />
-      <nav className={styles.topNav}>
-        <a href={withBasePath("/")} className={styles.back}>
-          <BackIcon />
-          Uzair Khatri
-        </a>
-        <div className={styles.topNavRight}>
-          <a href={withBasePath("/insights/")} className={styles.topNavLink}>
-            Insights
-          </a>
-          <a href={withBasePath("/#work")} className={styles.topNavLink}>
-            All work
-          </a>
-          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
-            CV
-          </a>
-          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
-            Book call
-          </a>
-        </div>
-      </nav>
+      <SubPageNav />
 
       <header className={styles.hero}>
         <div className={styles.heroInner}>
@@ -194,16 +178,17 @@ export default function WellowsCaseStudy() {
             <div className={styles.heroMeta}>
               <span className={styles.tag}>AI Agents / SaaS</span>
               <span className={styles.tag}>11-week delivery</span>
-              <span className={styles.tag}>Founding Architect</span>
+              <span className={styles.tag}>Solutions Architect</span>
             </div>
             <h1 className={styles.heroTitle}>
               Wellows <span style={{ display: "block", fontSize: "0.5em", color: "var(--gold-bright)", fontWeight: 700, marginTop: "0.35rem", letterSpacing: "0.02em" }}>Multi-Agent AI Workflow Architecture</span>
             </h1>
-            <p className={styles.heroSub}>AI Search Visibility Platform</p>
+            <p className={styles.heroSub}>LLM Search Visibility Platform</p>
             <p className={styles.heroDesc}>
-              How I designed the production architecture for a multi-agent platform tracking brand
-              visibility across ChatGPT, Gemini, Perplexity, and Google AI, moving from prototype to
-              live business system in eleven weeks.
+              How I designed the production architecture for a platform that measures whether a brand
+              shows up in AI answers across ChatGPT, Gemini, Perplexity, and Google AI, then closes
+              the gaps it finds through automated content generation and technical page remediation.
+              Prototype to live business system in eleven weeks.
             </p>
             <div className={styles.heroFacts}>
               <span><strong>3</strong> production agents</span>
@@ -228,14 +213,16 @@ export default function WellowsCaseStudy() {
               was still a set of disconnected scripts.
             </p>
             <p>
-              Keyword research, technical auditing, and citation monitoring each ran manually. None
-              shared data. There was no orchestration, cost control, observability, or failure
-              isolation. A rate limit or API timeout could break the pipeline silently.
+              Citation monitoring, technical auditing, and content drafting each ran manually. None
+              shared data, so content was written without the visibility findings that should have
+              informed it. There was no orchestration, cost control, observability,
+              or failure isolation. A rate limit or API timeout could break the pipeline silently.
             </p>
             <p>
-              The work was to turn the demo into a product architecture: agents with clear
-              responsibilities, a shared retrieval layer, async processing, typed APIs, and
-              production operating controls.
+              The work was to turn the demo into a product architecture where measurement and
+              remediation share one spine: agents with clear responsibilities, a shared retrieval
+              layer that grounds both the audit and the content written against it, async
+              processing, typed APIs, and production operating controls.
             </p>
           </div>
         </div>
@@ -316,7 +303,7 @@ export default function WellowsCaseStudy() {
                 <div className={styles.diagramAgents}>
                   <div className={`${styles.diagramNode} ${styles.diagramAgent}`}>
                     <strong>KIVA</strong>
-                    <span>Keyword intelligence and search opportunity discovery</span>
+                    <span>Writing assistant drafting grounded remediation content</span>
                   </div>
                   <div className={`${styles.diagramNode} ${styles.diagramAgent}`}>
                     <strong>OPTA</strong>

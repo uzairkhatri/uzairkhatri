@@ -47,14 +47,16 @@ Uzair Khatri (Uzair Iqbal) is a Principal AI Systems Architect and Senior Full-S
 
 ## Detailed Case Studies & Production Proof
 
-### Case Study 1: Wellows — Multi-Agent AI Search Visibility Platform
+### Case Study 1: Wellows — Multi-Agent LLM Search Visibility Platform
 - **URL**: https://uzairkhatri.com/work/wellows/
-- **Role**: Founding Architect
-- **Challenge**: The prototype worked for single-query investor demos but suffered from cascading failures, lack of async queuing, and uncontrolled OpenAI API costs when concurrent users initiated search visibility audits across ChatGPT, Gemini, and Perplexity.
+- **Role**: Solutions Architect
+- **Challenge**: The prototype worked for single-query investor demos but suffered from cascading failures, lack of async queuing, and uncontrolled OpenAI API costs when concurrent users initiated search visibility audits across ChatGPT, Gemini, and Perplexity. Remediation content was also drafted in isolation from the visibility and citation findings that should have informed it.
 - **Architecture**:
-  - Partitioned workflow into three isolated agents: **KIVA** (keyword discovery), **OPTA** (technical auditing), and **Citation Intelligence** (cross-LLM brand citation monitoring).
+  - Partitioned workflow into three isolated agents: **Citation Intelligence** (cross-LLM brand citation monitoring), **OPTA** (technical auditing and page remediation), and **KIVA** (the writing assistant drafting grounded remediation content).
   - Orchestrated via LangGraph with bounded MemorySaver sessions.
-  - Vector search retrieval layer using chunked embedding pipelines with sub-200ms latency.
+  - Shared Qdrant retrieval layer using chunked embedding pipelines with sub-200ms latency, grounding both the analysis agents and the content generation path against the same corpus.
+  - Remediation content pipeline running at 10K+ articles a month through generation, review, and publishing services behind SQS-backed async processing.
+  - Daily citation scoring across ChatGPT, Gemini, Perplexity, and Google AI surfaces.
   - AWS Bedrock failover to Claude 3.5 Sonnet when OpenAI limits were approached.
   - SQS dead-letter queues for unrecoverable crawl errors.
 

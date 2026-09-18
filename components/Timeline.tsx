@@ -6,39 +6,39 @@ import styles from "./Timeline.module.css";
 
 const timelineData = [
   {
-    year: "2025",
-    role: "AI Systems Architect",
-    focus: "Agentic Runtimes & Guardrails",
+    year: "2024",
+    role: "Solutions Architect",
+    focus: "Production AI Content Platform",
     description:
-      "Orchestrates multi-agent systems (LangGraph), vector similarity indexes, and Bedrock failover structures. Hardens AI products to survive production traffic, LLM rate-limits, and token cost budgets.",
+      "Owned the architecture behind 10K+ generated articles a month across generation, review, and publishing services. Ran OpenAI and Claude in production, built the Qdrant retrieval layer that grounds every output, and cut API latency from 800ms to 120ms.",
   },
   {
     year: "2023",
-    role: "Engineering Lead",
-    focus: "Backend Microservices & Distributed Queues",
+    role: "Solutions Architect",
+    focus: "Fintech Platform Architecture",
     description:
-      "Scaled payment payout platforms (Stripe Connect) and asynchronous task executors (Celery/Redis), shifting manual matching runs into lock-safe background worker queues.",
+      "Led backend architecture for a cashback platform with 1M+ customers and 5,000+ daily transactions. Split the monolith into 12 domain services, dropping average feature delivery from 3 weeks to 5 days, and designed settlement flows across 100+ partner integrations.",
   },
   {
     year: "2021",
-    role: "Solutions Architect",
-    focus: "High-Availability Infrastructure",
+    role: "Associate Architect",
+    focus: "Search Services & Regulated Workflows",
     description:
-      "Designed event-driven API gateways, Redis distributed locks (Redlock), and database transaction safety boundaries for concurrent corporate operations.",
+      "Owned search and user-interaction services for a 1M+ customer platform, lifting search-driven engagement 10% through ranking changes, Redis caching, and query-path tuning. Concurrently built Java Spring Boot services and automated 5 IBM FileNet approval workflows for EFU Life and TPL Life.",
   },
   {
-    year: "2018",
-    role: "Senior Backend Systems Engineer",
-    focus: "Monolith Refactoring & Partner Integration",
+    year: "2017",
+    role: "Senior Engineer to Lead Engineer",
+    focus: "Backend APIs & Team Leadership",
     description:
-      "Refactored complex commercial monolithic backends, optimizing affiliate ledgers, API caching, and Postgres transaction performance for brand ecosystems.",
+      "Promoted from senior to lead while owning backend APIs for a core consumer platform. Built Laravel and PHP services behind user actions and merchant integrations, and led and mentored 10 engineers through code review, design discussion, and delivery planning.",
   },
   {
-    year: "2015",
-    role: "Backend Systems Engineer",
-    focus: "Relational Schemas & Transaction Flows",
+    year: "2012",
+    role: "Senior Software Developer to Web Developer",
+    focus: "Hhelios Consultants, Axact, Social Hubris",
     description:
-      "Engineered early transactional database schemas, custom backend architectures, and automated payment integrations for high-availability enterprise web portals.",
+      "Delivered 100+ web applications, CMS integrations, REST APIs, and backend services for enterprise and international clients.",
   },
 ];
 
@@ -88,7 +88,7 @@ export default function Timeline() {
           </div>
           <h2>Selected Experience</h2>
           <p>
-            A 14-year engineering progression from transactional database architectures to scalable, enterprise multi-agent runtimes.
+            A 14-year progression from client web applications to production AI platforms and high-volume fintech backends.
           </p>
         </header>
 
@@ -116,7 +116,7 @@ export default function Timeline() {
               {showAll ? (
                 <>Collapse Earlier History &uarr;</>
               ) : (
-                <>View Full 14-Year Timeline (2015&ndash;2020) &darr;</>
+                <>View Earlier Roles (2012&ndash;2017) &darr;</>
               )}
             </button>
           </div>
