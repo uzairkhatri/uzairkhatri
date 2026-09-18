@@ -30,7 +30,7 @@
   --gold-bright: #d8ad64;
   --content-max: 92rem;
   --page-pad: clamp(1.2rem, 4vw, 4rem);
-  --section-pad: clamp(3.6rem, 6vw, 6.25rem);
+  --section-pad: clamp(3.2rem, 5vw, 5.5rem);
   --hairline-dark: rgba(255, 255, 255, 0.1);
   --hairline-light: rgba(25, 29, 28, 0.13);
 }
@@ -787,7 +787,7 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
   text-transform: uppercase;
 }
 
-.hero-role h2 {
+.hero-role h1 {
   margin: 0;
   max-width: 10.8ch;
   font-family: var(--font-outfit), var(--font-inter), sans-serif;
@@ -799,7 +799,7 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
   white-space: normal;
 }
 
-.hero-role h2 span {
+.hero-role h1 span {
   display: block;
   max-width: none;
   font: inherit;
@@ -810,17 +810,17 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
   -webkit-background-clip: text;
 }
 
-.hero-role h2 span:nth-child(1) {
+.hero-role h1 span:nth-child(1) {
   background-image: linear-gradient(180deg, #ffffff 0%, #d8d5ce 54%, #68635a 100%);
   text-shadow: 0 8px 34px rgba(0, 0, 0, 0.84);
 }
 
-.hero-role h2 span:nth-child(2) {
+.hero-role h1 span:nth-child(2) {
   background-image: linear-gradient(180deg, #fff3d4 0%, #d8ad64 55%, #64431e 100%);
   text-shadow: 0 10px 34px rgba(216, 173, 100, 0.22);
 }
 
-.hero-role h2 span:nth-child(3) {
+.hero-role h1 span:nth-child(3) {
   background-image: linear-gradient(180deg, #edd2a3 0%, #c59b53 48%, #35220f 100%);
   text-shadow: 0 12px 34px rgba(197, 155, 83, 0.28);
 }
@@ -996,7 +996,7 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
     width: min(23rem, 43vw);
   }
 
-  .hero-role h2 {
+  .hero-role h1 {
     font-size: clamp(3rem, 6.1vw, 5.35rem);
   }
 
@@ -1068,7 +1068,7 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
     z-index: 3 !important;
   }
 
-  .hero-role h2 {
+  .hero-role h1 {
     max-width: 10ch;
     font-size: clamp(2.35rem, 10.6vw, 3.25rem);
     white-space: normal;
@@ -1144,7 +1144,7 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
 @media (max-width: 860px) {
   .hero-content,
   .hero-role,
-  .hero-role h2,
+  .hero-role h1,
   .hero-role > span,
   .hero-actions,
   .hero-actions a {
@@ -1192,7 +1192,7 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
     overflow-wrap: break-word;
   }
 
-  .hero-role h2 {
+  .hero-role h1 {
     width: auto !important;
     max-width: 100% !important;
     overflow-wrap: normal;

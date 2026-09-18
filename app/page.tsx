@@ -19,9 +19,6 @@ import AEOQuestions from "@/components/AEOQuestions";
 export default function Home() {
   return (
     <main>
-      <h1 className="sr-only">
-        Uzair Khatri | AI Services, SaaS Applications, Autonomous AI Workflows & Web Development Architect
-      </h1>
       <ScrollReveal />
       <StickyNav />
       <Landing />

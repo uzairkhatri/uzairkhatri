@@ -3,7 +3,7 @@ import { BOOKING_URL } from "@/components/siteLinks";
 import BookRedirectClient from "./BookRedirectClient";
 
 export const metadata: Metadata = {
-  title: "Book an Architecture Strategy Session | Uzair Khatri",
+  title: "Book an Architecture Strategy Session",
   description: "Schedule a 30-minute high-impact architecture strategy session with Uzair Khatri.",
   robots: {
     index: false,

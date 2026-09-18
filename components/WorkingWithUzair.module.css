@@ -2,7 +2,7 @@
   position: relative;
   background: linear-gradient(180deg, #101312 0%, #0d0f14 100%);
   color: #ffffff;
-  padding: clamp(4.5rem, 7vw, 7rem) var(--page-pad);
+  padding: var(--section-pad) var(--page-pad);
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   overflow: hidden;
 }

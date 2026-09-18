@@ -1,7 +1,7 @@
 .section {
   overflow: hidden;
   background: var(--graphite-deep);
-  padding: clamp(4.5rem, 6.5vw, 7rem) var(--page-pad);
+  padding: var(--section-pad) var(--page-pad);
   border-top: 1px solid var(--hairline-dark);
 }
 

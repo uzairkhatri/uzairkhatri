@@ -24,14 +24,14 @@ const capabilities: Capability[] = [
     title: "Enterprise Systems Topology",
     pillars: "State Machines · Queues · Failover · Audit",
     desc: "Structuring microservices and multi-agent workflows with strict memory boundaries, asynchronous worker queues, and automated recovery.",
-    serviceHref: "/services/ai-systems/",
+    serviceHref: "/services/ai-agents/",
   },
   {
     tag: "03 / 0 to 1 Execution",
     title: "AI Product Engineering",
     pillars: "0 to 1 Build · Concurrency Locks · Ledgers",
     desc: "Shipping resilient, monetizable SaaS platforms with distributed concurrency safety, transactional ledger balance, and intuitive controls.",
-    serviceHref: "/services/ai-systems/",
+    serviceHref: "/services/saas-architecture/",
   },
   {
     tag: "04 / Cloud & Edge",

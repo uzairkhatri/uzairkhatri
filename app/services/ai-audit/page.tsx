@@ -6,7 +6,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 const image = "https://uzairkhatri.com/linkedin-featured/services.png";
 
 export const metadata: Metadata = {
-  title: "Production AI & Architecture Diagnostic Review — Uzair Khatri",
+  title: "Production AI & Architecture Diagnostic Review",
   description:
     "A 2-week focused technical review for AI systems and SaaS platforms: isolating hallucination vectors, token cost leaks, rate-limit bottlenecks, and scale risks by Uzair Khatri.",
   alternates: {
