@@ -69,6 +69,7 @@ export default function StickyNav() {
         <a href={withBasePath("/#work")}>Work</a>
         <a href={withBasePath("/services/ai-systems/")}>Services</a>
         <a href={withBasePath("/case-studies/")}>Case Studies</a>
+        <a href={withBasePath("/insights/")}>Insights</a>
         <a href={withBasePath("/#about")}>About</a>
         <a href={CV_URL} target="_blank" rel="noreferrer" title="Download Resume / CV (PDF)">CV</a>
         <a href={withBasePath("/#contact")}>Contact</a>

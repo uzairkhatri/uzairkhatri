@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "../wellows/page.module.css";
-import { BOOKING_URL, CV_URL, withBasePath } from "@/components/siteLinks";
+import SubPageNav from "@/components/SubPageNav";
+import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
@@ -27,13 +28,6 @@ export const metadata: Metadata = {
   },
 };
 
-function BackIcon() {
-  return (
-    <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M11 4 6 9l5 5" />
-    </svg>
-  );
-}
 
 const decisions = [
   {
@@ -168,26 +162,7 @@ export default function SavyourCaseStudy() {
         url="https://uzairkhatri.com/work/savyour/"
         image="https://uzairkhatri.com/linkedin-featured/case-studies.png"
       />
-      <nav className={styles.topNav}>
-        <a href={withBasePath("/")} className={styles.back}>
-          <BackIcon />
-          Uzair Khatri
-        </a>
-        <div className={styles.topNavRight}>
-          <a href={withBasePath("/insights/")} className={styles.topNavLink}>
-            Insights
-          </a>
-          <a href={withBasePath("/#work")} className={styles.topNavLink}>
-            All work
-          </a>
-          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
-            CV
-          </a>
-          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
-            Book call
-          </a>
-        </div>
-      </nav>
+      <SubPageNav />
 
       <header className={styles.hero}>
         <div className={styles.heroInner}>
