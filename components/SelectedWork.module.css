@@ -458,6 +458,14 @@
   padding-top: 1.4rem;
 }
 
+/* .metricPanel span sets --text-muted at a higher specificity, which dropped
+   this kicker to 4.17:1 against the section background. Gold restores it to
+   roughly 8.5:1. */
+.metricPanel .blockKicker {
+  color: var(--gold-bright);
+  opacity: 1;
+}
+
 .blockKicker {
   display: inline-block;
   color: var(--gold-bright);

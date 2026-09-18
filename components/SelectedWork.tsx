@@ -305,7 +305,7 @@ export default function SelectedWork() {
         {/* Dashboard Split Container */}
         <div className={styles.dashboardContainer}>
           
-          <nav className={styles.tabsList} aria-label="Project architecture selector">
+          <nav className={styles.tabsList} role="tablist" aria-label="Project architecture selector">
             {projects.map((proj, idx) => (
               <ProjectBlade
                 key={proj.number}

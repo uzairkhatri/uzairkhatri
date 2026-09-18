@@ -66,7 +66,7 @@ function StarRating() {
 function TestimonialCard({ author, quote, source, location }: { author: string; quote: string; source: string; location?: string }) {
   return (
     <article className={styles.card}>
-      <div className={styles.cardStars} aria-label="Five star rating">
+      <div className={styles.cardStars} role="img" aria-label="Five star rating">
         <StarRating />
       </div>
       <p className={styles.cardText}>&ldquo;{quote}&rdquo;</p>
@@ -130,7 +130,7 @@ export default function TrustStrip() {
 
         <div className={styles.inner}>
           <div className={styles.featured}>
-            <div className={styles.featuredStars} aria-label="Five star rating">
+            <div className={styles.featuredStars} role="img" aria-label="Five star rating">
               <StarRating />
             </div>
             <blockquote className={styles.featuredQuote}>

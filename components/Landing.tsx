@@ -72,7 +72,7 @@ export default function Landing() {
       <div className="hero-grid-3d" aria-hidden="true" />
       
       <nav className="hero-nav" aria-label="Primary navigation">
-        <a href={withBasePath("/")} aria-label="Uzair Khatri home" style={{ border: "none", paddingBottom: 0, textDecoration: "none" }}>
+        <a href={withBasePath("/")} style={{ border: "none", paddingBottom: 0, textDecoration: "none" }}>
           <Logo />
         </a>
         <div className="desktop-nav-links">
