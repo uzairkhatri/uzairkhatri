@@ -27,11 +27,12 @@ export default function Home() {
       <SelectedWork />
       <ProductionCommandCenter />
       <About />
+      <AEOQuestions show="services" />
       <EngagementModels />
       <Timeline />
       <WorkingWithUzair />
       <TrustStrip />
-      <AEOQuestions />
+      <AEOQuestions show="faq" />
       <Contact />
       <Footer />
       <BookingModal />

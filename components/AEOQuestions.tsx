@@ -70,11 +70,22 @@ const faqs: FAQ[] = [
   }
 ];
 
-export default function AEOQuestions() {
+interface AEOQuestionsProps {
+  /** Which half to render. Services and FAQ sit at different points on the page. */
+  show?: "services" | "faq";
+}
+
+export default function AEOQuestions({ show = "services" }: AEOQuestionsProps) {
+  const isFaq = show === "faq";
   return (
-    <section className={styles.section} id="capabilities" aria-label="Capabilities and FAQ">
-      <FaqJsonLd />
+    <section
+      className={styles.section}
+      id={isFaq ? "faq" : "capabilities"}
+      aria-label={isFaq ? "Frequently asked questions" : "Core architectural services"}
+    >
+      {isFaq && <FaqJsonLd />}
       <div className={styles.shell}>
+        {!isFaq && (<>
         <header className={styles.header}>
           <div className={styles.eyebrow}>
             <span className={styles.eyebrowDot} />
@@ -102,6 +113,9 @@ export default function AEOQuestions() {
           ))}
         </div>
 
+        </>)}
+
+        {isFaq && (
         <div className={styles.faqContainer}>
           <h3 className={styles.faqTitle}>
             Frequently Asked Questions (Engagement &amp; Delivery)
@@ -115,6 +129,7 @@ export default function AEOQuestions() {
             </details>
           ))}
         </div>
+        )}
       </div>
     </section>
   );

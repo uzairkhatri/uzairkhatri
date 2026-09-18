@@ -3,7 +3,7 @@
   overflow: hidden;
   background: linear-gradient(180deg, #101312 0%, #151a18 100%);
   color: #ffffff;
-  padding: var(--section-pad) var(--page-pad);
+  padding: 0 var(--page-pad) var(--section-pad);
   border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
@@ -150,9 +150,8 @@
   display: grid;
   grid-template-columns: minmax(15rem, 0.45fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 4rem);
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-  padding-top: clamp(2rem, 4vw, 3rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .processIntro h3 {
