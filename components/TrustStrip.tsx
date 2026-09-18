@@ -124,7 +124,7 @@ export default function TrustStrip() {
         <header className={styles.header}>
           <h2>Client Results &amp; References</h2>
           <p>
-            Verified feedback from technology founders, CTOs, and enterprise partners whose production systems had to perform.
+            Direct feedback from the founders, platform owners, and product teams I have built and stabilised systems for.
           </p>
         </header>
 
