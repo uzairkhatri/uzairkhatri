@@ -974,6 +974,25 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
   }
 }
 
+/* Decorative 3D grid: a 140% x 140% layer carrying two repeating gradients, a
+   radial mask and a perspective transform that projects it past 24000px wide,
+   animating forever. Dropping it on phones measured -21% total blocking time
+   and -12% main-thread work in paired Lighthouse runs. It did NOT move LCP,
+   which is dominated by style and layout across the whole page, not this one
+   element. */
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .hero-grid-3d {
+    display: none;
+  }
+}
+
+/* Tighter vertical rhythm on small screens: 13 sections x 2 edges adds up. */
+@media (max-width: 600px) {
+  :root {
+    --section-pad: clamp(2.4rem, 8vw, 3.2rem);
+  }
+}
+
 @media (max-width: 980px) {
   .hero-canvas {
     grid-template-columns: minmax(0, 0.95fr) minmax(20rem, 0.9fr);
@@ -1801,4 +1820,32 @@ article[id],
 h2[id],
 h3[id] {
   scroll-margin-top: 6rem !important;
+}
+
+/* ── Off-screen work skipping ───────────────────────────────────────────
+   Style & Layout measured 3808ms of main-thread time, three times script
+   evaluation, because every one of ~1100 elements is styled and laid out up
+   front across a 12000px page. content-visibility lets the browser skip that
+   for sections outside the viewport until they approach it.
+
+   The hero is deliberately excluded: it holds the LCP element and must render
+   immediately. contain-intrinsic-size keeps the scrollbar honest before a
+   section has been rendered, and the auto keyword makes the browser remember
+   each section's real size once measured, so scrolling back up stays stable. */
+main > section:not(.hero-canvas) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* Decorative infinite animations keep the compositor and style engine busy for
+   as long as the page is open. On phones, where the CPU budget is smallest,
+   they are not worth their cost. */
+@media (max-width: 900px) {
+  .hero-availability span::before,
+  [class*="pulse"],
+  [class*="shimmer"],
+  [class*="scan"],
+  [class*="rotate"] {
+    animation: none !important;
+  }
 }

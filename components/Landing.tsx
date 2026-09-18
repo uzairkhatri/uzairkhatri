@@ -13,6 +13,10 @@ export default function Landing() {
     const heroElement = heroRef.current;
     if (!heroElement || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    // Pointer parallax is meaningless without a mouse, and the rAF loop would
+    // otherwise run forever on phones, competing with paint on a slow CPU.
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
