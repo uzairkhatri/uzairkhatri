@@ -111,9 +111,9 @@ export default function ManifestoAndStats() {
             <div className={styles.grid}>
               <div className={styles.gridItem}>
                 <strong className={styles.gridValue}>
-                  <AnimatedCounter value="25+" />
+                  <AnimatedCounter value="10K+" />
                 </strong>
-                <span className={styles.linkLabel}>systems shipped beyond prototype state</span>
+                <span className={styles.linkLabel}>articles generated per month on production LLM pipelines</span>
                 <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                   <defs>
                     <linearGradient id="mini-grad-1" x1="0" y1="0" x2="0" y2="1">
@@ -127,9 +127,9 @@ export default function ManifestoAndStats() {
               </div>
               <div className={styles.gridItem}>
                 <strong className={styles.gridValue}>
-                  <AnimatedCounter value="95%" />
+                  <AnimatedCounter value="1M+" />
                 </strong>
-                <span className={styles.linkLabel}>target reliability under peak load</span>
+                <span className={styles.linkLabel}>customers on the fintech platform I architected</span>
                 <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                   <defs>
                     <linearGradient id="mini-grad-2" x1="0" y1="0" x2="0" y2="1">
@@ -143,9 +143,9 @@ export default function ManifestoAndStats() {
               </div>
               <div className={styles.gridItem}>
                 <strong className={styles.gridValue}>
-                  <AnimatedCounter value="3" />
+                  <AnimatedCounter value="12" />
                 </strong>
-                <span className={styles.linkLabel}>named agents orchestrated in production paths</span>
+                <span className={styles.linkLabel}>domain services carved out of a production monolith</span>
                 <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                   <defs>
                     <linearGradient id="mini-grad-3" x1="0" y1="0" x2="0" y2="1">
@@ -159,9 +159,9 @@ export default function ManifestoAndStats() {
               </div>
               <div className={styles.gridItem}>
                 <strong className={styles.gridValue}>
-                  <AnimatedCounter value="0" />
+                  <AnimatedCounter value="120ms" />
                 </strong>
-                <span className={styles.linkLabel}>tolerance for theater without operating proof</span>
+                <span className={styles.linkLabel}>API latency, down from 800ms under the same load</span>
                 <svg viewBox="0 0 100 30" className={styles.miniSparkline} aria-hidden="true">
                   <defs>
                     <linearGradient id="mini-grad-4" x1="0" y1="0" x2="0" y2="1">

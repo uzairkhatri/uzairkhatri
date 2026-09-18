@@ -6,7 +6,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 const image = "https://uzairkhatri.com/linkedin-featured/services.png";
 
 export const metadata: Metadata = {
-  title: "Multi-Agent AI Workflows & LangGraph Architecture — Uzair Khatri",
+  title: "Multi-Agent AI Workflows & LangGraph Architecture",
   description:
     "Production multi-agent AI architecture, LangGraph stateful runtimes, deterministic guardrails, RAG retrieval spines, and fault-isolated agent clusters designed by Uzair Khatri.",
   alternates: {
@@ -40,7 +40,7 @@ export default function AIAgentsServicePage() {
         eyebrow="Agentic AI Workflows & Runtimes"
         title={<>Multi-agent systems designed for <em>unforgiving production.</em></>}
         intro="I architect stateful, error-isolated multi-agent workflows using LangGraph, structured memory contracts, deterministic guardrails, and asynchronous task execution that survive model rate-limits, context bloat, and hallucinations."
-        proof="Founding Architect of the Wellows multi-agent platform (KIVA, OPTA, Citation Intelligence) with sub-200ms vector retrieval and 80% manual workflow reduction."
+        proof="Solutions Architect on the Wellows LLM search visibility platform (KIVA, OPTA, Citation Intelligence) with sub-200ms vector retrieval and 80% manual workflow reduction."
         primaryLabel="Discuss Agent Architecture"
         primaryHref={BOOKING_URL}
         secondaryLabel="Read Wellows Case Study"

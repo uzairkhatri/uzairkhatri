@@ -34,24 +34,24 @@ const projects: Project[] = [
     number: "01",
     year: "2024",
     name: "Wellows",
-    category: "AI Search Visibility Platform",
-    role: "Founding Architect",
+    category: "LLM Search Visibility Platform",
+    role: "Solutions Architect",
     caseStudyUrl: "/work/wellows",
     description:
-      "Designed the agent workflows, retrieval layer, backend services, and infrastructure path for production-grade AI search visibility across ChatGPT, Gemini, Perplexity, and Google AI surfaces.",
-    stack: ["LangGraph", "OpenAI", "FastAPI", "Vector Search", "AWS"],
-    metric: ["3 agents active", "KIVA, OPTA, and Citation Intelligence orchestration"],
+      "Designed the agent workflows, shared retrieval layer, backend services, and infrastructure path for a platform that measures brand visibility across ChatGPT, Gemini, Perplexity, and Google AI, then closes the gaps through automated content and technical page remediation.",
+    stack: ["LangGraph", "OpenAI", "Claude", "FastAPI", "Qdrant", "AWS"],
+    metric: ["3 agents active", "Citation measurement and automated remediation on one spine"],
     metrics: [
       { label: "Runtime", value: "LangGraph" },
       { label: "Safety", value: "Guardrails" },
       { label: "Tracing", value: "LangSmith" }
     ],
     diagram: "wellows",
-    challenge: "Wellows prototype worked in investor demos but lacked cost controls, async orchestration, and failure boundaries required to support concurrent enterprise users.",
-    solution: "Orchestrated three specialized agents (KIVA, OPTA, and Citation Intelligence) using LangGraph and isolated error queues, ensuring failure in one did not crash the system.",
+    challenge: "Wellows prototype worked in investor demos but lacked cost controls, async orchestration, and failure boundaries required to support concurrent enterprise users. Remediation content was also drafted without the visibility findings that should have informed it.",
+    solution: "Orchestrated three specialized agents (KIVA, OPTA, and Citation Intelligence) using LangGraph and isolated error queues, ensuring failure in one did not crash the system, and grounded KIVA against the same Qdrant store the monitoring agents query.",
     blueprint: {
       orchestration: "LangGraph / FastAPI / Python",
-      data: "Vector Index / Ingestion pipeline",
+      data: "Qdrant index / Shared ingestion pipeline",
       infra: "AWS SQS Queues / ECS Containers"
     },
     schema: {

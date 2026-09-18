@@ -6,7 +6,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 const image = "https://uzairkhatri.com/linkedin-featured/services.png";
 
 export const metadata: Metadata = {
-  title: "SaaS Architecture & Distributed Systems Engineering — Uzair Khatri",
+  title: "SaaS Architecture & Distributed Systems Engineering",
   description:
     "Production SaaS application architecture, Redis Redlock distributed locks, idempotent financial ledgers, Stripe Connect integrations, and scalable cloud microservices by Uzair Khatri.",
   alternates: {

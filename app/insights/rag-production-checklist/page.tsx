@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import styles from "../insights.module.css";
-import { BOOKING_URL, CV_URL, withBasePath } from "@/components/siteLinks";
+import SubPageNav from "@/components/SubPageNav";
+import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
 const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png";
 
 export const metadata: Metadata = {
-  title: "The Production RAG Architecture Checklist — Uzair Khatri",
+  title: "The Production RAG Architecture Checklist",
   description:
     "Why naive vector search fails in production. An architectural checklist covering chunking, hybrid BM25 search, semantic re-ranking, and sub-200ms latency budgets by Uzair Khatri.",
   alternates: {
@@ -26,13 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-function BackIcon() {
-  return (
-    <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ width: "1.1rem" }}>
-      <path d="M11 4 6 9l5 5" />
-    </svg>
-  );
-}
 
 export default function RagProductionChecklistArticle() {
   return (
@@ -51,26 +45,7 @@ export default function RagProductionChecklistArticle() {
         image={ogImage}
       />
 
-      <nav className={styles.topNav}>
-        <a href={withBasePath("/insights/")} className={styles.back}>
-          <BackIcon />
-          All Insights
-        </a>
-        <div className={styles.topNavRight}>
-          <a href={withBasePath("/services/ai-systems/")} className={styles.topNavLink}>
-            Services
-          </a>
-          <a href={withBasePath("/case-studies/")} className={styles.topNavLink}>
-            Case Studies
-          </a>
-          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
-            CV
-          </a>
-          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
-            Book call
-          </a>
-        </div>
-      </nav>
+      <SubPageNav backHref={withBasePath("/insights/")} backLabel="All Insights" />
 
       <header className={styles.articleHero}>
         <div className={styles.articleHeroInner}>

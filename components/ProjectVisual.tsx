@@ -44,10 +44,10 @@ const nodeDescriptions: Record<string, string> = {
   "w-ingest": "FastAPI entry point throttling incoming search visibility requests and managing token headers.",
   "w-guard": "LlamaGuard safety model validating prompt injection safety before agent workflow allocation.",
   "w-router": "LangGraph StateGraph router managing state context, task distribution, and agent handoffs.",
-  "w-kiva": "Specialized agent query handler identifying search visibility opportunities.",
+  "w-kiva": "Writing assistant drafting remediation content grounded in retrieved brand context.",
   "w-opta": "Audit agent crawling search surfaces and resolving technical citation anomalies.",
   "w-citation": "Compliance monitoring agent tracking brand visibility and sentiment variations across LLMs.",
-  "w-vector": "Shared pgvector database cluster containing cached competitor crawls (queries <120ms).",
+  "w-vector": "Shared Qdrant vector cluster containing cached competitor crawls (queries <120ms).",
   "w-llm": "Primary LLM node (GPT-4o) running structured JSON parsers for citation audit outputs.",
   "w-fallback": "Failover AWS Bedrock (Claude 3.5 Sonnet) activated automatically on primary rate-limits.",
   "w-judge": "Self-Correction LLM Evaluator scoring output confidence. Triggers plan retry if confidence <0.85.",
@@ -227,7 +227,7 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 3 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("w-kiva")} onMouseEnter={() => setHoveredNode("w-kiva")} onMouseLeave={() => setHoveredNode(null)}>
         <rect x="330" y="30" width="110" height="40" rx="6" />
         <text x="385" y="48" className={styles.nodeTitle}>KIVA Agent</text>
-        <text x="385" y="60" className={styles.nodeSub}>Keyword Classifier</text>
+        <text x="385" y="60" className={styles.nodeSub}>Writing Assistant</text>
       </motion.g>
 
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 4 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("w-opta")} onMouseEnter={() => setHoveredNode("w-opta")} onMouseLeave={() => setHoveredNode(null)}>
@@ -244,7 +244,7 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
 
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 6 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("w-vector")} onMouseEnter={() => setHoveredNode("w-vector")} onMouseLeave={() => setHoveredNode(null)}>
         <rect x="480" y="30" width="120" height="40" rx="6" />
-        <text x="540" y="48" className={styles.nodeTitle} fill="#00d66f !important">PGVector Index</text>
+        <text x="540" y="48" className={styles.nodeTitle} fill="#00d66f !important">Qdrant Index</text>
         <text x="540" y="60" className={styles.nodeSub}>Vector Ingestion</text>
       </motion.g>
 

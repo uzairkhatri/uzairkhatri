@@ -140,11 +140,11 @@ export default function Landing() {
         </div>
 
         <div className="hero-role">
-          <h2>
+          <h1>
             <span>Fragile AI.</span>
             <span>Rebuilt for</span>
             <span>Production.</span>
-          </h2>
+          </h1>
           <p className="hero-thesis">
             I architect production AI systems, multi-agent runtimes, and enterprise cloud backends that stay reliable beyond the demo.
           </p>

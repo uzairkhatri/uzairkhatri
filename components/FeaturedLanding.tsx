@@ -61,10 +61,10 @@ export default function FeaturedLanding({
       <nav className={styles.nav} aria-label="Page navigation">
         <a href={withBasePath("/")} aria-label="Uzair Khatri home"><Logo compact /></a>
         <div className={styles.navLinks}>
+          <a href={withBasePath("/#work")}>Work</a>
           <a href={withBasePath("/services/ai-systems/")}>Services</a>
           <a href={withBasePath("/case-studies/")}>Case Studies</a>
           <a href={withBasePath("/insights/")}>Insights</a>
-          <a href={withBasePath("/#work")}>Work</a>
           <a href={CV_URL} target="_blank" rel="noreferrer">CV</a>
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.navCta}>Book a call</a>
         </div>

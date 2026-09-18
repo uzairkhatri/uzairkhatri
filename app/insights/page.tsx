@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import styles from "./insights.module.css";
-import { BOOKING_URL, CV_URL, withBasePath } from "@/components/siteLinks";
+import SubPageNav from "@/components/SubPageNav";
+import { withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 const image = "https://uzairkhatri.com/linkedin-featured/services.png";
 
 export const metadata: Metadata = {
-  title: "Architecture Insights & Engineering Essays — Uzair Khatri",
+  title: "Architecture Insights & Engineering Essays",
   description:
     "Production AI architecture teardowns, agentic guardrail blueprints, RAG checklists, and distributed systems engineering notes by Uzair Khatri.",
   alternates: {
@@ -26,13 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-function BackIcon() {
-  return (
-    <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ width: "1.1rem" }}>
-      <path d="M11 4 6 9l5 5" />
-    </svg>
-  );
-}
 
 const articles = [
   {
@@ -83,26 +77,7 @@ export default function InsightsHub() {
         ]}
       />
 
-      <nav className={styles.topNav}>
-        <a href={withBasePath("/")} className={styles.back}>
-          <BackIcon />
-          Uzair Khatri
-        </a>
-        <div className={styles.topNavRight}>
-          <a href={withBasePath("/services/ai-systems/")} className={styles.topNavLink}>
-            Services
-          </a>
-          <a href={withBasePath("/case-studies/")} className={styles.topNavLink}>
-            Case Studies
-          </a>
-          <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.topNavLink}>
-            CV
-          </a>
-          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
-            Book call
-          </a>
-        </div>
-      </nav>
+      <SubPageNav />
 
       <header className={styles.hubHero}>
         <div className={styles.hubHeroInner}>

@@ -35,7 +35,7 @@
 
 ## Representative Case Studies
 
-- **Wellows (AI Search Visibility Platform)**: Designed multi-agent architecture (KIVA, OPTA, Citation Intelligence) using LangGraph and vector search to monitor brand visibility across ChatGPT, Gemini, and Perplexity.
+- **Wellows (LLM Search Visibility Platform)**: Designed multi-agent architecture (KIVA, OPTA, Citation Intelligence) using LangGraph and a shared Qdrant retrieval layer. The platform measures brand citations in AI answers across ChatGPT, Gemini, Perplexity and Google AI, then closes the gaps it finds through automated content remediation at 10K+ articles a month and technical page fixes.
   - Link: https://uzairkhatri.com/work/wellows/
 - **ClassFlow (Live Tutoring Marketplace SaaS)**: Architected automated tutor matching across global timezones (<100ms), Redis Redlock concurrency locks to eliminate double-booking, and automated Stripe Connect teacher payouts.
   - Link: https://uzairkhatri.com/work/classflow/
