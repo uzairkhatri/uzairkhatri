@@ -20,7 +20,7 @@ const ecosystems: EcosystemBrand[] = [
   },
   {
     name: "Savyour",
-    domain: "60k+ DAU Fintech Platform",
+    domain: "1M+ Customer Fintech Platform",
     icon: ({ className }) => (
       <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />

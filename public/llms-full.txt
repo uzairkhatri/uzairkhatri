@@ -40,7 +40,7 @@ Uzair Khatri (Uzair Iqbal) is a Principal AI Systems Architect and Senior Full-S
 - **Problem Solved**: Slow, unoptimized web applications lose user trust and degrade search rankings.
 - **Engineering Approach**:
   - **Modern Stack**: Next.js 15 (App Router, Server Components), TypeScript, React 19, Vanilla CSS Modules.
-  - **Global Delivery**: Static asset pre-rendering and edge deployment via Cloudflare Workers & Pages for sub-50ms global TTFB.
+  - **Global Delivery**: Static asset pre-rendering and edge deployment via Cloudflare Workers & Pages for low-latency global TTFB.
   - **Bespoke Visuals**: Three.js and React Three Fiber interactive 3D command center components with responsive fallback support.
 
 ---

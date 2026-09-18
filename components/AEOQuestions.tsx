@@ -36,7 +36,7 @@ const capabilities: Capability[] = [
   {
     tag: "04 / Cloud & Edge",
     title: "Cloud & Platform Infrastructure",
-    pillars: "AWS Cloud · Edge Delivery · Sub-50ms TTFB",
+    pillars: "AWS Cloud · Edge Delivery · Global CDN Caching",
     desc: "Deploying high-throughput Next.js and FastAPI runtimes with global edge caching, automated CI/CD pipelines, and enterprise SLA compliance.",
     serviceHref: "/services/ai-systems/",
   },

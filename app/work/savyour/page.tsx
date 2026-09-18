@@ -10,7 +10,7 @@ const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
 export const metadata: Metadata = {
   title: "Savyour Case Study — High-Throughput Fintech SaaS Ledger",
   description:
-    "How Uzair Khatri architected high-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's 650+ partner cashback platform.",
+    "How Uzair Khatri architected high-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's 100+ partner cashback platform.",
   alternates: {
     canonical: "https://uzairkhatri.com/work/savyour/",
   },
@@ -33,7 +33,7 @@ const decisions = [
   {
     title: "Idempotent Webhook Processing via HMAC & Redis Keys",
     problem:
-      "650+ affiliate networks and merchant partners dispatch webhook notifications with unpredictable retry behaviors, out-of-order deliveries, and duplicate payloads that threatened wallet double-crediting.",
+      "100+ affiliate networks and merchant partners dispatch webhook notifications with unpredictable retry behaviors, out-of-order deliveries, and duplicate payloads that threatened wallet double-crediting.",
     decision:
       "Engineered an ingestion barrier verifying HMAC-SHA256 partner signatures and enforcing deterministic idempotency keys via Redis atomic operations (SETNX with 72-hour TTL) before entering async task queues.",
     tradeoff:
@@ -125,7 +125,7 @@ const timeline = [
 
 const outcomes = [
   {
-    value: "650+",
+    value: "100+",
     label: "Integrated brand partners",
     note: "Supported across Daraz, Foodpanda, local retailers, and international affiliate networks without ingestion failures.",
   },
@@ -137,7 +137,7 @@ const outcomes = [
   {
     value: "<50ms",
     label: "P95 wallet query latency",
-    note: "Sub-50ms balance retrieval latency under high concurrent mobile consumer traffic.",
+    note: "Cached balance retrieval under high concurrent mobile consumer traffic.",
   },
   {
     value: "100%",
@@ -158,7 +158,7 @@ export default function SavyourCaseStudy() {
       />
       <TechArticleJsonLd
         title="Savyour Case Study — High-Throughput Fintech SaaS Ledger"
-        description="How Uzair Khatri architected high-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's 650+ partner cashback platform."
+        description="How Uzair Khatri architected high-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's 100+ partner cashback platform."
         url="https://uzairkhatri.com/work/savyour/"
         image="https://uzairkhatri.com/linkedin-featured/case-studies.png"
       />
@@ -178,11 +178,11 @@ export default function SavyourCaseStudy() {
             <p className={styles.heroSub}>Enterprise Cashback &amp; Affiliate Ecosystem</p>
             <p className={styles.heroDesc}>
               How I architected high-throughput webhook ingestion, double-entry financial ledgers,
-              and hierarchical Redis caching for a consumer rewards platform serving 650+ brand partners
+              and hierarchical Redis caching for a consumer rewards platform serving 100+ brand partners
               and millions of monthly transactions.
             </p>
             <div className={styles.heroFacts}>
-              <span><strong>650+</strong> brand partners</span>
+              <span><strong>100+</strong> brand partners</span>
               <span><strong>99.4%</strong> cache hit ratio</span>
               <span><strong>&lt;50ms</strong> P95 wallet query</span>
             </div>
@@ -279,7 +279,7 @@ export default function SavyourCaseStudy() {
             <div className={styles.diagramBody}>
               <div className={styles.diagramRow}>
                 <div className={styles.diagramNode}>
-                  <strong>650+ Partner Webhooks</strong>
+                  <strong>100+ Partner Webhooks</strong>
                   <span>Affiliate networks &amp; merchants</span>
                 </div>
                 <div className={styles.diagramArrow} aria-hidden="true" />
@@ -295,7 +295,7 @@ export default function SavyourCaseStudy() {
                   </div>
                   <div className={`${styles.diagramNode} ${styles.diagramAgent}`}>
                     <strong>Two-Tier Redis Cache</strong>
-                    <span>Sub-50ms brand tiers &amp; balance reads</span>
+                    <span>Cached brand tiers &amp; balance reads</span>
                   </div>
                   <div className={`${styles.diagramNode} ${styles.diagramAgent}`}>
                     <strong>Payout Outbox Engine</strong>
@@ -387,7 +387,7 @@ export default function SavyourCaseStudy() {
           <p className={styles.eyebrow}>Outcomes</p>
           <h2 className={styles.sectionTitle}>Hard metrics from real consumer scale.</h2>
           <p className={styles.sectionDesc}>
-            Eliminated duplicate payout exploits completely while maintaining sub-50ms responsiveness
+            Eliminated duplicate payout exploits while maintaining responsive balance reads
             during peak nationwide retail promotions.
           </p>
           <div className={styles.outcomeGrid}>

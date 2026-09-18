@@ -40,7 +40,7 @@ export default function SaasArchitectureServicePage() {
         eyebrow="SaaS Platform & Distributed Systems"
         title={<>Scalable SaaS backends built for <em>strict concurrency & data safety.</em></>}
         intro="I architect multi-tenant SaaS platforms, distributed concurrency locks, idempotent financial transaction ledgers, and high-throughput cloud microservices that eliminate race conditions, double-spend vulnerabilities, and database deadlocks."
-        proof="Architect of ClassFlow (Redis Redlock instructor matchmaking, Stripe Connect ledgers) and Savyour (650+ partner high-concurrency cashback ledger with sub-50ms balance retrieval)."
+        proof="Architect of ClassFlow (Redis Redlock instructor matchmaking, Stripe Connect ledgers) and Savyour (100+ partner high-concurrency cashback ledger with cached balance retrieval)."
         primaryLabel="Discuss SaaS Architecture"
         primaryHref={BOOKING_URL}
         secondaryLabel="Read ClassFlow Case Study"
@@ -48,7 +48,7 @@ export default function SaasArchitectureServicePage() {
         stats={[
           { value: "100%", label: "Ledger reconciliation accuracy across double-entry transactions" },
           { value: "<100ms", label: "Dynamic matchmaking & distributed lock resolution" },
-          { value: "650+", label: "High-throughput affiliate & e-commerce partner integrations" },
+          { value: "100+", label: "High-throughput affiliate & e-commerce partner integrations" },
         ]}
         sectionEyebrow="SaaS Engineering Deliverables"
         sectionTitle="Eliminating race conditions, ledger drift, and scale bottlenecks."

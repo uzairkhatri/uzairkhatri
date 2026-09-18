@@ -30,7 +30,7 @@
 
 ### 4. High-Performance Web Development
 - **Modern Frameworks**: Next.js 15 (App Router, Server Components), React 19, TypeScript.
-- **Edge Deployment**: Sub-50ms global delivery via Cloudflare Edge Network.
+- **Edge Deployment**: Global delivery via Cloudflare Edge Network.
 - **Interactive Experiences**: Bespoke dark UI, dynamic telemetry monitors, and Three.js / React Three Fiber visualizers.
 
 ## Representative Case Studies

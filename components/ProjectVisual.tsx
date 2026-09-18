@@ -22,19 +22,19 @@ const visualData = {
   classflow: {
     brand: "ClassFlow",
     title: "Scheduler & Ledger Engine",
-    metric: "0 manual ops",
+    metric: "Automated ops",
     tabs: ["Redis Redlock", "Timezone Matcher", "Serializable DB Ledger"]
   },
   savyour: {
     brand: "Savyour",
     title: "Idempotent Webhook Ingestion & Cache",
-    metric: "650+ partners",
+    metric: "100+ partners",
     tabs: ["HMAC Verification", "Bloom Filter ID", "Cache Eviction"]
   },
   efu: {
     brand: "EFU Life",
     title: "Enterprise Document Case Routing",
-    metric: "100% paperless",
+    metric: "5 workflows",
     tabs: ["OCR Datacap Queue", "FileNet Store", "AD/LDAP Access"]
   }
 };
@@ -47,7 +47,7 @@ const nodeDescriptions: Record<string, string> = {
   "w-kiva": "Writing assistant drafting remediation content grounded in retrieved brand context.",
   "w-opta": "Audit agent crawling search surfaces and resolving technical citation anomalies.",
   "w-citation": "Compliance monitoring agent tracking brand visibility and sentiment variations across LLMs.",
-  "w-vector": "Shared Qdrant vector cluster containing cached competitor crawls (queries <120ms).",
+  "w-vector": "Shared Qdrant vector cluster containing cached competitor crawls (retrieval under 200ms).",
   "w-llm": "Primary LLM node (GPT-4o) running structured JSON parsers for citation audit outputs.",
   "w-fallback": "Failover AWS Bedrock (Claude 3.5 Sonnet) activated automatically on primary rate-limits.",
   "w-judge": "Self-Correction LLM Evaluator scoring output confidence. Triggers plan retry if confidence <0.85.",

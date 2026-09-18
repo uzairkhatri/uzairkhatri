@@ -90,7 +90,7 @@ const serviceSchema = {
         "itemOffered": {
           "@type": "Service",
           "name": "High-Performance Web Development",
-          "description": "Engineering modern Next.js 15 web applications with React 19, TypeScript, edge rendering, and sub-50ms global delivery."
+          "description": "Engineering modern Next.js 15 web applications with React 19, TypeScript, edge rendering, and global edge delivery."
         }
       }
     ]

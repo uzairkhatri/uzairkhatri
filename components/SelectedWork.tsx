@@ -26,7 +26,6 @@ type Project = {
     data: string;
     infra: string;
   };
-  schema: Record<string, any>;
 };
 
 const projects: Project[] = [
@@ -54,19 +53,6 @@ const projects: Project[] = [
       data: "Qdrant index / Shared ingestion pipeline",
       infra: "AWS SQS Queues / ECS Containers"
     },
-    schema: {
-      "orchestration": {
-        "engine": "LangGraph StateGraph",
-        "nodes": ["KIVA_agent", "OPTA_agent", "Citation_Intelligence"],
-        "max_concurrency_threads": 64,
-        "state_context_store": "MemorySaver (Session Bound)"
-      },
-      "resilience": {
-        "provider_failover": "Claude-3.5-Sonnet (via AWS Bedrock)",
-        "rate_limiting_retry": "Exponential backoff with jitter",
-        "dead_letter_queue": "aws-sqs-wellows-errors"
-      }
-    }
   },
   {
     number: "02",
@@ -78,7 +64,7 @@ const projects: Project[] = [
     description:
       "Architected automated tutor matching across global timezones, Redis concurrency locks to eliminate double-booking, and automated Stripe teacher payouts.",
     stack: ["FastAPI", "Redis Redlock", "Stripe Connect", "WebSockets", "PostgreSQL"],
-    metric: ["0 manual ops", "Scheduling and payment reconciliation automated end-to-end"],
+    metric: ["Automated ops", "Scheduling, matching, and payout reconciliation run without manual steps"],
     metrics: [
       { label: "Locks", value: "Redis" },
       { label: "Payments", value: "Stripe" },
@@ -92,18 +78,6 @@ const projects: Project[] = [
       data: "Redis Locks / WebSockets match feedback",
       infra: "Stripe payout system / AWS ECS"
     },
-    schema: {
-      "matchmaker_engine": {
-        "scoring_matrix": ["timezone_offset", "historical_rating", "active_load"],
-        "lock_safety": "Redis Distributed Mutex (Redlock)",
-        "lock_ttl_seconds": 45
-      },
-      "ledger_consistency": {
-        "transaction_isolation": "PostgreSQL Serializable",
-        "payout_provider": "Stripe Custom Accounts",
-        "match_resolution": "real-time WebSocket state client"
-      }
-    }
   },
   {
     number: "03",
@@ -115,7 +89,7 @@ const projects: Project[] = [
     description:
       "Contributed backend architecture across cashback calculation, partner integrations, wallet flows, payment disbursement, and AI shopping assistance for a large consumer marketplace.",
     stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Payment APIs"],
-    metric: ["650+ brands", "Brand-partner ecosystem supported through integration architecture"],
+    metric: ["100+ partners", "Merchant integrations served by the settlement and partner API layer"],
     metrics: [
       { label: "Ledger", value: "ACID" },
       { label: "Events", value: "Webhooks" },
@@ -129,17 +103,6 @@ const projects: Project[] = [
       data: "PostgreSQL Ledger / Transaction Isolation",
       infra: "Partner webhook channels / AWS"
     },
-    schema: {
-      "ledger_accounting": {
-        "idempotency_key": "x-savyour-transaction-id",
-        "isolation_level": "PostgreSQL Repeatable Read",
-        "cache_invalidation": "Redis namespaces key pattern"
-      },
-      "webhook_ingestion": {
-        "rate_limit": 2500,
-        "security_verification": "HMAC-SHA256 signature verification"
-      }
-    }
   },
   {
     number: "04",
@@ -150,7 +113,7 @@ const projects: Project[] = [
     description:
       "Implemented IBM FileNet P8, Case Manager, and Capture to move document-heavy insurance operations toward digital case management and paperless delivery.",
     stack: ["IBM FileNet", "Case Manager", "Capture", "Workflow Automation"],
-    metric: ["100% paperless", "Paperless delivery path for enterprise document workflows"],
+    metric: ["5 workflows", "IBM FileNet approval chains automated, cutting turnaround from weeks to days"],
     metrics: [
       { label: "Workflow", value: "Case P8" },
       { label: "Capture", value: "Datacap" },
@@ -164,54 +127,17 @@ const projects: Project[] = [
       data: "FileNet P8 Content Repository",
       infra: "On-Premise Server High Availability clusters"
     },
-    schema: {
-      "document_pipeline": {
-        "ingestion": "IBM Datacap capture queues",
-        "indexing_metadata": "IBM FileNet P8 Metadata schema",
-        "access_control": "LDAP Active Directory synchronized ACLs"
-      },
-      "case_routing": {
-        "workflow_engine": "IBM Process Engine PE engine",
-        "failover": "Clustered active-active database replica"
-      }
-    }
   },
 ];
 
-const projectTraces: Record<string, string[]> = {
-  "Wellows": [
-    "[INFO] Initializing multi-agent orchestration (KIVA + OPTA)...",
-    "[TRACE] Ingestion pipeline: Fetching Perplexity citations & search signals",
-    "[DEBUG] DB Search: Querying Vector similarity indexes...",
-    "[RESOLVED] Vector database returns 88 items (confidence > 0.91)",
-    "[TRACE] OPTA Node: Executing citation optimization via GPT-4o",
-    "[MUTATION] Updating search visibility audit cache...",
-    "[SUCCESS] Process completed in 1420ms. Gateways clear."
-  ],
-  "ClassFlow": [
-    "[INFO] Received class lifecycle event trigger (User #408)...",
-    "[LOCK] Redis Mutex: Setting lock on teacher_slot_892",
-    "[TRACE] Matchmaker agent: Scoring candidates in UTC-5 timezone",
-    "[MUTATION] Booking ledger: Writing class lifecycle matching data",
-    "[PAYMENT] Stripe transfer: Initiating partner disbursement batch",
-    "[SUCCESS] DB locks released. 0 manual operations triggered."
-  ],
-  "Savyour": [
-    "[INFO] Cashback payload received from brand partner webhook...",
-    "[TRACE] Database isolation: Starting Postgres ACID transaction",
-    "[CACHE] Redis key invalidation: cash_ledger:user_991",
-    "[TRACE] Cashback engine: Calculating reward event details (4.5% rate)",
-    "[COMMIT] Financial ledger commit completed and confirmed",
-    "[SUCCESS] Reward transaction logged. Cashback state synchronized."
-  ],
-  "EFU Life": [
-    "[INFO] Scanning high-volume paperless case directory...",
-    "[TRACE] Capture engine: FileNet metadata extraction in process",
-    "[WORKFLOW] Case Manager: Routing claims document #10928 to agent",
-    "[COMPLIANCE] Compliance rules: checking signature verification state",
-    "[ARCHIVE] Content Store: metadata index written to P8 cluster",
-    "[SUCCESS] Case route complete. compliance audit trail updated."
-  ]
+// How many nodes each project's architecture diagram walks through. This drives
+// the sequential node highlight in ProjectVisual via activeLogIndex; it is a
+// presentation timer, not a record of anything the system did.
+const diagramSteps: Record<string, number> = {
+  Wellows: 7,
+  ClassFlow: 6,
+  Savyour: 6,
+  "EFU Life": 6,
 };
 
 const cardVariants = {
@@ -311,9 +237,7 @@ function ProjectBlade({
 
 export default function SelectedWork() {
   const [activeTab, setActiveTab] = useState(0);
-  const [telemetryLines, setTelemetryLines] = useState<string[]>([]);
   const [activeLogIndex, setActiveLogIndex] = useState(7);
-  const [consoleView, setConsoleView] = useState<"log" | "schema">("log");
   const activeProject = projects[activeTab];
 
   const handleTabChange = (index: number) => {
@@ -321,31 +245,24 @@ export default function SelectedWork() {
     setActiveTab(index);
   };
 
-  // Telemetry loop hook: runs once, then enters an idle monitor standby
+  // Advances the architecture diagram's highlighted node, then settles.
   useEffect(() => {
-    const activeTraces = projectTraces[activeProject.name] || [];
-    setTelemetryLines([activeTraces[0]]);
+    const steps = diagramSteps[activeProject.name] ?? 6;
     setActiveLogIndex(0);
 
-    let lineIndex = 1;
+    let step = 1;
     const interval = setInterval(() => {
-      if (lineIndex < activeTraces.length) {
-        setTelemetryLines((prev) => [...prev, activeTraces[lineIndex]]);
-        setActiveLogIndex(lineIndex);
-        lineIndex++;
+      if (step < steps) {
+        setActiveLogIndex(step);
+        step++;
       } else {
-        // Enters a clean standing idle check line, then shuts down interval loop
-        setTelemetryLines((prev) => [
-          ...prev,
-          `[IDLE] Node listener active. Monitoring transactions...`
-        ]);
-        setActiveLogIndex(7); // 7 represents completion / idle mode
+        setActiveLogIndex(7); // settled state: no node emphasised
         clearInterval(interval);
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [activeTab]);
+  }, [activeTab, activeProject.name]);
 
   // Accent colors for dynamic dashboard glow transitions
   const accentColors = ["#c59b53", "#8cc7ad", "#9db5d8", "#c9bca8"];
@@ -500,56 +417,6 @@ export default function SelectedWork() {
                   </div>
                 </motion.aside>
               </div>
-
-              {/* Bottom Full-Width Telemetry trace / JSON Schema Switcher */}
-              <motion.div className={styles.traceConsole} variants={itemVariants}>
-                <div className={styles.consoleTabHeader}>
-                  <h4>Architecture Evidence</h4>
-                  <div className={styles.consoleViewSelectors}>
-                    <button 
-                      className={`${styles.consoleSelBtn} ${consoleView === "log" ? styles.consoleSelActive : ""}`}
-                      onClick={() => setConsoleView("log")}
-                    >
-                      Trace
-                    </button>
-                    <button 
-                      className={`${styles.consoleSelBtn} ${consoleView === "schema" ? styles.consoleSelActive : ""}`}
-                      onClick={() => setConsoleView("schema")}
-                    >
-                      Schema
-                    </button>
-                  </div>
-                </div>
-
-                <div className={styles.consoleBody}>
-                  <div className={styles.consoleHeader}>
-                    <span className={styles.consoleDotRed} />
-                    <span className={styles.consoleDotYellow} />
-                    <span className={styles.consoleDotGreen} />
-                    <span className={styles.consoleTitle}>
-                      {consoleView === "log" ? "telemetry_stream.log" : "system_parameters.json"}
-                    </span>
-                  </div>
-
-                  {consoleView === "log" ? (
-                    <div className={styles.consoleLines}>
-                      {telemetryLines.map((line, idx) => (
-                        <div key={idx} className={styles.consoleLine}>
-                          <span className={styles.consoleTimestamp}>[+{(idx * 1.0).toFixed(1)}s]</span>{" "}
-                          <span className={styles.consoleText}>{line}</span>
-                        </div>
-                      ))}
-                      {telemetryLines.length < (projectTraces[activeProject.name]?.length || 0) + 1 && (
-                        <div className={styles.consoleCursor} />
-                      )}
-                    </div>
-                  ) : (
-                    <div className={styles.consoleJson}>
-                      <pre><code>{JSON.stringify(activeProject.schema, null, 2)}</code></pre>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
 
               {/* Footer actions */}
               <motion.footer className={styles.specFooter} variants={itemVariants}>
