@@ -1,5 +1,5 @@
 import styles from "./TrustStrip.module.css";
-import { EMAIL_ADDRESS } from "./siteLinks";
+import { EMAIL_ADDRESS, UPWORK_URL } from "./siteLinks";
 
 const testimonials = [
   {
@@ -158,12 +158,21 @@ export default function TrustStrip() {
             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
           </svg>
           <div className={styles.bannerText}>
-            <strong>NDA Protected &amp; Verified</strong>
-            <span>References can be formally validated upon request.</span>
+            <strong>Platform-verified &amp; NDA protected</strong>
+            <span>
+              Client reviews are verified on Upwork, where the contract, hours
+              and payment are confirmed by the platform. Full names and product
+              details stay withheld under client NDAs.
+            </span>
           </div>
-          <a href={`mailto:${EMAIL_ADDRESS}?subject=Reference%20Verification%20Request&body=Hi%20Uzair%2C%0A%0AI'm%20reviewing%20your%20architecture%20portfolio%20and%20would%20like%20to%20verify%20references%20for%20your%20withheld%20NDA%20testimonials.%0A%0AThanks%2C%0A%5BMy%20Name%5D`} className={styles.verifyLink}>
-            Request validation reference &rarr;
-          </a>
+          <div className={styles.bannerLinks}>
+            <a href={UPWORK_URL} target="_blank" rel="noreferrer" className={styles.verifyLink}>
+              Verified reviews on Upwork &rarr;
+            </a>
+            <a href={`mailto:${EMAIL_ADDRESS}?subject=Reference%20Verification%20Request&body=Hi%20Uzair%2C%0A%0AI'm%20reviewing%20your%20architecture%20portfolio%20and%20would%20like%20to%20verify%20references%20for%20your%20withheld%20NDA%20testimonials.%0A%0AThanks%2C%0A%5BMy%20Name%5D`} className={styles.verifyLinkMuted}>
+              Request a reference &rarr;
+            </a>
+          </div>
         </div>
       </div>
     </section>
