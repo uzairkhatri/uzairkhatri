@@ -234,7 +234,7 @@
 
 @media (max-width: 620px) {
   .section {
-    padding: 3.8rem 1.1rem;
+    padding: var(--section-pad) 1.1rem;
   }
 
   .header h2 {

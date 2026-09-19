@@ -14,11 +14,14 @@ interface SubPageNavProps {
   backHref?: string;
   /** Label for the back link. Defaults to the site name. */
   backLabel?: string;
+  /** Page-specific links, shown before CV. Used for things like a repo link. */
+  extraLinks?: { label: string; href: string; external?: boolean }[];
 }
 
 export default function SubPageNav({
   backHref = withBasePath("/"),
   backLabel = "Uzair Khatri",
+  extraLinks = [],
 }: SubPageNavProps) {
   return (
     <nav className={styles.topNav} aria-label="Section navigation">
@@ -39,6 +42,16 @@ export default function SubPageNav({
         <a href={withBasePath("/insights/")} className={styles.topNavLink}>
           Insights
         </a>
+        {extraLinks.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className={styles.topNavLink}
+            {...(link.external ? { target: "_blank", rel: "noreferrer" } : {})}
+          >
+            {link.label}
+          </a>
+        ))}
         <a href={CV_URL} target="_blank" rel="noreferrer" className={`${styles.topNavLink} ${styles.hideOnMobile}`}>
           CV
         </a>

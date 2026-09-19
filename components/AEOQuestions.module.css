@@ -225,6 +225,9 @@
   }
 }
 
+/* Two-up only from tablet down to large phones. At ~390px the cards get to
+   157px wide and titles like "Production AI Architecture" wrap to three
+   lines, so common phone widths keep a single column. */
 @media (max-width: 420px) {
   .grid {
     grid-template-columns: 1fr;

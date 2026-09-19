@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import styles from "./page.module.css";
+import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
@@ -34,7 +35,7 @@ export default function ProductionRagCaseStudy() {
   return <div className={styles.page}>
     <BreadcrumbJsonLd items={[{name:"Home",url:"https://uzairkhatri.com/"},{name:"Case Studies",url:"https://uzairkhatri.com/case-studies/"},{name:"Production RAG",url}]} />
     <TechArticleJsonLd title="Production RAG: From Prototype to Measurable Production Architecture" description="A public engineering reference for production-oriented retrieval-augmented generation with measurable retrieval quality and operational controls." url={url} image={image} />
-    <nav className={styles.nav}><a href={withBasePath("/")}>Uzair Khatri</a><div className={styles.navLinks}><a href={withBasePath("/case-studies/")}>Case studies</a><a href={repo} target="_blank" rel="noreferrer">GitHub</a><a className={styles.cta} href={BOOKING_URL} target="_blank" rel="noreferrer">Book call</a></div></nav>
+    <SubPageNav extraLinks={[{ label: "GitHub", href: repo, external: true }]} />
 
     <header className={styles.hero}><div className={`${styles.inner} ${styles.heroGrid}`}><div><p className={styles.eyebrow}>Engineering reference / Production RAG</p><h1 className={styles.title}>From RAG demo to measurable production architecture.</h1><p className={styles.lead}>A public reference implementation showing how I structure retrieval-augmented generation when correctness, regression detection, observability, cost, and provider change all matter—not just whether a demo returns a plausible answer.</p><div className={styles.chips}><span className={styles.chip}>FastAPI</span><span className={styles.chip}>Hybrid retrieval</span><span className={styles.chip}>Reranking</span><span className={styles.chip}>Recall@5 + MRR</span><span className={styles.chip}>CI quality gate</span></div></div><div className={styles.architecture}><img src={architecture} alt="Production RAG reference architecture" /></div></div></header>
 
