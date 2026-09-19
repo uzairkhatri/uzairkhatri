@@ -150,21 +150,22 @@ export default function Landing() {
             <span>Production.</span>
           </h1>
           <p className="hero-thesis">
-            I architect production AI systems, multi-agent runtimes, and enterprise cloud backends that stay reliable beyond the demo.
+            I design and build production AI systems, agentic workflows, RAG platforms, and cloud architectures for companies moving AI beyond the prototype.
           </p>
         </div>
 
         <div className="hero-actions" aria-label="Hero actions">
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-3d-double">
-            <span className="btn-3d-text-primary">Discuss a Project</span>
+            <span className="btn-3d-text-primary">Book an Architecture Call</span>
           </a>
-          <a href="#work" className="hero-secondary-btn">View Production Work &rarr;</a>
+          <a href={withBasePath("/case-studies/")} className="hero-secondary-btn">View Case Studies &rarr;</a>
         </div>
 
         <div className="hero-proof-row" aria-label="Proof points">
-          <span>14+ Years in Architecture</span>
-          <span>Agentic Multi-Agent Systems</span>
-          <span>Operator-Grade Handoff</span>
+          <span>14+ Years Engineering</span>
+          <span>Production AI</span>
+          <span>Enterprise Systems</span>
+          <span>AWS + Kubernetes</span>
         </div>
       </div>
     </section>
