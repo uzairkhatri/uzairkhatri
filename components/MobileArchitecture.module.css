@@ -1,0 +1,100 @@
+/* Phone-only architecture flow. Hidden entirely on larger screens, where the
+   SVG diagram has room to be read at full size. */
+.flow {
+  display: none;
+}
+
+@media (max-width: 620px) {
+  .flow {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .stage {
+    position: relative;
+  }
+
+  .stageHead {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .stageIndex {
+    color: var(--gold);
+    font-family: var(--font-space-mono), monospace;
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .stageLabel {
+    color: rgba(255, 255, 255, 0.72);
+    font-family: var(--font-space-mono), monospace;
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nodes {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .node {
+    display: grid;
+    gap: 0.1rem;
+    border: 1px solid rgba(197, 155, 83, 0.3);
+    border-left: 2px solid var(--gold);
+    border-radius: 5px;
+    padding: 0.5rem 0.65rem;
+    background: rgba(197, 155, 83, 0.04);
+    min-width: 0;
+  }
+
+  .nodeTitle {
+    color: #ffffff;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: break-word;
+  }
+
+  .nodeSub {
+    color: var(--gold-bright);
+    font-family: var(--font-space-mono), monospace;
+    font-size: 0.56rem;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    overflow-wrap: break-word;
+  }
+
+  /* Vertical run between stages, so the top-to-bottom flow reads as a path
+     rather than as a stack of unrelated groups. */
+  .connector {
+    width: 1px;
+    height: 0.95rem;
+    margin: 0.3rem 0 0.55rem 0.55rem;
+    background: linear-gradient(
+      to bottom,
+      var(--gold) 0%,
+      rgba(197, 155, 83, 0.15) 100%
+    );
+  }
+
+  .connector::after {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    margin-left: -1.5px;
+    margin-top: 0.95rem;
+    border-right: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    transform: rotate(45deg);
+    opacity: 0.8;
+  }
+}

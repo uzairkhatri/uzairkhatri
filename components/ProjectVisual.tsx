@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./ProjectVisual.module.css";
+import MobileArchitecture from "./MobileArchitecture";
 
 export type ProjectVisualType = "wellows" | "classflow" | "savyour" | "efu";
 
@@ -613,7 +614,8 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
           <strong>{data.metric}</strong>
         </div>
         <div className={styles.diagramContainer}>
-          {renderDiagram()}
+          <div className={styles.svgOnly}>{renderDiagram()}</div>
+          <MobileArchitecture type={type} />
         </div>
         <div className={styles.consoleDetailBar}>
           <span className={styles.tickerPrefix}>[SYSTEM DETAILS]:</span>{" "}

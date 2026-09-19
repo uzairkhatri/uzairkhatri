@@ -353,3 +353,32 @@
   }
 }
 
+
+/* The SVG diagram is unreadable below ~620px; MobileArchitecture takes over
+   there with a layout built for the width instead of a scaled-down one. */
+.svgOnly {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 620px) {
+  .svgOnly {
+    display: none;
+  }
+
+  .diagramContainer {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0.9rem;
+  }
+}
+
+@media (max-width: 620px) {
+  /* Nothing to hover on a phone, and MobileArchitecture already shows each
+     node's title and role inline. */
+  .consoleDetailBar {
+    display: none;
+  }
+}
