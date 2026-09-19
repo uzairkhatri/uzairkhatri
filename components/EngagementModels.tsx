@@ -13,6 +13,9 @@ interface EngagementTier {
   deliverables: string[];
   ctaText: string;
   ctaHref: string;
+  /** Optional link to the matching service page, for tiers that have one. */
+  detailHref?: string;
+  detailText?: string;
   isPrimary?: boolean;
 }
 
@@ -30,6 +33,8 @@ const tiers: EngagementTier[] = [
     ],
     ctaText: "Request Architecture Audit",
     ctaHref: BOOKING_URL,
+    detailHref: withBasePath("/services/ai-audit/"),
+    detailText: "What the audit covers",
     isPrimary: false
   },
   {
@@ -122,6 +127,11 @@ export default function EngagementModels() {
                 >
                   {tier.ctaText} &rarr;
                 </a>
+                {tier.detailHref && (
+                  <a href={tier.detailHref} className={styles.detailLink}>
+                    {tier.detailText} &rarr;
+                  </a>
+                )}
               </div>
             </article>
           ))}

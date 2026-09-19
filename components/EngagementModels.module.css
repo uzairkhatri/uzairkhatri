@@ -278,3 +278,20 @@
     gap: 1.5rem;
   }
 }
+
+.detailLink {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: var(--gold-bright);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.detailLink:hover {
+  color: #ffffff;
+}

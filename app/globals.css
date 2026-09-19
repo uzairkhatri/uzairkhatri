@@ -367,7 +367,9 @@ code, pre, .tech-mono, .hero-availability, .hero-role small, .hero-microcopy {
   object-fit: contain;
   object-position: 72% bottom !important;
   transform: translate3d(18%, 0, 0) scale(1.01) !important;
-  filter: saturate(0.92) contrast(1.05);
+  /* The portrait sits behind two dark gradient layers and was reading as
+     empty space on brighter displays. */
+  filter: saturate(0.98) contrast(1.06) brightness(1.18);
 }
 
 .hero-portrait-glow {
