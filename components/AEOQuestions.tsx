@@ -113,6 +113,30 @@ export default function AEOQuestions({ show = "services" }: AEOQuestionsProps) {
           ))}
         </div>
 
+        <aside className={styles.openProof}>
+          <div>
+            <span className={styles.openProofTag}>Open engineering reference</span>
+            <p className={styles.openProofText}>
+              Production RAG architecture you can read rather than take on
+              trust: hybrid retrieval, reranking, grounded citations, Recall@5
+              and MRR evaluation, and CI gates that block retrieval
+              regressions.
+            </p>
+          </div>
+          <div className={styles.openProofLinks}>
+            <a
+              href="https://github.com/uzairkhatri/production-rag-reference"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.openProofPrimary}
+            >
+              Inspect the repository &rarr;
+            </a>
+            <Link href={withBasePath("/work/production-rag/")} className={styles.openProofSecondary}>
+              Read the case study &rarr;
+            </Link>
+          </div>
+        </aside>
         </>)}
 
         {isFaq && (

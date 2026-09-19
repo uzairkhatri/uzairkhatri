@@ -233,3 +233,68 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Public, inspectable proof. Deliberately distinct from the service cards:
+   this is the one thing on the page a reader can evaluate for themselves,
+   without a reference call or an NDA. */
+.openProof {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.2rem 2rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  border: 1px solid rgba(197, 155, 83, 0.28);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 1.35rem 1.6rem;
+  background: rgba(197, 155, 83, 0.04);
+}
+
+.openProofTag {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--gold-bright);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.openProofText {
+  margin: 0;
+  max-width: 62ch;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.openProofLinks {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+}
+
+.openProofPrimary,
+.openProofSecondary {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.openProofPrimary { color: var(--gold-bright); }
+.openProofPrimary:hover { color: #ffffff; }
+.openProofSecondary { color: rgba(255, 255, 255, 0.6); }
+.openProofSecondary:hover { color: var(--gold-bright); }
+
+@media (max-width: 768px) {
+  .openProof {
+    grid-template-columns: 1fr;
+    padding: 1.1rem 1.2rem;
+  }
+}

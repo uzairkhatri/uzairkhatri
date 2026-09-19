@@ -792,3 +792,22 @@
     padding: 2rem 1.4rem;
   }
 }
+
+.heroLive {
+  margin: 1.1rem 0 0;
+}
+
+.heroLive a {
+  color: var(--gold-bright);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.heroLive a:hover {
+  color: #ffffff;
+}

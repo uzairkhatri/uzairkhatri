@@ -21,6 +21,8 @@ type Project = {
   challenge: string;
   solution: string;
   caseStudyUrl?: string;
+  /** Public URL of the shipped product, where one exists and is live. */
+  liveUrl?: string;
   blueprint: {
     orchestration: string;
     data: string;
@@ -36,6 +38,7 @@ const projects: Project[] = [
     category: "LLM Search Visibility Platform",
     role: "Solutions Architect",
     caseStudyUrl: "/work/wellows",
+    liveUrl: "https://wellows.com",
     description:
       "Designed the agent workflows, shared retrieval layer, backend services, and infrastructure path for a platform that measures brand visibility across ChatGPT, Gemini, Perplexity, and Google AI, then closes the gaps through automated content and technical page remediation.",
     stack: ["LangGraph", "OpenAI", "Claude", "FastAPI", "Qdrant", "AWS"],
@@ -363,6 +366,16 @@ export default function SelectedWork() {
                     {activeProject.caseStudyUrl && (
                       <a href={withBasePath(activeProject.caseStudyUrl)} className={styles.caseStudyLink}>
                         Read Architecture RFC &rarr;
+                      </a>
+                    )}
+                    {activeProject.liveUrl && (
+                      <a
+                        href={activeProject.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.caseStudyLink}
+                      >
+                        View the live platform &rarr;
                       </a>
                     )}
                   </div>

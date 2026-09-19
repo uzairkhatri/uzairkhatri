@@ -195,6 +195,11 @@ export default function WellowsCaseStudy() {
               <span><strong>80%</strong> fewer manual workflow steps</span>
               <span><strong>&lt;200ms</strong> vector retrieval</span>
             </div>
+            <p className={styles.heroLive}>
+              <a href="https://wellows.com" target="_blank" rel="noreferrer">
+                View the live platform &rarr;
+              </a>
+            </p>
           </div>
           <ProjectVisual type="wellows" variant="hero" />
         </div>
