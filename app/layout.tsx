@@ -9,6 +9,11 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  // Lighthouse attributed the page's only layout shift to this font and to
+  // Cormorant Garamond swapping in over the fallback. Naming the fallback
+  // stack lets next/font size-adjust against what the browser will actually
+  // render first, instead of its default Arial metrics.
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "Roboto", "Arial"],
 });
 
 const spaceMono = Space_Mono({
@@ -29,7 +34,8 @@ const cormorantGaramond = Cormorant_Garamond({
   weight: ["400", "600"],
   style: ["normal", "italic"],
   variable: "--font-cormorant-garamond",
-  display: "swap",
+  display: "optional",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 export const metadata: Metadata = {
