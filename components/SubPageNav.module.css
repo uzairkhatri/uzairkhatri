@@ -2,7 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1.4rem;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--hairline-dark);
@@ -22,6 +24,11 @@
   font-weight: 800;
   text-decoration: none;
   transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.back svg {
+  flex-shrink: 0;
 }
 
 .back:hover {
@@ -32,6 +39,7 @@
   display: flex;
   align-items: center;
   gap: 1.4rem;
+  justify-content: flex-end;
 }
 
 .topNavLink {
@@ -61,6 +69,7 @@
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .topNavCta:hover {
@@ -68,19 +77,44 @@
   color: #121514;
 }
 
-@media (max-width: 720px) {
+.topNav a:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .topNav {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 0.75rem;
+    padding: 0.5rem 1.25rem;
+  }
+  .back {
+    min-height: 44px;
+  }
   .topNavRight {
-    gap: 1rem;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0 1.25rem;
   }
   .topNavLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 0.72rem;
+    white-space: nowrap;
+  }
+  .topNavCta {
+    grid-column: 2;
+    grid-row: 1;
+    box-sizing: border-box;
+    min-height: 44px;
+    letter-spacing: 0;
   }
 }
 
 @media (max-width: 600px) {
-  .topNav {
-    padding: 0.8rem 1.25rem;
-  }
   .hideOnMobile {
     display: none;
   }

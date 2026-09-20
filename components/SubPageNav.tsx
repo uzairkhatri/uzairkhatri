@@ -55,10 +55,10 @@ export default function SubPageNav({
         <a href={CV_URL} target="_blank" rel="noreferrer" className={`${styles.topNavLink} ${styles.hideOnMobile}`}>
           CV
         </a>
-        <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
-          Book a call
-        </a>
       </div>
+      <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
+        Book a call
+      </a>
     </nav>
   );
 }
