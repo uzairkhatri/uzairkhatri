@@ -413,6 +413,31 @@
   gap: 0.5rem;
 }
 
+.caseStudyLead {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1.25rem;
+}
+
+.caseStudyLead .roleMeta {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+}
+
+.caseStudyLead .roleMeta span {
+  color: var(--text-muted);
+}
+
+.caseStudyLead p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
 .specRoleLine span {
   color: var(--text-muted);
 }
@@ -456,6 +481,68 @@
   gap: 1.4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 1.4rem;
+}
+
+.caseStudyFlow {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.flowStep {
+  position: relative;
+  display: grid;
+  gap: 0.45rem;
+  padding: 1.15rem 0 1.15rem 1.45rem;
+}
+
+.flowStep + .flowStep {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.flowStep::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border: 1px solid var(--project-accent, var(--gold));
+  border-radius: 50%;
+  background: rgba(10, 12, 11, 0.95);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--project-accent, var(--gold)) 28%, transparent);
+}
+
+.flowStep::after {
+  content: "";
+  position: absolute;
+  left: calc(0.225rem + 0.5px);
+  top: 1.9rem;
+  bottom: -0.2rem;
+  width: 1px;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--project-accent, var(--gold)) 40%, transparent), transparent);
+}
+
+.flowStep:last-child::after {
+  display: none;
+}
+
+.flowStep h4 {
+  margin: 0;
+  color: var(--gold);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.flowStep p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.62;
 }
 
 /* .metricPanel span sets --text-muted at a higher specificity, which dropped
