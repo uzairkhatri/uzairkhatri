@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./Contact.module.css";
 import { BOOKING_URL, EMAIL_ADDRESS, EMAIL_URL, withBasePath } from "./siteLinks";
 import { trackLeadSubmission, trackBookingClick } from "./analytics";
@@ -33,9 +33,18 @@ export default function Contact() {
   const [projectStage, setProjectStage] = useState<string>("Prototype");
   const [formState, setFormState] = useState({ name: "", email: "", message: "", _gotcha: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const submitting = useRef(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const emailFallback = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry (" + projectStage + ") from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n[Project Stage: " + projectStage + "]\n\n" + formState.message)}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting.current) return;
+    if (!formState.name.trim() || !formState.message.trim()) {
+      setErrorMessage("Please enter your name and project context.");
+      setStatus("error");
+      return;
+    }
 
     // Honeypot check: If filled by automated bot, fake success silently without hitting API
     if (formState._gotcha) {
@@ -44,41 +53,45 @@ export default function Contact() {
       return;
     }
 
+    submitting.current = true;
     setStatus("submitting");
+    setErrorMessage("");
 
     const endpoint = withBasePath("/api/contact");
-    const formattedMessage = `[Project Stage: ${projectStage}]\n\n${formState.message.slice(0, 3000)}`;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
 
     try {
       const response = await fetch(endpoint, {
         method: "POST",
+        signal: controller.signal,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json"
         },
         body: JSON.stringify({
-          name: formState.name.slice(0, 100),
-          email: formState.email.slice(0, 100),
-          message: formState.message.slice(0, 3000),
+          name: formState.name.trim().slice(0, 100),
+          email: formState.email.trim().slice(0, 100),
+          message: formState.message.trim().slice(0, 3000),
           stage: projectStage,
           _gotcha: formState._gotcha,
         })
       });
 
-      if (response.ok) {
+      const result = await response.json();
+      if (response.ok && result?.success === true) {
         trackLeadSubmission(projectStage, "api_contact");
         setStatus("success");
         setFormState({ name: "", email: "", message: "", _gotcha: "" });
       } else {
-        trackLeadSubmission(projectStage, "mailto_fallback");
-        // Fallback to mailto link
-        window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry (" + projectStage + ") from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formattedMessage)}`;
-        setStatus("success");
+        throw new Error("Contact request was not accepted");
       }
     } catch {
-      trackLeadSubmission(projectStage, "mailto_fallback");
-      window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry (" + projectStage + ") from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n" + formattedMessage)}`;
-      setStatus("success");
+      setErrorMessage("We couldn't confirm delivery. Your message is still here. Try again, or send it using your email app.");
+      setStatus("error");
+    } finally {
+      window.clearTimeout(timeout);
+      submitting.current = false;
     }
   };
 
@@ -123,7 +136,7 @@ export default function Contact() {
             <h3>Send the context. I&apos;ll pressure-test the shape of the system.</h3>
             
             {status === "success" ? (
-              <div className={styles.formSuccess}>
+              <div className={styles.formSuccess} role="status">
                 <div className={styles.successIconStage}>
                   <span className={styles.successPulse} />
                   <svg className={styles.successCheck} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -137,7 +150,7 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className={styles.form}>
+              <form onSubmit={handleSubmit} className={styles.form} aria-busy={status === "submitting"}>
                 {/* Honeypot field for anti-bot spam defense */}
                 <input
                   type="text"
@@ -154,6 +167,10 @@ export default function Contact() {
                     <input
                       type="text"
                       placeholder="Name"
+                      aria-label="Name"
+                      name="name"
+                      autoComplete="name"
+                      disabled={status === "submitting"}
                       required
                       maxLength={100}
                       value={formState.name}
@@ -165,6 +182,10 @@ export default function Contact() {
                     <input
                       type="email"
                       placeholder="Email"
+                      aria-label="Email"
+                      name="email"
+                      autoComplete="email"
+                      disabled={status === "submitting"}
                       required
                       maxLength={100}
                       value={formState.email}
@@ -180,6 +201,7 @@ export default function Contact() {
                       <button
                         key={stage}
                         type="button"
+                        disabled={status === "submitting"}
                         className={`${styles.stageBtn} ${projectStage === stage ? styles.stageBtnActive : ""}`}
                         onClick={() => setProjectStage(stage)}
                         aria-checked={projectStage === stage}
@@ -194,6 +216,9 @@ export default function Contact() {
                 <div className={styles.formGroup}>
                   <textarea
                     placeholder="What is built, what is breaking, and what has to scale?"
+                    aria-label="Project context"
+                    name="message"
+                    disabled={status === "submitting"}
                     required
                     maxLength={3000}
                     rows={3}
@@ -202,8 +227,14 @@ export default function Contact() {
                     className={styles.textarea}
                   />
                 </div>
+                {status === "error" && (
+                  <div className={styles.formError}>
+                    <p role="alert">{errorMessage}</p>
+                    <a href={emailFallback}>Open email draft &rarr;</a>
+                  </div>
+                )}
                 <button type="submit" disabled={status === "submitting"} className={styles.submitBtn}>
-                  {status === "submitting" ? "Sending..." : "Send Context"}
+                  {status === "submitting" ? "Sending..." : status === "error" ? "Try again" : "Send Context"}
                 </button>
               </form>
             )}

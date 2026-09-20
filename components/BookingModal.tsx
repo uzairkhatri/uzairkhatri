@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./BookingModal.module.css";
 import { BOOKING_URL } from "./siteLinks";
 import { trackBookingClick } from "./analytics";
@@ -11,6 +11,8 @@ const CALENDLY_EMBED_URL =
 export default function BookingModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
     // Warm up Calendly connection on mouse hover or focus over booking links
@@ -21,7 +23,7 @@ export default function BookingModal() {
       }
       if (target && target instanceof HTMLAnchorElement) {
         const href = target.getAttribute("href") || "";
-        if (href.includes("calendly.com") || href === BOOKING_URL) {
+        if (href === BOOKING_URL) {
           // Preconnect link hint dynamically if not already done
           if (!document.getElementById("calendly-preconnect")) {
             const link = document.createElement("link");
@@ -36,6 +38,7 @@ export default function BookingModal() {
 
     // Intercept clicks on Calendly links to open in modal
     const handleGlobalClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       let target = e.target as HTMLElement | null;
       while (target && target.tagName !== "A") {
         target = target.parentElement;
@@ -43,8 +46,9 @@ export default function BookingModal() {
 
       if (target && target instanceof HTMLAnchorElement) {
         const href = target.getAttribute("href") || "";
-        if (href.includes("calendly.com") || href === BOOKING_URL) {
+        if (href === BOOKING_URL && !target.hasAttribute("data-booking-direct")) {
           e.preventDefault();
+          triggerRef.current = target;
           const source = target.getAttribute("data-source") || target.innerText.trim().slice(0, 50) || "calendly_cta";
           trackBookingClick(source);
           setIsLoading(true);
@@ -65,49 +69,46 @@ export default function BookingModal() {
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      // Prevent layout shift from scrollbar disappearing
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      document.body.style.overflow = "hidden";
-
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setIsOpen(false);
-        }
-      };
-      window.addEventListener("keydown", handleKeyDown);
-      return () => {
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    } else {
-      document.body.style.paddingRight = "";
-      document.body.style.overflow = "";
-    }
+    if (!isOpen) return;
+    const dialog = dialogRef.current;
+    const previousPadding = document.body.style.paddingRight;
+    const previousOverflow = document.body.style.overflow;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.style.overflow = "hidden";
+    dialog?.showModal();
     return () => {
-      document.body.style.paddingRight = "";
-      document.body.style.overflow = "";
+      dialog?.close();
+      document.body.style.paddingRight = previousPadding;
+      document.body.style.overflow = previousOverflow;
+      triggerRef.current?.focus();
     };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    <div
+    <dialog
+      ref={dialogRef}
       className={styles.overlay}
-      onClick={() => setIsOpen(false)}
-      role="dialog"
-      aria-modal="true"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) setIsOpen(false);
+      }}
+      onCancel={() => setIsOpen(false)}
       aria-label="Architecture Review Booking Modal"
     >
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button
-          className={styles.closeBtn}
-          onClick={() => setIsOpen(false)}
-          aria-label="Close booking modal"
-        >
-          &times;
-        </button>
+        <div className={styles.modalHeader}>
+          <span>Book an architecture call</span>
+          <button
+            autoFocus
+            className={styles.closeBtn}
+            onClick={() => setIsOpen(false)}
+            aria-label="Close booking modal"
+          >
+            &times;
+          </button>
+        </div>
 
         <div className={styles.iframeContainer}>
           {isLoading && (
@@ -145,13 +146,6 @@ export default function BookingModal() {
                   </div>
                 </div>
               </div>
-
-              <div className={styles.fallbackNotice}>
-                Taking longer than usual?{" "}
-                <a href={BOOKING_URL} target="_blank" rel="noreferrer">
-                  Open directly on Calendly &rarr;
-                </a>
-              </div>
             </div>
           )}
 
@@ -166,7 +160,12 @@ export default function BookingModal() {
             className={`${styles.iframe} ${isLoading ? "" : styles.iframeLoaded}`}
           />
         </div>
+        <div className={styles.fallbackNotice}>
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer" data-booking-direct>
+            Open directly on Calendly &rarr;
+          </a>
+        </div>
       </div>
-    </div>
+    </dialog>
   );
 }
