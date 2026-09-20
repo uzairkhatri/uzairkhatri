@@ -117,6 +117,7 @@ const projects: Project[] = [
     name: "EFU Life",
     category: "Enterprise Insurance System",
     role: "Enterprise Architect",
+    caseStudyUrl: "/work/efu-life/",
     description:
       "Implemented IBM FileNet P8, Case Manager, and Capture to move document-heavy insurance operations toward digital case management and paperless delivery.",
     stack: ["IBM FileNet", "Case Manager", "Capture", "Workflow Automation"],
