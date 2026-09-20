@@ -20,6 +20,7 @@ type Project = {
   diagram: ProjectVisualType;
   challenge: string;
   solution: string;
+  outcome: string;
   caseStudyUrl?: string;
   /** Public URL of the shipped product, where one exists and is live. */
   liveUrl?: string;
@@ -51,6 +52,7 @@ const projects: Project[] = [
     diagram: "wellows",
     challenge: "Wellows prototype worked in investor demos but lacked cost controls, async orchestration, and failure boundaries required to support concurrent enterprise users. Remediation content was also drafted without the visibility findings that should have informed it.",
     solution: "Orchestrated three specialized agents (KIVA, OPTA, and Citation Intelligence) using LangGraph and isolated error queues, ensuring failure in one did not crash the system, and grounded KIVA against the same Qdrant store the monitoring agents query.",
+    outcome: "Citation measurement and remediation now sit on one production spine, with LangGraph orchestration, tracing, and guardrails ready for concurrent enterprise search-visibility audits.",
     blueprint: {
       orchestration: "LangGraph / FastAPI / Python",
       data: "Qdrant index / Shared ingestion pipeline",
@@ -76,6 +78,7 @@ const projects: Project[] = [
     diagram: "classflow",
     challenge: "Online tutoring operations suffered from manual scheduling bottlenecks across 14 timezones and concurrent double-booking conflicts during peak enrollment surges.",
     solution: "Engineered an autonomous matchmaking engine with sub-100ms timezone heuristic scoring, Redis Redlock concurrency holds, and automated Stripe Connect disbursements.",
+    outcome: "Scheduling, tutor matching, class state, and teacher payout reconciliation moved from manual operations into automated system paths.",
     blueprint: {
       orchestration: "FastAPI / Python State Machine",
       data: "Redis Locks / WebSockets match feedback",
@@ -101,6 +104,7 @@ const projects: Project[] = [
     diagram: "savyour",
     challenge: "Processing thousands of affiliate rewards events concurrently while keeping financial wallet ledgers synchronized, idempotent, and highly consistent.",
     solution: "Developed decoupled ingestion queues with database-level ACID transactions and Redis caches to handle cashback event calculation in sub-second timelines.",
+    outcome: "A settlement and partner API layer supported 100+ merchant integrations while preserving idempotent wallet updates during reward-event spikes.",
     blueprint: {
       orchestration: "FastAPI Async Services",
       data: "PostgreSQL Ledger / Transaction Isolation",
@@ -125,6 +129,7 @@ const projects: Project[] = [
     diagram: "efu",
     challenge: "Migrating highly physical paper filing operations to paperless case routing for thousands of enterprise policy documents daily with strict compliance guidelines.",
     solution: "Implemented IBM FileNet Content Store with automated document ingestion and Case Manager routing pipelines, eliminating manual filing queues.",
+    outcome: "Five IBM FileNet approval chains shifted document-heavy insurance work from week-scale handoffs toward day-scale digital case routing.",
     blueprint: {
       orchestration: "IBM Case Manager Workflows",
       data: "FileNet P8 Content Repository",
@@ -337,7 +342,7 @@ export default function SelectedWork() {
                   <h3 className={styles.projectNameTitle}>{activeProject.name} &bull; {activeProject.category}</h3>
                   <span className={styles.projectRolePill}>{activeProject.role}</span>
                 </div>
-                <p className={styles.projectSummaryLine}>{activeProject.description}</p>
+                <p className={styles.projectSummaryLine}>{activeProject.outcome}</p>
               </motion.div>
 
               {/* Project Visual Display Header */}
@@ -357,40 +362,30 @@ export default function SelectedWork() {
               {/* Sub-Layout Content Columns */}
               <div className={styles.specBody}>
                 <motion.div className={styles.specDetails} variants={itemVariants}>
-                  <div className={styles.specRoleLine}>
+                  <div className={styles.caseStudyLead}>
                     <div className={styles.roleMeta}>
                       <strong>{activeProject.role}</strong>
                       <span>&bull;</span>
                       <span>{activeProject.category}</span>
                     </div>
-                    {activeProject.caseStudyUrl && (
-                      <a href={withBasePath(activeProject.caseStudyUrl)} className={styles.caseStudyLink}>
-                        Read Architecture RFC &rarr;
-                      </a>
-                    )}
-                    {activeProject.liveUrl && (
-                      <a
-                        href={activeProject.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className={styles.caseStudyLink}
-                      >
-                        View the live platform &rarr;
-                      </a>
-                    )}
+                    <p>{activeProject.description}</p>
                   </div>
-                  <p className={styles.specDesc}>{activeProject.description}</p>
 
-                  <div className={styles.blockRow}>
-                    <div className={styles.block}>
+                  <div className={styles.caseStudyFlow} aria-label={`${activeProject.name} case study summary`}>
+                    <div className={styles.flowStep}>
                       <span className={styles.blockKicker}>01 / Problem</span>
-                      <h4>The Scale Challenge</h4>
+                      <h4>What had to change</h4>
                       <p>{activeProject.challenge}</p>
                     </div>
-                    <div className={styles.block}>
-                      <span className={styles.blockKicker}>02 / Architecture</span>
-                      <h4>The Architectural Solution</h4>
+                    <div className={styles.flowStep}>
+                      <span className={styles.blockKicker}>02 / What I Architected</span>
+                      <h4>The system I shaped</h4>
                       <p>{activeProject.solution}</p>
+                    </div>
+                    <div className={styles.flowStep}>
+                      <span className={styles.blockKicker}>03 / Outcome</span>
+                      <h4>What became possible</h4>
+                      <p>{activeProject.outcome}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -411,13 +406,6 @@ export default function SelectedWork() {
                       <strong>Infrastructure</strong>
                       <span>{activeProject.blueprint.infra}</span>
                     </div>
-                  </div>
-
-                  <div className={styles.metricPanel}>
-                    <span className={styles.blockKicker}>03 / Outcome</span>
-                    <h4>Outcome Impact</h4>
-                    <strong>{activeProject.metric[0]}</strong>
-                    <span>{activeProject.metric[1]}</span>
                   </div>
 
                   <div className={styles.stackPanel}>
@@ -444,7 +432,12 @@ export default function SelectedWork() {
                 <div className={styles.specFooterLinks}>
                   {activeProject.caseStudyUrl && (
                     <a href={withBasePath(activeProject.caseStudyUrl)} className={styles.specRfcBtn}>
-                      Open Case Study RFC &rarr;
+                      View Case Study &rarr;
+                    </a>
+                  )}
+                  {activeProject.liveUrl && (
+                    <a href={activeProject.liveUrl} target="_blank" rel="noreferrer">
+                      View Live Platform &rarr;
                     </a>
                   )}
                   <a href={BOOKING_URL} target="_blank" rel="noreferrer">
