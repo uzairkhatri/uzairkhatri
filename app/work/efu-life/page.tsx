@@ -9,7 +9,7 @@ const title = "EFU Life Case Study - Enterprise Document Workflow Architecture";
 const description =
   "How Uzair Khatri implemented IBM FileNet P8, Capture, and Case Manager for EFU Life to move document-heavy insurance operations toward digital case routing.";
 const url = "https://uzairkhatri.com/work/efu-life/";
-const image = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
+const image = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
 export const metadata: Metadata = {
   title,
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title,
     description,
     url,
-    images: [{ url: image, width: 1200, height: 627, alt: "Enterprise architecture case studies" }],
+    images: [{ url: image, width: 1734, height: 907, alt: "Enterprise architecture case studies" }],
   },
   twitter: { card: "summary_large_image", title, description, images: [image] },
 };

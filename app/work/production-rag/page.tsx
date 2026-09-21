@@ -7,13 +7,13 @@ import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 const url = "https://uzairkhatri.com/work/production-rag/";
 const repo = "https://github.com/uzairkhatri/production-rag-reference";
 const architecture = "https://raw.githubusercontent.com/uzairkhatri/production-rag-reference/main/docs/assets/architecture.svg";
-const image = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
+const image = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "Production RAG Case Study — Measurable Retrieval Architecture",
   description: "A production-oriented RAG reference architecture with hybrid retrieval, reranking, grounded citations, Recall@5 and MRR evaluation, CI regression gates, observability, and provider boundaries.",
   alternates: { canonical: url },
-  openGraph: { title: "Production RAG: From Prototype to Measurable Architecture", description: "Engineering proof for a RAG system designed to be measured, operated, and changed safely.", url, images: [{ url: image, width: 1200, height: 627 }] },
+  openGraph: { title: "Production RAG: From Prototype to Measurable Architecture", description: "Engineering proof for a RAG system designed to be measured, operated, and changed safely.", url, images: [{ url: image, width: 1734, height: 907 }] },
   twitter: { card: "summary_large_image", title: "Production RAG: From Prototype to Measurable Architecture", description: "Hybrid retrieval, reranking, grounded citations, evaluation gates, observability, and provider boundaries.", images: [image] },
 };
 

@@ -4,7 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
-const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png";
+const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "Evaluating Multi-Agent Systems in Production",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Evaluating Multi-Agent Systems in Production — Uzair Khatri",
     description: "Testing and benchmarking autonomous AI agents without blowing your API budget: deterministic assertions and CI/CD regression suites.",
     url: "https://uzairkhatri.com/insights/ai-agent-evaluation/",
-    images: [{ url: ogImage, width: 1200, height: 627 }],
+    images: [{ url: ogImage, width: 1734, height: 907 }],
   },
   twitter: {
     card: "summary_large_image",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import FeaturedLanding from "@/components/FeaturedLanding";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 
-const image = "https://uzairkhatri.com/linkedin-featured/strategy-call.png";
+const image = "https://uzairkhatri.com/linkedin-featured/strategy-call.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "Book an AI Architecture Strategy Call",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://uzairkhatri.com/strategy-call/",
   },
-  openGraph: { title: "Let’s Solve Your AI Workflow & SaaS Architecture", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Leave with a concrete engineering plan.", url: "https://uzairkhatri.com/strategy-call/", images: [{ url: image, width: 1200, height: 627 }] },
+  openGraph: { title: "Let’s Solve Your AI Workflow & SaaS Architecture", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Leave with a concrete engineering plan.", url: "https://uzairkhatri.com/strategy-call/", images: [{ url: image, width: 1734, height: 907 }] },
   twitter: { card: "summary_large_image", title: "Let’s Solve Your AI Workflow & SaaS Architecture", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Leave with a concrete engineering plan.", images: [image] },
 };
 

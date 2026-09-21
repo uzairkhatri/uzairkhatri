@@ -206,7 +206,7 @@ export function TechArticleJsonLd({
     "headline": title,
     "description": description,
     "url": url,
-    "image": image || "https://uzairkhatri.com/linkedin-featured/case-studies.png",
+    "image": image || "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921",
     "author": {
       "@type": "Person",
       "@id": "https://uzairkhatri.com/#person",

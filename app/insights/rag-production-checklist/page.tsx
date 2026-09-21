@@ -4,7 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
-const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png";
+const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "The Production RAG Architecture Checklist",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "The Production RAG Architecture Checklist — Uzair Khatri",
     description: "Why naive vector search fails in production. Chunking, hybrid BM25 search, semantic re-ranking, and latency budgets.",
     url: "https://uzairkhatri.com/insights/rag-production-checklist/",
-    images: [{ url: ogImage, width: 1200, height: 627 }],
+    images: [{ url: ogImage, width: 1734, height: 907 }],
   },
   twitter: {
     card: "summary_large_image",

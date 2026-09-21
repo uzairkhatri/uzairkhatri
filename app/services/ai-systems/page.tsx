@@ -3,7 +3,7 @@ import FeaturedLanding from "@/components/FeaturedLanding";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
-const image = "https://uzairkhatri.com/linkedin-featured/services.png";
+const image = "https://uzairkhatri.com/linkedin-featured/services.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "AI Services, SaaS & Software Architecture",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://uzairkhatri.com/services/ai-systems/",
   },
-  openGraph: { title: "AI Systems Built for Production", description: "From AI prototype to reliable business system.", url: "https://uzairkhatri.com/services/ai-systems/", images: [{ url: image, width: 1200, height: 627 }] },
+  openGraph: { title: "AI Systems Built for Production", description: "From AI prototype to reliable business system.", url: "https://uzairkhatri.com/services/ai-systems/", images: [{ url: image, width: 1734, height: 907 }] },
   twitter: { card: "summary_large_image", title: "AI Systems Built for Production", description: "From AI prototype to reliable business system.", images: [image] },
 };
 

@@ -5,7 +5,7 @@ import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
-const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
+const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Wellows Case Study — Multi-Agent AI Workflow Architecture",
     description: "An LLM search visibility platform that measures brand citations in AI answers, then closes the gaps through automated remediation. Multi-agent architecture on LangGraph.",
     url: "https://uzairkhatri.com/work/wellows/",
-    images: [{ url: ogImage, width: 1200, height: 627, alt: "Wellows Architecture Case Study" }],
+    images: [{ url: ogImage, width: 1734, height: 907, alt: "Wellows Architecture Case Study" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -168,7 +168,7 @@ export default function WellowsCaseStudy() {
         title="Wellows Case Study — Multi-Agent AI Workflow Architecture"
         description="How Uzair Khatri designed the production AI services and multi-agent workflow architecture for Wellows, an LLM search visibility platform measuring brand citations across ChatGPT, Gemini, Perplexity, and Google AI, then closing gaps through automated content and technical remediation."
         url="https://uzairkhatri.com/work/wellows/"
-        image="https://uzairkhatri.com/linkedin-featured/case-studies.png"
+        image="https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921"
       />
       <SubPageNav />
 

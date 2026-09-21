@@ -5,7 +5,7 @@ import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
-const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
+const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "Savyour Case Study — High-Throughput Fintech SaaS Ledger",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Savyour Case Study — High-Throughput Fintech SaaS Ledger",
     description: "High-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's cashback platform.",
     url: "https://uzairkhatri.com/work/savyour/",
-    images: [{ url: ogImage, width: 1200, height: 627, alt: "Savyour Architecture Case Study" }],
+    images: [{ url: ogImage, width: 1734, height: 907, alt: "Savyour Architecture Case Study" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -160,7 +160,7 @@ export default function SavyourCaseStudy() {
         title="Savyour Case Study — High-Throughput Fintech SaaS Ledger"
         description="How Uzair Khatri architected high-throughput webhook ingestion, double-entry financial ledgers, and hierarchical Redis caching for Savyour's 100+ partner cashback platform."
         url="https://uzairkhatri.com/work/savyour/"
-        image="https://uzairkhatri.com/linkedin-featured/case-studies.png"
+        image="https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921"
       />
       <SubPageNav />
 
