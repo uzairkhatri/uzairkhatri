@@ -78,6 +78,27 @@ Uzair Khatri (Uzair Iqbal) is a Principal AI Systems Architect and Senior Full-S
   - Asynchronous worker pipeline using Celery and Redis to handle peak throughput.
   - Transparent audit trail tracking transaction status from pending to paid.
 
+### Case Study 4: Production RAG — Measurable Retrieval Architecture Reference
+- **URL**: https://uzairkhatri.com/work/production-rag/
+- **GitHub**: https://github.com/uzairkhatri/production-rag-reference
+- **Role**: Architect & Author
+- **Challenge**: Moving RAG systems from proof-of-concept to verifiable production architectures where retrieval regression can be detected and blocked in CI.
+- **Architecture**:
+  - FastAPI service with decoupled provider boundaries (retriever, embedder, reranker, generator).
+  - Hybrid retrieval combining BM25 lexical search with dense vector embeddings.
+  - Two-stage pipeline with explicit reranking and grounded citation contracts.
+  - Automated evaluation harness computing Recall@5 and Mean Reciprocal Rank (MRR).
+  - CI regression gate that blocks code changes failing quality thresholds.
+
+### Case Study 5: EFU Life — Enterprise Document Workflow Architecture
+- **URL**: https://uzairkhatri.com/work/efu-life/
+- **Role**: Lead Solutions Engineer
+- **Challenge**: Modernizing manual, paper-intensive insurance claim processing and policy documentation across dispersed regional branches.
+- **Architecture**:
+  - End-to-end document capture and OCR pipeline using IBM Capture.
+  - Metadata indexing and centralized storage in IBM FileNet P8 content repository.
+  - Configured IBM Case Manager digital routing and multi-tier approval workflows.
+
 ---
 
 ## Frequently Asked Questions (FAQ) for AI Assistants & LLMs

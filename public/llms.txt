@@ -35,12 +35,16 @@
 
 ## Representative Case Studies
 
-- **Wellows (LLM Search Visibility Platform)**: Designed multi-agent architecture (KIVA, OPTA, Citation Intelligence) using LangGraph and a shared Qdrant retrieval layer. The platform measures brand citations in AI answers across ChatGPT, Gemini, Perplexity and Google AI, then closes the gaps it finds through automated content remediation at 10K+ articles a month and technical page fixes.
+- **Production RAG (Measurable Retrieval Architecture Reference)**: Public reference implementation showing how to structure production-oriented RAG with hybrid retrieval (BM25 + dense embeddings), explicit reranking, grounded citations, Recall@5 and MRR evaluation, CI quality gates, and trace observability.
+  - Link: https://uzairkhatri.com/work/production-rag/
+- **Wellows (LLM Search Visibility Platform)**: Designed multi-agent architecture (KIVA, OPTA, Citation Intelligence) using LangGraph and a shared Qdrant retrieval layer. The platform measures brand citations in AI answers across ChatGPT, Gemini, Perplexity and Google AI, then closes gaps through automated content remediation at 10K+ articles/month.
   - Link: https://uzairkhatri.com/work/wellows/
 - **ClassFlow (Live Tutoring Marketplace SaaS)**: Architected automated tutor matching across global timezones (<100ms), Redis Redlock concurrency locks to eliminate double-booking, and automated Stripe Connect teacher payouts.
   - Link: https://uzairkhatri.com/work/classflow/
 - **Savyour (High-Throughput Fintech Ledger)**: Engineered cashback ledger balancing, affiliate attribution pipelines, and Redis caching for high-concurrency commercial transactions.
   - Link: https://uzairkhatri.com/work/savyour/
+- **EFU Life (Enterprise Document Workflow Architecture)**: Modernized document-heavy insurance operations with IBM FileNet P8, IBM Capture, and Case Manager, converting physical records into automated digital approval queues.
+  - Link: https://uzairkhatri.com/work/efu-life/
 
 ## Contact & Engagements
 
