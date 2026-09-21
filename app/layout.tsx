@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono, Outfit, Cormorant_Garamond } from "next/font/google";
-import Script from "next/script";
+import SiteAnalytics from "@/components/SiteAnalytics";
 import "@/app/globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
 import JsonLd from "@/components/JsonLd";
@@ -128,23 +128,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${inter.variable} ${spaceMono.variable} ${outfit.variable} ${cormorantGaramond.variable}`}
       >
-        {/* Google tag (gtag.js) */}
-        <Script
-          strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=G-1LXS5Z6GJ6"
-        />
-        <Script
-          id="google-analytics"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-1LXS5Z6GJ6');
-            `,
-          }}
-        />
+        <SiteAnalytics />
         <ScrollProgress />
         {children}
       </body>

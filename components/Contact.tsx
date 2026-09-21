@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import styles from "./Contact.module.css";
 import { BOOKING_URL, EMAIL_ADDRESS, EMAIL_URL, withBasePath } from "./siteLinks";
-import { trackLeadSubmission, trackBookingClick } from "./analytics";
+import { trackLeadSubmission } from "./analytics";
 
 const links = [
   ["Email", EMAIL_URL, EMAIL_ADDRESS],
@@ -120,7 +120,7 @@ export default function Contact() {
               href={BOOKING_URL} 
               target="_blank" 
               rel="noreferrer"
-              onClick={() => trackBookingClick("contact_section")}
+              data-source="contact_section"
             >
               Book 30-Min Architecture Call &rarr;
             </a>
