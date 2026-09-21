@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./BookingModal.module.css";
 import { BOOKING_URL } from "./siteLinks";
-import { trackBookingClick } from "./analytics";
 
 const CALENDLY_EMBED_URL =
   "https://calendly.com/uz-khatri/30min?embed_domain=uzairkhatri.com&embed_type=inline&background_color=171b1a&text_color=ffffff&primary_color=c59b53";
@@ -49,8 +48,6 @@ export default function BookingModal() {
         if (href === BOOKING_URL && !target.hasAttribute("data-booking-direct")) {
           e.preventDefault();
           triggerRef.current = target;
-          const source = target.getAttribute("data-source") || target.innerText.trim().slice(0, 50) || "calendly_cta";
-          trackBookingClick(source);
           setIsLoading(true);
           setIsOpen(true);
         }
@@ -161,7 +158,7 @@ export default function BookingModal() {
           />
         </div>
         <div className={styles.fallbackNotice}>
-          <a href={BOOKING_URL} target="_blank" rel="noreferrer" data-booking-direct>
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer" data-booking-direct data-source="booking_modal_direct">
             Open directly on Calendly &rarr;
           </a>
         </div>

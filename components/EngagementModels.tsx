@@ -2,7 +2,6 @@
 
 import styles from "./EngagementModels.module.css";
 import { BOOKING_URL, withBasePath } from "./siteLinks";
-import { trackBookingClick } from "./analytics";
 
 interface EngagementTier {
   tag: string;
@@ -123,7 +122,7 @@ export default function EngagementModels() {
                   target={tier.ctaHref.includes("calendly") ? "_blank" : undefined}
                   rel={tier.ctaHref.includes("calendly") ? "noreferrer" : undefined}
                   className={`${styles.ctaBtn} ${tier.isPrimary ? styles.ctaPrimary : styles.ctaSecondary}`}
-                  onClick={() => trackBookingClick(`engagement_${tier.tag.toLowerCase().replace(/[^a-z0-9]/g, "_")}`)}
+                  data-source={`engagement_${tier.tag.toLowerCase().replace(/[^a-z0-9]/g, "_")}`}
                 >
                   {tier.ctaText} &rarr;
                 </a>
@@ -142,7 +141,7 @@ export default function EngagementModels() {
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
           </svg>
           <p>
-            Every engagement begins with a complimentary 30-minute Architecture Strategy Call to evaluate scope, system feasibility, and mutual fit. <a href={BOOKING_URL} target="_blank" rel="noreferrer" onClick={() => trackBookingClick("engagement_bottom_note")}>Schedule a call directly &rarr;</a>
+            Every engagement begins with a complimentary 30-minute Architecture Strategy Call to evaluate scope, system feasibility, and mutual fit. <a href={BOOKING_URL} target="_blank" rel="noreferrer" data-source="engagement_bottom_note">Schedule a call directly &rarr;</a>
           </p>
         </div>
       </div>
