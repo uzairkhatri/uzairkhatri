@@ -1,4 +1,12 @@
 .overlay {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border: 0;
+  box-sizing: border-box;
+  color: #ffffff;
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -9,6 +17,19 @@
   -webkit-backdrop-filter: blur(12px);
   padding: 1.5rem;
   animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.overlay::backdrop {
+  background: transparent;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
 }
 
 .modal {
@@ -30,12 +51,10 @@
 }
 
 .closeBtn {
-  position: absolute;
-  top: 1rem;
-  right: 1.2rem;
+  flex-shrink: 0;
   z-index: 20;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(23, 27, 26, 0.95);
@@ -59,8 +78,8 @@
 
 .iframeContainer {
   flex: 1;
+  min-height: 0;
   width: 100%;
-  height: 100%;
   background: #171b1a;
   position: relative;
 }
@@ -75,6 +94,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
 }
 
 .skeletonHeader {
@@ -171,6 +191,8 @@
 .w90 { width: 90%; }
 
 .fallbackNotice {
+  flex-shrink: 0;
+  padding: 0.25rem 1rem;
   font-family: var(--font-space-mono), monospace;
   font-size: 0.68rem;
   color: rgba(255, 255, 255, 0.45);
@@ -178,9 +200,19 @@
 }
 
 .fallbackNotice a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   color: var(--gold-bright, #d8ad64);
   text-decoration: none;
   font-weight: 600;
+}
+
+.modal a:focus-visible,
+.modal button:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
 }
 
 .fallbackNotice a:hover {
@@ -220,7 +252,7 @@
     padding: 0.5rem;
   }
   .modal {
-    height: 100svh;
+    height: calc(100svh - 1rem);
     max-height: none;
     border-radius: 12px;
   }

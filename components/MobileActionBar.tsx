@@ -18,9 +18,11 @@ export default function MobileActionBar() {
           const heroThreshold = 350;
           const docHeight = document.documentElement.scrollHeight;
           const isNearBottom = window.innerHeight + scrollY >= docHeight - 380;
+          const contact = document.getElementById("contact")?.getBoundingClientRect();
+          const isContactVisible = contact && contact.top < window.innerHeight && contact.bottom > 0;
 
           // Show when scrolled past hero, but hide near contact/footer
-          if (scrollY > heroThreshold && !isNearBottom) {
+          if (scrollY > heroThreshold && !isNearBottom && !isContactVisible) {
             setVisible(true);
           } else {
             setVisible(false);
@@ -33,13 +35,20 @@ export default function MobileActionBar() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   return (
     <aside 
       className={`${styles.container} ${visible ? styles.visible : ""}`}
       aria-label="Quick mobile actions"
+      aria-hidden={!visible}
+      inert={!visible}
     >
       <div className={styles.bar}>
         <a
@@ -56,7 +65,7 @@ export default function MobileActionBar() {
         </a>
 
         <a
-          href={withBasePath("/#contact")}
+          href={withBasePath("/#contact-card")}
           className={styles.contactBtn}
         >
           <svg className={styles.icon} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
