@@ -5,7 +5,7 @@ import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
-const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png";
+const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "ClassFlow Case Study — Live Tutoring Marketplace Architecture",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "ClassFlow Case Study — Live Tutoring Marketplace Architecture",
     description: "Live tutoring marketplace platform architecture unifying dynamic matchmaking, Redis Redlock concurrency, and Stripe Connect automated ledgers.",
     url: "https://uzairkhatri.com/work/classflow/",
-    images: [{ url: ogImage, width: 1200, height: 627, alt: "ClassFlow Architecture Case Study" }],
+    images: [{ url: ogImage, width: 1734, height: 907, alt: "ClassFlow Architecture Case Study" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -159,7 +159,7 @@ export default function ClassFlowCaseStudy() {
         title="ClassFlow Case Study — Live Tutoring Marketplace Architecture"
         description="How Uzair Khatri architected ClassFlow: an automated live tutoring marketplace unifying dynamic teacher matching, distributed lock safety with Redis Redlock, and automated Stripe payouts."
         url="https://uzairkhatri.com/work/classflow/"
-        image="https://uzairkhatri.com/linkedin-featured/case-studies.png"
+        image="https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921"
       />
       <SubPageNav />
 

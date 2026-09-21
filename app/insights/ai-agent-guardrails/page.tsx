@@ -4,7 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
-const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png";
+const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "Deterministic Guardrails for Probabilistic Agents",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Deterministic Guardrails for Probabilistic Agents — Uzair Khatri",
     description: "Architecting production guardrails for autonomous AI agents: Pydantic schema validation, circuit breakers, and dead-letter queues.",
     url: "https://uzairkhatri.com/insights/ai-agent-guardrails/",
-    images: [{ url: ogImage, width: 1200, height: 627 }],
+    images: [{ url: ogImage, width: 1734, height: 907 }],
   },
   twitter: {
     card: "summary_large_image",

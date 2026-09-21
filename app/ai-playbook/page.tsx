@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import FeaturedLanding from "@/components/FeaturedLanding";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 
-const image = "https://uzairkhatri.com/linkedin-featured/ai-playbook.png";
+const image = "https://uzairkhatri.com/linkedin-featured/ai-playbook.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "The Production AI Playbook — AI Workflows & Systems",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://uzairkhatri.com/ai-playbook/",
   },
-  openGraph: { title: "The Production AI Playbook", description: "Evaluation, observability, security, cost, and human oversight for real AI systems.", url: "https://uzairkhatri.com/ai-playbook/", images: [{ url: image, width: 1200, height: 627 }] },
+  openGraph: { title: "The Production AI Playbook", description: "Evaluation, observability, security, cost, and human oversight for real AI systems.", url: "https://uzairkhatri.com/ai-playbook/", images: [{ url: image, width: 1734, height: 907 }] },
   twitter: { card: "summary_large_image", title: "The Production AI Playbook", description: "Evaluation, observability, security, cost, and human oversight for real AI systems.", images: [image] },
 };
 

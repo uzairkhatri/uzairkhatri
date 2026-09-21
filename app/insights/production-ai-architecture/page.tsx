@@ -4,7 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 
-const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png";
+const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png?v=20260921";
 
 export const metadata: Metadata = {
   title: "Why 80% of AI Demos Never Survive Production",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Why 80% of AI Demos Never Survive Production — Uzair Khatri",
     description: "An architectural breakdown of why AI prototypes fail under real enterprise traffic, and how to build resilient systems.",
     url: "https://uzairkhatri.com/insights/production-ai-architecture/",
-    images: [{ url: ogImage, width: 1200, height: 627 }],
+    images: [{ url: ogImage, width: 1734, height: 907 }],
   },
   twitter: {
     card: "summary_large_image",
