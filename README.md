@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1200&color=38BDF8&center=true&vCenter=true&width=750&lines=Principal+AI+Systems+Architect+%7C+14%2B+Years;Production+RAG%3A+Recall%405+(0.94)+%2B+MRR+(0.91)+CI+Quality+Gates;Multi-Agent+Orchestration+(LangGraph)+with+SQS+Dead-Letter+Queues;Scaled+Monolith-to-Services+for+1M%2B+Fintech+Customers;Turning+Fragile+AI+Prototypes+Into+Resilient+Production+Engines" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=21&pause=1400&color=38BDF8&center=true&vCenter=true&width=750&lines=Most+AI+demos+break+in+production.+I+build+the+ones+that+don't.;Moving+fragile+prompt+loops+into+deterministic+state+machines.;Production+RAG+with+verified+evaluation+gates%2C+not+blind+hope.;14%2B+years+scaling+distributed+systems+to+1M%2B+active+users.;Enterprise+AI+architectures+built+for+99.9%25+uptime+%26+200ms+SLAs." alt="Typing SVG" />
 </p>
 
 <p align="center">
