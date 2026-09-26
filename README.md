@@ -84,6 +84,24 @@ git diff / codebase ──> [Audit Engine: 8 Dimensions] ──> GitHub Actions 
 
 ---
 
+### 4. [High-Throughput Event Platform](https://github.com/uzairkhatri/high-throughput-event-platform)
+*Reference architecture for API ingestion, Kafka-style streaming, idempotent workers, retries, dead-letter handling, and observable operations.*
+
+```text
+API Clients → FastAPI Ingestion → Kafka-Compatible Stream
+                      │                    │
+              Redis Idempotency     Partitioned Workers
+                                           │
+                          PostgreSQL Projections + DLQ + OpenTelemetry
+```
+
+* **Distributed Systems Design:** Explicit partitioning, at-least-once delivery, producer and consumer idempotency, bounded retries, and dead-letter routing.
+* **Operational Readiness:** Docker Compose, Kubernetes manifests, OpenTelemetry collector configuration, CI, and a k6 load-test harness.
+* **Honest Benchmarking:** Includes reproducible load-test tooling without fabricated throughput claims; results are measured per environment.
+* 👉 [**Explore Repository →**](https://github.com/uzairkhatri/high-throughput-event-platform)
+
+---
+
 ## 📊 Engineering Telemetry & Activity
 
 <p align="center">
