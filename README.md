@@ -105,8 +105,7 @@ API Clients → FastAPI Ingestion → Kafka-Compatible Stream
 ## 📊 Engineering Telemetry & Activity
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=uzairkhatri&show_icons=true&theme=tokyonight&hide_border=false&border_color=1e5ea8&bg_color=07111f&title_color=38bdf8&text_color=d7e2f0&icon_color=f5a623" alt="Uzair Khatri GitHub Stats" height="175" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=uzairkhatri&layout=compact&theme=tokyonight&border_color=1e5ea8&bg_color=07111f&title_color=38bdf8&text_color=d7e2f0" alt="Top Languages" height="175" />
+  <img src="./assets/engineering-telemetry.svg" alt="Uzair Khatri — Engineering Telemetry & Production Benchmarks" width="100%" />
 </p>
 
 ---
