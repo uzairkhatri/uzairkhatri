@@ -32,6 +32,171 @@ export default {
       return Response.redirect("https://calendly.com/uz-khatri/30min", 302);
     }
 
+    if (url.pathname === "/api/audit" && request.method === "POST") {
+      try {
+        const body = (await request.json()) as {
+          name?: string;
+          email?: string;
+          company?: string;
+          stage?: string;
+          stack?: string;
+          bottleneck?: string;
+          repoOrDiagram?: string;
+          message?: string;
+          _gotcha?: string;
+        };
+
+        if (body._gotcha) {
+          return new Response(JSON.stringify({ success: true }), {
+            headers: { "Content-Type": "application/json" },
+          });
+        }
+
+        const name = (body.name || "").trim().slice(0, 100);
+        const email = (body.email || "").trim().slice(0, 100);
+        const company = (body.company || "").trim().slice(0, 100);
+        const stage = (body.stage || "Production").trim().slice(0, 80);
+        const stack = (body.stack || "").trim().slice(0, 200);
+        const bottleneck = (body.bottleneck || "").trim().slice(0, 200);
+        const repoOrDiagram = (body.repoOrDiagram || "").trim().slice(0, 300);
+        const rawMessage = (body.message || "").trim().slice(0, 4000);
+
+        if (!name || !email || !rawMessage) {
+          return new Response(
+            JSON.stringify({ error: "Name, email, and description are required." }),
+            { status: 400, headers: { "Content-Type": "application/json" } }
+          );
+        }
+
+        const nowFormatted = new Date().toUTCString();
+
+        const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AI Architecture Pre-Mortem Request</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #0b0d0e; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #ffffff;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #0b0d0e; padding: 36px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 640px; background-color: #131618; border: 1px solid rgba(216, 173, 100, 0.4); border-radius: 12px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.6);">
+          <tr>
+            <td style="background: linear-gradient(90deg, #c59b53, #d8ad64, #c59b53); height: 4px;"></td>
+          </tr>
+          <tr>
+            <td style="padding: 28px 32px 20px 32px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+              <span style="display: inline-block; font-family: 'SF Mono', Consolas, monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #d8ad64; margin-bottom: 8px;">UZAIRKHATRI.COM &bull; ARCHITECTURE TRIAGE DISPATCH</span>
+              <h1 style="margin: 0; font-size: 22px; font-weight: 800; color: #ffffff;">🚨 New AI Architecture Pre-Mortem Request</h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 24px 32px 16px 32px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Client Name</td>
+                  <td style="padding: 7px 0; font-size: 15px; color: #ffffff; font-weight: 600;">${escapeHtml(name)}</td>
+                </tr>
+                <tr>
+                  <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Work Email</td>
+                  <td style="padding: 7px 0; font-size: 15px; color: #d8ad64; font-weight: 600;">
+                    <a href="mailto:${escapeHtml(email)}" style="color: #d8ad64; text-decoration: none;">${escapeHtml(email)}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Company / URL</td>
+                  <td style="padding: 7px 0; font-size: 14px; color: #ffffff;">${escapeHtml(company || "N/A")}</td>
+                </tr>
+                <tr>
+                  <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Primary Fire</td>
+                  <td style="padding: 7px 0; font-size: 14px; color: #ff7675; font-weight: 700;">${escapeHtml(bottleneck || "N/A")}</td>
+                </tr>
+                <tr>
+                  <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Stack</td>
+                  <td style="padding: 7px 0; font-size: 14px; color: #ffffff;">${escapeHtml(stack || "N/A")}</td>
+                </tr>
+                <tr>
+                  <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Repo / Spec</td>
+                  <td style="padding: 7px 0; font-size: 14px; color: #74b9ff;">
+                    ${repoOrDiagram ? `<a href="${escapeHtml(repoOrDiagram)}" style="color: #74b9ff; text-decoration: underline;" target="_blank">${escapeHtml(repoOrDiagram)}</a>` : "N/A"}
+                  </td>
+                </tr>
+                <tr>
+                  <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Received</td>
+                  <td style="padding: 7px 0; font-size: 13px; color: #8e9594; font-family: 'SF Mono', monospace;">${nowFormatted}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 32px 28px 32px;">
+              <div style="font-size: 11px; font-family: 'SF Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; color: #8e9594; margin-bottom: 10px; font-weight: 700;">System Context &amp; Details:</div>
+              <div style="background-color: #0b0d0e; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 20px; font-size: 14px; line-height: 1.65; color: #f0f3f2; white-space: pre-wrap; word-break: break-word;">${escapeHtml(rawMessage)}</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td align="center">
+                    <a href="mailto:${escapeHtml(email)}?subject=${encodeURIComponent(`Re: AI Architecture Pre-Mortem - Uzair Khatri (${name})`)}" style="display: inline-block; width: 100%; text-align: center; background-color: #d8ad64; color: #111418; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 14px 24px; border-radius: 999px; text-decoration: none; box-sizing: border-box; box-shadow: 0 4px 14px rgba(216, 173, 100, 0.3);">
+                      Reply Directly to ${escapeHtml(name)} &rarr;
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+        const text = `============================================================
+🚨 UZAIRKHATRI.COM • NEW AI ARCHITECTURE PRE-MORTEM REQUEST
+============================================================
+
+CLIENT DETAILS
+------------------------------------------------------------
+Name:          ${name}
+Email:         ${email}
+Company:       ${company || "N/A"}
+Stage:         ${stage}
+Stack:         ${stack || "N/A"}
+Primary Fire:  ${bottleneck || "N/A"}
+Repo / Link:   ${repoOrDiagram || "N/A"}
+Timestamp:     ${nowFormatted}
+
+DETAILS
+------------------------------------------------------------
+${rawMessage}
+
+------------------------------------------------------------
+Quick Reply: mailto:${email}?subject=${encodeURIComponent(`Re: AI Architecture Pre-Mortem - Uzair Khatri (${name})`)}
+============================================================`;
+
+        await env.EMAIL.send({
+          to: "uz.khatri@gmail.com",
+          from: "hello@uzairkhatri.com",
+          subject: `🚨 [AI Pre-Mortem Request]: ${name} (${company || stack || "Production"})`,
+          text,
+          html,
+          replyTo: email,
+        });
+
+        return new Response(JSON.stringify({ success: true }), {
+          headers: { "Content-Type": "application/json" },
+        });
+      } catch (err: any) {
+        return new Response(
+          JSON.stringify({ error: err?.message || "Failed to dispatch audit email" }),
+          { status: 500, headers: { "Content-Type": "application/json" } }
+        );
+      }
+    }
+
     if (url.pathname === "/api/contact" && request.method === "POST") {
       try {
         const body = (await request.json()) as {

@@ -4,6 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
+import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
 
 const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
@@ -404,18 +405,14 @@ export default function ClassFlowCaseStudy() {
 
       <section className={styles.cta} aria-label="Call to action">
         <div className={styles.ctaInner}>
-          <p className={styles.eyebrowLight}>Work together</p>
-          <h2 className={styles.ctaTitle}>Scaling a complex operational platform?</h2>
-          <p className={styles.ctaDesc}>
-            Let&apos;s eliminate manual bottlenecks, lock contention, and state synchronization issues
-            before they impact your customer experience.
-          </p>
-          <div className={styles.ctaActions}>
-            <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.ctaPrimary}>
-              Request Architecture Review
-            </a>
+          <CaseStudyAuditCTA
+            focusArea="Marketplace & Real-Time Operational Architecture"
+            title="Scaling a complex marketplace or booking platform?"
+            description="Eliminate double-booking race conditions, WebSocket state desyncs, and payment reconciliation failures before you scale your transaction volume."
+          />
+          <div className={styles.ctaActions} style={{ marginTop: "1.5rem" }}>
             <a href={withBasePath("/#work")} className={styles.ctaSecondary}>
-              View all work
+              View all work &rarr;
             </a>
           </div>
         </div>

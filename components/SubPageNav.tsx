@@ -42,6 +42,9 @@ export default function SubPageNav({
         <a href={withBasePath("/insights/")} className={styles.topNavLink}>
           Insights
         </a>
+        <a href={withBasePath("/audit/")} className={styles.topNavLink} style={{ color: "#d8ad64" }}>
+          AI Triage
+        </a>
         {extraLinks.map((link) => (
           <a
             key={link.href}

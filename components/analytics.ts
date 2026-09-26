@@ -70,6 +70,16 @@ export function trackLeadSubmission(stage: string, method: string = "contact_for
   });
 }
 
+export function trackAuditSubmission(stack: string, bottleneck: string) {
+  trackEvent("audit_request", {
+    event_category: "Conversion",
+    event_label: `${stack} - ${bottleneck}`,
+    stack,
+    bottleneck,
+    value: 1,
+  });
+}
+
 export function trackBookingClick(source: string = "general") {
   if (!isAnalyticsAllowed()) return;
   trackEvent("booking_click", {

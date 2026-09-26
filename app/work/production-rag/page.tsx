@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
+import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
 
 const url = "https://uzairkhatri.com/work/production-rag/";
 const repo = "https://github.com/uzairkhatri/production-rag-reference";
@@ -47,6 +48,17 @@ export default function ProductionRagCaseStudy() {
 
     <section className={styles.sectionAlt}><div className={styles.inner}><p className={styles.eyebrow}>Verification</p><h2 className={styles.heading}>Quality becomes a software delivery concern.</h2><p className={styles.intro}>The repository contains a labelled evaluation dataset and a CLI evaluation runner. Recall@5 checks whether relevant evidence appears in the top five results; MRR rewards ranking the first relevant result higher. Configured thresholds turn those measurements into a regression gate that can fail CI.</p><div className={styles.proof}><a className={styles.button} href={repo} target="_blank" rel="noreferrer">Inspect the repository</a><a className={styles.buttonGhost} href={`${repo}/blob/main/docs/demo.md`} target="_blank" rel="noreferrer">Run the demo</a><a className={styles.buttonGhost} href={`${repo}/actions/workflows/rag-evaluation.yml`} target="_blank" rel="noreferrer">View evaluation workflow</a></div></div></section>
 
-    <section className={styles.section}><div className={`${styles.inner} ${styles.closing}`}><p className={styles.eyebrow}>Production AI architecture</p><h2 className={styles.heading}>Building RAG that has to survive production?</h2><p className={styles.intro}>I work on the layer between a promising AI prototype and an operable system: architecture boundaries, retrieval quality, evaluation, observability, reliability, security, and cost controls.</p><div className={styles.proof}><a className={styles.button} href={BOOKING_URL} target="_blank" rel="noreferrer">Book an architecture strategy call</a><a className={styles.buttonGhost} href={withBasePath("/case-studies/")}>Explore more work</a></div></div></section>
+    <section className={styles.section}>
+      <div className={`${styles.inner} ${styles.closing}`}>
+        <CaseStudyAuditCTA
+          focusArea="RAG & Knowledge Retrieval Quality"
+          title="Building RAG that has to survive production constraints?"
+          description="Don't wait for silent retrieval drift or hallucinated answers in front of enterprise clients. Let's triage your chunking, hybrid reranking, and CI evaluation gates."
+        />
+        <div className={styles.proof} style={{ marginTop: "1.5rem" }}>
+          <a className={styles.buttonGhost} href={withBasePath("/case-studies/")}>Explore more work &rarr;</a>
+        </div>
+      </div>
+    </section>
   </div>;
 }

@@ -4,6 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
+import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
 
 const title = "EFU Life Case Study - Enterprise Document Workflow Architecture";
 const description =
@@ -153,13 +154,12 @@ export default function EFULifeCaseStudy() {
 
       <section className={styles.cta} aria-labelledby="efu-contact">
         <div className={styles.sectionInner}>
-          <h2 id="efu-contact" className={styles.sectionTitle}>Have a document workflow to modernize?</h2>
-          <p className={styles.ctaDesc}>
-            Let&apos;s review the capture, routing, access, and integration
-            boundaries that shape your system.
-          </p>
-          <div className={styles.ctaActions}>
-            <a className={styles.ctaPrimary} href={BOOKING_URL} target="_blank" rel="noreferrer">Discuss Similar Architecture &rarr;</a>
+          <CaseStudyAuditCTA
+            focusArea="Enterprise Workflow Modernization"
+            title="Have a document or case workflow that needs modernizing?"
+            description="Whether you're moving from manual queues to automated routing, or integrating OCR/LLM extraction into legacy backends, let's triage your system boundaries, access rules, and throughput bottlenecks."
+          />
+          <div className={styles.ctaActions} style={{ marginTop: "1.5rem" }}>
             <a className={styles.ctaSecondary} href={withBasePath("/case-studies/")}>All Case Studies &rarr;</a>
             <a className={styles.backWork} href={withBasePath("/#work")}>Back to Selected Work &rarr;</a>
           </div>

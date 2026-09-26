@@ -8,6 +8,7 @@ const urlList = [
   "https://uzairkhatri.com/services/ai-agents/",
   "https://uzairkhatri.com/services/saas-architecture/",
   "https://uzairkhatri.com/services/ai-audit/",
+  "https://uzairkhatri.com/audit/",
   "https://uzairkhatri.com/work/production-rag/",
   "https://uzairkhatri.com/work/wellows/",
   "https://uzairkhatri.com/work/classflow/",

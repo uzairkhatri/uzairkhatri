@@ -4,6 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
+import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
 
 const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
@@ -404,18 +405,14 @@ export default function SavyourCaseStudy() {
 
       <section className={styles.cta} aria-label="Call to action">
         <div className={styles.ctaInner}>
-          <p className={styles.eyebrowLight}>Work together</p>
-          <h2 className={styles.ctaTitle}>Building high-concurrency transactional systems?</h2>
-          <p className={styles.ctaDesc}>
-            Let&apos;s build an idempotent, verifiable data pipeline that keeps your financial records
-            accurate and your customer experience instant.
-          </p>
-          <div className={styles.ctaActions}>
-            <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.ctaPrimary}>
-              Request Architecture Review
-            </a>
+          <CaseStudyAuditCTA
+            focusArea="High-Concurrency SaaS & Data Pipelines"
+            title="Building high-throughput transactional backends?"
+            description="If you're dealing with webhook surges, distributed race conditions, or cache consistency issues, let's stress-test your idempotency keys, message queues, and ledger boundaries."
+          />
+          <div className={styles.ctaActions} style={{ marginTop: "1.5rem" }}>
             <a href={withBasePath("/#work")} className={styles.ctaSecondary}>
-              View all work
+              View all work &rarr;
             </a>
           </div>
         </div>

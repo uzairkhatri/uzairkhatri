@@ -4,6 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
+import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
 
 const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
@@ -422,18 +423,14 @@ export default function WellowsCaseStudy() {
 
       <section className={styles.cta} aria-label="Call to action">
         <div className={styles.ctaInner}>
-          <p className={styles.eyebrowLight}>Work together</p>
-          <h2 className={styles.ctaTitle}>Moving AI from prototype to production?</h2>
-          <p className={styles.ctaDesc}>
-            I do not do patch jobs. If the architecture is wrong, I will tell you before another
-            expensive layer gets built on top of it.
-          </p>
-          <div className={styles.ctaActions}>
-            <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.ctaPrimary}>
-              Book Architecture Call
-            </a>
+          <CaseStudyAuditCTA
+            focusArea="Multi-Agent Systems & LLM Architecture"
+            title="Moving your AI agents from prototype to production?"
+            description="If your agent loops are freezing, hallucinating, or blowing past token budgets under concurrent load, let's triage your state isolation, tool-calling boundaries, and failure fallbacks."
+          />
+          <div className={styles.ctaActions} style={{ marginTop: "1.5rem" }}>
             <a href={withBasePath("/#work")} className={styles.ctaSecondary}>
-              View all work
+              View all work &rarr;
             </a>
           </div>
         </div>
