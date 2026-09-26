@@ -3,7 +3,11 @@
 </p>
 
 <p align="center">
-  <a href="https://uzairkhatri.com"><img src="https://img.shields.io/badge/Website-uzairkhatri.com-0052cc?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1200&color=38BDF8&center=true&vCenter=true&width=750&lines=Principal+AI+Systems+Architect+%7C+14%2B+Years;Production+RAG%3A+Recall%405+(0.94)+%2B+MRR+(0.91)+CI+Quality+Gates;Multi-Agent+Orchestration+(LangGraph)+with+SQS+Dead-Letter+Queues;Scaled+Monolith-to-Services+for+1M%2B+Fintech+Customers;Turning+Fragile+AI+Prototypes+Into+Resilient+Production+Engines" alt="Typing SVG" />
+</p>
+
+<p align="center">
+  <a href="https://uzairkhatri.com"><img src="https://img.shields.io/badge/Portfolio-uzairkhatri.com-0052cc?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
   <a href="https://uzairkhatri.com/case-studies/"><img src="https://img.shields.io/badge/Selected_Work-Case_Studies-10b981?style=for-the-badge&logo=buffer&logoColor=white" alt="Case Studies" /></a>
   <a href="https://www.linkedin.com/in/uzair-khatri/"><img src="https://img.shields.io/badge/LinkedIn-Uzair_Khatri-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="https://calendly.com/uz-khatri/30min"><img src="https://img.shields.io/badge/Book_Call-30_Min_Strategy-f97316?style=for-the-badge&logo=calendly&logoColor=white" alt="Book a Strategy Call" /></a>
@@ -16,83 +20,76 @@
 
 ---
 
-### ⚡ Production Scale & Impact
+### ⚡ Executive Scale & Impact
 
-| Metric | Engineering Proof |
+| Metric | Engineering Proof & Production Benchmark |
 | :--- | :--- |
-| **14+ Years** | Designing fault-tolerant distributed backends, fintech ledgers, and enterprise architectures |
-| **1M+ Customers** | Scaled core ledger and merchant settlement APIs processing 5,000+ daily transactions (*Savyour*) |
-| **10K+ / Month** | Multi-agent autonomous content and remediation pipeline orchestrated via LangGraph (*Wellows*) |
-| **800ms → 120ms** | API latency reduction achieved through async refactoring, Redis caching, and SQS queue isolation |
-| **<200ms Vector SLA** | Hybrid dense/sparse vector retrieval layer built on Qdrant with zero-evidence abstention guards |
+| **14+ Years** | Architecting resilient distributed systems, enterprise workflows, and scalable backends |
+| **1M+ Customers** | Engineered core ledger, partner APIs, and settlement flows processing 5,000+ daily transactions (*Savyour*) |
+| **10K+ / Month** | Multi-agent autonomous remediation engine scoring LLM search citations across ChatGPT & Perplexity (*Wellows*) |
+| **800ms → 120ms** | Production API latency reduction achieved through async refactoring, Redis caching, and SQS queue isolation |
+| **<200ms Vector SLA** | Hybrid dense/sparse retrieval layer on Qdrant with deterministic value-presence abstention gates |
 
 ---
 
-## 🛠️ Featured Open-Source Architectures
+## 🏛️ The Four Production Layers
 
-<table>
-<tr>
-<td width="50%" valign="top">
+> *"The model is rarely the system. It's the stress point. Building reliable AI products requires explicit boundaries, measurable quality gates, and deterministic operational controls."*
 
-### 🔍 [Production RAG Reference](https://github.com/uzairkhatri/production-rag-reference)
+<p align="center">
+  <img src="./assets/four-production-layers.svg" alt="The Four Production Layers Architecture" width="100%" />
+</p>
+
+---
+
+## 🛠️ Flagship Open-Source Architectures
+
+### 1. [Production RAG Reference](https://github.com/uzairkhatri/production-rag-reference)
 *FastAPI reference architecture for RAG systems that can be measured, evaluated, and operated with confidence.*
 
-```text
-Document Ingestion ──> Word Chunking ──> Hybrid Retrieval (BM25 + Vector)
-                                                    │
-Context Selection <── Lexical Reranker <────────────┘
-        │
-Value Evidence Guard ──> Answer Generation + Grounded Citations + UUID Trace
-```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/uzairkhatri/production-rag-reference/main/docs/assets/architecture.svg" alt="Production RAG Reference Architecture" width="100%" />
+</p>
 
-**Key Engineering Capabilities:**
-* **Measurable Quality:** Recall@5 (**0.9444**) and MRR (**0.9167**) regression floors enforced in CI.
+* **Measurable Retrieval Gate:** Enforces **Recall@5 (0.9444)** and **MRR (0.9167)** regression floors in GitHub Actions CI before any code merges.
 * **Deterministic Guardrails:** Value-presence verification rejects hallucinated metrics, versions, and prices before hitting generator endpoints.
-* **Provider Independence:** Swappable interfaces across offline local execution and OpenAI/Claude.
+* **Provider Independence:** Swappable interfaces supporting offline local execution and production OpenAI / Claude adapters.
+* 👉 [**Explore Repository →**](https://github.com/uzairkhatri/production-rag-reference) · [Read Architecture Case Study](https://uzairkhatri.com/work/production-rag/)
 
-👉 [**Explore Repository →**](https://github.com/uzairkhatri/production-rag-reference) · [Live Architecture Walkthrough](https://uzairkhatri.com/work/production-rag/)
+---
 
-</td>
-<td width="50%" valign="top">
+### 2. [FastAPI AI Engineering Team](https://github.com/uzairkhatri/fastapi-ai-team)
+*Autonomous multi-agent engineering runtime: 11 specialized agents and 7 architectural skills taking specifications to production PRs.*
 
-### 🛡️ [Production AI Readiness](https://github.com/uzairkhatri/production-ai-readiness)
-*Deterministic Python CLI that catches enterprise AI and LLM risks before code merges.*
+<p align="center">
+  <img src="./assets/fastapi-ai-team-architecture.svg" alt="FastAPI AI Team Multi-Agent Architecture" width="100%" />
+</p>
+
+* **Isolated Task Boundaries:** Dedicated agents for API/Backend, Database, QA/Testing, and Security audit.
+* **Deterministic State Machine:** Orchestrated through stateful handoffs with verification checks before PR submission.
+* 👉 [**Explore Repository →**](https://github.com/uzairkhatri/fastapi-ai-team)
+
+---
+
+### 3. [Production AI Readiness CLI](https://github.com/uzairkhatri/production-ai-readiness)
+*Deterministic Python CLI that audits AI/LLM codebases across 8 engineering dimensions before deployment.*
 
 ```text
-git diff / codebase
-        │
-[Audit Engine: 8 Quality Dimensions]
-        │
-├── Evaluation & RAG Quality
-├── Guardrails & PII Sanitization
-├── Observability & Trace IDs
-└── Reliability & Cost Limits
-        │
-PR Gate Block / SARIF / JSON / Markdown Report
+git diff / codebase ──> [Audit Engine: 8 Dimensions] ──> GitHub Actions PR Gate (SARIF / JSON / MD)
 ```
 
-**Key Engineering Capabilities:**
-* **8 Critical Dimensions:** Evaluates test coverage, prompt injection defenses, token budget ceilings, and human-in-the-loop gates.
-* **CI/CD Integration:** Runs as a native GitHub Actions PR gate with SARIF security reporting.
-* **Audit Transparency:** Generates audit-ready evidence for enterprise security and compliance.
+* **8 Audit Dimensions:** Evaluates test coverage, prompt injection defenses, token budget ceilings, and human-in-the-loop approval gates.
+* **Security & SARIF Integration:** Integrates into CI/CD pipelines to block risky AI patterns before pull requests merge.
+* 👉 [**Explore Repository →**](https://github.com/uzairkhatri/production-ai-readiness) · [Explore AI Audit Advisory](https://uzairkhatri.com/services/ai-audit/)
 
-👉 [**Explore Repository →**](https://github.com/uzairkhatri/production-ai-readiness) · [AI Architecture Audit Service](https://uzairkhatri.com/services/ai-audit/)
+---
 
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top">
+## 📊 Engineering Telemetry & Activity
 
-### 🤖 [FastAPI AI Engineering Team](https://github.com/uzairkhatri/fastapi-ai-team)
-*Your AI-powered FastAPI engineering team: 11 specialized autonomous agents and 7 architectural skills taking specifications to production-ready pull requests.*
-
-`Multi-Agent Orchestration` · `LangGraph State Machines` · `Automated Pre-PR Security Gates` · `Async Job Queues`
-
-👉 [**Explore Repository →**](https://github.com/uzairkhatri/fastapi-ai-team)
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=uzairkhatri&show_icons=true&theme=tokyonight&hide_border=false&border_color=1e5ea8&bg_color=07111f&title_color=38bdf8&text_color=d7e2f0&icon_color=f5a623" alt="Uzair Khatri GitHub Stats" height="175" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=uzairkhatri&layout=compact&theme=tokyonight&border_color=1e5ea8&bg_color=07111f&title_color=38bdf8&text_color=d7e2f0" alt="Top Languages" height="175" />
+</p>
 
 ---
 
@@ -142,7 +139,7 @@ PR Gate Block / SARIF / JSON / Markdown Report
 
 ---
 
-## 🏛️ Selected Enterprise Case Studies
+## 🏛️ Enterprise Production Case Studies
 
 | Client / Product | Domain | Engineering Highlights | Case Study |
 | :--- | :--- | :--- | :---: |
