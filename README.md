@@ -110,6 +110,15 @@ API Clients → FastAPI Ingestion → Kafka-Compatible Stream
 
 ---
 
+## 📈 Live GitHub Activity
+
+<p align="center">
+  <img src="https://github-readme-stats-ivory-alpha-36.vercel.app/api?username=uzairkhatri&show_icons=true&hide_border=true&bg_color=07111f&title_color=38bdf8&text_color=94a3b8&icon_color=38bdf8&ring_color=38bdf8" alt="Uzair Khatri's GitHub Stats" width="49%" />
+  <img src="https://streak-stats.demolab.com/?user=uzairkhatri&background=07111f&border=07111f&ring=38bdf8&fire=38bdf8&currStreakLabel=38bdf8&sideLabels=94a3b8&currStreakNum=ffffff&sideNums=ffffff&dates=94a3b8&hide_border=true" alt="Uzair Khatri's GitHub Streak" width="49%" />
+</p>
+
+---
+
 ## 💻 Production Tech Stack
 
 <div align="left">
