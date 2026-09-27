@@ -114,13 +114,16 @@ export default function AuditPage() {
 
       <section className={styles.engineerSection}>
         <div className={styles.sectionLabel}>Reviewed by an engineer who ships</div>
-        <div className={styles.engineerPanel}><Image src={withBasePath("/img/audit-engineer-v2.png")} alt="Uzair Khatri" width={118} height={118}/><div className={styles.engineerCopy}><h2>Uzair Khatri <span>·</span> AI Production Architect</h2><p>I design and build production AI systems for real-world use cases. With 12+ years of experience in cloud-native systems, I focus on practical, scalable and cost-effective architectures that actually work in production.</p></div><ul className={styles.engineerPoints}><li>Production-focused mindset</li><li>Hands-on technical experience</li><li>Practical, non-nonsense advice</li><li>100% confidential review</li></ul></div>
+        <div className={styles.engineerPanel}><Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Khatri" width={118} height={118}/><div className={styles.engineerCopy}><h2>Uzair Khatri <span>·</span> AI Production Architect</h2><p>I design and build production AI systems for real-world use cases. With 14+ years of experience in distributed systems and cloud-native architecture, I focus on practical, scalable and cost-effective architectures that actually work in production.</p></div><ul className={styles.engineerPoints}><li>Production-focused mindset</li><li>Hands-on technical experience</li><li>Practical, non-nonsense advice</li><li>100% confidential review</li></ul></div>
       </section>
 
       <section className={styles.formSection} id="request-audit">
-        <div className={styles.formLabel}>Get Started</div>
         {status === "success" ? <div className={styles.success}><span>✓</span><h2>Your audit request is in.</h2><p>I’ll review your details and get back to you within 48 hours.</p></div> : <>
-          <div className={styles.sectionHeading}><h2>Request Your Free AI Audit</h2><p>Share a few details about your project. All submissions are kept strictly confidential.</p></div>
+          <div className={styles.sectionHeading}>
+            <div className={styles.formLabel}>Get Started</div>
+            <h2>Request Your Free AI Audit</h2>
+            <p>Share a few details about your project. All submissions are kept strictly confidential.</p>
+          </div>
           <form onSubmit={submitAudit}>
             <input className={styles.honeypot} tabIndex={-1} autoComplete="off" value={form._gotcha} onChange={(e) => update("_gotcha", e.target.value)}/>
             <div className={styles.formGrid}><label>Your Name <b>*</b><input required value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="e.g. Alex Vance"/></label><label>Work Email <b>*</b><input required type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="alex@company.com"/></label><label>Company / Product URL<input value={form.company} onChange={(e) => update("company", e.target.value)} placeholder="company.com or app name"/></label><label>Current Stage<select value={form.stage} onChange={(e) => update("stage", e.target.value)}><option value="">Select stage</option><option>Idea / Planning</option><option>Prototype / MVP</option><option>Staging / Pre-launch</option><option>Production with users</option></select></label></div>
