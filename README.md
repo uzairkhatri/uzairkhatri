@@ -31,7 +31,8 @@ Each project includes implementation, tests, CI, and architecture documentation.
 
 ## Open Source
 
-**OpenTelemetry Python Contrib**  
+**OpenTelemetry Python Contrib**
+
 [PR #5111: trace per-cursor Psycopg2 factories](https://github.com/open-telemetry/opentelemetry-python-contrib/pull/5111)
 
 The change fixes a real instrumentation gap, adds focused regression coverage and a changelog entry, and has completed the Linux Foundation CLA process. Status: **submitted upstream and awaiting maintainer review**.
