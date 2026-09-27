@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 :root {
+  /* Local system stacks keep production builds independent of font CDNs. */
+  --font-inter: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-outfit: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  --font-cormorant-garamond: Georgia, "Times New Roman", serif;
+  --font-space-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --hero-bg-top: #98a2a1;
   --hero-bg-bottom: #7f8b8a;
   --ink: #111418;
