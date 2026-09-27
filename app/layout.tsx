@@ -1,42 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Space_Mono, Outfit, Cormorant_Garamond } from "next/font/google";
 import SiteAnalytics from "@/components/SiteAnalytics";
 import "@/app/globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
 import JsonLd from "@/components/JsonLd";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  // Lighthouse attributed the page's only layout shift to this font and to
-  // Cormorant Garamond swapping in over the fallback. Naming the fallback
-  // stack lets next/font size-adjust against what the browser will actually
-  // render first, instead of its default Arial metrics.
-  fallback: ["system-ui", "-apple-system", "Segoe UI", "Roboto", "Arial"],
-});
-
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
-  display: "swap",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  display: "swap",
-});
-
-const cormorantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant-garamond",
-  display: "optional",
-  fallback: ["Georgia", "Times New Roman", "serif"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://uzairkhatri.com"),
@@ -124,10 +90,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
         <JsonLd />
       </head>
-      <body
-        suppressHydrationWarning
-        className={`${inter.variable} ${spaceMono.variable} ${outfit.variable} ${cormorantGaramond.variable}`}
-      >
+      <body suppressHydrationWarning>
         <SiteAnalytics />
         <ScrollProgress />
         {children}
