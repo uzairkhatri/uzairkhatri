@@ -7,6 +7,7 @@
 
 <p align="center">
   <a href="https://uzairkhatri.com"><img src="https://img.shields.io/badge/Portfolio-uzairkhatri.com-0052CC?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
+  <a href="https://uzairkhatri.com/insights"><img src="https://img.shields.io/badge/Blog-Insights-7C3AED?style=flat-square&logo=rss&logoColor=white" alt="Blog" /></a>
   <a href="https://www.linkedin.com/in/uzair-khatri/"><img src="https://img.shields.io/badge/LinkedIn-Uzair_Khatri-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:hello@uzairkhatri.com"><img src="https://img.shields.io/badge/Email-hello%40uzairkhatri.com-059669?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
   <a href="https://calendly.com/uz-khatri/30min"><img src="https://img.shields.io/badge/Book_a_Call-30_minutes-EA580C?style=flat-square&logo=calendly&logoColor=white" alt="Book a call" /></a>
@@ -124,7 +125,7 @@ Detailed outcomes and project context are available in the [case studies](https:
 ## Activity
 
 <p align="center">
-  <img src="https://github-readme-stats-ivory-alpha-36.vercel.app/api?username=uzairkhatri&show_icons=true&hide_border=true&hide=stars&title_color=0052CC&icon_color=0052CC&text_color=333333" alt="Uzair Khatri's GitHub stats" width="49%" />
+  <img src="https://github-readme-stats-ivory-alpha-36.vercel.app/api?username=uzairkhatri&show_icons=true&hide_border=true&hide=stars&hide_rank=true&title_color=0052CC&icon_color=0052CC&text_color=333333" alt="Uzair Khatri's GitHub stats" width="49%" />
   <img src="https://streak-stats.demolab.com/?user=uzairkhatri&hide_border=true&ring=0052CC&fire=EA580C&currStreakLabel=0052CC" alt="Uzair Khatri's GitHub streak" width="49%" />
 </p>
 
