@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="./assets/profile-hero-banner.png" alt="Distributed systems network motif" width="100%" />
-</p>
-
 <h1 align="center">Hi, I'm Uzair Khatri</h1>
 
 <p align="center">
