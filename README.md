@@ -124,7 +124,7 @@ Detailed outcomes and project context are available in the [case studies](https:
 ## Activity
 
 <p align="center">
-  <img src="https://github-readme-stats-ivory-alpha-36.vercel.app/api?username=uzairkhatri&show_icons=true&hide_border=true&title_color=0052CC&icon_color=0052CC&text_color=333333" alt="Uzair Khatri's GitHub stats" width="49%" />
+  <img src="https://github-readme-stats-ivory-alpha-36.vercel.app/api?username=uzairkhatri&show_icons=true&hide_border=true&hide=stars&title_color=0052CC&icon_color=0052CC&text_color=333333" alt="Uzair Khatri's GitHub stats" width="49%" />
   <img src="https://streak-stats.demolab.com/?user=uzairkhatri&hide_border=true&ring=0052CC&fire=EA580C&currStreakLabel=0052CC" alt="Uzair Khatri's GitHub streak" width="49%" />
 </p>
 
