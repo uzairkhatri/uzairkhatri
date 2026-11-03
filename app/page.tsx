@@ -14,6 +14,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import BookingModal from "@/components/BookingModal";
 import MobileActionBar from "@/components/MobileActionBar";
 import AEOQuestions from "@/components/AEOQuestions";
+import Writing from "@/components/Writing";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <SelectedWork />
       <About />
       <AEOQuestions show="services" />
+      <Writing />
       <EngagementModels />
       <Timeline />
       <WorkingWithUzair />

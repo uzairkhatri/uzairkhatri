@@ -10,7 +10,7 @@ const personSchema = {
   "email": "mailto:hello@uzairkhatri.com",
   "sameAs": [
     "https://www.linkedin.com/in/uzair-khatri",
-    "https://github.com/UzairKhatri",
+    "https://github.com/uzairkhatri",
     "https://dev.to/uzairkhatri"
   ],
   "knowsAbout": [
@@ -38,7 +38,6 @@ const serviceSchema = {
   "name": "Uzair Khatri — AI Systems Architecture & SaaS Engineering",
   "url": "https://uzairkhatri.com",
   "image": "https://uzairkhatri.com/img/profile/hero-portrait.png",
-  "telephone": "+923000000000",
   "email": "hello@uzairkhatri.com",
   "priceRange": "$$$$",
   "address": {

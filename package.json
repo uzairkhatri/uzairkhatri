@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:analytics": "node --test tests/analytics.test.cjs"
+    "test": "node --test tests/analytics.test.cjs tests/sitemap.test.cjs tests/schema.test.cjs tests/worker.test.cjs",
+    "test:analytics": "node --test tests/analytics.test.cjs",
+    "test:sitemap": "node --test tests/sitemap.test.cjs",
+    "test:schema": "node --test tests/schema.test.cjs",
+    "test:worker": "node --test tests/worker.test.cjs"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",

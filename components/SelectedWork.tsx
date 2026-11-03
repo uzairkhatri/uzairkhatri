@@ -21,7 +21,7 @@ type Project = {
   challenge: string;
   solution: string;
   outcome: string;
-  caseStudyUrl?: string;
+  caseStudyUrl: string;
   /** Public URL of the shipped product, where one exists and is live. */
   liveUrl?: string;
   blueprint: {
@@ -38,7 +38,7 @@ const projects: Project[] = [
     name: "Wellows",
     category: "LLM Search Visibility Platform",
     role: "Solutions Architect",
-    caseStudyUrl: "/work/wellows",
+    caseStudyUrl: "/work/wellows/",
     liveUrl: "https://wellows.com",
     description:
       "Designed the agent workflows, shared retrieval layer, backend services, and infrastructure path for a platform that measures brand visibility across ChatGPT, Gemini, Perplexity, and Google AI, then closes the gaps through automated content and technical page remediation.",
@@ -65,7 +65,7 @@ const projects: Project[] = [
     name: "ClassFlow",
     category: "Live Tutoring Marketplace SaaS",
     role: "Lead Architect",
-    caseStudyUrl: "/work/classflow",
+    caseStudyUrl: "/work/classflow/",
     description:
       "Architected automated tutor matching across global timezones, Redis concurrency locks to eliminate double-booking, and automated Stripe teacher payouts.",
     stack: ["FastAPI", "Redis Redlock", "Stripe Connect", "WebSockets", "PostgreSQL"],
@@ -91,7 +91,7 @@ const projects: Project[] = [
     name: "Savyour",
     category: "Fintech Cashback Platform",
     role: "Solutions Architect",
-    caseStudyUrl: "/work/savyour",
+    caseStudyUrl: "/work/savyour/",
     description:
       "Contributed backend architecture across cashback calculation, partner integrations, wallet flows, payment disbursement, and AI shopping assistance for a large consumer marketplace.",
     stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Payment APIs"],
@@ -202,15 +202,22 @@ function ProjectBlade({
   ];
   
   return (
-    <button
+    <div
       ref={tiltGlow.ref}
       onMouseMove={tiltGlow.onMouseMove}
       onMouseLeave={tiltGlow.onMouseLeave}
       style={tiltGlow.style}
       className={`${styles.tabBtn} ${idx === activeTab ? styles.tabActive : ""}`}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       aria-selected={idx === activeTab}
       role="tab"
+      tabIndex={0}
     >
       {idx === activeTab && (
         <motion.div
@@ -240,7 +247,30 @@ function ProjectBlade({
           <strong>{bladeSpecs[idx].spine}</strong>
         </div>
       </div>
-    </button>
+      <div className={styles.bladeActionRow}>
+        <a
+          href={withBasePath(proj.caseStudyUrl)}
+          className={styles.bladeActionLink}
+          title={`Read ${proj.name} architecture case study`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          Read Case Study &rarr;
+        </a>
+        {proj.liveUrl && (
+          <a
+            href={proj.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.bladeActionLink}
+            title={`Visit ${proj.name} live platform`}
+            onClick={(e) => e.stopPropagation()}
+            style={{ opacity: 0.7 }}
+          >
+            Live Site &nearr;
+          </a>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -454,4 +484,3 @@ export default function SelectedWork() {
     </section>
   );
 }
-

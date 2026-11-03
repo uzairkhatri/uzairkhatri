@@ -15,7 +15,6 @@ const urlList = [
   "https://uzairkhatri.com/work/savyour/",
   "https://uzairkhatri.com/work/efu-life/",
   "https://uzairkhatri.com/case-studies/",
-  "https://uzairkhatri.com/book/",
   "https://uzairkhatri.com/strategy-call/",
   "https://uzairkhatri.com/ai-playbook/",
   "https://uzairkhatri.com/insights/",

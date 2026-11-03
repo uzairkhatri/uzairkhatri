@@ -1,50 +1,90 @@
 import styles from "./Writing.module.css";
+import { withBasePath } from "./siteLinks";
 
-const LINKEDIN_URL = "https://www.linkedin.com/in/uzair-khatri";
+interface Article {
+  slug: string;
+  title: string;
+  category: string;
+  readTime: string;
+  summary: string;
+}
 
-const essays = [
+const articles: Article[] = [
   {
-    title: "How I Think About Production AI",
+    slug: "production-ai-architecture",
+    category: "Architecture Philosophy",
+    readTime: "8 min read",
+    title: "Why 80% of AI Demos Never Survive Production",
     summary:
-      "Why the hard part is no longer the prompt, but the system around the prompt: orchestration, state, recovery, observability, and cost control.",
+      "The shift from prototype to system: surviving rate limits, context window bloat, cascading hallucination loops, and unpredictable API bills under enterprise traffic.",
   },
   {
-    title: "The Prototype Is Not the Product",
+    slug: "ai-agent-guardrails",
+    category: "Agentic Engineering",
+    readTime: "11 min read",
+    title: "Deterministic Guardrails for Probabilistic Agents",
     summary:
-      "A practical architecture lens for teams moving from investor-demo energy to real users, real traffic, and business-critical reliability.",
+      "Building unshakeable boundary layers around autonomous LangGraph agents: Pydantic v2 schema validation gates, error isolation, exponential backoff, and dead-letter queues.",
   },
   {
-    title: "Agents Need Boundaries Before They Need Tools",
+    slug: "rag-production-checklist",
+    category: "Retrieval Engineering",
+    readTime: "9 min read",
+    title: "Beyond Naive Vector Search: Production RAG Checklist",
     summary:
-      "A note on designing agentic workflows with clear responsibilities, failure paths, and human-operable control surfaces.",
+      "Why top-k cosine similarity fails under live customer queries. Implementing chunking strategies, hybrid dense-sparse indexing, Cohere reranking, and sub-200ms latency budgets.",
   },
   {
-    title: "What Production Architecture Has to Survive",
+    slug: "ai-agent-evaluation",
+    category: "Systems Evaluation",
+    readTime: "10 min read",
+    title: "Evaluating Multi-Agent Systems in Production",
     summary:
-      "A checklist for cost, latency, observability, ownership, and failure recovery before an AI feature becomes a business system.",
+      "Continuous evaluation frameworks for non-deterministic agent clusters: synthetic regression tests, LLM-as-a-judge boundaries, trajectory scoring, and cost-governed automated benchmarks.",
   },
 ];
 
 export default function Writing() {
   return (
-    <section className={`${styles.section} reveal-section`} id="writing" aria-labelledby="writing-title">
+    <section className={`${styles.section} reveal-section`} id="insights" aria-labelledby="writing-title">
       <div className={styles.shell}>
         <header className={styles.header}>
-          <div className="section-eyebrow">
-            <span />
-            Writing
+          <div className={styles.headerLeft}>
+            <div className="section-eyebrow">
+              <span />
+              Insights &amp; Architecture Notes
+            </div>
+            <h2 id="writing-title">How I build past the prototype.</h2>
           </div>
-          <h2 id="writing-title">How I think about production AI.</h2>
-          <span>Short essays and architecture notes for teams building past the demo.</span>
+          <div>
+            <p className={styles.headerLead}>
+              In-depth architectural teardowns, production failure mode analyses, and deterministic systems patterns from building production AI agents, distributed backends, and cloud SaaS platforms.
+            </p>
+            <a href={withBasePath("/insights/")} className={styles.hubLink}>
+              Explore all technical essays &rarr;
+            </a>
+          </div>
         </header>
 
         <div className={styles.grid}>
-          {essays.map((essay, index) => (
-            <article className={`${styles.card} ${index === 0 ? styles.featured : ""} reveal-item`} key={essay.title}>
-              <span>Architecture note</span>
-              <h3>{essay.title}</h3>
-              <p>{essay.summary}</p>
-              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">Read on LinkedIn -&gt;</a>
+          {articles.map((art, index) => (
+            <article
+              className={`${styles.card} ${index === 0 ? styles.featured : ""} reveal-item`}
+              key={art.slug}
+            >
+              <div className={styles.metaRow}>
+                <span className={styles.category}>{art.category}</span>
+                <span className={styles.readTime}>{art.readTime}</span>
+              </div>
+              <h3>{art.title}</h3>
+              <p>{art.summary}</p>
+              <a
+                href={withBasePath(`/insights/${art.slug}/`)}
+                title={`Read ${art.title}`}
+                className={styles.articleLink}
+              >
+                Read Technical Note &rarr;
+              </a>
             </article>
           ))}
         </div>

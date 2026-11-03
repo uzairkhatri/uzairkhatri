@@ -1022,3 +1022,34 @@
     align-items: flex-start;
   }
 }
+
+
+.bladeActionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.85rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 1;
+}
+
+.bladeActionLink {
+  color: var(--project-accent, var(--gold));
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.bladeActionLink:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+}
