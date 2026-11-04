@@ -15,3 +15,7 @@ Thumbs.db
 .wrangler/
 .agents/ga-credentials.json
 .agents/*credentials*.json
+
+tsconfig.tsbuildinfo
+docs/growth-system/20-revenue-acquisition-tracker.md
+docs/growth-system/*tracker*.md

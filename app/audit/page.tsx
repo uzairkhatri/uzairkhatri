@@ -19,11 +19,28 @@ const auditAreas = [
 ];
 
 const stacks = ["Python", "JavaScript / TypeScript", "LangChain", "LlamaIndex", "OpenAI", "Anthropic", "AWS", "GCP", "Azure", "Docker / Kubernetes", "PostgreSQL", "Redis", "Other"];
+
 const faq = [
-  ["Is the audit really free?", "Yes. There is no cost and no obligation. This is a technical review, not a sales call."],
-  ["What will you review?", "Architecture, costs, latency, reliability, RAG, agent workflows, security and scaling."],
-  ["Do I need to share source code?", "No. A high-level architecture diagram or description is usually enough."],
-  ["What happens after I submit?", "I’ll review your submission and get back to you, usually within 48 hours, to schedule your 15-minute walkthrough."],
+  [
+    "What is the difference between the Free Triage Call and the $250 Pre-Mortem?",
+    "The Free 30-Minute Architecture Discovery Call is a focused, 1:1 architectural sanity check to identify your single highest-risk bottleneck and recommend an action path (verbal diagnostic, zero written deliverable). The $250 Production Pre-Mortem is an intensive 48-hour diagnostic sprint delivering a focused written Risk Priority Matrix (P0/P1/P2), architecture remediation patterns (no repository access required), cost optimization modeling, and a 30-minute live technical walkthrough with Uzair."
+  ],
+  [
+    "What specific areas are analyzed in the $250 Pre-Mortem?",
+    "We inspect system boundaries, database connection pool exhaustion risks under LLM streaming, uncached prompt token inflation, hybrid RAG retrieval precision (dense + sparse BM25), LangGraph multi-agent recursion guards, latency waterfalls, and OWASP LLM security vulnerabilities."
+  ],
+  [
+    "Do I need to share proprietary source code?",
+    "No. A high-level architecture diagram, schema outline, or sanitized description is usually enough to uncover silent architectural failure points. No repository access or private code sharing is required."
+  ],
+  [
+    "What if we need you to implement the recommended fixes?",
+    "For teams needing hands-on execution, I offer custom engineering implementation sprints and fractional architecture advisory (custom quote based on scope) to implement multi-agent state graphs, Redis Redlock concurrency, and production AWS/vector DB infrastructure."
+  ],
+  [
+    "I am an engineering leader or recruiter looking to hire full-time. How should I reach out?",
+    "You can download my CV directly from the header, review my production case studies, email me at hello@uzairkhatri.com, or schedule an introductory screening call via Calendly."
+  ],
 ];
 
 function AuditIcon({ type }: { type: string }) {
@@ -300,19 +317,24 @@ function AuditDashboard() {
           <i />
         </div>
         <div>
-          <strong>AI PRODUCTION AUDIT // LIVE DIAGNOSTIC CONSOLE</strong>
+          <strong>ARCHITECTURAL BENCHMARK CONSOLE // SPECIFICATION PREVIEW</strong>
           <small>Interactive Architectural Telemetry &amp; Optimization Engine</small>
         </div>
         <div className={styles.ready}>
-          <span /> {isScanning ? "DIAGNOSTIC SCANNING…" : "Audit Engine Active"}
-          <small>Verified Architecture Model</small>
+          <span /> {isScanning ? "BENCHMARK SCANNING…" : "Benchmark Model Active"}
+          <small>Illustrative Topology</small>
         </div>
+      </div>
+
+      <div className={styles.simulatedBanner}>
+        <span>ℹ ILLUSTRATIVE BENCHMARK</span>
+        <p>This interactive console displays illustrative benchmarks of common production failure modes (DB pool exhaustion, un-cached prompt tokens, serial tool latency) to demonstrate our diagnostic methodology. It is not live telemetry from your infrastructure.</p>
       </div>
 
       <div className={styles.dashboardBody}>
         {/* Navigation Rail */}
         <nav className={styles.auditRail} aria-label="Audit dashboard sections">
-          {nav.map((item, index) => (
+          {nav.map((item) => (
             <button
               key={item}
               className={active === item ? styles.railActive : ""}
@@ -335,7 +357,7 @@ function AuditDashboard() {
                   <span className={styles.stageTag}>Topological Architecture Map</span>
                   <h3 className={styles.stageTitle}>Production AI System Pipeline</h3>
                 </div>
-                <span className={`${styles.stageBadge} ${styles.badgeGreen}`}>Live Flow Active</span>
+                <span className={`${styles.stageBadge} ${styles.badgeGreen}`}>Benchmark Flow</span>
               </div>
 
               <div className={styles.topoCanvas}>
@@ -499,7 +521,7 @@ function AuditDashboard() {
 
               <div className={styles.costComparisonCard}>
                 <div className={styles.costHeaderRow}>
-                  <span>MONTHLY TOKEN EXPENDITURE COMPARISON</span>
+                  <span>ILLUSTRATIVE BENCHMARK SPEND COMPARISON</span>
                   <span className={styles.savingsHighlight}>POTENTIAL SAVINGS: -$4,650 / MO (-68%)</span>
                 </div>
                 <div className={styles.costBarGroup}>
@@ -771,7 +793,7 @@ function AuditDashboard() {
           <div>
             <div className={styles.healthHeader}>
               <h3>System Health</h3>
-              <span className={styles.liveBadge}><i className={styles.liveDot} /> LIVE TELEMETRY</span>
+              <span className={styles.liveBadge}><i className={styles.liveDot} /> BENCHMARK</span>
             </div>
 
             <div className={styles.scoreCircleBox}>
@@ -816,12 +838,12 @@ function AuditDashboard() {
 
           <div className={styles.healthActions}>
             <button type="button" className={styles.scanButton} onClick={runScan}>
-              {isScanning ? "Scanning Architecture…" : "⚡ Re-run Diagnostic Scan"}
+              {isScanning ? "Scanning Architecture…" : "⚡ Re-run Benchmark Scan"}
             </button>
-            <a href="#request-audit" className={styles.primaryButton} style={{ minHeight: "38px", fontSize: ".76rem", width: "100%" }}>
-              Get Your Free Audit →
+            <a href="#pricing-tiers" className={styles.primaryButton} style={{ minHeight: "38px", fontSize: ".76rem", width: "100%" }}>
+              Explore Review Options →
             </a>
-            <small className={styles.healthFootnote}>Interactive demo based on production benchmarks.</small>
+            <small className={styles.healthFootnote}>Illustrative benchmark model based on production failure mode patterns.</small>
           </div>
         </aside>
       </div>
@@ -831,82 +853,337 @@ function AuditDashboard() {
 
 export default function AuditPage() {
   const [selectedStacks, setSelectedStacks] = useState<string[]>([]);
-  const [form, setForm] = useState({ name: "", email: "", company: "", stage: "", description: "", _gotcha: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    stage: "",
+    engagementType: "Fixed-Scope Architecture Pre-Mortem ($250 Flat)",
+    description: "",
+    _gotcha: ""
+  });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const sending = useRef(false);
-  const toggleStack = (stack: string) => setSelectedStacks((current) => current.includes(stack) ? current.filter((item) => item !== stack) : [...current, stack]);
-  const update = (key: keyof typeof form, value: string) => setForm((current) => ({ ...current, [key]: value }));
+
+  const toggleStack = (stack: string) =>
+    setSelectedStacks((current) =>
+      current.includes(stack) ? current.filter((item) => item !== stack) : [...current, stack]
+    );
+
+  const update = (key: keyof typeof form, value: string) =>
+    setForm((current) => ({ ...current, [key]: value }));
 
   async function submitAudit(event: React.FormEvent) {
     event.preventDefault();
     if (sending.current) return;
     sending.current = true;
     setStatus("submitting");
-    const message = `[FREE AI PRODUCTION AUDIT]\nCompany: ${form.company || "N/A"}\nStage: ${form.stage || "N/A"}\nStack: ${selectedStacks.join(", ") || "N/A"}\n\n${form.description}`;
+
+    const message = `[ARCHITECTURE ENGAGEMENT INQUIRY]\nType: ${form.engagementType}\nCompany: ${form.company || "N/A"}\nStage: ${form.stage || "N/A"}\nStack: ${selectedStacks.join(", ") || "N/A"}\n\n${form.description}`;
+
     try {
-      const response = await fetch(withBasePath("/api/audit"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: form.name, email: form.email, company: form.company, stage: form.stage, stack: selectedStacks.join(", "), message, _gotcha: form._gotcha }) });
+      const response = await fetch(withBasePath("/api/audit"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          stage: form.stage,
+          stack: selectedStacks.join(", "),
+          message,
+          _gotcha: form._gotcha
+        })
+      });
+
       const result = await response.json();
       if (!response.ok || !result?.success) throw new Error();
-      trackAuditSubmission(selectedStacks.join(", "), "Free AI production audit");
+
+      trackAuditSubmission(selectedStacks.join(", "), form.engagementType);
       setStatus("success");
-    } catch { setStatus("error"); }
-    finally { sending.current = false; }
+    } catch {
+      setStatus("error");
+    } finally {
+      sending.current = false;
+    }
   }
 
-  return <div className={styles.page}>
-    <SubPageNav backLabel="Uzair Khatri" />
-    <main>
-      <section className={styles.hero}>
-        <div className={styles.heroGrid} aria-hidden="true" />
-        <div className={`${styles.handNote} ${styles.noteLeft}`}>Turn your<br/>AI idea into<br/>real impact.<span>↪</span></div>
-        <div className={styles.heroCopy}>
-          <div className={styles.eyebrowPill}>Free AI Production Audit</div>
-          <h1>Build Smarter.<br/><em>Ship with Confidence.</em></h1>
-          <p>Get a free, expert review of your AI architecture, infrastructure and workflows. Find risks, reduce costs, and improve reliability — before they impact your users or your budget.</p>
-          <div className={styles.heroActions}><a className={styles.primaryButton} href="#request-audit">Request Your Free Audit <span>→</span></a><a className={styles.secondaryButton} href="#sample-report">See a Sample Report</a></div>
-          <div className={styles.heroProof}><span><b>♢</b>100% Confidential</span><span><b>ϟ</b>No Sales Pitch</span><span><b>▥</b>Actionable Recommendations</span></div>
-        </div>
-        <div className={styles.laptopVisual} aria-hidden="true"><Image src={withBasePath("/img/audit-laptop-v2.png")} alt="" width={1536} height={1152} priority /></div>
-        <AuditDashboard />
-      </section>
-
-      <section className={styles.checkSection}>
-        <div className={styles.sectionHeading}><span>What We Check</span><h2>A complete review of your AI stack.</h2><p>We analyze your systems end-to-end and highlight what’s working, what’s at risk,<br/>and where you can improve.</p></div>
-        <div className={styles.auditGrid}>{auditAreas.map((area) => <article className={styles.auditCard} key={area.title}><AuditIcon type={area.icon}/><h3>{area.title}</h3><ul>{area.items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div>
-      </section>
-
-      <section className={styles.reportSection} id="sample-report">
-        <div className={styles.reportCopy}><div className={styles.eyebrowPill}>Sample Output</div><h2>A clear report,<br/>not just a checklist.</h2><p>You’ll receive a 10+ page audit report with visual diagrams, a summary of key issues, risk ratings, and practical recommendations you can act on.</p><a href="#request-audit" className={styles.primaryButton}>View a Sample Report <span>→</span></a></div>
-        <div className={styles.reportStack} aria-label="Sample AI Production Audit report"><Image className={styles.reportAsset} src={withBasePath("/img/audit-report-v2.png")} alt="Three-page sample AI Production Audit report" width={1536} height={1024}/></div>
-        <div className={`${styles.handNote} ${styles.reportNote}`}>Real insights.<br/>Real impact.<span>↪</span></div>
-      </section>
-
-      <section className={styles.engineerSection}>
-        <div className={styles.sectionLabel}>Reviewed by an engineer who ships</div>
-        <div className={styles.engineerPanel}><Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Khatri" width={118} height={118}/><div className={styles.engineerCopy}><h2>Uzair Khatri <span>·</span> AI Production Architect</h2><p>I design and build production AI systems for real-world use cases. With 14+ years of experience in distributed systems and cloud-native architecture, I focus on practical, scalable and cost-effective architectures that actually work in production.</p></div><ul className={styles.engineerPoints}><li>Production-focused mindset</li><li>Hands-on technical experience</li><li>Practical, non-nonsense advice</li><li>100% confidential review</li></ul></div>
-      </section>
-
-      <section className={styles.formSection} id="request-audit">
-        {status === "success" ? <div className={styles.success}><span>✓</span><h2>Your audit request is in.</h2><p>I’ll review your details and get back to you within 48 hours.</p></div> : <>
-          <div className={styles.sectionHeading}>
-            <div className={styles.formLabel}>Get Started</div>
-            <h2>Request Your Free AI Audit</h2>
-            <p>Share a few details about your project. All submissions are kept strictly confidential.</p>
+  return (
+    <div className={styles.page}>
+      <SubPageNav backLabel="Uzair Khatri" />
+      <main>
+        {/* Recruiter Fast-Track Header Callout */}
+        <div className={styles.recruiterBanner}>
+          <div className={styles.recruiterBadge}>HIRING LEADERS &amp; RECRUITERS</div>
+          <div className={styles.recruiterContent}>
+            <h3>Looking for a Principal AI Systems Architect or Staff Backend Engineer?</h3>
+            <p>14+ years of software engineering and distributed systems, hands-on production AI architecture across Python, Java, AWS, Redis Redlock, and LangGraph multi-agent runtimes. Available for senior full-time roles, contracts, and fractional leadership.</p>
+            <div className={styles.recruiterActions}>
+              <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.recruiterButton}>Download CV (Uzair Iqbal - PDF) &rarr;</a>
+              <a href={withBasePath("/#work")} className={styles.recruiterSecondary}>View Enterprise Case Studies</a>
+              <a href="mailto:hello@uzairkhatri.com" className={styles.recruiterSecondary}>hello@uzairkhatri.com</a>
+            </div>
           </div>
-          <form onSubmit={submitAudit}>
-            <input className={styles.honeypot} tabIndex={-1} autoComplete="off" value={form._gotcha} onChange={(e) => update("_gotcha", e.target.value)}/>
-            <div className={styles.formGrid}><label>Your Name <b>*</b><input required value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="e.g. Alex Vance"/></label><label>Work Email <b>*</b><input required type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="alex@company.com"/></label><label>Company / Product URL<input value={form.company} onChange={(e) => update("company", e.target.value)} placeholder="company.com or app name"/></label><label>Current Stage<select value={form.stage} onChange={(e) => update("stage", e.target.value)}><option value="">Select stage</option><option>Idea / Planning</option><option>Prototype / MVP</option><option>Staging / Pre-launch</option><option>Production with users</option></select></label></div>
-            <fieldset><legend>Current Stack & Frameworks <span>(select all that apply)</span></legend><div className={styles.stackOptions}>{stacks.map((stack) => <button type="button" key={stack} aria-pressed={selectedStacks.includes(stack)} onClick={() => toggleStack(stack)}>{selectedStacks.includes(stack) ? "✓" : "~"} {stack}</button>)}</div></fieldset>
-            <label className={styles.fullLabel}>Tell me about your system & what you’re looking to improve <b>*</b><textarea required value={form.description} onChange={(e) => update("description", e.target.value)} placeholder="e.g. We’re building an AI agent for customer support and want to reduce costs and improve reliability..."/></label>
-            {status === "error" && <p className={styles.formError}>The request could not be sent. Please email hello@uzairkhatri.com.</p>}
-            <button className={styles.submitButton} disabled={status === "submitting"}>{status === "submitting" ? "Submitting…" : "Request Free Audit →"}</button>
-            <div className={styles.formProof}><span>♙&nbsp; 100% Confidential</span><span>ϟ&nbsp; No Obligation</span><span>▣&nbsp; Practical Recommendations</span></div>
-          </form>
-        </>}
-      </section>
+        </div>
 
-      <section className={styles.faqSection}><div className={styles.sectionHeading}><span>Common Questions</span><h2>Frequently Asked Questions</h2></div><div className={styles.faqGrid}>{faq.map(([question, answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div></section>
-    </main>
-    <footer className={styles.footer}><div><strong>‹&nbsp; Uzair Khatri</strong><small>AI Systems · Architecture · Real-World Impact</small></div><nav><a href={withBasePath("/#work")}>Work</a><a href={withBasePath("/services/ai-systems/")}>Services</a><a href={withBasePath("/case-studies/")}>Case Studies</a><a href={withBasePath("/insights/")}>Insights</a><a className={styles.activeLink} href={withBasePath("/audit/")}>AI Triage</a><a href={CV_URL}>CV</a><a className={styles.footerCta} href={BOOKING_URL}>Book a call</a></nav><p>Build better. Ship smarter.</p><p>© 2026 Uzair Khatri. All rights reserved.</p></footer>
-  </div>;
+        <section className={styles.hero}>
+          <div className={styles.heroGrid} aria-hidden="true" />
+          <div className={`${styles.handNote} ${styles.noteLeft}`}>Turn your<br/>AI idea into<br/>real impact.<span>↪</span></div>
+          <div className={styles.heroCopy}>
+            <div className={styles.eyebrowPill}>AI Production Architecture Triage &amp; Pre-Mortem</div>
+            <h1>Build Smarter.<br/><em>Ship with Confidence.</em></h1>
+            <p>Diagnose silent failure modes, eliminate token waste, and harden agentic workflows before scaling to enterprise users. Choose between a free 30-minute discovery call, a fixed-scope $250 pre-mortem review, or custom hands-on implementation.</p>
+            <div className={styles.heroActions}>
+              <a className={styles.primaryButton} href="#pricing-tiers">View Review Tiers ($0 – $250) <span>→</span></a>
+              <a className={styles.secondaryButton} href={BOOKING_URL} target="_blank" rel="noreferrer">Book Free 30-Min Call</a>
+            </div>
+            <div className={styles.heroProof}><span><b>♢</b>100% Confidential</span><span><b>ϟ</b>Fixed-Scope Options</span><span><b>▥</b>Actionable Recommendations</span></div>
+          </div>
+          <div className={styles.laptopVisual} aria-hidden="true"><Image src={withBasePath("/img/audit-laptop-v2.png")} alt="" width={1536} height={1152} priority /></div>
+          <AuditDashboard />
+        </section>
+
+        {/* 3-Tier Offer Structure */}
+        <section className={styles.tierSection} id="pricing-tiers">
+          <div className={styles.sectionHeading}>
+            <span>Architecture Engagement Structures</span>
+            <h2>Choose the right level of architectural review.</h2>
+            <p>From a free 30-minute diagnostic discovery call to a focused 48-hour engineering pre-mortem or hands-on implementation sprint.</p>
+          </div>
+
+          <div className={styles.tierGrid}>
+            {/* Tier 1: Free */}
+            <article className={styles.tierCard}>
+              <div className={styles.tierTag}>Introductory Triage</div>
+              <div className={styles.tierPrice}>
+                $0 <span className={styles.tierPriceSub}>/ 30-min call</span>
+              </div>
+              <h3 className={styles.tierTitle}>Free Architecture Discovery</h3>
+              <p className={styles.tierDescription}>
+                A fast, high-impact 1:1 conversation to triage your biggest technical risk (latency, hallucination, or cloud bill) and identify the right path forward.
+              </p>
+              <ul className={styles.tierDeliverables}>
+                <li>30-Minute live video call with Uzair</li>
+                <li>Verbal triage of your primary technical fire</li>
+                <li>Immediate sanity check on tech stack choices</li>
+                <li>Scoping recommendation (no written deliverable)</li>
+              </ul>
+              <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={`${styles.secondaryButton} ${styles.tierCta}`}>
+                Book Free 30-Min Call &rarr;
+              </a>
+            </article>
+
+            {/* Tier 2: Paid Fixed-Scope ($250) */}
+            <article className={`${styles.tierCard} ${styles.tierFeatured}`}>
+              <span className={styles.tierBadge}>Recommended for Founders &amp; CTOs</span>
+              <div className={styles.tierTag}>Fixed-Scope Pre-Mortem</div>
+              <div className={styles.tierPrice}>
+                $250 <span className={styles.tierPriceSub}>flat fee · 48-hr SLA</span>
+              </div>
+              <h3 className={styles.tierTitle}>Production Architecture Pre-Mortem</h3>
+              <p className={styles.tierDescription}>
+                Fixed-scope review of one agreed technical problem (concurrency, RAG accuracy, or token cost leak) to stop silent failures before scaling.
+              </p>
+              <ul className={styles.tierDeliverables}>
+                <li>Fixed-scope review of one agreed technical problem</li>
+                <li>3–5 Page prioritized findings report (Risk Priority Matrix P0/P1/P2)</li>
+                <li>Recommended remediation approach &amp; patterns (no repo access required)</li>
+                <li>30-Minute walkthrough &amp; team Q&amp;A</li>
+                <li>Delivered within 48 hours after complete materials received &amp; scope accepted</li>
+              </ul>
+              <a href="#request-audit" className={`${styles.primaryButton} ${styles.tierCta}`}>
+                Request $250 Pre-Mortem &rarr;
+              </a>
+            </article>
+
+            {/* Tier 3: Higher-Value */}
+            <article className={styles.tierCard}>
+              <div className={styles.tierTag}>Hands-On Execution</div>
+              <div className={styles.tierPrice}>
+                Custom Quote <span className={styles.tierPriceSub}>/ sprint or retainer</span>
+              </div>
+              <h3 className={styles.tierTitle}>Implementation &amp; Advisory</h3>
+              <p className={styles.tierDescription}>
+                Direct, hands-on engineering execution and technical advisory tailored to your architecture roadmap and delivery timeline.
+              </p>
+              <ul className={styles.tierDeliverables}>
+                <li>Engineering implementation &amp; direct PR contributions</li>
+                <li>Architecture improvements &amp; multi-agent workflows (LangGraph)</li>
+                <li>AI and backend integrations (APIs, queues, vector DBs)</li>
+                <li>Ongoing technical advisory, code reviews &amp; hiring guidance</li>
+              </ul>
+              <a href="#request-audit" className={`${styles.secondaryButton} ${styles.tierCta}`}>
+                Inquire for Implementation &rarr;
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <section className={styles.checkSection}>
+          <div className={styles.sectionHeading}>
+            <span>What We Check</span>
+            <h2>A complete review of your AI stack.</h2>
+            <p>We analyze your systems end-to-end and highlight what’s working, what’s at risk,<br/>and where you can improve.</p>
+          </div>
+          <div className={styles.auditGrid}>
+            {auditAreas.map((area) => (
+              <article className={styles.auditCard} key={area.title}>
+                <AuditIcon type={area.icon}/>
+                <h3>{area.title}</h3>
+                <ul>{area.items.map((item) => <li key={item}>{item}</li>)}</ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.reportSection} id="sample-report">
+          <div className={styles.reportCopy}>
+            <div className={styles.eyebrowPill}>$250 Pre-Mortem Deliverable</div>
+            <h2>A clear report,<br/>not just a checklist.</h2>
+            <p>In the $250 Architecture Pre-Mortem, you receive a detailed written findings document with visual diagrams, risk ratings (P0/P1/P2), code snippets, and a live 45-minute technical walkthrough.</p>
+            <a href="#request-audit" className={styles.primaryButton}>Request Pre-Mortem ($250) <span>→</span></a>
+          </div>
+          <div className={styles.reportStack} aria-label="Sample AI Production Audit report">
+            <Image className={styles.reportAsset} src={withBasePath("/img/audit-report-v2.png")} alt="Three-page sample AI Production Audit report" width={1536} height={1024}/>
+          </div>
+          <div className={`${styles.handNote} ${styles.reportNote}`}>Real insights.<br/>Real impact.<span>↪</span></div>
+        </section>
+
+        <section className={styles.engineerSection}>
+          <div className={styles.sectionLabel}>Reviewed by an engineer who ships</div>
+          <div className={styles.engineerPanel}>
+            <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Khatri" width={118} height={118}/>
+            <div className={styles.engineerCopy}>
+              <h2>Uzair Khatri <span>·</span> AI Production Architect</h2>
+              <p>I design and build production AI systems for real-world use cases. With 12+ years of experience in distributed systems and cloud-native architecture, I focus on practical, scalable and cost-effective architectures that actually work in production.</p>
+            </div>
+            <ul className={styles.engineerPoints}>
+              <li>Production-focused mindset</li>
+              <li>Hands-on technical experience</li>
+              <li>Practical, non-nonsense advice</li>
+              <li>100% confidential review</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className={styles.formSection} id="request-audit">
+          {status === "success" ? (
+            <div className={styles.success}>
+              <span>✓</span>
+              <h2>Your request has been received.</h2>
+              <p>I’ll review your details and get back to you within 24 to 48 hours.</p>
+            </div>
+          ) : (
+            <>
+              <div className={styles.sectionHeading}>
+                <div className={styles.formLabel}>Get Started</div>
+                <h2>Request Your Architecture Review</h2>
+                <p>Select your preferred engagement level. All submissions are kept strictly confidential.</p>
+              </div>
+              <form onSubmit={submitAudit}>
+                <input className={styles.honeypot} tabIndex={-1} autoComplete="off" value={form._gotcha} onChange={(e) => update("_gotcha", e.target.value)}/>
+                <div className={styles.formGrid}>
+                  <label>Your Name <b>*</b>
+                    <input required value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="e.g. Alex Vance"/>
+                  </label>
+                  <label>Work Email <b>*</b>
+                    <input required type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="alex@company.com"/>
+                  </label>
+                  <label>Company / Product URL
+                    <input value={form.company} onChange={(e) => update("company", e.target.value)} placeholder="company.com or app name"/>
+                  </label>
+                  <label>Current Stage
+                    <select value={form.stage} onChange={(e) => update("stage", e.target.value)}>
+                      <option value="">Select stage</option>
+                      <option>Idea / Planning</option>
+                      <option>Prototype / MVP</option>
+                      <option>Staging / Pre-launch</option>
+                      <option>Production with users</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div style={{ marginTop: "16px" }}>
+                  <label style={{ fontSize: "0.82rem", fontWeight: "700", color: "var(--audit-gold-bright)", display: "block", marginBottom: "8px" }}>
+                    Engagement Type <b>*</b>
+                    <select
+                      value={form.engagementType}
+                      onChange={(e) => update("engagementType", e.target.value)}
+                      style={{ width: "100%", height: "46px", background: "#0a1012", border: "1px solid rgba(255, 255, 255, 0.15)", borderRadius: "6px", color: "#ffffff", padding: "0 14px", marginTop: "4px" }}
+                    >
+                      <option value="Fixed-Scope Architecture Pre-Mortem ($250 Flat)">Fixed-Scope Architecture Pre-Mortem ($250 Flat Scope — 48-hr SLA)</option>
+                      <option value="Free 30-Min Architecture Discovery Call ($0)">Free 30-Min Architecture Discovery Call ($0 — Verbal Triage)</option>
+                      <option value="Senior Engineering Role / Recruiter Inquiry">Senior Engineering Role / Recruiter Inquiry (Full-time / Contract)</option>
+                      <option value="Implementation & Advisory (Custom Quote)">Implementation &amp; Advisory (Custom Quote)</option>
+                    </select>
+                  </label>
+                </div>
+
+                <fieldset style={{ marginTop: "16px" }}>
+                  <legend>Current Stack &amp; Frameworks <span>(select all that apply)</span></legend>
+                  <div className={styles.stackOptions}>
+                    {stacks.map((stack) => (
+                      <button type="button" key={stack} aria-pressed={selectedStacks.includes(stack)} onClick={() => toggleStack(stack)}>
+                        {selectedStacks.includes(stack) ? "✓" : "~"} {stack}
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
+
+                <label className={styles.fullLabel}>
+                  Tell me about your system &amp; what you’re looking to review or build <b>*</b>
+                  <textarea required value={form.description} onChange={(e) => update("description", e.target.value)} placeholder="e.g. We’re deploying an agentic LangGraph workflow and experiencing latency spikes on tool calls, plus need a pre-launch sanity check..."/>
+                </label>
+
+                {status === "error" && <p className={styles.formError}>The request could not be sent. Please email hello@uzairkhatri.com.</p>}
+                
+                <button className={styles.submitButton} disabled={status === "submitting"}>
+                  {status === "submitting" ? "Submitting…" : "Submit Review Request →"}
+                </button>
+                
+                <div className={styles.formProof}>
+                  <span>♙&nbsp; 100% Confidential</span>
+                  <span>ϟ&nbsp; Clear Scope</span>
+                  <span>▣&nbsp; Actionable Recommendations</span>
+                </div>
+              </form>
+            </>
+          )}
+        </section>
+
+        <section className={styles.faqSection}>
+          <div className={styles.sectionHeading}>
+            <span>Common Questions</span>
+            <h2>Frequently Asked Questions</h2>
+          </div>
+          <div className={styles.faqGrid}>
+            {faq.map(([question, answer]) => (
+              <details key={question}>
+                <summary>{question}<span>+</span></summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      </main>
+      
+      <footer className={styles.footer}>
+        <div>
+          <strong>‹&nbsp; Uzair Khatri</strong>
+          <small>AI Systems · Architecture · Real-World Impact</small>
+        </div>
+        <nav>
+          <a href={withBasePath("/#work")}>Work</a>
+          <a href={withBasePath("/services/ai-systems/")}>Services</a>
+          <a href={withBasePath("/case-studies/")}>Case Studies</a>
+          <a href={withBasePath("/insights/")}>Insights</a>
+          <a className={styles.activeLink} href={withBasePath("/audit/")}>AI Triage &amp; Pre-Mortem</a>
+          <a href={CV_URL} target="_blank" rel="noreferrer">CV</a>
+          <a className={styles.footerCta} href={BOOKING_URL}>Book a call</a>
+        </nav>
+        <p>Build better. Ship smarter.</p>
+        <p>© 2026 Uzair Khatri. All rights reserved.</p>
+      </footer>
+    </div>
+  );
 }

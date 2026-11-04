@@ -1,4 +1,5 @@
 import Landing from "@/components/Landing";
+import DualPathways from "@/components/DualPathways";
 import About from "@/components/About";
 import Timeline from "@/components/Timeline";
 import Contact from "@/components/Contact";
@@ -22,6 +23,7 @@ export default function Home() {
       <ScrollReveal />
       <StickyNav />
       <Landing />
+      <DualPathways />
       <EcosystemLogos />
       <ManifestoAndStats />
       <SelectedWork />

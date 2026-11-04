@@ -7,6 +7,7 @@
 
 <p align="center">
   <a href="https://uzairkhatri.com"><img src="https://img.shields.io/badge/Portfolio-uzairkhatri.com-0052CC?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
+  <a href="https://uzairkhatri.com/Uzair-Iqbal-AI-Architect-CV.pdf"><img src="https://img.shields.io/badge/Resume%2FCV-Download_PDF-blue?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Resume / CV" /></a>
   <a href="https://uzairkhatri.com/insights"><img src="https://img.shields.io/badge/Blog-Insights-7C3AED?style=flat-square&logo=rss&logoColor=white" alt="Blog" /></a>
   <a href="https://www.linkedin.com/in/uzair-khatri/"><img src="https://img.shields.io/badge/LinkedIn-Uzair_Khatri-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:hello@uzairkhatri.com"><img src="https://img.shields.io/badge/Email-hello%40uzairkhatri.com-059669?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
@@ -132,6 +133,8 @@ Detailed outcomes and project context are available in the [case studies](https:
 ## Connect
 
 I work with teams moving AI prototypes into production and with engineering organizations that need stronger architecture, reliability, or delivery controls.
+
+**Availability:** Actively available for senior engineering leadership, Staff/Principal AI Systems Architect roles, and fixed-scope architecture pre-mortems ($250).
 
 [Portfolio](https://uzairkhatri.com) | [Case studies](https://uzairkhatri.com/case-studies/) | [LinkedIn](https://www.linkedin.com/in/uzair-khatri/) | [Book a call](https://calendly.com/uz-khatri/30min) | [Email](mailto:hello@uzairkhatri.com)
 

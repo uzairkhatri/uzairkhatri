@@ -137,10 +137,16 @@ export default function Landing() {
       </div>
 
       <div className="hero-content">
-        <div className="hero-identity-row">
-          <span className="hero-identity-name">Uzair Khatri</span>
-          <span className="hero-identity-sep">&bull;</span>
-          <span className="hero-identity-role">AI Systems Architect</span>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.65rem", marginBottom: "0.85rem" }}>
+          <div className="hero-identity-row" style={{ marginBottom: 0 }}>
+            <span className="hero-identity-name">Uzair Khatri</span>
+            <span className="hero-identity-sep">&bull;</span>
+            <span className="hero-identity-role">AI Systems Architect</span>
+          </div>
+          <div className="hero-availability">
+            <span aria-hidden="true" />
+            <span>Available for Staff/Principal Roles &amp; Consulting</span>
+          </div>
         </div>
 
         <div className="hero-role">

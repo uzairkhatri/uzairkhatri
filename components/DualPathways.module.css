@@ -1,0 +1,253 @@
+.section {
+  position: relative;
+  padding: clamp(2.5rem, 4.5vw, 4.5rem) 0 clamp(1.5rem, 3vw, 3rem);
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.shell {
+  width: min(84rem, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.6rem, 2.6vw, 2.4rem);
+  background: rgba(14, 18, 16, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.cardFeatured {
+  background: rgba(197, 155, 83, 0.04);
+  border-color: rgba(216, 173, 100, 0.32);
+}
+
+.cardFeatured:hover {
+  border-color: rgba(216, 173, 100, 0.55);
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.tagBadge {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+}
+
+.tagBadgeGold {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  background: rgba(216, 173, 100, 0.12);
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+}
+
+.statusPill {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #00d66f;
+  background: rgba(0, 214, 111, 0.1);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 214, 111, 0.25);
+}
+
+.statusPillGold {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--gold-bright);
+  background: rgba(216, 173, 100, 0.12);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 173, 100, 0.3);
+}
+
+.cardTitle {
+  font-family: var(--font-outfit), var(--font-inter), sans-serif;
+  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+  font-weight: 750;
+  line-height: 1.25;
+  color: #ffffff;
+  margin: 0 0 0.75rem;
+}
+
+.cardSummary {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 1.5rem;
+}
+
+.funnelSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.8rem;
+  padding: 1.1rem;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stepItem {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.stepNum {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.stepNumGold {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--gold-bright);
+}
+
+.stepItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.stepItem strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.stepItem span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.4;
+}
+
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.3rem;
+  background: #ffffff;
+  color: #0b0f0d;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.primaryBtn:hover {
+  background: #e5e5e5;
+}
+
+.primaryBtnGold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.3rem;
+  background: linear-gradient(135deg, #d8ad64 0%, #b88636 100%);
+  color: #0b0f0d;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.86rem;
+  font-weight: 750;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(216, 173, 100, 0.28);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.primaryBtnGold:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.textLink {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.textLink:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
