@@ -614,14 +614,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  mask-image:
-    linear-gradient(to right, transparent 0%, black 10%, black 92%, transparent 100%),
-    linear-gradient(to bottom, black 84%, transparent 100%);
-  -webkit-mask-image:
-    linear-gradient(to right, transparent 0%, black 10%, black 92%, transparent 100%),
-    linear-gradient(to bottom, black 84%, transparent 100%);
-  mask-composite: intersect;
-  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, black 86%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 86%, transparent 100%);
 }
 
 .portraitImg {
@@ -631,7 +625,7 @@
   object-fit: contain;
   object-position: top center;
   display: block;
-  filter: contrast(1.05) brightness(0.98);
+  filter: contrast(1.03) brightness(1.0);
 }
 
 /* ========================================================

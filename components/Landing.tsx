@@ -96,6 +96,7 @@ export default function Landing() {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Request Architecture Review"
               >
                 Request Review
               </a>
