@@ -1,13 +1,14 @@
 /* ==========================================================================
-   Section 02 — Executive Proof Strip & Architectural Benchmarks
-   Inspired by Underwrite & Atlaso (Deterministic · Constraint-Based · No Mock Data)
+   Section 02 — Production Architectural Benchmarks
+   Underwrite-Style Comparative Architecture & Inset Metric Benchmarks
+   Cohesive Warm Gold & Obsidian Palette
    ========================================================================== */
 
 .section {
   position: relative;
   width: 100%;
-  background: #080a0f;
-  padding: clamp(2rem, 3.5vw, 3.2rem) 0 clamp(2.5rem, 4vw, 3.8rem);
+  background: #0a0c0e;
+  padding: clamp(2.5rem, 4.5vw, 4.5rem) 0 clamp(2.5rem, 4vw, 4rem);
   overflow: hidden;
 }
 
@@ -21,78 +22,19 @@
   box-sizing: border-box;
 }
 
-/* ========================================================
-   Elevated Architectural Dossier Frame
-   ======================================================== */
-
-.ledgerFrame {
-  position: relative;
-  width: 100%;
-  background: linear-gradient(180deg, #0e121a 0%, #090c12 100%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 18px;
-  box-shadow:
-    0 28px 70px rgba(0, 0, 0, 0.75),
-    0 0 50px rgba(56, 189, 248, 0.03),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-/* 4 Precision L-Shaped Corner Brackets */
-.cornerBracket {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  pointer-events: none;
-  z-index: 4;
-}
-
-.cornerTL {
-  top: 10px;
-  left: 10px;
-  border-top: 2px solid rgba(212, 170, 103, 0.7);
-  border-left: 2px solid rgba(212, 170, 103, 0.7);
-  border-top-left-radius: 4px;
-}
-
-.cornerTR {
-  top: 10px;
-  right: 10px;
-  border-top: 2px solid rgba(212, 170, 103, 0.7);
-  border-right: 2px solid rgba(212, 170, 103, 0.7);
-  border-top-right-radius: 4px;
-}
-
-.cornerBL {
-  bottom: 10px;
-  left: 10px;
-  border-bottom: 2px solid rgba(212, 170, 103, 0.7);
-  border-left: 2px solid rgba(212, 170, 103, 0.7);
-  border-bottom-left-radius: 4px;
-}
-
-.cornerBR {
-  bottom: 10px;
-  right: 10px;
-  border-bottom: 2px solid rgba(212, 170, 103, 0.7);
-  border-right: 2px solid rgba(212, 170, 103, 0.7);
-  border-bottom-right-radius: 4px;
-}
-
-/* Top-Edge Ambient Spotlight (Underwrite Signature) */
+/* Overhead Ambient Gold Spotlight & Micro-Grid */
 .topSpotlight {
   position: absolute;
-  top: -40px;
+  top: -60px;
   left: 50%;
   transform: translateX(-50%);
-  width: 75%;
-  height: 220px;
+  width: 80%;
+  height: 260px;
   background: radial-gradient(
     ellipse at 50% 0%,
-    rgba(56, 189, 248, 0.12) 0%,
-    rgba(212, 170, 103, 0.06) 42%,
-    transparent 78%
+    rgba(212, 170, 103, 0.14) 0%,
+    rgba(184, 134, 59, 0.05) 45%,
+    transparent 75%
   );
   pointer-events: none;
   z-index: 0;
@@ -102,8 +44,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(212, 170, 103, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 170, 103, 0.025) 1px, transparent 1px);
   background-size: 32px 32px;
   mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 35%, transparent 92%);
   -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 35%, transparent 92%);
@@ -112,7 +54,7 @@
 }
 
 /* ========================================================
-   Row 1: Centered Underwrite-Style Header Block
+   Row 1: Centered Header Block
    ======================================================== */
 
 .headerBlock {
@@ -123,8 +65,7 @@
   align-items: center;
   text-align: center;
   max-width: 860px;
-  margin: 0 auto;
-  padding: clamp(2.2rem, 3.5vw, 3.2rem) clamp(1.2rem, 2.5vw, 2rem) clamp(1.4rem, 2.2vw, 2rem);
+  margin: 0 auto clamp(2rem, 3vw, 2.8rem);
 }
 
 .eyebrowPill {
@@ -132,25 +73,25 @@
   align-items: center;
   gap: 0.55rem;
   padding: 0.38rem 1rem;
-  background: rgba(14, 22, 36, 0.88);
-  border: 1px solid rgba(56, 189, 248, 0.32);
+  background: rgba(18, 22, 28, 0.9);
+  border: 1px solid rgba(212, 170, 103, 0.32);
   border-radius: 999px;
   font-family: var(--font-space-mono), monospace;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #7dd3fc;
+  color: #f5d69b;
   text-transform: uppercase;
   margin-bottom: 1.25rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .eyebrowDot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 10px #38bdf8;
+  background: #34d399;
+  box-shadow: 0 0 10px #34d399;
   animation: pulseDot 2.4s infinite ease-in-out;
 }
 
@@ -168,7 +109,7 @@
 .heading {
   margin: 0 0 0.85rem;
   font-family: var(--font-outfit), var(--font-inter), sans-serif;
-  font-size: clamp(2rem, 3.4vw, 3.1rem);
+  font-size: clamp(2.1rem, 3.6vw, 3.2rem);
   font-weight: 700;
   line-height: 1.14;
   letter-spacing: -0.03em;
@@ -177,8 +118,8 @@
 
 .headingAccent {
   display: block;
-  color: #7dd3fc;
-  background: linear-gradient(135deg, #e2e8f0 0%, #7dd3fc 45%, #d4aa67 100%);
+  color: #d4aa67;
+  background: linear-gradient(135deg, #f5d69b 0%, #d4aa67 50%, #b8863b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -196,7 +137,7 @@
 .subtitle {
   margin: 0 0 1.25rem;
   font-family: var(--font-inter), sans-serif;
-  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-size: clamp(0.92rem, 1.05vw, 1.02rem);
   font-weight: 400;
   line-height: 1.6;
   color: #94a3b8;
@@ -216,19 +157,19 @@
   display: inline-flex;
   align-items: center;
   padding: 0.32rem 0.85rem;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(18, 22, 28, 0.75);
+  border: 1px solid rgba(212, 170, 103, 0.25);
   border-radius: 999px;
   font-family: var(--font-space-mono), monospace;
   font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #cbd5e1;
+  color: #dfb97a;
   text-transform: uppercase;
 }
 
 /* ========================================================
-   Row 2: 3-Column Authentic Architectural Benchmark Cards
+   Row 2: 3 Floating Underwrite-Style Cards
    ======================================================== */
 
 .systemsGrid {
@@ -236,8 +177,8 @@
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.35rem;
-  padding: 0 clamp(1.25rem, 2.5vw, 2.2rem) clamp(1.8rem, 2.5vw, 2.5rem);
+  gap: 1.4rem;
+  margin-bottom: 2rem;
 }
 
 .systemCell {
@@ -251,45 +192,45 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.15rem;
-  padding: 1.5rem;
+  gap: 1.2rem;
+  padding: 1.6rem;
   background: linear-gradient(
     180deg,
-    rgba(16, 21, 30, 0.94) 0%,
-    rgba(10, 13, 19, 0.98) 100%
+    rgba(20, 24, 32, 0.95) 0%,
+    rgba(12, 15, 21, 0.98) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 18px;
   text-decoration: none;
   box-sizing: border-box;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
   transition: border-color 0.24s ease, transform 0.24s ease, box-shadow 0.24s ease;
 }
 
 .systemCard:hover {
   transform: translateY(-3px);
-  border-color: rgba(56, 189, 248, 0.38);
-  box-shadow:
-    0 22px 48px rgba(0, 0, 0, 0.65),
-    0 0 32px rgba(56, 189, 248, 0.08);
-}
-
-.card_gold:hover {
   border-color: rgba(212, 170, 103, 0.45);
   box-shadow:
-    0 22px 48px rgba(0, 0, 0, 0.65),
+    0 24px 52px rgba(0, 0, 0, 0.7),
     0 0 32px rgba(212, 170, 103, 0.08);
 }
 
-.card_cyan:hover {
-  border-color: rgba(45, 212, 191, 0.45);
+.card_emerald:hover {
+  border-color: rgba(52, 211, 153, 0.45);
   box-shadow:
-    0 22px 48px rgba(0, 0, 0, 0.65),
-    0 0 32px rgba(45, 212, 191, 0.08);
+    0 24px 52px rgba(0, 0, 0, 0.7),
+    0 0 32px rgba(52, 211, 153, 0.08);
+}
+
+.card_titanium:hover {
+  border-color: rgba(226, 232, 240, 0.4);
+  box-shadow:
+    0 24px 52px rgba(0, 0, 0, 0.7),
+    0 0 32px rgba(226, 232, 240, 0.06);
 }
 
 .systemCard:focus-visible {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid #d4aa67;
   outline-offset: 3px;
 }
 
@@ -311,22 +252,22 @@
   text-transform: uppercase;
 }
 
-.tag_blue {
-  color: #7dd3fc;
-  background: rgba(14, 30, 54, 0.9);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-}
-
 .tag_gold {
   color: #f5d69b;
   background: rgba(38, 30, 16, 0.9);
-  border: 1px solid rgba(212, 170, 103, 0.3);
+  border: 1px solid rgba(212, 170, 103, 0.32);
 }
 
-.tag_cyan {
-  color: #5eead4;
-  background: rgba(12, 36, 36, 0.9);
-  border: 1px solid rgba(45, 212, 191, 0.3);
+.tag_emerald {
+  color: #6ee7b7;
+  background: rgba(10, 36, 26, 0.9);
+  border: 1px solid rgba(52, 211, 153, 0.32);
+}
+
+.tag_titanium {
+  color: #e2e8f0;
+  background: rgba(26, 31, 40, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.26);
 }
 
 .cardMenuDots {
@@ -358,7 +299,7 @@
 .systemName {
   margin: 0;
   font-family: var(--font-outfit), var(--font-inter), sans-serif;
-  font-size: 1.38rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.02em;
@@ -400,16 +341,8 @@
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #38bdf8;
+  color: #d4aa67;
   text-transform: uppercase;
-}
-
-.card_gold .narrativeLabelAccent {
-  color: #dfb97a;
-}
-
-.card_cyan .narrativeLabelAccent {
-  color: #2dd4bf;
 }
 
 .narrativeText {
@@ -425,11 +358,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  background: rgba(7, 10, 15, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(9, 11, 16, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 14px;
   padding: 1rem 1.15rem;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .metricBoxLabel {
@@ -437,7 +370,7 @@
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #64748b;
+  color: #717d8f;
   text-transform: uppercase;
 }
 
@@ -456,19 +389,19 @@
   letter-spacing: -0.03em;
 }
 
-.val_blue {
-  color: #38bdf8;
-  text-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
-}
-
 .val_gold {
   color: #f5d69b;
   text-shadow: 0 0 16px rgba(245, 214, 155, 0.3);
 }
 
-.val_cyan {
-  color: #2dd4bf;
-  text-shadow: 0 0 16px rgba(45, 212, 191, 0.3);
+.val_emerald {
+  color: #34d399;
+  text-shadow: 0 0 16px rgba(52, 211, 153, 0.3);
+}
+
+.val_titanium {
+  color: #ffffff;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
 }
 
 .metricUnit {
@@ -518,20 +451,12 @@
 }
 
 .systemCard:hover .ctaLink {
-  color: #38bdf8;
+  color: #f5d69b;
   transform: translateX(2px);
 }
 
-.card_gold:hover .ctaLink {
-  color: #dfb97a;
-}
-
-.card_cyan:hover .ctaLink {
-  color: #2dd4bf;
-}
-
 /* ========================================================
-   Scroll Indicator (Underwrite Signature)
+   Scroll Indicator
    ======================================================== */
 
 .scrollIndicatorRow {
@@ -540,8 +465,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.25rem 0 1.8rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 1rem 0 2rem;
 }
 
 .scrollLink {
@@ -552,14 +476,14 @@
   font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #64748b;
+  color: #717d8f;
   text-decoration: none;
   text-transform: uppercase;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .scrollLink:hover {
-  color: #38bdf8;
+  color: #f5d69b;
   transform: translateY(2px);
 }
 
@@ -587,7 +511,9 @@
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   padding: clamp(1.4rem, 2vw, 1.8rem) clamp(1.5rem, 2.5vw, 2.2rem);
-  background: rgba(10, 13, 19, 0.85);
+  background: rgba(14, 18, 25, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
 }
 
 .pathwayCell {
@@ -596,7 +522,7 @@
   justify-content: space-between;
   gap: 1.25rem;
   padding: 1.1rem 1.35rem;
-  background: rgba(16, 21, 30, 0.6);
+  background: rgba(18, 23, 32, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 12px;
   box-sizing: border-box;

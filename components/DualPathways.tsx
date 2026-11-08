@@ -4,7 +4,7 @@ import styles from "./DualPathways.module.css";
 
 interface SystemCredential {
   tag: string;
-  tagTone: "blue" | "gold" | "cyan";
+  tagTone: "gold" | "emerald" | "titanium";
   name: string;
   subtitle: string;
   problem: string;
@@ -20,7 +20,7 @@ interface SystemCredential {
 const SELECTED_SYSTEMS: SystemCredential[] = [
   {
     tag: "AI AGENTS & RAG",
-    tagTone: "blue",
+    tagTone: "gold",
     name: "Wellows",
     subtitle: "LLM Search Visibility & Citation Engine",
     problem:
@@ -36,7 +36,7 @@ const SELECTED_SYSTEMS: SystemCredential[] = [
   },
   {
     tag: "FINTECH & LEDGERS",
-    tagTone: "gold",
+    tagTone: "emerald",
     name: "Savyour",
     subtitle: "High-Throughput Webhook Ledger & Settlement",
     problem:
@@ -52,7 +52,7 @@ const SELECTED_SYSTEMS: SystemCredential[] = [
   },
   {
     tag: "ENTERPRISE SAAS",
-    tagTone: "cyan",
+    tagTone: "titanium",
     name: "Classflow & EFU Life",
     subtitle: "Stateful Concurrency & Paperless Routing",
     problem:
@@ -83,216 +83,207 @@ export default function DualPathways() {
     >
       <div id="start" style={{ position: "absolute", top: 0, height: 0, width: 0 }} aria-hidden="true" />
       <div className={styles.container}>
-        <div className={styles.ledgerFrame}>
-          {/* Precision Corner Brackets */}
-          <span className={`${styles.cornerBracket} ${styles.cornerTL}`} aria-hidden="true" />
-          <span className={`${styles.cornerBracket} ${styles.cornerTR}`} aria-hidden="true" />
-          <span className={`${styles.cornerBracket} ${styles.cornerBL}`} aria-hidden="true" />
-          <span className={`${styles.cornerBracket} ${styles.cornerBR}`} aria-hidden="true" />
+        {/* Overhead Ambient Gold Spotlight & Micro-Grid */}
+        <div className={styles.topSpotlight} aria-hidden="true" />
+        <div className={styles.blueprintGrid} aria-hidden="true" />
 
-          {/* Underwrite-Style Ambient Lighting & Micro-Grid */}
-          <div className={styles.topSpotlight} aria-hidden="true" />
-          <div className={styles.blueprintGrid} aria-hidden="true" />
-
-          {/* Row 1: Centered Underwrite-Style Headline & Context */}
-          <div className={styles.headerBlock}>
-            {/* Pill Badge with glowing dot */}
-            <div className={styles.eyebrowPill}>
-              <span className={styles.eyebrowDot} aria-hidden="true" />
-              <span>2026 ARCHITECTURAL BENCHMARK REPORT · LIVE INTELLIGENCE</span>
-            </div>
-
-            {/* Two-Tone Bold Title */}
-            <h2 id="benchmark-title" className={styles.heading}>
-              Three architectures.
-              <span className={styles.headingAccent}> Real operating constraints.</span>
-            </h2>
-
-            {/* Subtitle & Trust Pillars */}
-            <p className={styles.subtitleLead}>See the data.</p>
-            <p className={styles.subtitle}>
-              Prototypes prove demand. Production architectures are defined by how they
-              isolate failures, enforce data invariants, and protect token budgets.
-            </p>
-
-            <div className={styles.proofPillsRow} aria-label="Engineering guarantees">
-              {PROOF_PILLS.map((pill) => (
-                <span key={pill} className={styles.proofPill}>
-                  {pill}
-                </span>
-              ))}
-            </div>
+        {/* Row 1: Centered Headline & Editorial Context */}
+        <div className={styles.headerBlock}>
+          {/* Status Pill Badge with live green dot */}
+          <div className={styles.eyebrowPill}>
+            <span className={styles.eyebrowDot} aria-hidden="true" />
+            <span>02 // PRODUCTION ARCHITECTURAL BENCHMARKS</span>
           </div>
 
-          {/* Row 2: 3 Underwrite-Style Architectural Benchmark Cards */}
-          <div
-            className={styles.systemsGrid}
-            role="list"
-            aria-label="Selected production architectural benchmarks"
-          >
-            {SELECTED_SYSTEMS.map((sys) => (
-              <div
-                key={sys.name}
-                className={styles.systemCell}
-                role="listitem"
-              >
-                <a
-                  href={withBasePath(sys.href)}
-                  className={`${styles.systemCard} ${styles[`card_${sys.tagTone}`]}`}
-                  data-source="architectural-benchmark"
-                >
-                  {/* Card Header: Category Tag on left, three dots on right */}
-                  <div className={styles.cardTopHeader}>
-                    <span className={`${styles.cardTag} ${styles[`tag_${sys.tagTone}`]}`}>
-                      {sys.tag}
-                    </span>
-                    <span className={styles.cardMenuDots} aria-hidden="true">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </span>
-                  </div>
+          {/* Two-Tone Bold Headline in Warm Gold */}
+          <h2 id="benchmark-title" className={styles.heading}>
+            Three architectures.
+            <span className={styles.headingAccent}> Real operating constraints.</span>
+          </h2>
 
-                  {/* Title & Subtitle */}
-                  <div className={styles.titleGroup}>
-                    <h3 className={styles.systemName}>{sys.name}</h3>
-                    <p className={styles.systemSubtitle}>{sys.subtitle}</p>
-                  </div>
+          <p className={styles.subtitleLead}>See the data.</p>
+          <p className={styles.subtitle}>
+            Prototypes prove demand. Production architectures are defined by how they
+            isolate failures, enforce data invariants, and protect token budgets.
+          </p>
 
-                  {/* Concise Failure Mode & Architectural Decision */}
-                  <div className={styles.narrativeGroup}>
-                    <div className={styles.narrativeItem}>
-                      <span className={styles.narrativeLabel}>OPERATING PROBLEM</span>
-                      <p className={styles.narrativeText}>{sys.problem}</p>
-                    </div>
-                    <div className={styles.narrativeItem}>
-                      <span className={styles.narrativeLabelAccent}>ARCHITECTURAL DECISION</span>
-                      <p className={styles.narrativeText}>{sys.decision}</p>
-                    </div>
-                  </div>
-
-                  {/* Underwrite-Style Inset Metric Benchmark Box */}
-                  <div className={styles.metricBox}>
-                    <span className={styles.metricBoxLabel}>{sys.metricLabel}</span>
-                    <div className={styles.metricValRow}>
-                      <span className={`${styles.metricVal} ${styles[`val_${sys.tagTone}`]}`}>
-                        {sys.metricValue}
-                      </span>
-                      <span className={styles.metricUnit}>{sys.metricUnit}</span>
-                    </div>
-                    <div className={styles.metricSecondaryRow}>
-                      <span>{sys.secondaryMetric}</span>
-                    </div>
-                  </div>
-
-                  {/* Card Footer: Tech Stack & Read Case Study link */}
-                  <div className={styles.cardFooter}>
-                    <span className={styles.stackText}>{sys.stack}</span>
-                    <span className={styles.ctaLink}>
-                      Read Case Study <span aria-hidden="true">&rarr;</span>
-                    </span>
-                  </div>
-                </a>
-              </div>
+          <div className={styles.proofPillsRow} aria-label="Engineering guarantees">
+            {PROOF_PILLS.map((pill) => (
+              <span key={pill} className={styles.proofPill}>
+                {pill}
+              </span>
             ))}
           </div>
+        </div>
 
-          {/* Scroll prompt (Underwrite Style) */}
-          <div className={styles.scrollIndicatorRow}>
-            <a href="#work" className={styles.scrollLink}>
-              <span>SCROLL TO SEE THE FULL BENCHMARK</span>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className={styles.scrollChevron}
+        {/* Row 2: 3 Floating Underwrite-Style Cards */}
+        <div
+          className={styles.systemsGrid}
+          role="list"
+          aria-label="Selected production architectural benchmarks"
+        >
+          {SELECTED_SYSTEMS.map((sys) => (
+            <div
+              key={sys.name}
+              className={styles.systemCell}
+              role="listitem"
+            >
+              <a
+                href={withBasePath(sys.href)}
+                className={`${styles.systemCard} ${styles[`card_${sys.tagTone}`]}`}
+                data-source="architectural-benchmark"
               >
-                <path d="M6 9l6 6 6-6" />
-              </svg>
+                {/* Card Header: Category Tag on left, three dots on right */}
+                <div className={styles.cardTopHeader}>
+                  <span className={`${styles.cardTag} ${styles[`tag_${sys.tagTone}`]}`}>
+                    {sys.tag}
+                  </span>
+                  <span className={styles.cardMenuDots} aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </div>
+
+                {/* Title & Subtitle */}
+                <div className={styles.titleGroup}>
+                  <h3 className={styles.systemName}>{sys.name}</h3>
+                  <p className={styles.systemSubtitle}>{sys.subtitle}</p>
+                </div>
+
+                {/* Operating Problem & Architectural Decision */}
+                <div className={styles.narrativeGroup}>
+                  <div className={styles.narrativeItem}>
+                    <span className={styles.narrativeLabel}>OPERATING PROBLEM</span>
+                    <p className={styles.narrativeText}>{sys.problem}</p>
+                  </div>
+                  <div className={styles.narrativeItem}>
+                    <span className={styles.narrativeLabelAccent}>ARCHITECTURAL DECISION</span>
+                    <p className={styles.narrativeText}>{sys.decision}</p>
+                  </div>
+                </div>
+
+                {/* Underwrite-Style Inset Metric Benchmark Box */}
+                <div className={styles.metricBox}>
+                  <span className={styles.metricBoxLabel}>{sys.metricLabel}</span>
+                  <div className={styles.metricValRow}>
+                    <span className={`${styles.metricVal} ${styles[`val_${sys.tagTone}`]}`}>
+                      {sys.metricValue}
+                    </span>
+                    <span className={styles.metricUnit}>{sys.metricUnit}</span>
+                  </div>
+                  <div className={styles.metricSecondaryRow}>
+                    <span>{sys.secondaryMetric}</span>
+                  </div>
+                </div>
+
+                {/* Card Footer: Tech Stack & Read Case Study Link */}
+                <div className={styles.cardFooter}>
+                  <span className={styles.stackText}>{sys.stack}</span>
+                  <span className={styles.ctaLink}>
+                    Read Case Study <span aria-hidden="true">&rarr;</span>
+                  </span>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {/* Scroll prompt (Underwrite Signature) */}
+        <div className={styles.scrollIndicatorRow}>
+          <a href="#work" className={styles.scrollLink}>
+            <span>SCROLL TO EXPLORE ARCHITECTURE LAB</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className={styles.scrollChevron}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </a>
+        </div>
+
+        {/* Row 3: Dual-Action Pathway Footer (Recruiter & Founder Fast-Tracks) */}
+        <div className={styles.pathwaysRow}>
+          {/* Left: Hiring Teams */}
+          <div className={styles.pathwayCell}>
+            <div className={styles.pathwayInfo}>
+              <div className={styles.pathwayIconBox} aria-hidden="true">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+              </div>
+              <div className={styles.pathwayText}>
+                <span className={styles.pathwayTitle}>FOR HIRING TEAMS</span>
+                <span className={styles.pathwayDesc}>
+                  Staff, Principal &amp; AI Architect Roles &middot; Uzair Khatri (Uzair Iqbal)
+                </span>
+              </div>
+            </div>
+
+            <a
+              href={CV_URL}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.pathwayBtnOutline}
+            >
+              <span>Explore CV (PDF)</span>
+              <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
 
-          {/* Row 3: Dual-Action Pathway Footer (Recruiter & Founder Fast-Tracks) */}
-          <div className={styles.pathwaysRow}>
-            {/* Left: Hiring Teams */}
-            <div className={styles.pathwayCell}>
-              <div className={styles.pathwayInfo}>
-                <div className={styles.pathwayIconBox} aria-hidden="true">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                  </svg>
-                </div>
-                <div className={styles.pathwayText}>
-                  <span className={styles.pathwayTitle}>FOR HIRING TEAMS</span>
-                  <span className={styles.pathwayDesc}>
-                    Staff, Principal &amp; AI Architect Roles &middot; Uzair Khatri (Uzair Iqbal)
-                  </span>
-                </div>
+          {/* Right: Founders & CTOs */}
+          <div className={styles.pathwayCell}>
+            <div className={styles.pathwayInfo}>
+              <div className={styles.pathwayIconBox} aria-hidden="true">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                </svg>
               </div>
-
-              <a
-                href={CV_URL}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.pathwayBtnOutline}
-              >
-                <span>Explore CV (PDF)</span>
-                <span aria-hidden="true">&rarr;</span>
-              </a>
+              <div className={styles.pathwayText}>
+                <span className={styles.pathwayTitle}>
+                  FOR FOUNDERS &amp; CTOS
+                </span>
+                <span className={styles.pathwayDesc}>
+                  Architecture Pre-Mortem ($250) &amp; Implementation Sprints
+                </span>
+              </div>
             </div>
 
-            {/* Right: Founders & CTOs */}
-            <div className={styles.pathwayCell}>
-              <div className={styles.pathwayInfo}>
-                <div className={styles.pathwayIconBox} aria-hidden="true">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
-                  </svg>
-                </div>
-                <div className={styles.pathwayText}>
-                  <span className={styles.pathwayTitle}>
-                    FOR FOUNDERS &amp; CTOS
-                  </span>
-                  <span className={styles.pathwayDesc}>
-                    Architecture Pre-Mortem ($250) &amp; Implementation Sprints
-                  </span>
-                </div>
-              </div>
-
-              <a
-                href={withBasePath("/audit/")}
-                className={styles.pathwayBtnGold}
-              >
-                <span>Request Architecture Pre-Mortem</span>
-                <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
+            <a
+              href={withBasePath("/audit/")}
+              className={styles.pathwayBtnGold}
+            >
+              <span>Request Architecture Pre-Mortem</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
           </div>
         </div>
       </div>
