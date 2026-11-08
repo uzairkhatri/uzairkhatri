@@ -385,8 +385,8 @@
 }
 
 .goldEmphasis {
-  color: #d4aa67;
-  background: linear-gradient(180deg, #e5c287 0%, #c89d58 100%);
+  color: #dfb97a;
+  background: linear-gradient(135deg, #f5d69b 0%, #d4aa67 50%, #b8863b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -631,7 +631,7 @@
   object-fit: contain;
   object-position: top center;
   display: block;
-  filter: contrast(1.08) brightness(0.94) saturate(0.92);
+  filter: contrast(1.05) brightness(0.98);
 }
 
 /* ========================================================

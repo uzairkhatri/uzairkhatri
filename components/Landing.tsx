@@ -97,7 +97,7 @@ export default function Landing() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Book Strategy Call
+                Request Review
               </a>
             </div>
 
@@ -343,16 +343,32 @@ export default function Landing() {
                 />
 
                 {/* Precision intersection node markers & crosshairs */}
-                <circle cx="127" cy="137" r="2.2" fill="#D4AA67" fillOpacity="0.55" />
-                <circle cx="473" cy="137" r="2.2" fill="#D4AA67" fillOpacity="0.55" />
-                <circle cx="55" cy="310" r="2.2" fill="#D4AA67" fillOpacity="0.55" />
-                <circle cx="545" cy="310" r="2.2" fill="#D4AA67" fillOpacity="0.55" />
+                <circle cx="55" cy="310" r="3" fill="#D4AA67" />
+                <circle cx="545" cy="310" r="3" fill="#D4AA67" />
+                <circle cx="300" cy="65" r="3" fill="#D4AA67" />
+                <circle cx="127" cy="137" r="2.2" fill="#D4AA67" fillOpacity="0.65" />
+                <circle cx="473" cy="137" r="2.2" fill="#D4AA67" fillOpacity="0.65" />
+                
+                {/* Sweeping Architectural Contour Lines across Lower Stage */}
+                <path
+                  d="M 20 490 Q 280 570 590 420"
+                  stroke="rgba(212, 170, 103, 0.22)"
+                  strokeWidth="1.2"
+                  fill="none"
+                />
+                <path
+                  d="M 90 520 Q 330 600 600 450"
+                  stroke="rgba(212, 170, 103, 0.12)"
+                  strokeWidth="0.85"
+                  fill="none"
+                />
+
                 {/* Small "+" calibration mark on upper-right arc */}
                 <path
                   d="M498 158H508M503 153V163"
                   stroke="#D4AA67"
-                  strokeOpacity="0.55"
-                  strokeWidth="1.2"
+                  strokeOpacity="0.75"
+                  strokeWidth="1.3"
                 />
               </svg>
 
