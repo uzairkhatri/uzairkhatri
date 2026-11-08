@@ -60,7 +60,7 @@ export default function SubPageNav({
         </a>
       </div>
       <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
-        Book a call
+        Book Strategy Call
       </a>
     </nav>
   );

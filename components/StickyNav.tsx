@@ -81,9 +81,9 @@ export default function StickyNav() {
         target="_blank"
         rel="noreferrer"
       >
-        <span className={styles.ctaTextPrimary}>Request Review</span>
+        <span className={styles.ctaTextPrimary}>Book Strategy Call</span>
         <span className={styles.ctaTextHover} aria-hidden="true">
-          Request Review
+          Book Strategy Call
         </span>
       </a>
     </motion.nav>

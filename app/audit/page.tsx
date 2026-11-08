@@ -1041,7 +1041,7 @@ export default function AuditPage() {
           <div className={styles.reportCopy}>
             <div className={styles.eyebrowPill}>$250 Pre-Mortem Deliverable</div>
             <h2>A clear report,<br/>not just a checklist.</h2>
-            <p>In the $250 Architecture Pre-Mortem, you receive a detailed written findings document with visual diagrams, risk ratings (P0/P1/P2), code snippets, and a live 45-minute technical walkthrough.</p>
+            <p>In the $250 Architecture Pre-Mortem, you receive a 3–5 page written risk assessment with system topology diagrams, prioritized risk ratings (P0/P1/P2), actionable code/config snippets, and a live 30-minute technical walkthrough delivered within 48 hours of scope acceptance.</p>
             <a href="#request-audit" className={styles.primaryButton}>Request Pre-Mortem ($250) <span>→</span></a>
           </div>
           <div className={styles.reportStack} aria-label="Sample AI Production Audit report">
@@ -1055,8 +1055,8 @@ export default function AuditPage() {
           <div className={styles.engineerPanel}>
             <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Khatri" width={118} height={118}/>
             <div className={styles.engineerCopy}>
-              <h2>Uzair Khatri <span>·</span> AI Production Architect</h2>
-              <p>I design and build production AI systems for real-world use cases. With 12+ years of experience in distributed systems and cloud-native architecture, I focus on practical, scalable and cost-effective architectures that actually work in production.</p>
+              <h2>Uzair Khatri (Uzair Iqbal) <span>·</span> AI Production Architect</h2>
+              <p>I design and build production AI systems for real-world enterprise use cases. With 14+ years of experience in distributed systems, high-concurrency backends, and cloud-native architecture, I focus on deterministic, scalable architectures that reliably survive customer load.</p>
             </div>
             <ul className={styles.engineerPoints}>
               <li>Production-focused mindset</li>

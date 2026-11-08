@@ -92,7 +92,7 @@ const channels: ChannelCard[] = [
   },
   {
     label: "RESUME / CV",
-    value: "Download PDF CV",
+    value: "Uzair Khatri (Uzair Iqbal) · PDF",
     href: withBasePath("/Uzair-Iqbal-AI-Architect-CV.pdf"),
     download: true,
     arrow: "↓",
@@ -312,28 +312,29 @@ export default function Contact() {
                     Book an Architecture Strategy Call
                   </h3>
                   <p className={styles.callDesc}>
-                    Walk through your current system boundaries, latency or token
-                    bottlenecks, and target roadmap live.
+                    A focused 30-minute engineer-to-engineer conversation to review
+                    your system architecture, identify your highest-risk bottlenecks,
+                    and agree on concrete next steps.
                   </p>
 
-                  {/* Concrete 30-Min Session Agenda Mini-Preview */}
+                  {/* Concrete 30-Min Session Agenda */}
                   <div className={styles.agendaWindow} aria-hidden="true">
                     <div className={styles.agendaHeader}>
-                      <span>SESSION DELIVERABLE PREVIEW</span>
-                      <span className={styles.agendaTag}>LIVE TRIAGE</span>
+                      <span>30-MIN STRATEGY CALL AGENDA</span>
+                      <span className={styles.agendaTag}>1-ON-1</span>
                     </div>
                     <div className={styles.agendaRows}>
                       <div className={styles.agendaRow}>
-                        <span>01 · Runtime &amp; State Triage</span>
-                        <span className={styles.agendaPill}>Bottleneck Map</span>
+                        <span>01 · Current Architecture &amp; Topology</span>
+                        <span className={styles.agendaPill}>System Map</span>
                       </div>
                       <div className={styles.agendaRow}>
-                        <span>02 · Latency &amp; Token Cost Profile</span>
-                        <span className={styles.agendaPillGold}>ROI Target</span>
+                        <span>02 · Critical Failure Points &amp; Scaling Limits</span>
+                        <span className={styles.agendaPillGold}>Risk Triage</span>
                       </div>
                       <div className={styles.agendaRow}>
-                        <span>03 · Next Architecture Decisions</span>
-                        <span className={styles.agendaPill}>Actionable RFC</span>
+                        <span>03 · High-Priority Engineering Decisions</span>
+                        <span className={styles.agendaPill}>Action Plan</span>
                       </div>
                     </div>
                   </div>

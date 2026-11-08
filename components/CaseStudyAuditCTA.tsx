@@ -9,7 +9,7 @@ interface CaseStudyAuditCTAProps {
 
 export default function CaseStudyAuditCTA({
   title = "Building a similar production AI or high-throughput system?",
-  description = "Avoid fragile prototypes, concurrency deadlocks, and runaway token bills. Request a private, 5-minute video teardown of your architecture, or book an engineer-to-engineer strategy call.",
+  description = "Avoid fragile prototypes, concurrency deadlocks, and runaway token bills. Request a focused $250 Architecture Pre-Mortem, or book a free 30-minute engineer-to-engineer strategy call.",
   focusArea = "Production AI & Architecture Triage",
 }: CaseStudyAuditCTAProps) {
   return (
@@ -31,7 +31,7 @@ export default function CaseStudyAuditCTA({
           className={styles.primaryBtn}
           data-source="case_study_audit"
         >
-          <span>Request 15-Min Architecture Triage</span>
+          <span>Request Architecture Pre-Mortem ($250)</span>
           <span aria-hidden="true">&rarr;</span>
         </a>
         <a
@@ -41,22 +41,22 @@ export default function CaseStudyAuditCTA({
           className={styles.secondaryBtn}
           data-source="case_study_booking"
         >
-          <span>Book 30-Min Strategy Call</span>
+          <span>Book 30-Min Strategy Call (Free)</span>
         </a>
       </div>
 
       <div className={styles.trustList}>
         <div className={styles.trustItem}>
           <span className={styles.trustIcon}>🔒</span>
-          <span>100% Confidential (NDA protected)</span>
+          <span>100% Confidential (Mutual NDA on request)</span>
         </div>
         <div className={styles.trustItem}>
           <span className={styles.trustIcon}>⚡</span>
-          <span>48-Hour Async Video Turnaround</span>
+          <span>48-Hour Report &amp; Walkthrough Turnaround</span>
         </div>
         <div className={styles.trustItem}>
           <span className={styles.trustIcon}>🛠️</span>
-          <span>Zero Sales Pitch &bull; Pure Engineering</span>
+          <span>Zero Sales Fluff &bull; Concrete Engineering</span>
         </div>
       </div>
     </section>

@@ -3,175 +3,77 @@ import { CV_URL, withBasePath } from "./siteLinks";
 import styles from "./DualPathways.module.css";
 
 interface SystemCredential {
+  tag: string;
   name: string;
-  capability: string;
-  badge: string;
-  windowTab: string;
+  subtitle: string;
+  problem: string;
+  decision: string;
+  primaryMetric: string;
+  primaryLabel: string;
+  secondaryMetrics: string;
   stack: string;
   href: string;
-  preview: React.ReactNode;
 }
 
 const SELECTED_SYSTEMS: SystemCredential[] = [
   {
+    tag: "MULTI-AGENT AI & RETRIEVAL",
     name: "Wellows",
-    capability: "AI-powered SaaS",
-    badge: "CASE STUDY \u2197",
-    windowTab: "Analytics Console",
-    stack: "LangGraph \u00b7 Multi-Agent \u00b7 Next.js",
+    subtitle: "LLM Search Visibility & Citation Engine",
+    problem:
+      "Single-query prototype scripts degraded under concurrent load, with unguarded token spend and ungrounded model outputs.",
+    decision:
+      "Engineered LangGraph supervisor state machines with strict Pydantic contracts, isolated SQS queues, and Qdrant retrieval fallback.",
+    primaryMetric: "3 Production Agents",
+    primaryLabel: "LangGraph State Machine",
+    secondaryMetrics: "<200ms vector lookup · 11-week delivery",
+    stack: "LangGraph · Qdrant · FastAPI · Python",
     href: "/work/wellows/",
-    preview: (
-      <div className={styles.uiBody}>
-        <div className={styles.uiHeadline}>AI Search Visibility &amp; Citations</div>
-        <div className={styles.uiSubCard}>
-          <div className={styles.uiMetricRow}>
-            <span>Brand Citation Score:</span>
-            <strong>88.4%</strong>
-            <em className={styles.uiPositive}>(+14%)</em>
-          </div>
-
-          <div className={styles.uiRowsList}>
-            <div className={styles.uiItemRow}>
-              <span className={styles.uiItemName}>
-                <span className={styles.uiDotEmerald} aria-hidden="true" />
-                ChatGPT Search
-              </span>
-              <span className={styles.uiPillEmerald}>Cited &middot; #1 Source</span>
-            </div>
-            <div className={styles.uiItemRow}>
-              <span className={styles.uiItemName}>
-                <span className={styles.uiDotEmerald} aria-hidden="true" />
-                Perplexity AI
-              </span>
-              <span className={styles.uiPillEmerald}>Cited &middot; 92% Visibility</span>
-            </div>
-            <div className={styles.uiItemRow}>
-              <span className={styles.uiItemName}>
-                <span className={styles.uiDotGold} aria-hidden="true" />
-                Gemini / AI Overview
-              </span>
-              <span className={styles.uiPillGold}>KIVA Draft Ready</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
   },
   {
+    tag: "FINTECH & DISTRIBUTED SYSTEMS",
     name: "Savyour",
-    capability: "Fintech & distributed systems",
-    badge: "FINTECH",
-    windowTab: "Fintech Ledger",
-    stack: "Microservices \u00b7 Event-Driven \u00b7 AWS",
+    subtitle: "High-Throughput Webhook Ledger & Settlement",
+    problem:
+      "Surging nationwide retail promotions triggered webhook race conditions and duplicate cashback payout exploits across partner networks.",
+    decision:
+      "Architected Redis Redlock distributed locking, HMAC webhook verification, and double-entry immutable ledgers in PostgreSQL.",
+    primaryMetric: "100+ Retail Partners",
+    primaryLabel: "Zero Duplicate Payouts",
+    secondaryMetrics: "18ms wallet write · ACID committed",
+    stack: "FastAPI · Redis Redlock · PostgreSQL · AWS",
     href: "/work/savyour/",
-    preview: (
-      <div className={styles.uiBody}>
-        <div className={styles.uiHeadline}>Partner Settlement &amp; ACID Ledger</div>
-        <div className={styles.uiSubCard}>
-          <div className={styles.uiMetricRow}>
-            <span>100+ Active Merchants &middot;</span>
-            <strong>99.99%</strong>
-            <span>Ledger Sync</span>
-          </div>
-
-          <div className={styles.uiRowsList}>
-            <div className={styles.uiItemRow}>
-              <span className={styles.uiItemName}>
-                <span className={styles.uiDotEmerald} aria-hidden="true" />
-                Webhook #SV-9402
-              </span>
-              <span className={styles.uiPillEmerald}>HMAC Verified</span>
-            </div>
-            <div className={styles.uiItemRow}>
-              <span className={styles.uiItemName}>
-                <span className={styles.uiDotGold} aria-hidden="true" />
-                Cashback Calc (+5.0%)
-              </span>
-              <span className={styles.uiPillGold}>ACID Committed</span>
-            </div>
-            <div className={styles.uiItemRow}>
-              <span className={styles.uiItemName}>
-                <span className={styles.uiDotEmerald} aria-hidden="true" />
-                Wallet Disbursement
-              </span>
-              <span className={styles.uiPillEmerald}>Settled &middot; 18ms</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
   },
   {
-    name: "EFU Life",
-    capability: "Enterprise insurance",
-    badge: "ENTERPRISE",
-    windowTab: "Workflow Console",
-    stack: "Core Systems \u00b7 APIs \u00b7 High Availability",
-    href: "/work/efu-life/",
-    preview: (
-      <div className={styles.uiBody}>
-        <div className={styles.uiHeadline}>Policy Underwriting Workflow</div>
-        <div className={styles.uiSubCard}>
-          <div className={styles.uiMetricRow}>
-            <strong>Policy #EFU-4091</strong>
-            <span>&middot; Paperless Case Queue</span>
-          </div>
-
-          <div className={styles.uiStepper}>
-            <div className={styles.uiStepNode}>
-              <span className={styles.uiStepBox}>1</span>
-              <small>Scan</small>
-            </div>
-            <span className={styles.uiStepArrow} aria-hidden="true">&rarr;</span>
-            <div className={styles.uiStepNode}>
-              <span className={styles.uiStepBox}>2</span>
-              <small>OCR</small>
-            </div>
-            <span className={styles.uiStepArrow} aria-hidden="true">&rarr;</span>
-            <div className={styles.uiStepNode}>
-              <span className={styles.uiStepBox}>3</span>
-              <small>Risk</small>
-            </div>
-            <span className={styles.uiStepArrow} aria-hidden="true">&rarr;</span>
-            <div className={styles.uiStepNode}>
-              <span className={styles.uiStepBox}>4</span>
-              <small>Review</small>
-            </div>
-            <span className={styles.uiStepArrow} aria-hidden="true">&rarr;</span>
-            <div className={styles.uiStepNode}>
-              <span className={`${styles.uiStepBox} ${styles.uiStepBoxDone}`}>&#10003;</span>
-              <small className={styles.uiPositive}>Approved</small>
-            </div>
-          </div>
-
-          <div className={styles.uiFooterMeta}>
-            <span>
-              Doc Store: <strong className={styles.uiPositive}>HA Synced</strong>
-            </span>
-            <span>&middot;</span>
-            <span>
-              Access: <strong className={styles.uiPositive}>AD/LDAP Verified</strong>
-            </span>
-          </div>
-        </div>
-      </div>
-    ),
+    tag: "SAAS CONCURRENCY & WORKFLOWS",
+    name: "Classflow & EFU Life",
+    subtitle: "Stateful Concurrency & Paperless Routing",
+    problem:
+      "Concurrent checkout surges caused booking collisions, while manual insurance queues created multi-day document bottlenecks.",
+    decision:
+      "Implemented optimistic concurrency control with tenant state isolation, transactional queue workers, and role-based audit logging.",
+    primaryMetric: "Zero Double-Bookings",
+    primaryLabel: "Optimistic State Mutex",
+    secondaryMetrics: "Day-scale automated queue · Paperless pipeline",
+    stack: "Next.js · PostgreSQL · SQS · Event-Driven",
+    href: "/work/classflow/",
   },
 ];
 
 const PROOF_PILLS = [
-  "14+ YRS ARCHITECTURE",
-  "PRODUCTION AI & RAG",
-  "HIGH-THROUGHPUT BACKENDS",
+  "DETERMINISTIC",
+  "CONSTRAINT-BASED",
+  "NO MOCK METRICS",
 ];
 
 export default function DualPathways() {
   return (
     <section
-      id="start"
+      id="experience"
       className={styles.section}
       aria-labelledby="executive-proof-title"
     >
+      <div id="start" style={{ position: "absolute", top: 0, height: 0, width: 0 }} aria-hidden="true" />
       <div className={styles.container}>
         <div className={styles.ledgerFrame}>
           {/* Precision Gold Corner Brackets */}
@@ -213,22 +115,22 @@ export default function DualPathways() {
                     fill="#D4AA67"
                   />
                 </svg>
-                <span>02 // PRODUCTION EXPERIENCE &middot; SELECTED SYSTEMS</span>
+                <span>02 // PRODUCTION EXPERIENCE &middot; ARCHITECTURAL BENCHMARKS</span>
               </div>
 
               <h2 id="executive-proof-title" className={styles.heading}>
-                Architecture beyond the prototype.
+                Three architectures. Real operating constraints.
               </h2>
 
               <p className={styles.subtitle}>
-                Experience spanning production AI, fintech, enterprise workflows,
-                and SaaS platforms.
+                Prototypes prove demand. Production architectures are defined by how
+                they isolate failures, enforce data invariants, and protect token budgets.
               </p>
             </div>
 
             <div
               className={styles.proofPillsCol}
-              aria-label="Architectural credentials"
+              aria-label="Engineering guarantees"
             >
               {PROOF_PILLS.map((pill) => (
                 <span key={pill} className={styles.proofPill}>
@@ -238,11 +140,11 @@ export default function DualPathways() {
             </div>
           </div>
 
-          {/* Row 2: 3-Column Rich Product UI Showcase Cards */}
+          {/* Row 2: 3-Column Authentic Architectural Benchmark Cards */}
           <div
             className={styles.systemsGrid}
             role="list"
-            aria-label="Selected production systems"
+            aria-label="Selected production architectural benchmarks"
           >
             {SELECTED_SYSTEMS.map((sys) => (
               <div
@@ -253,33 +155,49 @@ export default function DualPathways() {
                 <a
                   href={withBasePath(sys.href)}
                   className={styles.systemCard}
-                  data-source="executive-proof-strip"
+                  data-source="architectural-benchmark"
                 >
-                  {/* Realistic Product UI Window Preview */}
-                  <div className={styles.uiWindow} aria-hidden="true">
-                    <div className={styles.uiWindowBar}>
-                      <div className={styles.uiTrafficLights}>
-                        <span className={styles.dotRed} />
-                        <span className={styles.dotYellow} />
-                        <span className={styles.dotGreen} />
-                      </div>
-                      <span className={styles.uiWindowTab}>{sys.windowTab}</span>
-                      <span className={styles.cardBadge}>{sys.badge}</span>
-                    </div>
-
-                    {sys.preview}
+                  {/* Card Header & Tag */}
+                  <div className={styles.cardTopHeader}>
+                    <span className={styles.cardTag}>{sys.tag}</span>
+                    <span className={styles.cardArrow} aria-hidden="true">↗</span>
                   </div>
 
-                  {/* Card Footer Copy & Tech Stack */}
-                  <div className={styles.cardFooter}>
-                    <div className={styles.cardBody}>
-                      <span className={styles.systemName}>{sys.name}</span>
-                      <span className={styles.systemCapability}>
-                        {sys.capability}
-                      </span>
-                    </div>
+                  {/* Title & Subtitle */}
+                  <div className={styles.titleGroup}>
+                    <h3 className={styles.systemName}>{sys.name}</h3>
+                    <p className={styles.systemSubtitle}>{sys.subtitle}</p>
+                  </div>
 
-                    <div className={styles.stackPill}>{sys.stack}</div>
+                  {/* Problem Statement */}
+                  <div className={styles.specSection}>
+                    <span className={styles.specLabel}>OPERATING PROBLEM</span>
+                    <p className={styles.specText}>{sys.problem}</p>
+                  </div>
+
+                  {/* Architectural Decision */}
+                  <div className={styles.specSection}>
+                    <span className={styles.specLabelGold}>ARCHITECTURAL DECISION</span>
+                    <p className={styles.specText}>{sys.decision}</p>
+                  </div>
+
+                  {/* Authentic Metric Benchmark Box (Underwrite Style) */}
+                  <div className={styles.metricBox}>
+                    <div className={styles.metricPrimaryRow}>
+                      <strong className={styles.metricVal}>{sys.primaryMetric}</strong>
+                      <span className={styles.metricLabel}>{sys.primaryLabel}</span>
+                    </div>
+                    <div className={styles.metricSecondaryRow}>
+                      <span>{sys.secondaryMetrics}</span>
+                    </div>
+                  </div>
+
+                  {/* Card Footer Tech Stack & CTA */}
+                  <div className={styles.cardFooter}>
+                    <span className={styles.stackText}>{sys.stack}</span>
+                    <span className={styles.ctaLink}>
+                      Read Case Study <span aria-hidden="true">&rarr;</span>
+                    </span>
                   </div>
                 </a>
               </div>
@@ -309,7 +227,7 @@ export default function DualPathways() {
                 <div className={styles.pathwayText}>
                   <span className={styles.pathwayTitle}>FOR HIRING TEAMS</span>
                   <span className={styles.pathwayDesc}>
-                    Staff, Principal &amp; AI Architect Roles (UAE &amp; Remote)
+                    Staff, Principal &amp; AI Architect Roles &middot; Uzair Khatri (Uzair Iqbal)
                   </span>
                 </div>
               </div>
@@ -320,7 +238,7 @@ export default function DualPathways() {
                 rel="noreferrer"
                 className={styles.pathwayBtnOutline}
               >
-                <span>Explore my CV (PDF)</span>
+                <span>Explore CV (PDF)</span>
                 <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
@@ -348,7 +266,7 @@ export default function DualPathways() {
                     FOR FOUNDERS &amp; CTOS
                   </span>
                   <span className={styles.pathwayDesc}>
-                    System Audits, Agent Orchestration &amp; Advisory
+                    Architecture Pre-Mortem ($250) &amp; Implementation Sprints
                   </span>
                 </div>
               </div>
@@ -357,7 +275,7 @@ export default function DualPathways() {
                 href={withBasePath("/audit/")}
                 className={styles.pathwayBtnGold}
               >
-                <span>Review your architecture</span>
+                <span>Request Architecture Pre-Mortem</span>
                 <span aria-hidden="true">&rarr;</span>
               </a>
             </div>

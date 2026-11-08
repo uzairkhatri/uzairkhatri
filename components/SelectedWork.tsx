@@ -562,8 +562,8 @@ const projects: Project[] = [
     caseStudyUrl: "/work/classflow/",
     metrics: [
       { value: "<100ms", label: "Timezone Matchmaking" },
-      { value: "0 Conflicts", label: "Redis Redlock Mutex" },
-      { value: "100% Auto", label: "Stripe Connect Payouts" },
+      { value: "Redlock Mutex", label: "State Isolation" },
+      { value: "Automated", label: "Stripe Connect Splits" },
     ],
     challenge:
       "Manual cross-timezone scheduling bottlenecks and concurrent booking race conditions caused double-booked tutors during peak hours.",

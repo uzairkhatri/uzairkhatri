@@ -97,7 +97,7 @@ export default function Landing() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Request Review
+                Book Strategy Call
               </a>
             </div>
 

@@ -67,7 +67,7 @@ export default function FeaturedLanding({
           <a href={withBasePath("/case-studies/")}>Case Studies</a>
           <a href={withBasePath("/insights/")}>Insights</a>
           <a href={CV_URL} target="_blank" rel="noreferrer">CV</a>
-          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.navCta}>Book a call</a>
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.navCta}>Book Strategy Call</a>
         </div>
       </nav>
 
