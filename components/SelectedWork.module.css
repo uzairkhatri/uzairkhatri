@@ -150,6 +150,19 @@
   color: #f7f7f5;
 }
 
+.titleMuted {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.titleAccent {
+  color: #dfb97a;
+  background: linear-gradient(135deg, #f5d69b 0%, #d4aa67 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Single-Row Segmented Pill Switcher Track */
 .switcherTrack {
   display: inline-flex;

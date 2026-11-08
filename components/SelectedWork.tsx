@@ -763,7 +763,7 @@ export default function SelectedWork() {
                 <span>03 // SELECTED WORK &middot; PRODUCTION CASE STUDIES</span>
               </div>
               <h2 className={styles.title} id="work-title">
-                Systems engineered for production scale.
+                Architect Systems. <span className={styles.titleMuted}>Stress Assumptions.</span> <span className={styles.titleAccent}>See What Holds.</span>
               </h2>
             </div>
 

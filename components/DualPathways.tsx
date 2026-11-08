@@ -4,57 +4,65 @@ import styles from "./DualPathways.module.css";
 
 interface SystemCredential {
   tag: string;
+  tagTone: "blue" | "gold" | "cyan";
   name: string;
   subtitle: string;
   problem: string;
   decision: string;
-  primaryMetric: string;
-  primaryLabel: string;
-  secondaryMetrics: string;
+  metricLabel: string;
+  metricValue: string;
+  metricUnit: string;
+  secondaryMetric: string;
   stack: string;
   href: string;
 }
 
 const SELECTED_SYSTEMS: SystemCredential[] = [
   {
-    tag: "MULTI-AGENT AI & RETRIEVAL",
+    tag: "AI AGENTS & RAG",
+    tagTone: "blue",
     name: "Wellows",
     subtitle: "LLM Search Visibility & Citation Engine",
     problem:
-      "Single-query prototype scripts degraded under concurrent load, with unguarded token spend and ungrounded model outputs.",
+      "Single-query prototype scripts degraded under concurrent load, with unguarded token spend and ungrounded model drift.",
     decision:
       "Engineered LangGraph supervisor state machines with strict Pydantic contracts, isolated SQS queues, and Qdrant retrieval fallback.",
-    primaryMetric: "3 Production Agents",
-    primaryLabel: "LangGraph State Machine",
-    secondaryMetrics: "<200ms vector lookup · 11-week delivery",
+    metricLabel: "VECTOR LOOKUP LATENCY",
+    metricValue: "<200",
+    metricUnit: "ms avg",
+    secondaryMetric: "3 LangGraph production agents",
     stack: "LangGraph · Qdrant · FastAPI · Python",
     href: "/work/wellows/",
   },
   {
-    tag: "FINTECH & DISTRIBUTED SYSTEMS",
+    tag: "FINTECH & LEDGERS",
+    tagTone: "gold",
     name: "Savyour",
     subtitle: "High-Throughput Webhook Ledger & Settlement",
     problem:
-      "Surging nationwide retail promotions triggered webhook race conditions and duplicate cashback payout exploits across partner networks.",
+      "Nationwide retail promotion bursts triggered webhook race conditions and duplicate cashback payout exploits across partner networks.",
     decision:
-      "Architected Redis Redlock distributed locking, HMAC webhook verification, and double-entry immutable ledgers in PostgreSQL.",
-    primaryMetric: "100+ Retail Partners",
-    primaryLabel: "Zero Duplicate Payouts",
-    secondaryMetrics: "18ms wallet write · ACID committed",
+      "Architected Redis Redlock distributed mutexes, HMAC webhook verification, and double-entry immutable ledgers in PostgreSQL.",
+    metricLabel: "PAYOUT INTEGRITY & LOCKING",
+    metricValue: "0",
+    metricUnit: "duplicate payouts",
+    secondaryMetric: "18ms wallet write · ACID committed",
     stack: "FastAPI · Redis Redlock · PostgreSQL · AWS",
     href: "/work/savyour/",
   },
   {
-    tag: "SAAS CONCURRENCY & WORKFLOWS",
+    tag: "ENTERPRISE SAAS",
+    tagTone: "cyan",
     name: "Classflow & EFU Life",
     subtitle: "Stateful Concurrency & Paperless Routing",
     problem:
-      "Concurrent checkout surges caused booking collisions, while manual insurance queues created multi-day document bottlenecks.",
+      "Peak checkout surges caused double-booking collisions, while manual insurance queues created multi-day underwriting backlogs.",
     decision:
       "Implemented optimistic concurrency control with tenant state isolation, transactional queue workers, and role-based audit logging.",
-    primaryMetric: "Zero Double-Bookings",
-    primaryLabel: "Optimistic State Mutex",
-    secondaryMetrics: "Day-scale automated queue · Paperless pipeline",
+    metricLabel: "BOOKING COLLISION RATE",
+    metricValue: "0",
+    metricUnit: "double-bookings",
+    secondaryMetric: "100% automated paperless queue",
     stack: "Next.js · PostgreSQL · SQS · Event-Driven",
     href: "/work/classflow/",
   },
@@ -71,67 +79,43 @@ export default function DualPathways() {
     <section
       id="experience"
       className={styles.section}
-      aria-labelledby="executive-proof-title"
+      aria-labelledby="benchmark-title"
     >
       <div id="start" style={{ position: "absolute", top: 0, height: 0, width: 0 }} aria-hidden="true" />
       <div className={styles.container}>
         <div className={styles.ledgerFrame}>
-          {/* Precision Gold Corner Brackets */}
-          <span
-            className={`${styles.cornerBracket} ${styles.cornerTL}`}
-            aria-hidden="true"
-          />
-          <span
-            className={`${styles.cornerBracket} ${styles.cornerTR}`}
-            aria-hidden="true"
-          />
-          <span
-            className={`${styles.cornerBracket} ${styles.cornerBL}`}
-            aria-hidden="true"
-          />
-          <span
-            className={`${styles.cornerBracket} ${styles.cornerBR}`}
-            aria-hidden="true"
-          />
+          {/* Precision Corner Brackets */}
+          <span className={`${styles.cornerBracket} ${styles.cornerTL}`} aria-hidden="true" />
+          <span className={`${styles.cornerBracket} ${styles.cornerTR}`} aria-hidden="true" />
+          <span className={`${styles.cornerBracket} ${styles.cornerBL}`} aria-hidden="true" />
+          <span className={`${styles.cornerBracket} ${styles.cornerBR}`} aria-hidden="true" />
 
-          {/* Top-Edge Warm Bronze Ambient Glow & Micro-Grid */}
-          <div className={styles.topEdgeGlow} aria-hidden="true" />
+          {/* Underwrite-Style Ambient Lighting & Micro-Grid */}
+          <div className={styles.topSpotlight} aria-hidden="true" />
           <div className={styles.blueprintGrid} aria-hidden="true" />
 
-          {/* Row 1: Balanced Editorial Context Header + Architectural Proof Pills */}
-          <div className={styles.headerRow}>
-            <div className={styles.headerCopy}>
-              <div className={styles.eyebrow}>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  className={styles.eyebrowStar}
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M8 0L9.8 6.2L16 8L9.8 9.8L8 16L6.2 9.8L0 8L6.2 6.2L8 0Z"
-                    fill="#D4AA67"
-                  />
-                </svg>
-                <span>02 // PRODUCTION EXPERIENCE &middot; ARCHITECTURAL BENCHMARKS</span>
-              </div>
-
-              <h2 id="executive-proof-title" className={styles.heading}>
-                Three architectures. Real operating constraints.
-              </h2>
-
-              <p className={styles.subtitle}>
-                Prototypes prove demand. Production architectures are defined by how
-                they isolate failures, enforce data invariants, and protect token budgets.
-              </p>
+          {/* Row 1: Centered Underwrite-Style Headline & Context */}
+          <div className={styles.headerBlock}>
+            {/* Pill Badge with glowing dot */}
+            <div className={styles.eyebrowPill}>
+              <span className={styles.eyebrowDot} aria-hidden="true" />
+              <span>2026 ARCHITECTURAL BENCHMARK REPORT · LIVE INTELLIGENCE</span>
             </div>
 
-            <div
-              className={styles.proofPillsCol}
-              aria-label="Engineering guarantees"
-            >
+            {/* Two-Tone Bold Title */}
+            <h2 id="benchmark-title" className={styles.heading}>
+              Three architectures.
+              <span className={styles.headingAccent}> Real operating constraints.</span>
+            </h2>
+
+            {/* Subtitle & Trust Pillars */}
+            <p className={styles.subtitleLead}>See the data.</p>
+            <p className={styles.subtitle}>
+              Prototypes prove demand. Production architectures are defined by how they
+              isolate failures, enforce data invariants, and protect token budgets.
+            </p>
+
+            <div className={styles.proofPillsRow} aria-label="Engineering guarantees">
               {PROOF_PILLS.map((pill) => (
                 <span key={pill} className={styles.proofPill}>
                   {pill}
@@ -140,7 +124,7 @@ export default function DualPathways() {
             </div>
           </div>
 
-          {/* Row 2: 3-Column Authentic Architectural Benchmark Cards */}
+          {/* Row 2: 3 Underwrite-Style Architectural Benchmark Cards */}
           <div
             className={styles.systemsGrid}
             role="list"
@@ -154,13 +138,19 @@ export default function DualPathways() {
               >
                 <a
                   href={withBasePath(sys.href)}
-                  className={styles.systemCard}
+                  className={`${styles.systemCard} ${styles[`card_${sys.tagTone}`]}`}
                   data-source="architectural-benchmark"
                 >
-                  {/* Card Header & Tag */}
+                  {/* Card Header: Category Tag on left, three dots on right */}
                   <div className={styles.cardTopHeader}>
-                    <span className={styles.cardTag}>{sys.tag}</span>
-                    <span className={styles.cardArrow} aria-hidden="true">↗</span>
+                    <span className={`${styles.cardTag} ${styles[`tag_${sys.tagTone}`]}`}>
+                      {sys.tag}
+                    </span>
+                    <span className={styles.cardMenuDots} aria-hidden="true">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
                   </div>
 
                   {/* Title & Subtitle */}
@@ -169,30 +159,33 @@ export default function DualPathways() {
                     <p className={styles.systemSubtitle}>{sys.subtitle}</p>
                   </div>
 
-                  {/* Problem Statement */}
-                  <div className={styles.specSection}>
-                    <span className={styles.specLabel}>OPERATING PROBLEM</span>
-                    <p className={styles.specText}>{sys.problem}</p>
+                  {/* Concise Failure Mode & Architectural Decision */}
+                  <div className={styles.narrativeGroup}>
+                    <div className={styles.narrativeItem}>
+                      <span className={styles.narrativeLabel}>OPERATING PROBLEM</span>
+                      <p className={styles.narrativeText}>{sys.problem}</p>
+                    </div>
+                    <div className={styles.narrativeItem}>
+                      <span className={styles.narrativeLabelAccent}>ARCHITECTURAL DECISION</span>
+                      <p className={styles.narrativeText}>{sys.decision}</p>
+                    </div>
                   </div>
 
-                  {/* Architectural Decision */}
-                  <div className={styles.specSection}>
-                    <span className={styles.specLabelGold}>ARCHITECTURAL DECISION</span>
-                    <p className={styles.specText}>{sys.decision}</p>
-                  </div>
-
-                  {/* Authentic Metric Benchmark Box (Underwrite Style) */}
+                  {/* Underwrite-Style Inset Metric Benchmark Box */}
                   <div className={styles.metricBox}>
-                    <div className={styles.metricPrimaryRow}>
-                      <strong className={styles.metricVal}>{sys.primaryMetric}</strong>
-                      <span className={styles.metricLabel}>{sys.primaryLabel}</span>
+                    <span className={styles.metricBoxLabel}>{sys.metricLabel}</span>
+                    <div className={styles.metricValRow}>
+                      <span className={`${styles.metricVal} ${styles[`val_${sys.tagTone}`]}`}>
+                        {sys.metricValue}
+                      </span>
+                      <span className={styles.metricUnit}>{sys.metricUnit}</span>
                     </div>
                     <div className={styles.metricSecondaryRow}>
-                      <span>{sys.secondaryMetrics}</span>
+                      <span>{sys.secondaryMetric}</span>
                     </div>
                   </div>
 
-                  {/* Card Footer Tech Stack & CTA */}
+                  {/* Card Footer: Tech Stack & Read Case Study link */}
                   <div className={styles.cardFooter}>
                     <span className={styles.stackText}>{sys.stack}</span>
                     <span className={styles.ctaLink}>
@@ -204,9 +197,30 @@ export default function DualPathways() {
             ))}
           </div>
 
-          {/* Row 3: Balanced Dual-Action Fast-Track Footer Bar */}
+          {/* Scroll prompt (Underwrite Style) */}
+          <div className={styles.scrollIndicatorRow}>
+            <a href="#work" className={styles.scrollLink}>
+              <span>SCROLL TO SEE THE FULL BENCHMARK</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className={styles.scrollChevron}
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+          </div>
+
+          {/* Row 3: Dual-Action Pathway Footer (Recruiter & Founder Fast-Tracks) */}
           <div className={styles.pathwaysRow}>
-            {/* Left Half: Hiring Teams */}
+            {/* Left: Hiring Teams */}
             <div className={styles.pathwayCell}>
               <div className={styles.pathwayInfo}>
                 <div className={styles.pathwayIconBox} aria-hidden="true">
@@ -243,7 +257,7 @@ export default function DualPathways() {
               </a>
             </div>
 
-            {/* Right Half: Founders & CTOs */}
+            {/* Right: Founders & CTOs */}
             <div className={styles.pathwayCell}>
               <div className={styles.pathwayInfo}>
                 <div className={styles.pathwayIconBox} aria-hidden="true">
