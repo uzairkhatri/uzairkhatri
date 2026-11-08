@@ -2,76 +2,54 @@ import React from "react";
 import { CV_URL, withBasePath } from "./siteLinks";
 import styles from "./DualPathways.module.css";
 
-interface SystemCredential {
-  tag: string;
-  tagTone: "gold" | "emerald" | "titanium";
-  name: string;
-  subtitle: string;
+interface ProductionProject {
+  category: string;
+  categoryTag: string;
+  title: string;
+  clientContext: string;
   problem: string;
-  decision: string;
-  metricLabel: string;
-  metricValue: string;
-  metricUnit: string;
-  secondaryMetric: string;
-  stack: string;
+  contribution: string;
+  tags: string[];
   href: string;
 }
 
-const SELECTED_SYSTEMS: SystemCredential[] = [
+const PRODUCTION_PROJECTS: ProductionProject[] = [
   {
-    tag: "AI AGENTS & RAG",
-    tagTone: "gold",
-    name: "Wellows",
-    subtitle: "LLM Search Visibility & Citation Engine",
+    category: "Production AI Platform",
+    categoryTag: "AI & RAG ARCHITECTURE",
+    title: "Wellows",
+    clientContext: "Multi-Agent Search Visibility & Citation Engine",
     problem:
-      "Single-query prototype scripts degraded under concurrent load, with unguarded token spend and ungrounded model drift.",
-    decision:
-      "Engineered LangGraph supervisor state machines with strict Pydantic contracts, isolated SQS queues, and Qdrant retrieval fallback.",
-    metricLabel: "VECTOR LOOKUP LATENCY",
-    metricValue: "<200",
-    metricUnit: "ms avg",
-    secondaryMetric: "3 LangGraph production agents",
-    stack: "LangGraph · Qdrant · FastAPI · Python",
+      "Single-query prototype scripts degraded under concurrent load, with unguarded token spend and ungrounded model outputs across search surfaces.",
+    contribution:
+      "Co-engineered a multi-agent orchestration architecture using LangGraph state machines, Pydantic schema validation, and isolated SQS queues to decouple citation auditing from content generation.",
+    tags: ["LangGraph", "Python / FastAPI", "AWS SQS & Redis"],
     href: "/work/wellows/",
   },
   {
-    tag: "FINTECH & LEDGERS",
-    tagTone: "emerald",
-    name: "Savyour",
-    subtitle: "High-Throughput Webhook Ledger & Settlement",
+    category: "Fintech & Distributed Backend",
+    categoryTag: "FINTECH & DISTRIBUTED SYSTEMS",
+    title: "Savyour",
+    clientContext: "High-Throughput Webhook Ledger & Settlement",
     problem:
-      "Nationwide retail promotion bursts triggered webhook race conditions and duplicate cashback payout exploits across partner networks.",
-    decision:
-      "Architected Redis Redlock distributed mutexes, HMAC webhook verification, and double-entry immutable ledgers in PostgreSQL.",
-    metricLabel: "PAYOUT INTEGRITY & LOCKING",
-    metricValue: "0",
-    metricUnit: "duplicate payouts",
-    secondaryMetric: "18ms wallet write · ACID committed",
-    stack: "FastAPI · Redis Redlock · PostgreSQL · AWS",
+      "Nationwide retail promotion bursts triggered concurrent affiliate webhook race conditions that risked duplicate balance updates.",
+    contribution:
+      "Architected distributed mutex locking with Redis Redlock, idempotent HMAC webhook ingestion, and double-entry transaction boundaries in PostgreSQL to protect ledger integrity.",
+    tags: ["Redis Redlock", "PostgreSQL ACID", "AWS ECS"],
     href: "/work/savyour/",
   },
   {
-    tag: "ENTERPRISE SAAS",
-    tagTone: "titanium",
-    name: "ClassFlow & Enterprise Insurer",
-    subtitle: "Stateful Concurrency & Regulated Paperless Routing",
+    category: "Enterprise Workflow & Integrations",
+    categoryTag: "REGULATED ENTERPRISE WORKFLOWS",
+    title: "Enterprise Insurer",
+    clientContext: "Regulated Document Ingestion & Case Routing Platform",
     problem:
-      "Peak checkout surges caused double-booking collisions, while manual insurance queues created multi-day underwriting backlogs.",
-    decision:
-      "Implemented optimistic concurrency control with tenant state isolation, transactional queue workers, and role-based audit logging.",
-    metricLabel: "BOOKING COLLISION RATE",
-    metricValue: "0",
-    metricUnit: "double-bookings",
-    secondaryMetric: "100% automated paperless queue",
-    stack: "Next.js · PostgreSQL · SQS · Event-Driven",
-    href: "/work/classflow/",
+      "Core insurance underwriting relied on paper-bound records and manual department handoffs, creating multi-day review queues and audit tracing gaps.",
+    contribution:
+      "Architected automated document capture, structured content indexing, and rules-based approval routing integrated with enterprise Active Directory / LDAP for end-to-end auditability.",
+    tags: ["Workflow Engine", "Content Repository", "Active Directory / LDAP"],
+    href: "/work/efu-life/",
   },
-];
-
-const PROOF_PILLS = [
-  "DETERMINISTIC",
-  "CONSTRAINT-BASED",
-  "NO MOCK METRICS",
 ];
 
 export default function DualPathways() {
@@ -79,7 +57,7 @@ export default function DualPathways() {
     <section
       id="experience"
       className={styles.section}
-      aria-labelledby="benchmark-title"
+      aria-labelledby="production-experience-title"
     >
       <div id="start" style={{ position: "absolute", top: 0, height: 0, width: 0 }} aria-hidden="true" />
       <div className={styles.container}>
@@ -87,132 +65,87 @@ export default function DualPathways() {
         <div className={styles.topSpotlight} aria-hidden="true" />
         <div className={styles.blueprintGrid} aria-hidden="true" />
 
-        {/* Row 1: Centered Headline & Editorial Context */}
+        {/* Section Header: Standardized Eyebrow, Headline & Context */}
         <div className={styles.headerBlock}>
-          {/* Status Pill Badge with live green dot */}
           <div className={styles.eyebrowPill}>
             <span className={styles.eyebrowDot} aria-hidden="true" />
-            <span>02 // PRODUCTION ARCHITECTURAL BENCHMARKS</span>
+            <span>PRODUCTION EXPERIENCE</span>
           </div>
 
-          {/* Two-Tone Bold Headline in Warm Gold */}
-          <h2 id="benchmark-title" className={styles.heading}>
-            Three architectures.
-            <span className={styles.headingAccent}> Real operating constraints.</span>
+          <h2 id="production-experience-title" className={styles.heading}>
+            Real Systems. <span className={styles.headingAccent}>Real Engineering Decisions.</span>
           </h2>
 
-          <p className={styles.subtitleLead}>See the data.</p>
           <p className={styles.subtitle}>
-            Prototypes prove demand. Production architectures are defined by how they
-            isolate failures, enforce data invariants, and protect token budgets.
+            From AI-powered platforms to high-throughput backend services, I&apos;ve helped
+            design and build systems where reliability, scalability, and maintainability matter.
           </p>
-
-          <div className={styles.proofPillsRow} aria-label="Engineering guarantees">
-            {PROOF_PILLS.map((pill) => (
-              <span key={pill} className={styles.proofPill}>
-                {pill}
-              </span>
-            ))}
-          </div>
         </div>
 
-        {/* Row 2: 3 Floating Underwrite-Style Cards */}
+        {/* 3 Concise Production Experience Cards */}
         <div
-          className={styles.systemsGrid}
+          className={styles.cardsGrid}
           role="list"
-          aria-label="Selected production architectural benchmarks"
+          aria-label="Verified production engineering projects"
         >
-          {SELECTED_SYSTEMS.map((sys) => (
+          {PRODUCTION_PROJECTS.map((proj) => (
             <div
-              key={sys.name}
-              className={styles.systemCell}
+              key={proj.title}
+              className={styles.cardCell}
               role="listitem"
             >
-              <a
-                href={withBasePath(sys.href)}
-                className={`${styles.systemCard} ${styles[`card_${sys.tagTone}`]}`}
-                data-source="architectural-benchmark"
-              >
-                {/* Card Header: Category Tag on left, three dots on right */}
-                <div className={styles.cardTopHeader}>
-                  <span className={`${styles.cardTag} ${styles[`tag_${sys.tagTone}`]}`}>
-                    {sys.tag}
-                  </span>
-                  <span className={styles.cardMenuDots} aria-hidden="true">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </span>
+              <article className={styles.projectCard}>
+                {/* Card Top: Category Badge */}
+                <div className={styles.cardHeader}>
+                  <span className={styles.categoryBadge}>{proj.category}</span>
+                  <span className={styles.categorySubtag}>{proj.categoryTag}</span>
                 </div>
 
-                {/* Title & Subtitle */}
-                <div className={styles.titleGroup}>
-                  <h3 className={styles.systemName}>{sys.name}</h3>
-                  <p className={styles.systemSubtitle}>{sys.subtitle}</p>
+                {/* Card Identity */}
+                <div className={styles.titleWrap}>
+                  <h3 className={styles.projectTitle}>{proj.title}</h3>
+                  <p className={styles.projectContext}>{proj.clientContext}</p>
                 </div>
 
-                {/* Operating Problem & Architectural Decision */}
-                <div className={styles.narrativeGroup}>
-                  <div className={styles.narrativeItem}>
-                    <span className={styles.narrativeLabel}>OPERATING PROBLEM</span>
-                    <p className={styles.narrativeText}>{sys.problem}</p>
-                  </div>
-                  <div className={styles.narrativeItem}>
-                    <span className={styles.narrativeLabelAccent}>ARCHITECTURAL DECISION</span>
-                    <p className={styles.narrativeText}>{sys.decision}</p>
-                  </div>
+                {/* Problem Statement */}
+                <div className={styles.contentBlock}>
+                  <span className={styles.blockLabel}>OPERATING PROBLEM</span>
+                  <p className={styles.blockText}>{proj.problem}</p>
                 </div>
 
-                {/* Underwrite-Style Inset Metric Benchmark Box */}
-                <div className={styles.metricBox}>
-                  <span className={styles.metricBoxLabel}>{sys.metricLabel}</span>
-                  <div className={styles.metricValRow}>
-                    <span className={`${styles.metricVal} ${styles[`val_${sys.tagTone}`]}`}>
-                      {sys.metricValue}
-                    </span>
-                    <span className={styles.metricUnit}>{sys.metricUnit}</span>
-                  </div>
-                  <div className={styles.metricSecondaryRow}>
-                    <span>{sys.secondaryMetric}</span>
-                  </div>
+                {/* Engineering Contribution */}
+                <div className={styles.contentBlock}>
+                  <span className={styles.blockLabelAccent}>ENGINEERING CONTRIBUTION</span>
+                  <p className={styles.blockText}>{proj.contribution}</p>
                 </div>
 
-                {/* Card Footer: Tech Stack & Read Case Study Link */}
+                {/* Card Footer: Tech Tags + Direct Case Study Link */}
                 <div className={styles.cardFooter}>
-                  <span className={styles.stackText}>{sys.stack}</span>
-                  <span className={styles.ctaLink}>
-                    Read Case Study <span aria-hidden="true">&rarr;</span>
-                  </span>
+                  <div className={styles.tagList} aria-label={`Technologies used in ${proj.title}`}>
+                    {proj.tags.map((tag) => (
+                      <span key={tag} className={styles.techTag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={withBasePath(proj.href)}
+                    className={styles.caseStudyLink}
+                    aria-label={`Read case study for ${proj.title}`}
+                  >
+                    <span>Read Case Study</span>
+                    <span className={styles.linkArrow} aria-hidden="true">&rarr;</span>
+                  </a>
                 </div>
-              </a>
+              </article>
             </div>
           ))}
         </div>
 
-        {/* Scroll prompt (Underwrite Signature) */}
-        <div className={styles.scrollIndicatorRow}>
-          <a href="#work" className={styles.scrollLink}>
-            <span>SCROLL TO EXPLORE ARCHITECTURE LAB</span>
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              className={styles.scrollChevron}
-            >
-              <path d="M6 9l6 6 6-6" />
-            </svg>
-          </a>
-        </div>
-
-        {/* Row 3: Dual-Action Pathway Footer (Recruiter & Founder Fast-Tracks) */}
-        <div className={styles.pathwaysRow}>
-          {/* Left: Hiring Teams */}
+        {/* Dual-Action Pathway Bar: Direct Paths for Hiring Teams & Founders */}
+        <div className={styles.pathwaysRow} aria-label="Next steps by audience">
+          {/* Hiring Teams */}
           <div className={styles.pathwayCell}>
             <div className={styles.pathwayInfo}>
               <div className={styles.pathwayIconBox} aria-hidden="true">
@@ -243,13 +176,14 @@ export default function DualPathways() {
               target="_blank"
               rel="noreferrer"
               className={styles.pathwayBtnOutline}
+              aria-label="Download Uzair Khatri resume and CV in PDF format"
             >
               <span>Explore CV (PDF)</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
 
-          {/* Right: Founders & CTOs */}
+          {/* Founders & CTOs */}
           <div className={styles.pathwayCell}>
             <div className={styles.pathwayInfo}>
               <div className={styles.pathwayIconBox} aria-hidden="true">
@@ -268,11 +202,9 @@ export default function DualPathways() {
                 </svg>
               </div>
               <div className={styles.pathwayText}>
-                <span className={styles.pathwayTitle}>
-                  FOR FOUNDERS &amp; CTOS
-                </span>
+                <span className={styles.pathwayTitle}>FOR FOUNDERS &amp; CTOS</span>
                 <span className={styles.pathwayDesc}>
-                  Architecture Pre-Mortem ($250) &amp; Implementation Sprints
+                  Architecture Reviews &amp; Production Implementation Sprints
                 </span>
               </div>
             </div>
@@ -280,8 +212,9 @@ export default function DualPathways() {
             <a
               href={withBasePath("/audit/")}
               className={styles.pathwayBtnGold}
+              aria-label="Request an architecture triage and review"
             >
-              <span>Request Architecture Pre-Mortem</span>
+              <span>Discuss Architecture</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
           </div>

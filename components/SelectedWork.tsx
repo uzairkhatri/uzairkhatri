@@ -65,8 +65,8 @@ const projects: Project[] = [
     liveLabel: "Visit wellows.com",
     metrics: [
       { value: "3 Agents", label: "LangGraph Runtime" },
-      { value: "10K+ / mo", label: "Remediation Pipeline" },
-      { value: "<200ms", label: "Qdrant Vector Lookup" },
+      { value: "Isolated Queues", label: "SQS Token Governance" },
+      { value: "Vector Fallback", label: "Qdrant Index" },
     ],
     challenge:
       "Single-query prototype failed under concurrent enterprise load, with unguarded token costs and disconnected content drafting.",
@@ -167,7 +167,7 @@ const projects: Project[] = [
         h: 56,
         tone: "default",
         description:
-          "Shared Qdrant vector index grounding both audit agents and content generation in <200ms.",
+          "Shared Qdrant vector index grounding both audit agents and content generation with semantic retrieval fallback.",
       },
       {
         id: "w-gpt4o",
@@ -348,7 +348,7 @@ const projects: Project[] = [
         h: 56,
         tone: "emerald",
         description:
-          "Double-Entry ACID Ledger — guarantees zero balance drift across pending, verified, and settled states.",
+          "Double-Entry ACID Ledger — enforces immutable balance reconciliation across pending, verified, and settled states.",
       },
       {
         id: "sv-redis",
@@ -561,7 +561,7 @@ const projects: Project[] = [
     codeSlug: "CLASSFLOW-SAAS",
     caseStudyUrl: "/work/classflow/",
     metrics: [
-      { value: "<100ms", label: "Timezone Matchmaking" },
+      { value: "Deterministic", label: "Timezone Matchmaking" },
       { value: "Redlock Mutex", label: "State Isolation" },
       { value: "Automated", label: "Stripe Connect Splits" },
     ],
@@ -601,7 +601,7 @@ const projects: Project[] = [
         h: 54,
         tone: "gold",
         description:
-          "Redis Redlock Distributed Mutex — guarantees atomic slot reservation with zero concurrent double-bookings.",
+          "Redis Redlock Distributed Mutex — enforces atomic slot reservation and lock expiration across concurrent booking requests.",
       },
       {
         id: "cf-state",
