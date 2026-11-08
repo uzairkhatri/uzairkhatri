@@ -334,7 +334,7 @@ export function ArchitectGuaranteeCard() {
         <span className={styles.architectRole}>Direct Engineer Review</span>
         <h4 className={styles.architectName}>Uzair Khatri &bull; AI Production Architect</h4>
         <p className={styles.architectBio}>
-          Every architecture triage is personally audited and recorded by me. Shipped production systems for EFU Life, Savyour, and Wellows. Zero junior sales reps or outsourced contractors.
+          Every architecture triage is personally audited and recorded by me. Shipped production systems for enterprise life insurers, Savyour, and Wellows. Zero junior sales reps or outsourced contractors.
         </p>
       </div>
     </div>
@@ -351,7 +351,7 @@ export function ArchitectureProofShowcase() {
       stack: ["LangGraph", "FastAPI", "Qdrant", "Claude 3.5 Sonnet", "GPT-4o"],
     },
     efu: {
-      client: "EFU Life — Enterprise Case & Document Routing",
+      client: "Enterprise Insurer — Regulated Case & Document Routing",
       desc: "Automated OCR capture, high-availability document repository, and Active Directory / LDAP integration replacing physical manual queues with paperless delivery.",
       stack: ["Document Repository", "Case Routing", "OCR Ingestion", "LDAP / AD"],
     },
@@ -387,7 +387,7 @@ export function ArchitectureProofShowcase() {
           className={`${styles.proofTabBtn} ${selectedProof === "efu" ? styles.proofTabBtnActive : ""}`}
           onClick={() => setSelectedProof("efu")}
         >
-          EFU Life // Enterprise Workflows
+          Enterprise Insurer // Regulated Workflows
         </button>
         <button
           type="button"

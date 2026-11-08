@@ -33,7 +33,7 @@ const visualData = {
     tabs: ["HMAC Verification", "Bloom Filter ID", "Cache Eviction"]
   },
   efu: {
-    brand: "EFU Life",
+    brand: "Enterprise Insurer",
     title: "Enterprise Document Case Routing",
     metric: "5 workflows",
     tabs: ["OCR Ingestion Queue", "Document Store", "AD/LDAP Access"]

@@ -389,13 +389,13 @@ const projects: Project[] = [
   },
   {
     number: "03",
-    tabTag: "Enterprise",
+    tabTag: "Regulated",
     year: "2022",
-    name: "EFU Life",
-    subtitle: "Enterprise Insurance Document Ingestion & Case Routing Architecture",
+    name: "Enterprise Insurer",
+    subtitle: "Regulated Insurance Document Ingestion & Case Routing Architecture",
     role: "ENTERPRISE ARCHITECT",
     statusLabel: "SHIPPED TO PRODUCTION",
-    codeSlug: "EFU-WORKFLOW",
+    codeSlug: "INSURANCE-WORKFLOW",
     caseStudyUrl: "/work/efu-life/",
     metrics: [
       { value: "5 Chains", label: "Automated Approvals" },

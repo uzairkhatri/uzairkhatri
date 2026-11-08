@@ -7,9 +7,9 @@ import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
 import Footer from "@/components/Footer";
 
-const title = "EFU Life Case Study - Enterprise Document Workflow Architecture";
+const title = "Enterprise Insurer Case Study - Document Workflow Architecture";
 const description =
-  "How Uzair Khatri architected automated document ingestion, content indexing, and case routing workflows for EFU Life to move document-heavy insurance operations toward paperless digital delivery.";
+  "How Uzair Khatri architected automated document ingestion, content indexing, and case routing workflows for a Tier-1 national life insurer to move document-heavy operations toward paperless digital delivery.";
 const url = "https://uzairkhatri.com/work/efu-life/";
 const image = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
@@ -59,7 +59,7 @@ export default function EFULifeCaseStudy() {
       <BreadcrumbJsonLd items={[
         { name: "Home", url: "https://uzairkhatri.com/" },
         { name: "Case Studies", url: "https://uzairkhatri.com/case-studies/" },
-        { name: "EFU Life Case Study", url },
+        { name: "Enterprise Insurer Case Study", url },
       ]} />
       <TechArticleJsonLd title={title} description={description} url={url} image={image} />
       <SubPageNav />
@@ -71,11 +71,11 @@ export default function EFULifeCaseStudy() {
               <span className={styles.tag}>Enterprise Insurance</span>
               <span className={styles.tag}>Enterprise Architect</span>
             </div>
-            <h1 className={styles.heroTitle}>EFU Life</h1>
-            <p className={styles.heroSub}>Enterprise Document Workflow Architecture</p>
+            <h1 className={styles.heroTitle}>Enterprise Insurer</h1>
+            <p className={styles.heroSub}>Regulated Document Workflow Architecture</p>
             <p className={styles.heroDesc}>
               I architected automated document capture, repository indexing, and
-              case routing workflows to move document-heavy insurance operations
+              case routing workflows for a Tier-1 national life insurer to move document-heavy insurance operations
               from physical filing and manual handoffs toward digital case
               management and paperless delivery.
             </p>

@@ -10,9 +10,9 @@ interface EcosystemBrand {
 
 const ecosystems: EcosystemBrand[] = [
   {
-    name: "EFU Life",
+    name: "Enterprise Insurer",
     relationship: "Client delivery",
-    context: "Enterprise insurance systems",
+    context: "Tier-1 regulated insurance systems",
     icon: ({ className }) => (
       <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
         <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />

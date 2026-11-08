@@ -24,7 +24,7 @@ const timelineData = [
     role: "Associate Architect",
     focus: "Search Services & Regulated Workflows",
     description:
-      "Owned search and user-interaction services for a 1M+ customer platform, lifting search-driven engagement 10% through ranking changes, Redis caching, and query-path tuning. Concurrently built Java Spring Boot services and automated 5 enterprise approval workflows for EFU Life and TPL Life.",
+      "Owned search and user-interaction services for a 1M+ customer platform, lifting search-driven engagement 10% through ranking changes, Redis caching, and query-path tuning. Concurrently built Java Spring Boot services and automated 5 enterprise approval workflows for leading regulated life insurance carriers.",
   },
   {
     year: "2017",

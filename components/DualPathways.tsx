@@ -53,8 +53,8 @@ const SELECTED_SYSTEMS: SystemCredential[] = [
   {
     tag: "ENTERPRISE SAAS",
     tagTone: "titanium",
-    name: "Classflow & EFU Life",
-    subtitle: "Stateful Concurrency & Paperless Routing",
+    name: "ClassFlow & Enterprise Insurer",
+    subtitle: "Stateful Concurrency & Regulated Paperless Routing",
     problem:
       "Peak checkout surges caused double-booking collisions, while manual insurance queues created multi-day underwriting backlogs.",
     decision:
