@@ -3,6 +3,7 @@ import styles from "../insights.module.css";
 import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
+import Footer from "@/components/Footer";
 
 const ogImage = "https://uzairkhatri.com/linkedin-featured/services.png?v=20260921";
 
@@ -155,6 +156,8 @@ export default function RagProductionChecklistArticle() {
           </div>
         </div>
       </article>
+
+      <Footer />
     </div>
   );
 }

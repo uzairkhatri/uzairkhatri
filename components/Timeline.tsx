@@ -24,7 +24,7 @@ const timelineData = [
     role: "Associate Architect",
     focus: "Search Services & Regulated Workflows",
     description:
-      "Owned search and user-interaction services for a 1M+ customer platform, lifting search-driven engagement 10% through ranking changes, Redis caching, and query-path tuning. Concurrently built Java Spring Boot services and automated 5 IBM FileNet approval workflows for EFU Life and TPL Life.",
+      "Owned search and user-interaction services for a 1M+ customer platform, lifting search-driven engagement 10% through ranking changes, Redis caching, and query-path tuning. Concurrently built Java Spring Boot services and automated 5 enterprise approval workflows for EFU Life and TPL Life.",
   },
   {
     year: "2017",
@@ -79,7 +79,8 @@ export default function Timeline() {
   const displayedItems = showAll ? timelineData : timelineData.slice(0, 3);
 
   return (
-    <section className={`${styles.section} reveal-section`} id="timeline" aria-label="Professional evolution timeline">
+    <section className={`${styles.section} reveal-section`} id="experience" aria-label="Professional evolution timeline">
+      <div id="timeline" style={{ position: "absolute", top: 0, height: 0, width: 0, overflow: "hidden" }} aria-hidden="true" />
       <div className={styles.shell}>
         <header className={styles.header}>
           <div className="section-eyebrow">

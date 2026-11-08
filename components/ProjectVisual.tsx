@@ -36,7 +36,7 @@ const visualData = {
     brand: "EFU Life",
     title: "Enterprise Document Case Routing",
     metric: "5 workflows",
-    tabs: ["OCR Datacap Queue", "FileNet Store", "AD/LDAP Access"]
+    tabs: ["OCR Ingestion Queue", "Document Store", "AD/LDAP Access"]
   }
 };
 
@@ -83,16 +83,16 @@ const nodeDescriptions: Record<string, string> = {
 
   // EFU Life
   "ef-scanner": "Physical document scanners digitizing application files into high-resolution formats.",
-  "ef-datacap": "IBM Datacap OCR engine processing ingestion pools and parsing document types.",
-  "ef-router": "IBM Process Engine dispatching cases to corresponding underwriter queues.",
-  "ef-ldap": "IBM Case Manager access controls integrated with Active Directory domain controllers.",
+  "ef-ocr": "OCR ingestion engine processing document pools and parsing policy record types.",
+  "ef-router": "Workflow process engine dispatching cases to corresponding underwriter queues.",
+  "ef-ldap": "Enterprise case access controls integrated with Active Directory domain controllers.",
   "ef-dispatch": "Automated routing rules dispatching cases based on complexity scores and policy limits.",
-  "ef-metadata": "FileNet document metadata schema indexing document attributes.",
-  "ef-filenet": "Clustered IBM FileNet P8 repository hosting secure policy document databases.",
+  "ef-metadata": "Document metadata schema indexing policy and claim attributes.",
+  "ef-repo": "Clustered high-availability document repository hosting secure policy document databases.",
   "ef-postgres": "High-availability active-active database replica supporting disaster failover models.",
   "ef-audit": "Electronic audit logging recording all document compliance modifications.",
   "ef-ldap-verify": "Multi-layer security group checks securing enterprise policy access.",
-  "ef-portal": "IBM Workplace XT portal displaying assignments to insurance underwriters."
+  "ef-portal": "Enterprise case portal displaying assignments to insurance underwriters."
 };
 
 export default function ProjectVisual({ type, variant = "card", activeLogIndex = 7 }: ProjectVisualProps) {
@@ -153,12 +153,12 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
     } else if (type === "efu") {
       switch (nodeName) {
         case "ef-scanner": return activeLogIndex === 0;
-        case "ef-datacap": return activeLogIndex === 1;
+        case "ef-ocr": return activeLogIndex === 1;
         case "ef-router": return activeLogIndex === 2;
         case "ef-ldap": return activeLogIndex === 3;
         case "ef-dispatch": return activeLogIndex === 2;
         case "ef-metadata": return activeLogIndex === 1;
-        case "ef-filenet": return activeLogIndex === 2;
+        case "ef-repo": return activeLogIndex === 2;
         case "ef-postgres": return activeLogIndex === 4;
         case "ef-audit": return activeLogIndex === 4;
         case "ef-portal": return activeLogIndex >= 3;
@@ -512,17 +512,17 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
         <text x="75" y="60" className={styles.nodeSub}>High-Vol Ingestion</text>
       </motion.g>
 
-      <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 1 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("ef-datacap")} onMouseEnter={() => setHoveredNode("ef-datacap")} onMouseLeave={() => setHoveredNode(null)}>
+      <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 1 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("ef-ocr")} onMouseEnter={() => setHoveredNode("ef-ocr")} onMouseLeave={() => setHoveredNode(null)}>
         <rect x="20" y="110" width="110" height="40" rx="6" />
         <circle cx="32" cy="130" r="3" fill="#c9bca8" />
-        <text x="77" y="128" className={styles.nodeTitle}>IBM Datacap Queue</text>
+        <text x="77" y="128" className={styles.nodeTitle}>OCR Ingest Queue</text>
         <text x="77" y="140" className={styles.nodeSub} fill="#c9bca8 !important">OCR / Queue Store</text>
       </motion.g>
 
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 2 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("ef-router")} onMouseEnter={() => setHoveredNode("ef-router")} onMouseLeave={() => setHoveredNode(null)}>
         <rect x="170" y="110" width="120" height="40" rx="6" />
-        <text x="230" y="128" className={styles.nodeTitle}>Case Router PE</text>
-        <text x="230" y="140" className={styles.nodeSub}>IBM Process Engine</text>
+        <text x="230" y="128" className={styles.nodeTitle}>Case Router Engine</text>
+        <text x="230" y="140" className={styles.nodeSub}>Workflow Engine</text>
       </motion.g>
 
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 3 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("ef-ldap")} onMouseEnter={() => setHoveredNode("ef-ldap")} onMouseLeave={() => setHoveredNode(null)}>
@@ -543,9 +543,9 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
         <text x="385" y="220" className={styles.nodeSub}>Document Metadata</text>
       </motion.g>
 
-      <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 6 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("ef-filenet")} onMouseEnter={() => setHoveredNode("ef-filenet")} onMouseLeave={() => setHoveredNode(null)}>
+      <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 6 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("ef-repo")} onMouseEnter={() => setHoveredNode("ef-repo")} onMouseLeave={() => setHoveredNode(null)}>
         <rect x="480" y="30" width="120" height="40" rx="6" />
-        <text x="540" y="48" className={styles.nodeTitle} fill="#00d66f !important">FileNet P8 Store</text>
+        <text x="540" y="48" className={styles.nodeTitle} fill="#00d66f !important">Document Store</text>
         <text x="540" y="60" className={styles.nodeSub}>Clustered HA Repo</text>
       </motion.g>
 
@@ -569,7 +569,7 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
 
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 10 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("ef-portal")} onMouseEnter={() => setHoveredNode("ef-portal")} onMouseLeave={() => setHoveredNode(null)}>
         <rect x="630" y="110" width="110" height="40" rx="6" />
-        <text x="685" y="128" className={styles.nodeTitle}>Workplace XT UI</text>
+        <text x="685" y="128" className={styles.nodeTitle}>Underwriter Portal</text>
         <text x="685" y="140" className={styles.nodeSub}>Underwriting Case</text>
       </motion.g>
     </svg>

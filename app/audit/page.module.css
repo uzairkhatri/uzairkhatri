@@ -1,13 +1,13 @@
 .page {
-  --audit-gold: #d8a943;
-  --audit-gold-bright: #f1c56c;
-  --audit-green: #20c779;
-  --audit-bg: #080c0d;
-  --audit-panel: #0d1315;
+  --audit-gold: #d4aa67;
+  --audit-gold-bright: #dfb978;
+  --audit-green: #2ecc71;
+  --audit-bg: #0a0c0e;
+  --audit-panel: #121519;
   min-width: 320px;
   min-height: 100vh;
   overflow: hidden;
-  color: #f5f6f4;
+  color: #f7f7f5;
   background: var(--audit-bg);
 }
 

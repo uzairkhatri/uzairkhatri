@@ -38,13 +38,13 @@
   max-width: 58rem;
   height: 90svh;
   max-height: 50rem;
-  background: #171b1a;
-  border: 1px solid rgba(197, 155, 83, 0.2);
+  background: #121519;
+  border: 1px solid rgba(212, 170, 103, 0.28);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 
-    0 32px 64px -12px rgba(0, 0, 0, 0.65),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
+    0 32px 64px -12px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -57,7 +57,7 @@
   height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(23, 27, 26, 0.95);
+  background: rgba(18, 21, 25, 0.95);
   color: #ffffff;
   font-size: 1.6rem;
   font-weight: 300;
@@ -70,9 +70,9 @@
 }
 
 .closeBtn:hover {
-  background: var(--gold, #c59b53);
-  color: #111418;
-  border-color: var(--gold, #c59b53);
+  background: #d4aa67;
+  color: #0b0d0e;
+  border-color: #d4aa67;
   transform: rotate(90deg);
 }
 
@@ -80,7 +80,7 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  background: #171b1a;
+  background: #0a0c0e;
   position: relative;
 }
 
@@ -88,7 +88,7 @@
 .skeletonContainer {
   position: absolute;
   inset: 0;
-  background: #171b1a;
+  background: #121519;
   z-index: 10;
   padding: 2.5rem 3rem;
   display: flex;
@@ -118,8 +118,8 @@
 .spinner {
   width: 1rem;
   height: 1rem;
-  border: 2px solid rgba(197, 155, 83, 0.25);
-  border-top-color: var(--gold-bright, #d8ad64);
+  border: 2px solid rgba(212, 170, 103, 0.25);
+  border-top-color: #d4aa67;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -127,7 +127,7 @@
 .subtext {
   font-family: var(--font-space-mono), monospace;
   font-size: 0.72rem;
-  color: var(--gold, #c59b53);
+  color: #d4aa67;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }

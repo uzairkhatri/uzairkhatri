@@ -5,10 +5,11 @@ import ProjectVisual from "@/components/ProjectVisual";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
+import Footer from "@/components/Footer";
 
 const title = "EFU Life Case Study - Enterprise Document Workflow Architecture";
 const description =
-  "How Uzair Khatri implemented IBM FileNet P8, Capture, and Case Manager for EFU Life to move document-heavy insurance operations toward digital case routing.";
+  "How Uzair Khatri architected automated document ingestion, content indexing, and case routing workflows for EFU Life to move document-heavy insurance operations toward paperless digital delivery.";
 const url = "https://uzairkhatri.com/work/efu-life/";
 const image = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
@@ -29,25 +30,25 @@ const decisions = [
   {
     title: "Document capture and indexing",
     problem: "Physical policy documents had to become usable case records, not simply scanned files in another filing queue.",
-    decision: "Implemented document ingestion using IBM Capture, with document metadata indexed in the FileNet P8 content repository.",
+    decision: "Implemented automated document ingestion and OCR processing, with structured metadata indexed in a centralized enterprise content repository.",
     consideration: "Capture and metadata form the entry boundary: downstream routing depends on a document being associated with the right case.",
   },
   {
     title: "Case routing and approval workflows",
     problem: "Paper-based handoffs made approval chains dependent on manual filing and movement between teams.",
-    decision: "Implemented IBM Case Manager routing and FileNet approval workflows to move document-driven work into digital queues.",
+    decision: "Architected automated case routing and multi-tier approval workflows to move document-driven work into digital queues.",
     consideration: "Routing rules make operational responsibilities explicit. Changes to an approval process also need to be reflected in its workflow configuration.",
   },
   {
     title: "Access controls and audit history",
     problem: "Digitizing insurance records had to preserve controlled access and a traceable history of document changes.",
-    decision: "Integrated Case Manager access controls with Active Directory / LDAP and included document audit logging in the architecture.",
+    decision: "Integrated workflow access controls with Active Directory / LDAP and included document audit logging in the architecture.",
     consideration: "Digital availability and permission to view a record are separate concerns; access checks remain part of the case workflow.",
   },
   {
     title: "Repository and operational continuity",
     problem: "Case routing depends on the underlying policy documents remaining available to the teams processing them.",
-    decision: "Used FileNet P8 as the content repository within an on-premise high-availability server architecture.",
+    decision: "Deployed a centralized enterprise document repository within an on-premise high-availability server architecture.",
     consideration: "Capture, routing, identity, and document storage remain distinct dependencies that must be operated together.",
   },
 ];
@@ -73,9 +74,10 @@ export default function EFULifeCaseStudy() {
             <h1 className={styles.heroTitle}>EFU Life</h1>
             <p className={styles.heroSub}>Enterprise Document Workflow Architecture</p>
             <p className={styles.heroDesc}>
-              I implemented IBM FileNet P8, Capture, and Case Manager to move
-              document-heavy insurance operations from physical filing and manual
-              handoffs toward digital case management and paperless delivery.
+              I architected automated document capture, repository indexing, and
+              case routing workflows to move document-heavy insurance operations
+              from physical filing and manual handoffs toward digital case
+              management and paperless delivery.
             </p>
           </div>
           <ProjectVisual type="efu" variant="hero" />
@@ -110,9 +112,10 @@ export default function EFULifeCaseStudy() {
           <p className={styles.eyebrowLight}>What I Architected</p>
           <h2 id="efu-architecture" className={styles.sectionTitleLight}>Capture, content, and case routing.</h2>
           <p className={styles.sectionDescLight}>
-            My implementation connected document ingestion, FileNet storage, and
-            Case Manager workflows, with identity and audit controls supporting
-            the path from a scanned document to an assigned case.
+            My implementation connected document ingestion, centralized document
+            storage, and automated case routing workflows, with identity and
+            audit controls supporting the path from a scanned document to an
+            assigned case.
           </p>
           <div className={styles.decisionGrid}>
             {decisions.map((item) => (
@@ -133,12 +136,12 @@ export default function EFULifeCaseStudy() {
           <h2 id="efu-outcome" className={styles.sectionTitle}>Approval work moved into digital workflows.</h2>
           <div className={styles.prose}>
             <p>
-              Five IBM FileNet approval chains were automated, moving
+              Five enterprise approval chains were automated, moving
               document-heavy insurance work from week-scale handoffs toward
               day-scale digital case routing.
             </p>
             <p>
-              Document ingestion, repository storage, and Case Manager routing
+              Document ingestion, repository storage, and automated case routing
               replaced manual filing queues with a connected digital path for
               case processing.
             </p>
@@ -165,6 +168,8 @@ export default function EFULifeCaseStudy() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

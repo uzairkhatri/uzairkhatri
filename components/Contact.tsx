@@ -1,41 +1,154 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./Contact.module.css";
-import { BOOKING_URL, EMAIL_ADDRESS, EMAIL_URL, withBasePath } from "./siteLinks";
+import {
+  BOOKING_URL,
+  EMAIL_ADDRESS,
+  EMAIL_URL,
+  withBasePath,
+} from "./siteLinks";
 import { trackLeadSubmission } from "./analytics";
 
-const links = [
-  ["Email", EMAIL_URL, EMAIL_ADDRESS],
-  ["LinkedIn", "https://www.linkedin.com/in/uzair-khatri", "Connect professionally"],
-  ["GitHub", "https://github.com/UzairKhatri", "Review technical work"],
-  ["Resume", withBasePath("/Uzair-Iqbal-AI-Architect-CV.pdf"), "Download CV (Uzair Iqbal — PDF)"],
-];
-
-const engagementTypes = [
-  "AI prototype to production",
-  "Agent workflow design",
-  "Backend scaling",
-  "Architecture risk review",
-];
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 18 18" aria-hidden="true">
-      <path d="M4 9h9M9.5 5.5 13 9l-3.5 3.5" />
-    </svg>
-  );
+interface ChannelCard {
+  label: string;
+  value: string;
+  href: string;
+  external?: boolean;
+  download?: boolean;
+  arrow: string;
+  icon: React.ReactNode;
 }
 
-const projectStages = ["Idea", "Prototype", "In Production", "Existing System"] as const;
+const channels: ChannelCard[] = [
+  {
+    label: "EMAIL",
+    value: EMAIL_ADDRESS,
+    href: EMAIL_URL,
+    arrow: "↗",
+    icon: (
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+      </svg>
+    ),
+  },
+  {
+    label: "LINKEDIN",
+    value: "Connect professionally",
+    href: "https://www.linkedin.com/in/uzair-khatri",
+    external: true,
+    arrow: "↗",
+    icon: (
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect x="2" y="9" width="4" height="12" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    ),
+  },
+  {
+    label: "GITHUB",
+    value: "Inspect production code",
+    href: "https://github.com/UzairKhatri",
+    external: true,
+    arrow: "↗",
+    icon: (
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+        <path d="M9 18c-4.51 2-5-2-7-2" />
+      </svg>
+    ),
+  },
+  {
+    label: "RESUME / CV",
+    value: "Download PDF CV",
+    href: withBasePath("/Uzair-Iqbal-AI-Architect-CV.pdf"),
+    download: true,
+    arrow: "↓",
+    icon: (
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="12" y1="18" x2="12" y2="12" />
+        <polyline points="9 15 12 18 15 15" />
+      </svg>
+    ),
+  },
+];
+
+const projectStages = [
+  "Idea",
+  "Prototype",
+  "In Production",
+  "Existing System",
+] as const;
 
 export default function Contact() {
   const [projectStage, setProjectStage] = useState<string>("Prototype");
-  const [formState, setFormState] = useState({ name: "", email: "", message: "", _gotcha: "" });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    message: "",
+    _gotcha: "",
+  });
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
   const submitting = useRef(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const emailFallback = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent("Architecture Inquiry (" + projectStage + ") from " + formState.name)}&body=${encodeURIComponent("From: " + formState.name + " (" + formState.email + ")\n\n[Project Stage: " + projectStage + "]\n\n" + formState.message)}`;
+  const emailFallback = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(
+    "Architecture Inquiry (" + projectStage + ") from " + formState.name
+  )}&body=${encodeURIComponent(
+    "From: " +
+      formState.name +
+      " (" +
+      formState.email +
+      ")\n\n[Project Stage: " +
+      projectStage +
+      "]\n\n" +
+      formState.message
+  )}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +180,7 @@ export default function Contact() {
         signal: controller.signal,
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify({
           name: formState.name.trim().slice(0, 100),
@@ -75,7 +188,7 @@ export default function Contact() {
           message: formState.message.trim().slice(0, 3000),
           stage: projectStage,
           _gotcha: formState._gotcha,
-        })
+        }),
       });
 
       const result = await response.json();
@@ -87,7 +200,9 @@ export default function Contact() {
         throw new Error("Contact request was not accepted");
       }
     } catch {
-      setErrorMessage("We couldn't confirm delivery. Your message is still here. Try again, or send it using your email app.");
+      setErrorMessage(
+        "We couldn't confirm delivery. Your message is still here. Try again, or send it using your email app."
+      );
       setStatus("error");
     } finally {
       window.clearTimeout(timeout);
@@ -96,172 +211,345 @@ export default function Contact() {
   };
 
   return (
-    <section className={`${styles.section} reveal-section`} id="contact" aria-labelledby="contact-title">
-      <div className={styles.shell}>
-        <div className={styles.left}>
-          <p className={styles.kicker}>
-            <span />
-            Architecture Review
-          </p>
-          <h2 id="contact-title">Have an AI system that needs to actually work?</h2>
-          <p className={styles.copy}>
-            Whether you&apos;re moving from prototype to production or fixing an AI system that&apos;s already struggling, let&apos;s review the architecture: runtime boundaries, memory state, concurrency safety, and cost controls.
-          </p>
+    <section
+      className={styles.section}
+      id="contact"
+      aria-labelledby="contact-title"
+    >
+      <div className={styles.container}>
+        <div className={styles.dossierFrame}>
+          {/* 4 Precision L-Shaped Gold Corner Brackets */}
+          <span className={styles.cornerTL} aria-hidden="true" />
+          <span className={styles.cornerTR} aria-hidden="true" />
+          <span className={styles.cornerBL} aria-hidden="true" />
+          <span className={styles.cornerBR} aria-hidden="true" />
 
-          <div className={styles.fitList} aria-label="Best fit for">
-            {engagementTypes.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
+          <div className={styles.topEdgeGlow} aria-hidden="true" />
 
-          <div className={styles.actions}>
-            <a 
-              className={styles.primary} 
-              href={BOOKING_URL} 
-              target="_blank" 
-              rel="noreferrer"
-              data-source="contact_section"
-            >
-              Book 30-Min Architecture Call &rarr;
-            </a>
-            <a className={styles.secondary} href="#contact-card">
-              Prefer async? Tell me about your project &darr;
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.right} id="contact-card">
-          <div className={styles.contactCard}>
-            <p>Start here</p>
-            <h3>Send the context. I&apos;ll pressure-test the shape of the system.</h3>
-            
-            {status === "success" ? (
-              <div className={styles.formSuccess} role="status">
-                <div className={styles.successIconStage}>
-                  <span className={styles.successPulse} />
-                  <svg className={styles.successCheck} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <strong>Message received.</strong>
-                <p>I&apos;ll review the context and respond within 24 hours.</p>
-                <button onClick={() => setStatus("idle")} className={styles.resetFormBtn}>
-                  Send another message
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className={styles.form} aria-busy={status === "submitting"}>
-                {/* Honeypot field for anti-bot spam defense */}
-                <input
-                  type="text"
-                  name="_gotcha"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  style={{ display: "none" }}
-                  value={formState._gotcha}
-                  onChange={(e) => setFormState({ ...formState, _gotcha: e.target.value })}
+          {/* Row 1: Balanced Header + Timezone Availability Pill */}
+          <header className={styles.headerRow}>
+            <div className={styles.headerCopy}>
+              <div className={styles.eyebrow}>
+                <svg
+                  className={styles.eyebrowStar}
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="#d4aa67"
                   aria-hidden="true"
-                />
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
+                >
+                  <path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z" />
+                </svg>
+                <span>05 // CONTACT &middot; SCHEDULE A CONVERSATION</span>
+              </div>
+              <h2 className={styles.heading} id="contact-title">
+                Have an AI or backend system that needs to scale?
+              </h2>
+              <p className={styles.subtitle}>
+                Whether you are moving from prototype to production, auditing a
+                live runtime, or hiring for a senior architecture role.
+              </p>
+            </div>
+
+            <div className={styles.timezoneBadge}>
+              <span className={styles.timezoneDot} aria-hidden="true" />
+              <span>
+                UTC+5 (PKT) &middot; AVAILABLE FOR DUBAI/GCC &amp; GLOBAL REMOTE
+              </span>
+            </div>
+          </header>
+
+          {/* Row 2: 2-Column Split Stage Inside Dossier */}
+          <div className={styles.stageGrid}>
+            {/* LEFT COLUMN (45%): Strategy Call Card + 2x2 Channel Grid */}
+            <div className={styles.leftCol}>
+              <div className={styles.callCard}>
+                <div>
+                  <div className={styles.callTopBar}>
+                    <div className={styles.hostProfile}>
+                      <div className={styles.hostAvatarWrap}>
+                        <img
+                          src={withBasePath("/img/profile/hero-portrait.webp")}
+                          alt="Uzair Khatri"
+                          width={42}
+                          height={42}
+                          className={styles.hostAvatar}
+                          loading="lazy"
+                        />
+                        <span
+                          className={styles.hostOnlineDot}
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div className={styles.hostMeta}>
+                        <strong className={styles.hostName}>Uzair Khatri</strong>
+                        <span className={styles.hostRole}>
+                          Principal AI Systems Architect
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className={styles.callBadge}>
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      <span>30 MIN &middot; 1-ON-1</span>
+                    </div>
+                  </div>
+
+                  <h3 className={styles.callTitle}>
+                    Book an Architecture Strategy Call
+                  </h3>
+                  <p className={styles.callDesc}>
+                    Walk through your current system boundaries, latency or token
+                    bottlenecks, and target roadmap live.
+                  </p>
+
+                  {/* Concrete 30-Min Session Agenda Mini-Preview */}
+                  <div className={styles.agendaWindow} aria-hidden="true">
+                    <div className={styles.agendaHeader}>
+                      <span>SESSION DELIVERABLE PREVIEW</span>
+                      <span className={styles.agendaTag}>LIVE TRIAGE</span>
+                    </div>
+                    <div className={styles.agendaRows}>
+                      <div className={styles.agendaRow}>
+                        <span>01 · Runtime &amp; State Triage</span>
+                        <span className={styles.agendaPill}>Bottleneck Map</span>
+                      </div>
+                      <div className={styles.agendaRow}>
+                        <span>02 · Latency &amp; Token Cost Profile</span>
+                        <span className={styles.agendaPillGold}>ROI Target</span>
+                      </div>
+                      <div className={styles.agendaRow}>
+                        <span>03 · Next Architecture Decisions</span>
+                        <span className={styles.agendaPill}>Actionable RFC</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-source="contact_section"
+                  className={styles.goldBtn}
+                >
+                  <span>Book 30-Min Architecture Call</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+
+              {/* 2x2 Direct Channels Grid */}
+              <div
+                className={styles.channelsGrid}
+                role="list"
+                aria-label="Direct contact channels"
+              >
+                {channels.map((ch) => (
+                  <a
+                    key={ch.label}
+                    href={ch.href}
+                    target={ch.external ? "_blank" : undefined}
+                    rel={ch.external ? "noreferrer" : undefined}
+                    download={ch.download ? true : undefined}
+                    className={styles.channelCard}
+                    role="listitem"
+                  >
+                    <span className={styles.channelKicker}>
+                      {ch.icon}
+                      <span>{ch.label}</span>
+                    </span>
+                    <strong className={styles.channelValue}>
+                      <span>{ch.value}</span>
+                      <span
+                        className={styles.channelArrow}
+                        aria-hidden="true"
+                      >
+                        {ch.arrow}
+                      </span>
+                    </strong>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN (55%): Async System Context Form */}
+            <div className={styles.rightCol} id="contact-card">
+              <div className={styles.formPanel}>
+                <span className={styles.formKicker}>
+                  PREFER ASYNC? // SEND SYSTEM CONTEXT
+                </span>
+                <h3 className={styles.formHeading}>
+                  Send the context. I&apos;ll pressure-test the shape of the
+                  system.
+                </h3>
+
+                {status === "success" ? (
+                  <div className={styles.formSuccess} role="status">
+                    <div className={styles.successIconStage}>
+                      <svg
+                        className={styles.successCheck}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    <strong>Message received.</strong>
+                    <p>
+                      I&apos;ll review your system context and respond within 24
+                      hours.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setStatus("idle")}
+                      className={styles.resetFormBtn}
+                    >
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
+                  <form
+                    onSubmit={handleSubmit}
+                    className={styles.form}
+                    aria-busy={status === "submitting"}
+                  >
+                    {/* Honeypot field for anti-bot spam defense */}
                     <input
                       type="text"
-                      placeholder="Name"
-                      aria-label="Name"
-                      name="name"
-                      autoComplete="name"
-                      disabled={status === "submitting"}
-                      required
-                      maxLength={100}
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className={styles.input}
+                      name="_gotcha"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      style={{ display: "none" }}
+                      value={formState._gotcha}
+                      onChange={(e) =>
+                        setFormState({ ...formState, _gotcha: e.target.value })
+                      }
+                      aria-hidden="true"
                     />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      aria-label="Email"
-                      name="email"
-                      autoComplete="email"
-                      disabled={status === "submitting"}
-                      required
-                      maxLength={100}
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className={styles.input}
-                    />
-                  </div>
-                </div>
-                <div className={styles.stageSelectorGroup}>
-                  <span className={styles.stageLabel}>Project Stage</span>
-                  <div className={styles.stageButtons} role="radiogroup" aria-label="Project stage">
-                    {projectStages.map((stage) => (
-                      <button
-                        key={stage}
-                        type="button"
+
+                    <div className={styles.formRow}>
+                      <input
+                        type="text"
+                        placeholder="Name"
+                        aria-label="Name"
+                        name="name"
+                        autoComplete="name"
                         disabled={status === "submitting"}
-                        className={`${styles.stageBtn} ${projectStage === stage ? styles.stageBtnActive : ""}`}
-                        onClick={() => setProjectStage(stage)}
-                        aria-checked={projectStage === stage}
-                        role="radio"
-                      >
-                        {stage}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                        required
+                        maxLength={100}
+                        value={formState.name}
+                        onChange={(e) =>
+                          setFormState({ ...formState, name: e.target.value })
+                        }
+                        className={styles.input}
+                      />
+                      <input
+                        type="email"
+                        placeholder="Work Email"
+                        aria-label="Work Email"
+                        name="email"
+                        autoComplete="email"
+                        disabled={status === "submitting"}
+                        required
+                        maxLength={100}
+                        value={formState.email}
+                        onChange={(e) =>
+                          setFormState({ ...formState, email: e.target.value })
+                        }
+                        className={styles.input}
+                      />
+                    </div>
 
-                <div className={styles.formGroup}>
-                  <textarea
-                    placeholder="What is built, what is breaking, and what has to scale?"
-                    aria-label="Project context"
-                    name="message"
-                    disabled={status === "submitting"}
-                    required
-                    maxLength={3000}
-                    rows={3}
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    className={styles.textarea}
-                  />
-                </div>
-                {status === "error" && (
-                  <div className={styles.formError}>
-                    <p role="alert">{errorMessage}</p>
-                    <a href={emailFallback}>Open email draft &rarr;</a>
-                  </div>
+                    <div
+                      className={styles.stageTrack}
+                      role="radiogroup"
+                      aria-label="Project stage"
+                    >
+                      {projectStages.map((stage) => {
+                        const active = projectStage === stage;
+                        return (
+                          <button
+                            key={stage}
+                            type="button"
+                            disabled={status === "submitting"}
+                            className={`${styles.stageBtn} ${
+                              active ? styles.stageBtnActive : ""
+                            }`}
+                            onClick={() => setProjectStage(stage)}
+                            aria-checked={active}
+                            role="radio"
+                          >
+                            [{stage}]
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <textarea
+                      placeholder="What is built, what is breaking, and what has to scale?"
+                      aria-label="Project context"
+                      name="message"
+                      disabled={status === "submitting"}
+                      required
+                      maxLength={3000}
+                      rows={4}
+                      value={formState.message}
+                      onChange={(e) =>
+                        setFormState({ ...formState, message: e.target.value })
+                      }
+                      className={styles.textarea}
+                    />
+
+                    {status === "error" && (
+                      <div className={styles.formError}>
+                        <p role="alert">{errorMessage}</p>
+                        <a href={emailFallback}>Open email draft &rarr;</a>
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className={styles.goldBtn}
+                    >
+                      <span>
+                        {status === "submitting"
+                          ? "Sending..."
+                          : status === "error"
+                          ? "Try again"
+                          : "Send System Context"}
+                      </span>
+                      <span aria-hidden="true">&rarr;</span>
+                    </button>
+
+                    <p className={styles.formFootnote}>
+                      Direct response within 24 hours &middot; Zero sales
+                      intermediaries
+                    </p>
+                  </form>
                 )}
-                <button type="submit" disabled={status === "submitting"} className={styles.submitBtn}>
-                  {status === "submitting" ? "Sending..." : status === "error" ? "Try again" : "Send Context"}
-                </button>
-              </form>
-            )}
+              </div>
+            </div>
           </div>
-
-          <div className={styles.links}>
-            {links.map(([label, href, description]) => (
-              <a
-                href={href}
-                key={label}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noreferrer" : undefined}
-                download={href.endsWith(".pdf") ? true : undefined}
-              >
-                <span>{label}</span>
-                <strong>{description}</strong>
-                <ArrowIcon />
-              </a>
-            ))}
-          </div>
-
-          <p className={styles.timezone}>
-            Based in Karachi (PKT / UTC+5). Available for Dubai/GCC (GST) and global remote architecture engagements. Enquiries answered within 24 hours.
-          </p>
         </div>
       </div>
     </section>
   );
 }
-

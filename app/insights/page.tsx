@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "./insights.module.css";
 import SubPageNav from "@/components/SubPageNav";
+import Footer from "@/components/Footer";
 import { withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
@@ -116,6 +117,8 @@ export default function InsightsHub() {
           ))}
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

@@ -95,9 +95,9 @@ Uzair Khatri (Uzair Iqbal) is a Principal AI Systems Architect and Senior Full-S
 - **Role**: Lead Solutions Engineer
 - **Challenge**: Modernizing manual, paper-intensive insurance claim processing and policy documentation across dispersed regional branches.
 - **Architecture**:
-  - End-to-end document capture and OCR pipeline using IBM Capture.
-  - Metadata indexing and centralized storage in IBM FileNet P8 content repository.
-  - Configured IBM Case Manager digital routing and multi-tier approval workflows.
+  - End-to-end document capture and OCR ingestion pipeline.
+  - Metadata indexing and centralized storage in a high-availability enterprise content repository.
+  - Configured digital case routing and multi-tier approval workflows.
 
 ---
 

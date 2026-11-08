@@ -43,7 +43,7 @@
   - Link: https://uzairkhatri.com/work/classflow/
 - **Savyour (High-Throughput Fintech Ledger)**: Engineered cashback ledger balancing, affiliate attribution pipelines, and Redis caching for high-concurrency commercial transactions.
   - Link: https://uzairkhatri.com/work/savyour/
-- **EFU Life (Enterprise Document Workflow Architecture)**: Modernized document-heavy insurance operations with IBM FileNet P8, IBM Capture, and Case Manager, converting physical records into automated digital approval queues.
+- **EFU Life (Enterprise Document Workflow Architecture)**: Modernized document-heavy insurance operations with automated OCR capture, centralized document indexing, and digital case routing, converting physical records into automated digital approval queues.
   - Link: https://uzairkhatri.com/work/efu-life/
 
 ## Contact & Engagements

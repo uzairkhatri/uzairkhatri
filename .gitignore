@@ -17,5 +17,6 @@ Thumbs.db
 .agents/*credentials*.json
 
 tsconfig.tsbuildinfo
+scratch/
 docs/growth-system/20-revenue-acquisition-tracker.md
 docs/growth-system/*tracker*.md

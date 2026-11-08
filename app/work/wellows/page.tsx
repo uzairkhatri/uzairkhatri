@@ -5,6 +5,7 @@ import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import ProjectVisual from "@/components/ProjectVisual";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
+import Footer from "@/components/Footer";
 
 const ogImage = "https://uzairkhatri.com/linkedin-featured/case-studies.png?v=20260921";
 
@@ -435,6 +436,8 @@ export default function WellowsCaseStudy() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import SubPageNav from "@/components/SubPageNav";
+import Footer from "@/components/Footer";
 import { trackAuditSubmission } from "@/components/analytics";
 import { BOOKING_URL, CV_URL, withBasePath } from "@/components/siteLinks";
 import styles from "./page.module.css";
@@ -1167,23 +1168,7 @@ export default function AuditPage() {
         </section>
       </main>
       
-      <footer className={styles.footer}>
-        <div>
-          <strong>‹&nbsp; Uzair Khatri</strong>
-          <small>AI Systems · Architecture · Real-World Impact</small>
-        </div>
-        <nav>
-          <a href={withBasePath("/#work")}>Work</a>
-          <a href={withBasePath("/services/ai-systems/")}>Services</a>
-          <a href={withBasePath("/case-studies/")}>Case Studies</a>
-          <a href={withBasePath("/insights/")}>Insights</a>
-          <a className={styles.activeLink} href={withBasePath("/audit/")}>AI Triage &amp; Pre-Mortem</a>
-          <a href={CV_URL} target="_blank" rel="noreferrer">CV</a>
-          <a className={styles.footerCta} href={BOOKING_URL}>Book a call</a>
-        </nav>
-        <p>Build better. Ship smarter.</p>
-        <p>© 2026 Uzair Khatri. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

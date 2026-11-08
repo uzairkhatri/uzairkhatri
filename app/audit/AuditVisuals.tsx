@@ -352,8 +352,8 @@ export function ArchitectureProofShowcase() {
     },
     efu: {
       client: "EFU Life — Enterprise Case & Document Routing",
-      desc: "IBM FileNet P8, Datacap Capture, and Active Directory / LDAP integration replacing physical manual queues with paperless delivery.",
-      stack: ["IBM FileNet P8", "IBM Case Manager", "IBM Capture", "LDAP / AD"],
+      desc: "Automated OCR capture, high-availability document repository, and Active Directory / LDAP integration replacing physical manual queues with paperless delivery.",
+      stack: ["Document Repository", "Case Routing", "OCR Ingestion", "LDAP / AD"],
     },
     savyour: {
       client: "Savyour — High-Throughput Fintech SaaS Ledger",

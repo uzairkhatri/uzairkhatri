@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  /* Local system stacks keep production builds independent of font CDNs. */
-  --font-inter: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-outfit: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-  --font-cormorant-garamond: Georgia, "Times New Roman", serif;
-  --font-space-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  /* Web fonts with local system fallbacks. */
+  --font-inter: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-outfit: "Outfit", "Segoe UI", Arial, sans-serif;
+  --font-cormorant-garamond: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-space-mono: "Space Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --hero-bg-top: #98a2a1;
   --hero-bg-bottom: #7f8b8a;
   --ink: #111418;
@@ -27,16 +27,16 @@
   --warm-soft: #e8e5dc;
   --warm-ink: #191d1c;
   --warm-muted: #656b67;
-  --graphite: #171b1a;
-  --graphite-deep: #101312;
-  --graphite-card: #202624;
-  --dark-muted: rgba(255, 255, 255, 0.56);
-  --gold: #c59b53;
-  --gold-bright: #d8ad64;
-  --content-max: 92rem;
-  --page-pad: clamp(1.2rem, 4vw, 4rem);
-  --section-pad: clamp(3.2rem, 5vw, 5.5rem);
-  --hairline-dark: rgba(255, 255, 255, 0.1);
+  --graphite: #0e1116;
+  --graphite-deep: #0a0c0e;
+  --graphite-card: #13171d;
+  --dark-muted: #a3abb6;
+  --gold: #c69c59;
+  --gold-bright: #d4aa67;
+  --content-max: 1280px;
+  --page-pad: clamp(1.25rem, 3vw, 2.5rem);
+  --section-pad: clamp(3rem, 4.5vw, 4.5rem);
+  --hairline-dark: rgba(255, 255, 255, 0.08);
   --hairline-light: rgba(25, 29, 28, 0.13);
 }
 

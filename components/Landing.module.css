@@ -1,0 +1,793 @@
+/* Section 1 Hero & Header — Luxury Editorial & Architectural Compass Design */
+
+.heroHeaderWrap {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  background-color: #0b0d0e;
+  background-image:
+    radial-gradient(ellipse 52% 56% at 74% 52%, rgba(175, 134, 68, 0.14), transparent 72%),
+    radial-gradient(ellipse 60% 60% at 22% 35%, rgba(22, 26, 30, 0.55), transparent 75%),
+    linear-gradient(180deg, #0a0c0d 0%, #0b0d0e 65%, #0e1112 100%);
+  color: #f2f2f0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(212, 170, 103, 0.16);
+}
+
+/* Subtle background architectural micro-grid (assistive hidden) */
+.heroGridLayer {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212, 170, 103, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 170, 103, 0.024) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 70% at 62% 50%, black 20%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 62% 50%, black 20%, transparent 85%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================================================
+   Contained Architectural Header Bar
+   ======================================================== */
+
+.navOuter {
+  position: relative;
+  z-index: 20;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(0.85rem, 1.5vw, 1.35rem) clamp(1rem, 2.5vw, 2.25rem) 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(22, 25, 28, 0.88) 0%, rgba(14, 17, 19, 0.92) 100%);
+  border: 1px solid rgba(212, 170, 103, 0.24);
+  border-radius: 12px;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.navContainer {
+  padding: 0.85rem clamp(1.1rem, 2vw, 1.85rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+.navBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+  border: none;
+  outline-offset: 4px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.navBrand:focus-visible {
+  outline: 2px solid #d4aa67;
+  border-radius: 4px;
+}
+
+.brandMonogram {
+  flex-shrink: 0;
+  display: block;
+}
+
+.brandTextWrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  white-space: nowrap;
+}
+
+.brandName {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #f5f5f3;
+  text-transform: uppercase;
+}
+
+.brandDivider {
+  color: rgba(212, 170, 103, 0.55);
+  font-weight: 400;
+  font-size: 0.92rem;
+}
+
+.brandRole {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.86rem;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  color: #a3abb6;
+  text-transform: uppercase;
+}
+
+.desktopLinks {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.1rem, 1.8vw, 2rem);
+}
+
+.navLink {
+  color: #d5dbe3;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 450;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: 0.35rem 0.15rem;
+  border-bottom: 1.5px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #ffffff;
+  border-color: #d4aa67;
+}
+
+.navLink:focus-visible {
+  outline: 2px solid #d4aa67;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.navCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 1.25rem;
+  background: rgba(212, 170, 103, 0.07);
+  border: 1px solid rgba(212, 170, 103, 0.52);
+  border-radius: 8px;
+  color: #dfb978;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.navCta:hover {
+  background: #d4aa67;
+  color: #0b0d0e;
+  border-color: #d4aa67;
+}
+
+.navCta:focus-visible {
+  outline: 2px solid #f2f2f0;
+  outline-offset: 2px;
+}
+
+/* Mobile Hamburger Toggle */
+.mobileToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  flex-shrink: 0;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 170, 103, 0.3);
+  border-radius: 8px;
+  color: #f2f2f0;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.mobileToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(212, 170, 103, 0.6);
+}
+
+.mobileToggle:focus-visible {
+  outline: 2px solid #d4aa67;
+  outline-offset: 2px;
+}
+
+/* Mobile Fullscreen Navigation Overlay */
+.mobileMenuOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(11, 13, 14, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem clamp(1.25rem, 5vw, 2.5rem);
+  overflow-y: auto;
+}
+
+.mobileMenuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileMenuClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  color: #f2f2f0;
+  cursor: pointer;
+}
+
+.mobileMenuClose:focus-visible {
+  outline: 2px solid #d4aa67;
+  outline-offset: 2px;
+}
+
+.mobileMenuLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  padding: 2.25rem 0;
+}
+
+.mobileMenuLinks a {
+  color: #f2f2f0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobileMenuLinks a:hover {
+  color: #d4aa67;
+}
+
+.mobileMenuLinks a:focus-visible {
+  outline: 2px solid #d4aa67;
+  outline-offset: 2px;
+}
+
+.mobileMenuCta {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0.95rem 1.75rem;
+  background: #d4aa67 !important;
+  color: #0b0d0e !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.mobileMenuFooter {
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  gap: 1.75rem;
+}
+
+.mobileMenuFooter a {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.mobileMenuFooter a:hover {
+  color: #d4aa67;
+}
+
+/* ========================================================
+   Hero Section — Editorial Serif & Architectural Compass
+   Desktop: ~56% Editorial Copy / ~44% Compass & Portrait
+   ======================================================== */
+
+.heroSection {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.5rem clamp(1.25rem, 3.5vw, 3.25rem) 0;
+  box-sizing: border-box;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(380px, 1fr);
+  gap: clamp(1.5rem, 2.8vw, 3rem);
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Left Column: Authoritative Editorial Content */
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  max-width: 660px;
+  width: 100%;
+  min-width: 0;
+  padding: clamp(1.25rem, 2vw, 2rem) 0 clamp(2.25rem, 3.2vw, 3.25rem);
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+/* Availability Badge */
+.badgeWrap {
+  margin-bottom: clamp(1.1rem, 1.6vw, 1.45rem);
+}
+
+.availBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.44rem 1rem;
+  background: rgba(22, 26, 29, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: clamp(0.68rem, 0.74vw, 0.74rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #d5dbe3;
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.availDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+  flex-shrink: 0;
+}
+
+/* High-Authority Geometric Display H1 Headline */
+.h1 {
+  margin: 0 0 clamp(1.15rem, 1.6vw, 1.45rem);
+  font-family: var(--font-outfit), var(--font-inter), sans-serif;
+  font-size: clamp(2.15rem, 3.35vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #f7f7f5;
+  white-space: nowrap;
+}
+
+.h1Line2 {
+  display: block;
+  white-space: nowrap;
+}
+
+.goldEmphasis {
+  color: #d4aa67;
+  background: linear-gradient(180deg, #e5c287 0%, #c89d58 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+/* Production-Focused Value Proposition */
+.mainDesc {
+  margin: 0 0 clamp(1.15rem, 1.6vw, 1.5rem);
+  font-family: var(--font-inter), sans-serif;
+  font-size: clamp(0.95rem, 1.05vw, 1.06rem);
+  font-weight: 400;
+  line-height: 1.62;
+  color: #b4bcc6;
+  max-width: 520px;
+}
+
+/* 14+ Years Experience Statement — Clean Left Gold Rule */
+.experienceStmt {
+  margin: 0 0 clamp(1.65rem, 2.2vw, 2.15rem);
+  font-family: var(--font-inter), sans-serif;
+  font-size: clamp(0.94rem, 1.02vw, 1.02rem);
+  font-weight: 400;
+  line-height: 1.55;
+  color: #d0d6df;
+  border-left: 3px solid #d4aa67;
+  padding: 0.1rem 0 0.1rem 1rem;
+  max-width: 430px;
+  box-sizing: border-box;
+}
+
+.goldAccentText {
+  color: #d4aa67;
+  font-weight: 600;
+}
+
+/* Audience-Aware Action Buttons */
+.ctaGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: clamp(1.85rem, 2.8vw, 2.6rem);
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 48px;
+  min-width: 44px;
+  padding: 0.75rem 1.65rem;
+  background: linear-gradient(180deg, #dfb97a 0%, #c49a57 100%);
+  color: #0b0d0e;
+  border: 1px solid #dfb97a;
+  border-radius: 8px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: clamp(0.9rem, 0.95vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow:
+    0 8px 24px rgba(212, 170, 103, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.btnPrimary:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 12px 28px rgba(212, 170, 103, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.btnPrimary:focus-visible {
+  outline: 2px solid #f2f2f0;
+  outline-offset: 3px;
+}
+
+.btnArrow {
+  display: inline-block;
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.btnPrimary:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  min-width: 44px;
+  padding: 0.75rem 1.65rem;
+  background: rgba(17, 20, 23, 0.78);
+  color: #f2f2f0;
+  border: 1px solid rgba(212, 170, 103, 0.48);
+  border-radius: 8px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: clamp(0.9rem, 0.95vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+.btnSecondary:hover {
+  background: rgba(212, 170, 103, 0.1);
+  border-color: rgba(212, 170, 103, 0.78);
+  transform: translateY(-1.5px);
+}
+
+.btnSecondary:focus-visible {
+  outline: 2px solid #d4aa67;
+  outline-offset: 3px;
+}
+
+/* Single-Line Technical Expertise Strip with Isometric Cube */
+.techStripWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.techIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #d4aa67;
+}
+
+.techStrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.65rem;
+  font-family: var(--font-space-mono), monospace;
+  font-size: clamp(0.7rem, 0.78vw, 0.78rem);
+  letter-spacing: 0.1em;
+  color: #aeb6c2;
+  line-height: 1.45;
+  text-transform: uppercase;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.techGroup {
+  white-space: nowrap;
+}
+
+.techPipe {
+  color: rgba(212, 170, 103, 0.45);
+  font-weight: 300;
+}
+
+/* ========================================================
+   Right Column: Architectural Compass & Studio Portrait
+   Starts right from the top under the header bar
+   ======================================================== */
+
+.portraitColumn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+  margin-top: -0.25rem;
+  z-index: 1;
+}
+
+.portraitStage {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Warm bronze studio spotlight behind head & torso */
+.portraitGlow {
+  position: absolute;
+  top: 2%;
+  left: 6%;
+  width: 88%;
+  height: 88%;
+  background: radial-gradient(
+    circle at 50% 42%,
+    rgba(198, 152, 82, 0.28) 0%,
+    rgba(130, 96, 48, 0.14) 44%,
+    rgba(11, 13, 14, 0) 72%
+  );
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Precision Architectural Compass Backdrop SVG */
+.compassBackdrop {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 112%;
+  max-width: 560px;
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Seamless Integrated Portrait Starting from the Top */
+.portraitCanvas {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  mask-image:
+    linear-gradient(to right, transparent 0%, black 10%, black 92%, transparent 100%),
+    linear-gradient(to bottom, black 84%, transparent 100%);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, black 10%, black 92%, transparent 100%),
+    linear-gradient(to bottom, black 84%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+.portraitImg {
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+  filter: contrast(1.08) brightness(0.94) saturate(0.92);
+}
+
+/* ========================================================
+   Responsive Breakpoints & Mobile Hierarchy
+   ======================================================== */
+
+@media (max-width: 1180px) {
+  .brandRole,
+  .brandDivider {
+    display: none;
+  }
+
+  .heroGrid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr);
+    gap: 2rem;
+  }
+
+  .h1 {
+    font-size: clamp(2.1rem, 3.5vw, 3rem);
+    white-space: normal;
+  }
+
+  .h1Line2 {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 860px) {
+  .navOuter {
+    padding: 0.75rem 1rem 0;
+  }
+
+  .navContainer {
+    padding: 0.75rem 1rem;
+  }
+
+  .desktopLinks {
+    display: none !important;
+  }
+
+  .mobileToggle {
+    display: inline-flex !important;
+  }
+
+  .heroSection {
+    padding: 1.5rem 1.25rem 0;
+  }
+
+  .heroGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Content precedes Portrait on Mobile */
+  .contentColumn {
+    max-width: 100%;
+    padding: 0.5rem 0 1rem;
+    order: 1;
+  }
+
+  .h1 {
+    white-space: normal;
+  }
+
+  .h1Line2 {
+    display: inline;
+    white-space: normal;
+  }
+
+  .portraitColumn {
+    order: 2;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .portraitStage {
+    max-width: 400px;
+  }
+
+  .portraitImg {
+    min-height: 0;
+    max-height: 430px;
+  }
+
+  .ctaGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .techPipe {
+    display: none;
+  }
+
+  .techStrip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .techGroup {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .navOuter {
+    padding: 0.6rem 0.75rem 0;
+  }
+
+  .heroSection {
+    padding: 1.25rem 1rem 0;
+  }
+
+  .h1 {
+    font-size: clamp(2rem, 8.5vw, 2.5rem);
+    line-height: 1.1;
+  }
+
+  .mainDesc {
+    font-size: 1rem;
+  }
+
+  .experienceStmt {
+    font-size: 0.96rem;
+    padding-left: 0.9rem;
+  }
+
+  .techStrip {
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+  }
+
+  .portraitStage {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btnPrimary,
+  .btnSecondary,
+  .navLink,
+  .navCta,
+  .mobileToggle,
+  .btnArrow {
+    transition: none !important;
+    transform: none !important;
+  }
+}

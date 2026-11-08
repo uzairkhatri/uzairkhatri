@@ -4,6 +4,7 @@ import SubPageNav from "@/components/SubPageNav";
 import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 import { BreadcrumbJsonLd, TechArticleJsonLd } from "@/components/JsonLd";
 import CaseStudyAuditCTA from "@/components/CaseStudyAuditCTA";
+import Footer from "@/components/Footer";
 
 const url = "https://uzairkhatri.com/work/production-rag/";
 const repo = "https://github.com/uzairkhatri/production-rag-reference";
@@ -60,5 +61,7 @@ export default function ProductionRagCaseStudy() {
         </div>
       </div>
     </section>
+
+    <Footer />
   </div>;
 }

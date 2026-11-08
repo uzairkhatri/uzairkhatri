@@ -31,10 +31,10 @@
 
 .window {
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  background: radial-gradient(circle at 85% 10%, rgba(197, 155, 83, 0.12), transparent 18rem), #151918;
-  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(212, 170, 103, 0.22);
+  border-radius: 10px;
+  background: radial-gradient(circle at 85% 10%, rgba(212, 170, 103, 0.12), transparent 18rem), #121519;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.45);
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -147,7 +147,7 @@
 
 .diagramContainer {
   padding: 1.25rem;
-  background: #090b0a;
+  background: #0a0c0e;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   justify-content: center;
@@ -182,8 +182,8 @@
 }
 
 .nodeGroup rect {
-  fill: #141817;
-  stroke: rgba(255, 255, 255, 0.08);
+  fill: #121519;
+  stroke: rgba(255, 255, 255, 0.1);
   stroke-width: 1px;
   transition: fill 0.22s ease, stroke 0.22s ease, filter 0.22s ease;
 }

@@ -87,16 +87,16 @@ const DIAGRAMS: Record<ProjectVisualType, Stage[]> = {
   efu: [
     { label: "Capture", nodes: [
       { title: "Physical Scanner", sub: "High-Vol Ingestion" },
-      { title: "IBM Datacap Queue", sub: "OCR / Queue Store" },
+      { title: "OCR Ingest Queue", sub: "OCR / Queue Store" },
     ]},
     { label: "Routing", nodes: [
-      { title: "Case Router PE", sub: "IBM Process Engine" },
+      { title: "Case Router Engine", sub: "Workflow Engine" },
       { title: "Dispatch Rules", sub: "Underwriter Routing" },
       { title: "LDAP AD Sync", sub: "Access Control List" },
     ]},
     { label: "Storage", nodes: [
       { title: "Metadata Index", sub: "Document Metadata" },
-      { title: "FileNet P8 Store", sub: "Clustered HA Repo" },
+      { title: "Document Store", sub: "Clustered HA Repo" },
       { title: "DB Clustered Stack", sub: "Active-Active Sync" },
     ]},
     { label: "Compliance", nodes: [
@@ -104,7 +104,7 @@ const DIAGRAMS: Record<ProjectVisualType, Stage[]> = {
       { title: "LDAP ACL Verify", sub: "Security Groups" },
     ]},
     { label: "Delivery", nodes: [
-      { title: "Workplace XT UI", sub: "Underwriting Case" },
+      { title: "Underwriter Portal UI", sub: "Underwriting Case" },
     ]},
   ],
 };

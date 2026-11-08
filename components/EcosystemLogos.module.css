@@ -83,6 +83,7 @@
 .logoText {
   display: flex;
   flex-direction: column;
+  gap: 0.08rem;
 }
 
 .logoName {
@@ -100,10 +101,18 @@
 
 .logoDomain {
   font-family: var(--font-space-mono, monospace);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
+}
+
+.logoRelationship {
+  font-family: var(--font-inter, sans-serif);
+  font-size: 0.67rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  color: #e5a93b;
 }
 
 @media (max-width: 1024px) {
@@ -137,6 +146,10 @@
   }
 
   .logoDomain {
-    font-size: 0.6rem;
+    font-size: 0.56rem;
+  }
+
+  .logoRelationship {
+    font-size: 0.62rem;
   }
 }

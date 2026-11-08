@@ -4,6 +4,7 @@
   color: #ffffff;
   padding: var(--section-pad) var(--page-pad);
   border-top: 1px solid var(--hairline-dark);
+  scroll-margin-top: clamp(4rem, 8vh, 6rem);
 }
 
 .shell {
