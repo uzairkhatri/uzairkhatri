@@ -238,14 +238,14 @@ const projects: Project[] = [
     metrics: [
       { value: "100+", label: "Merchant Integrations" },
       { value: "ACID", label: "Double-Entry Ledger" },
-      { value: "1M+ Users", label: "High-Volume Wallet Ops" },
+      { value: "High-Volume", label: "Wallet Operations" },
     ],
     challenge:
       "Processing thousands of concurrent affiliate reward webhooks during retail campaigns while preventing duplicate cashback payouts.",
     solution:
       "Engineered HMAC-verified webhook ingestion, Bloom-filter deduplication, SQS buffering, and repeatable-read PostgreSQL ACID ledger transactions.",
     outcome:
-      "Supported 100+ national merchant integrations with deterministic wallet consistency and sub-second balance reads.",
+      "Supported 100+ national merchant integrations with deterministic wallet consistency and indexed balance reads.",
     blueprint: {
       orchestration: "FastAPI · Async Workers · Python",
       data: "PostgreSQL ACID · Redis Cluster",
@@ -293,14 +293,14 @@ const projects: Project[] = [
       {
         id: "sv-bloom",
         title: "Bloom Filter",
-        sub: "2ms Deduplication",
+        sub: "In-Memory Deduplication",
         x: 105,
         y: 124,
         w: 162,
         h: 58,
         tone: "gold",
         description:
-          "2ms Bloom filter check rejecting duplicate partner transaction IDs before queue dispatch.",
+          "Fast Bloom filter check rejecting duplicate partner transaction IDs before queue dispatch.",
       },
       {
         id: "sv-calc",
@@ -568,9 +568,9 @@ const projects: Project[] = [
     challenge:
       "Manual cross-timezone scheduling bottlenecks and concurrent booking race conditions caused double-booked tutors during peak hours.",
     solution:
-      "Built a sub-100ms timezone matchmaking state machine protected by Redis Redlock distributed mutexes and automated Stripe Connect payouts.",
+      "Built a deterministic timezone matchmaking state machine protected by Redis Redlock distributed mutexes and automated Stripe Connect payouts.",
     outcome:
-      "Eliminated double-booking incidents and moved scheduling, live session state, and tutor disbursements into a zero-touch pipeline.",
+      "Enforces atomic slot reservation to prevent concurrent booking collisions and moved scheduling, live session state, and tutor disbursements into an automated pipeline.",
     blueprint: {
       orchestration: "FastAPI · Celery · WebSockets",
       data: "Redis Redlock · PostgreSQL Serializable",
@@ -625,7 +625,7 @@ const projects: Project[] = [
         h: 58,
         tone: "gold",
         description:
-          "Sub-100ms UTC offset resolver pairing students with available tutors across 14 global timezones.",
+          "Deterministic UTC offset resolver pairing students with available tutors across global timezones.",
       },
       {
         id: "cf-score",
