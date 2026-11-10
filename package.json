@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "node --test tests/analytics.test.cjs tests/sitemap.test.cjs tests/schema.test.cjs tests/worker.test.cjs",
+    "test": "node --test tests/analytics.test.cjs tests/sitemap.test.cjs tests/schema.test.cjs tests/worker.test.cjs tests/selected-work-links.test.cjs",
     "test:analytics": "node --test tests/analytics.test.cjs",
     "test:sitemap": "node --test tests/sitemap.test.cjs",
     "test:schema": "node --test tests/schema.test.cjs",

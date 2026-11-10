@@ -2,184 +2,112 @@
 
 import React from "react";
 import styles from "./EngagementModels.module.css";
-import { BOOKING_URL, withBasePath } from "./siteLinks";
+import { BOOKING_URL, CV_URL, withBasePath } from "./siteLinks";
 
-interface ConsoleRow {
-  label: string;
-  badge: string;
-  tone: "green" | "gold";
-}
-
-interface CapabilityItem {
-  kicker: string;
+interface ServiceItem {
+  number: string;
+  category: string;
   title: string;
-  description: string;
-  pills: string;
-  linkLabel: string;
-  href: string;
-  consoleTitle: string;
-  consoleSubtitle: string;
-  consoleRows: ConsoleRow[];
+  problem: string;
+  help: string;
+  tech: string[];
+  linkText: string;
+  linkHref: string;
 }
 
-const capabilities: CapabilityItem[] = [
+const services: ServiceItem[] = [
   {
-    kicker: "01 // PRODUCTION AI & SEARCH",
-    title: "Reliable AI & Retrieval Systems",
-    description:
-      "Build AI search that retrieves relevant domain context and produces schema-validated answers your engineering team can evaluate.",
-    pills: "Hybrid RAG · Contract Validation · CI Gates",
-    linkLabel: "Explore AI Systems",
-    href: "/services/ai-systems/",
-    consoleTitle: "RAG & Eval Architecture",
-    consoleSubtitle: "Deterministic Retrieval & Contract Enforcers",
-    consoleRows: [
-      {
-        label: "Retrieval: BM25 Lexical + Vector",
-        badge: "Hybrid Reranked",
-        tone: "green",
-      },
-      {
-        label: "Output Contract: Pydantic Schema",
-        badge: "Type-Enforced",
-        tone: "green",
-      },
-      {
-        label: "Regression Gate: Automated Suite",
-        badge: "CI Blocking",
-        tone: "gold",
-      },
-    ],
+    number: "01",
+    category: "AI & AGENTIC ARCHITECTURE",
+    title: "Production AI & Agentic Systems",
+    problem:
+      "Your AI prototype works, but making it reliable, testable, and cost-effective in production is difficult.",
+    help:
+      "AI agent orchestration, RAG architectures, evaluation, guardrails, failure recovery, and LLM cost controls.",
+    tech: ["Python", "LangGraph", "RAG", "LLM APIs", "AWS"],
+    linkText: "Explore AI Systems",
+    linkHref: "/services/ai-systems/",
   },
   {
-    kicker: "02 // AGENT ORCHESTRATION",
-    title: "Fault-Tolerant AI Agents",
-    description:
-      "Make AI agents work reliably across tools, external APIs, and failure modes with partitioned state machines and bounded step limits.",
-    pills: "LangGraph · State Isolation · Fallbacks",
-    linkLabel: "Explore Agent Runtimes",
-    href: "/services/ai-agents/",
-    consoleTitle: "LangGraph Runtime",
-    consoleSubtitle: "Stateful Supervisor & Failover Mesh",
-    consoleRows: [
-      {
-        label: "Supervisor State Graph",
-        badge: "Isolated State",
-        tone: "green",
-      },
-      {
-        label: "Provider API Latency Surge",
-        badge: "Multi-Model Failover",
-        tone: "gold",
-      },
-      {
-        label: "Unresolvable Tool Call Exception",
-        badge: "Dead-Letter Queue",
-        tone: "green",
-      },
-    ],
+    number: "02",
+    category: "DISTRIBUTED BACKEND & CONCURRENCY",
+    title: "Backend & Distributed Systems",
+    problem:
+      "Your platform needs to handle growth, concurrency, integrations, and failures without becoming fragile.",
+    help:
+      "Backend architecture, APIs, asynchronous processing, event-driven workflows, caching, reliability, and performance optimization.",
+    tech: ["Java", "Python", "Redis", "PostgreSQL/MySQL", "AWS", "Docker"],
+    linkText: "Explore SaaS Architecture",
+    linkHref: "/services/saas-architecture/",
   },
   {
-    kicker: "03 // SAAS & FINTECH BACKENDS",
-    title: "Distributed SaaS & Ledgers",
-    description:
-      "Prevent duplicate transactions, race conditions, and backend bottlenecks under high concurrent customer volume.",
-    pills: "Redis Redlock · Idempotency · ACID Ledgers",
-    linkLabel: "Explore SaaS Architecture",
-    href: "/services/saas-architecture/",
-    consoleTitle: "Concurrency & Ledger",
-    consoleSubtitle: "Distributed Locks & ACID Settlement",
-    consoleRows: [
-      {
-        label: "Distributed Mutex: Redis Redlock",
-        badge: "Serialized State",
-        tone: "green",
-      },
-      {
-        label: "PostgreSQL Double-Entry Ledger",
-        badge: "ACID Enforced",
-        tone: "gold",
-      },
-      {
-        label: "Idempotent Webhook Processing",
-        badge: "Deduplicated",
-        tone: "green",
-      },
-    ],
-  },
-  {
-    kicker: "04 // SYSTEM DIAGNOSTICS",
-    title: "Architecture Pre-Mortem Audit",
-    description:
-      "Find production risks, state leaks, rate-limit cliffs, and runaway token expenses before they cause expensive incidents.",
-    pills: "Failure Triage · Token Profiling · Risk RFC",
-    linkLabel: "Inspect Audit Process",
-    href: "/audit/",
-    consoleTitle: "Diagnostic Telemetry",
-    consoleSubtitle: "Risk Surface Analysis & Architecture RFC",
-    consoleRows: [
-      {
-        label: "Single-Point-of-Failure Triage",
-        badge: "Remediated",
-        tone: "green",
-      },
-      {
-        label: "Token Consumption Profiling",
-        badge: "Budget-Capped",
-        tone: "gold",
-      },
-      {
-        label: "P99 Latency & Concurrency Stress",
-        badge: "Benchmarked",
-        tone: "green",
-      },
-    ],
+    number: "03",
+    category: "ENTERPRISE SYSTEMS & MODERNIZATION",
+    title: "Enterprise Architecture & Integrations",
+    problem:
+      "Existing systems, databases, and business processes need to work together without introducing operational risk.",
+    help:
+      "Enterprise integration architecture, workflow automation, system modernization, secure data flows, and technical delivery planning.",
+    tech: ["APIs", "Message Queues", "Cloud Infrastructure", "Databases", "Enterprise Systems"],
+    linkText: "View Enterprise Architecture",
+    linkHref: "/work/efu-life/",
   },
 ];
 
-interface EngagementItem {
-  tag: string;
-  badge: string;
+interface EngagementTier {
+  kicker: string;
+  title: string;
+  priceBadge: string;
   description: string;
-  ctaLabel: string;
-  href: string;
-  external?: boolean;
+  scopeNote: string;
+  ctaText: string;
+  ctaHref: string;
+  isExternal?: boolean;
   featured?: boolean;
   source: string;
 }
 
-const engagements: EngagementItem[] = [
+const engagementTiers: EngagementTier[] = [
   {
-    tag: "01 · ARCHITECTURE PRE-MORTEM",
-    badge: "$250 · 48-HR TURNAROUND",
+    kicker: "FREE DIAGNOSTIC",
+    title: "30-Minute Architecture Discovery Call",
+    priceBadge: "FREE · 30 MIN",
     description:
-      "One scoped production risk, 3–5 page written risk assessment with code snippets, and a live 30-minute walkthrough.",
-    ctaLabel: "Request Pre-Mortem ($250)",
-    href: "/audit/",
+      "An initial conversation to understand your system architecture, identify critical bottlenecks or failure risks, and agree on an appropriate next step.",
+    scopeNote: "No extensive written technical report is included.",
+    ctaText: "Book Discovery Call",
+    ctaHref: BOOKING_URL,
+    isExternal: true,
     featured: false,
-    source: "engagement_01_audit",
+    source: "engagement_discovery_call",
   },
   {
-    tag: "02 · CRITICAL-PATH BUILD",
-    badge: "2–6 WEEKS · IMPLEMENTATION",
+    kicker: "FIXED-SCOPE AUDIT",
+    title: "Production Architecture Pre-Mortem",
+    priceBadge: "$250 · 48-HR TURNAROUND",
     description:
-      "Hands-on production implementation of agent state machines, retrieval pipelines, and high-concurrency backend backbones.",
-    ctaLabel: "Discuss a System Build",
-    href: BOOKING_URL,
-    external: true,
+      "A focused review of one critical architectural area or risk surface. Includes prioritized failure modes, concrete code/architecture recommendations, and a 30-minute walkthrough.",
+    scopeNote:
+      "Scope agreed before payment. 48-hr turnaround starts after scope confirmation and receipt of complete materials.",
+    ctaText: "Request Architecture Review",
+    ctaHref: "/audit/",
+    isExternal: false,
     featured: true,
-    source: "engagement_02_build",
+    source: "engagement_pre_mortem_audit",
   },
   {
-    tag: "03 · ADVISORY & STAFF/PRINCIPAL ROLES",
-    badge: "RETAINER OR FULL-TIME",
+    kicker: "CUSTOM DELIVERY",
+    title: "Engineering Implementation & Advisory",
+    priceBadge: "SCOPED SPRINT OR ADVISORY",
     description:
-      "Architecture direction, PR reviews, system design leadership, or full-time Staff/Principal roles for funded teams.",
-    ctaLabel: "Book 30-Min Strategy Call",
-    href: BOOKING_URL,
-    external: true,
+      "Hands-on backend delivery, production AI system implementation, architecture remediation, and technical leadership tailored to your operational requirements.",
+    scopeNote:
+      "Custom pricing and contract models based on agreed milestones and deliverables.",
+    ctaText: "Discuss Your Project",
+    ctaHref: BOOKING_URL,
+    isExternal: true,
     featured: false,
-    source: "engagement_03_advisory",
+    source: "engagement_implementation_advisory",
   },
 ];
 
@@ -188,9 +116,9 @@ export default function EngagementModels() {
     <section
       className={styles.section}
       id="services"
-      aria-labelledby="services-engagement-title"
+      aria-labelledby="services-heading"
     >
-      {/* Anchor targets for legacy navigation hashes */}
+      {/* Retain legacy navigation hash anchors */}
       <div
         id="capabilities"
         style={{ position: "absolute", top: 0, height: 0, width: 0 }}
@@ -203,157 +131,187 @@ export default function EngagementModels() {
       />
 
       <div className={styles.container}>
-        <div className={styles.dossierFrame}>
-          {/* 4 Precision L-Shaped Gold Corner Brackets */}
-          <span className={styles.cornerTL} aria-hidden="true" />
-          <span className={styles.cornerTR} aria-hidden="true" />
-          <span className={styles.cornerBL} aria-hidden="true" />
-          <span className={styles.cornerBR} aria-hidden="true" />
-
-          <div className={styles.topEdgeGlow} aria-hidden="true" />
-
-          {/* Row 1: Header + Embedded Engineering Badge */}
-          <header className={styles.headerRow}>
-            <div className={styles.headerCopy}>
-              <div className={styles.eyebrow}>
-                <svg
-                  className={styles.eyebrowStar}
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="#d4aa67"
-                  aria-hidden="true"
-                >
-                  <path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z" />
-                </svg>
-                <span>04 // SERVICES &amp; ENGAGEMENT &middot; WHAT I CAN SOLVE</span>
-              </div>
-              <h2 className={styles.heading} id="services-engagement-title">
-                Architectural capabilities &amp; ways to engage.
-              </h2>
-              <p className={styles.subtitle}>
-                From unblocking fragile AI prototypes to architecting
-                high-concurrency SaaS backends and enterprise workflows.
-              </p>
-            </div>
-
-            <div className={styles.partnershipBadge}>
-              <span className={styles.partnershipDot} aria-hidden="true" />
-              <span>EMBEDDED ENGINEERING &middot; ZERO BLACK-BOX HANDOFFS</span>
-            </div>
-          </header>
-
-          {/* Row 2: 4-Column Capability Cards Grid */}
-          <div
-            className={styles.capabilitiesGrid}
-            role="list"
-            aria-label="Core architectural capabilities"
-          >
-            {capabilities.map((cap) => (
-              <article
-                key={cap.title}
-                className={styles.capCard}
-                role="listitem"
-              >
-                <div className={styles.capTop}>
-                  {/* Realistic Product UI / Telemetry Mini-Window */}
-                  <div className={styles.consoleWindow} aria-hidden="true">
-                    <div className={styles.consoleTitlebar}>
-                      <div className={styles.consoleDots}>
-                        <span className={styles.dotRed} />
-                        <span className={styles.dotAmber} />
-                        <span className={styles.dotGreen} />
-                      </div>
-                      <span className={styles.consoleWindowName}>
-                        {cap.consoleTitle}
-                      </span>
-                    </div>
-
-                    <div className={styles.consoleBody}>
-                      {cap.consoleRows.map((row) => (
-                        <div key={row.label} className={styles.consoleRow}>
-                          <span className={styles.consoleRowLabel}>
-                            {row.label}
-                          </span>
-                          <span
-                            className={
-                              row.tone === "gold"
-                                ? styles.consoleBadgeGold
-                                : styles.consoleBadgeGreen
-                            }
-                          >
-                            {row.badge}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <span className={styles.capKicker}>{cap.kicker}</span>
-                  <h3 className={styles.capTitle}>{cap.title}</h3>
-                  <p className={styles.capDesc}>{cap.description}</p>
-                </div>
-
-                <div className={styles.capFooter}>
-                  <span className={styles.capPill}>{cap.pills}</span>
-                  <a
-                    href={withBasePath(cap.href)}
-                    className={styles.capLink}
-                  >
-                    <span>{cap.linkLabel}</span>
-                    <span aria-hidden="true">&rarr;</span>
-                  </a>
-                </div>
-              </article>
-            ))}
+        {/* Section 04 Header */}
+        <header className={styles.headerBlock}>
+          <div className={styles.eyebrowPill}>
+            <span className={styles.eyebrowDot} aria-hidden="true" />
+            <span>HOW I CAN HELP</span>
           </div>
 
-          {/* Row 3: 3-Column Engagement Strip */}
+          <h2 id="services-heading" className={styles.heading}>
+            Complex Systems.{" "}
+            <span className={styles.headingAccent}>Clear Solutions.</span>
+          </h2>
+
+          <p className={styles.subtitle}>
+            I help teams turn difficult engineering challenges into reliable,
+            maintainable systems—from production AI and backend architecture to
+            integrations and performance improvements.
+          </p>
+        </header>
+
+        {/* 3-Column Core Services Grid */}
+        <div
+          className={styles.servicesGrid}
+          role="list"
+          aria-label="Core Engineering Services"
+        >
+          {services.map((svc) => (
+            <article
+              key={svc.number}
+              className={styles.serviceCard}
+              role="listitem"
+            >
+              <div className={styles.serviceCardHeader}>
+                <span className={styles.serviceNumber}>[{svc.number}]</span>
+                <span className={styles.serviceCategory}>{svc.category}</span>
+              </div>
+
+              <h3 className={styles.serviceTitle}>{svc.title}</h3>
+
+              <div className={styles.serviceBody}>
+                <div className={styles.problemBox}>
+                  <strong className={styles.boxLabel}>THE CHALLENGE</strong>
+                  <p className={styles.boxText}>{svc.problem}</p>
+                </div>
+
+                <div className={styles.helpBox}>
+                  <strong className={styles.boxLabelGold}>HOW I HELP</strong>
+                  <p className={styles.boxText}>{svc.help}</p>
+                </div>
+              </div>
+
+              <div className={styles.serviceCardFooter}>
+                <div
+                  className={styles.techPillsList}
+                  aria-label={`Technologies for ${svc.title}`}
+                >
+                  {svc.tech.map((t) => (
+                    <span key={t} className={styles.techPill}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  href={withBasePath(svc.linkHref)}
+                  className={styles.serviceLink}
+                  aria-label={`${svc.linkText} for ${svc.title}`}
+                >
+                  <span>{svc.linkText}</span>
+                  <span className={styles.linkArrow} aria-hidden="true">
+                    &rarr;
+                  </span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Engagement Models Sub-Section */}
+        <div className={styles.engagementSection}>
+          <div className={styles.engagementHeader}>
+            <div className={styles.subEyebrow}>WAYS TO COLLABORATE</div>
+            <h3 className={styles.engagementHeading}>
+              Structured Engagement Models
+            </h3>
+            <p className={styles.engagementSub}>
+              From zero-risk diagnostic calls to fixed-scope architectural
+              pre-mortems and comprehensive implementation sprints.
+            </p>
+          </div>
+
           <div
             className={styles.engagementsGrid}
             role="list"
-            aria-label="Engagement models"
+            aria-label="Ways to engage"
           >
-            {engagements.map((eng) => {
-              const targetHref = eng.external
-                ? eng.href
-                : withBasePath(eng.href);
+            {engagementTiers.map((tier) => {
+              const targetHref = tier.isExternal
+                ? tier.ctaHref
+                : withBasePath(tier.ctaHref);
+
               return (
                 <article
-                  key={eng.tag}
-                  role="listitem"
-                  className={`${styles.engCard} ${
-                    eng.featured ? styles.engCardFeatured : ""
+                  key={tier.kicker}
+                  className={`${styles.engagementCard} ${
+                    tier.featured ? styles.engagementCardFeatured : ""
                   }`}
+                  role="listitem"
                 >
-                  <div className={styles.engTopRow}>
-                    <span className={styles.engTag}>{eng.tag}</span>
+                  <div className={styles.engagementCardHeader}>
+                    <span className={styles.engagementKicker}>
+                      {tier.kicker}
+                    </span>
                     <span
-                      className={`${styles.engBadge} ${
-                        eng.featured ? styles.engBadgeFeatured : ""
+                      className={`${styles.engagementPriceBadge} ${
+                        tier.featured ? styles.priceBadgeGold : ""
                       }`}
                     >
-                      {eng.badge}
+                      {tier.priceBadge}
                     </span>
                   </div>
 
-                  <p className={styles.engDesc}>{eng.description}</p>
+                  <h4 className={styles.engagementTitle}>{tier.title}</h4>
+                  <p className={styles.engagementDesc}>{tier.description}</p>
+
+                  <div className={styles.scopeNoteBox}>
+                    <span className={styles.scopeDot} aria-hidden="true" />
+                    <span className={styles.scopeNoteText}>
+                      {tier.scopeNote}
+                    </span>
+                  </div>
 
                   <a
                     href={targetHref}
-                    target={eng.external ? "_blank" : undefined}
-                    rel={eng.external ? "noreferrer" : undefined}
-                    data-source={eng.source}
+                    target={tier.isExternal ? "_blank" : undefined}
+                    rel={tier.isExternal ? "noreferrer" : undefined}
+                    data-source={tier.source}
                     className={
-                      eng.featured ? styles.engBtnGold : styles.engBtnOutline
+                      tier.featured
+                        ? styles.engagementBtnGold
+                        : styles.engagementBtnOutline
                     }
+                    aria-label={`${tier.ctaText} — ${tier.title}`}
                   >
-                    <span>{eng.ctaLabel}</span>
+                    <span>{tier.ctaText}</span>
                     <span aria-hidden="true">&rarr;</span>
                   </a>
                 </article>
               );
             })}
+          </div>
+        </div>
+
+        {/* Recruiter & Direct Inquiries Pathway */}
+        <div className={styles.recruiterPathway}>
+          <div className={styles.recruiterTextWrap}>
+            <span className={styles.recruiterPrompt}>
+              Recruiting or hiring for a Senior / Principal Engineering role?
+            </span>
+            <span className={styles.recruiterSubtext}>
+              Review my 14+ years of engineering leadership, verified case
+              studies, and technical CV.
+            </span>
+          </div>
+
+          <div className={styles.recruiterActions}>
+            <a
+              href={withBasePath("/case-studies/")}
+              className={styles.recruiterBtnOutline}
+            >
+              <span>Case Studies</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a
+              href={CV_URL}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.recruiterBtnGold}
+            >
+              <span>View CV (PDF)</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
           </div>
         </div>
       </div>

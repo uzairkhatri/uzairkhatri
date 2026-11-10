@@ -40,14 +40,14 @@ export default function AIAgentsServicePage() {
         eyebrow="Agentic AI Workflows & Runtimes"
         title={<>Multi-agent systems designed for <em>unforgiving production.</em></>}
         intro="I architect stateful, error-isolated multi-agent workflows using LangGraph, structured memory contracts, deterministic guardrails, and asynchronous task execution that survive model rate-limits, context bloat, and hallucinations."
-        proof="Solutions Architect on the Wellows LLM search visibility platform (KIVA, OPTA, Citation Intelligence) with sub-200ms vector retrieval and 80% manual workflow reduction."
+        proof="Solutions Architect on the Wellows LLM search visibility platform (KIVA, OPTA, Citation Intelligence) with shared vector retrieval and automated multi-agent remediation pipelines."
         primaryLabel="Discuss Agent Architecture"
         primaryHref={BOOKING_URL}
         secondaryLabel="Read Wellows Case Study"
         secondaryHref={withBasePath("/work/wellows/")}
         stats={[
           { value: "3+", label: "Isolated agents coordinated in production clusters" },
-          { value: "<200ms", label: "Vector retrieval latency target achieved" },
+          { value: "Sub-second", label: "Vector retrieval across shared brand corpora" },
           { value: "Zero", label: "Cascading failure propagation across agent boundaries" },
         ]}
         sectionEyebrow="Agent Engineering Deliverables"

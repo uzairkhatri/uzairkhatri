@@ -37,18 +37,18 @@ const decisions = [
     problem:
       "100+ affiliate networks and merchant partners dispatch webhook notifications with unpredictable retry behaviors, out-of-order deliveries, and duplicate payloads that threatened wallet double-crediting.",
     decision:
-      "Engineered an ingestion barrier verifying HMAC-SHA256 partner signatures and enforcing deterministic idempotency keys via Redis atomic operations (SETNX with 72-hour TTL) before entering async task queues.",
+      "Engineered an ingestion barrier verifying HMAC-SHA256 partner signatures and enforcing deterministic idempotency keys via Redis atomic operations (SETNX with sliding TTL windows sized to merchant retry envelopes) before entering async task queues.",
     tradeoff:
-      "Added ~15ms of ingestion verification latency, but mathematically eliminated duplicate transaction credits across millions of webhook events.",
+      "Added ~15ms of ingestion verification latency, but eliminated duplicate transaction processing across high-velocity webhook bursts while absorbing intermittent partner retries.",
   },
   {
-    title: "Immutable Double-Entry Ledger with Serializable PostgreSQL",
+    title: "Immutable Double-Entry Ledger with Strict Transaction Boundaries",
     problem:
       "Concurrent transaction events (crediting cashback while users initiated bank withdrawals) risked balance drift, race condition exploits, and non-reconcilable financial discrepancies.",
     decision:
-      "Implemented a strict double-entry bookkeeping ledger where user balances are computed from immutable credit/debit transaction lines under PostgreSQL Serializable isolation levels.",
+      "Implemented a strict double-entry bookkeeping ledger where user balances are computed from immutable credit/debit transaction lines within atomic PostgreSQL transactions and row-level locking on hot accounts.",
     tradeoff:
-      "Requires rigorous transaction isolation and advisory locks on hot accounts, but guarantees 100% financial audit integrity.",
+      "Requires explicit transaction boundaries and advisory locks during concurrent balance updates, but guarantees verifiable audit reconciliation and prevents balance drift.",
   },
   {
     title: "Two-Tier Hierarchical Redis Invalidation Architecture",
@@ -93,7 +93,7 @@ const failureModes = [
     tag: "Failure Mode 01",
     title: "Duplicate Affiliate Conversion Webhooks",
     impact: "Network retries from merchant affiliate networks crediting the consumer's wallet multiple times for a single order.",
-    defense: "HMAC request signature verification coupled with atomic Redis idempotent key caches (7-day TTL). Duplicate requests resolve to cached 200 OK without reaching the database.",
+    defense: "HMAC request signature verification coupled with atomic Redis idempotency keys (TTL-bounded across merchant retry windows). Duplicate requests resolve to cached 200 OK without reaching the database.",
   },
   {
     tag: "Failure Mode 02",
@@ -118,7 +118,7 @@ const failureModes = [
 const timeline = [
   ["Week 1-2", "Financial architecture and risk discovery. Audited affiliate webhook endpoints, mapped double-credit vulnerabilities, and designed the immutable ledger schema."],
   ["Week 3-4", "Built the idempotent ingestion gateway: HMAC validation, Redis atomic deduplication locks, and high-throughput SQS ingestion buffers."],
-  ["Week 5-6", "Engineered double-entry ledger backend: PostgreSQL Serializable transaction boundaries, debit/credit audit logging, and automated balancing triggers."],
+  ["Week 5-6", "Engineered double-entry ledger backend: PostgreSQL ACID transaction boundaries, debit/credit audit logging, and automated balancing triggers."],
   ["Week 7-8", "Designed hierarchical Redis caching layers: brand commission caches, user balance projections, and cache stampede protection."],
   ["Week 9-10", "Built payout outbox engine: asynchronous 1-Link bank gateway adapters, retry state machines, and dead-letter reconciliation playbooks."],
   ["Week 11-12", "Load testing with 5,000+ concurrent simulated webhook bursts, chaos engineering on database failover, and zero-downtime cutover."],
@@ -142,9 +142,9 @@ const outcomes = [
     note: "Cached balance retrieval under high concurrent mobile consumer traffic.",
   },
   {
-    value: "100%",
-    label: "ACID ledger reconciliation",
-    note: "Zero financial balance discrepancies across millions of double-entry ledger line items.",
+    value: "Zero",
+    label: "Ledger balance drift",
+    note: "Deterministic double-entry journal validation eliminated balance discrepancies across affiliate reward lines.",
   },
 ];
 
@@ -307,7 +307,7 @@ export default function SavyourCaseStudy() {
                 <div className={styles.diagramArrow} aria-hidden="true" />
                 <div className={styles.diagramNode}>
                   <strong>Double-Entry Ledger Store</strong>
-                  <span>PostgreSQL Serializable ACID records</span>
+                  <span>PostgreSQL ACID journal records</span>
                 </div>
               </div>
 

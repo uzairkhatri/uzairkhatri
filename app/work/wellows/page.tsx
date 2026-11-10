@@ -48,7 +48,7 @@ const decisions = [
     decision:
       "Built a vector search layer with chunked ingestion pipelines. Agents query the same store while new data is ingested asynchronously.",
     tradeoff:
-      "Requires careful chunk sizing and embedding consistency. Paid off in sub-200ms retrieval latency at query time.",
+      "Requires careful chunk sizing and embedding consistency. Paid off in fast semantic retrieval across large brand corpora at query time.",
   },
   {
     title: "Remediation grounded in the same retrieval layer as the audit",
@@ -82,13 +82,13 @@ const decisions = [
 const constraints = [
   {
     label: "Latency SLA",
-    title: "<200ms Vector Retrieval",
-    text: "Brand monitoring queries demanded immediate sub-second dashboard rendering, precluding naive, synchronous multi-LLM re-ranking on the critical user path.",
+    title: "Sub-Second Vector Retrieval",
+    text: "Brand monitoring queries demanded rapid dashboard rendering, precluding naive, synchronous multi-LLM re-ranking on the critical user path.",
   },
   {
     label: "Tenant Cost Governance",
     title: "Strict Token Spend Caps",
-    text: "Continuous crawling, citation audits, and remediation content at 10K+ articles a month could easily balloon API costs if agent loops ran unbounded without strict token quotas and deterministic cycle limits.",
+    text: "Continuous crawling, citation audits, and multi-agent remediation pipelines could easily balloon API costs if agent loops ran unbounded without strict token quotas and deterministic cycle limits.",
   },
   {
     label: "Failure Isolation",
@@ -140,19 +140,19 @@ const outcomes = [
     note: "KIVA, OPTA, and Citation Intelligence, each with defined responsibilities and independent failure paths.",
   },
   {
-    value: "80%",
-    label: "Reduction in manual workflow steps",
-    note: "Measured against the pre-agent manual analysis process the client used before the platform.",
+    value: "Automated",
+    label: "Citation audit pipeline",
+    note: "Replaced manual cross-engine research spreadsheets with continuous LLM search monitoring.",
   },
   {
-    value: "<200ms",
+    value: "Sub-second",
     label: "Vector retrieval latency",
-    note: "Achieved through chunked ingestion design and a shared retrieval layer across all three agents.",
+    note: "Achieved through chunked ingestion design and a shared Qdrant retrieval layer across all three agents.",
   },
   {
-    value: "10K+",
-    label: "Articles generated per month",
-    note: "Automated remediation output, grounded against the shared Qdrant retrieval layer and processed through SQS-backed generation, review, and publishing services.",
+    value: "Decoupled",
+    label: "Async job execution",
+    note: "SQS worker queues isolating long-running LLM generation and crawl tasks from ingress API traffic.",
   },
 ];
 
@@ -194,8 +194,8 @@ export default function WellowsCaseStudy() {
             </p>
             <div className={styles.heroFacts}>
               <span><strong>3</strong> production agents</span>
-              <span><strong>80%</strong> fewer manual workflow steps</span>
-              <span><strong>&lt;200ms</strong> vector retrieval</span>
+              <span><strong>Automated</strong> citation audits</span>
+              <span><strong>Sub-second</strong> vector retrieval</span>
             </div>
             <p className={styles.heroLive}>
               <a href="https://wellows.com" target="_blank" rel="noreferrer">

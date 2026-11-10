@@ -846,18 +846,26 @@ export default function SelectedWork() {
                     isSelected ? styles.selectorCardActive : ""
                   }`}
                   onClick={(e) => {
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
                     e.preventDefault();
                     setActiveTab(idx);
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown") {
                       e.preventDefault();
-                      setActiveTab((idx + 1) % projects.length);
+                      const next = (idx + 1) % projects.length;
+                      setActiveTab(next);
+                      const el = document.getElementById(`tab-${projects[next].codeSlug}`);
+                      if (el) el.focus();
                     } else if (e.key === "ArrowUp") {
                       e.preventDefault();
-                      setActiveTab(
-                        (idx - 1 + projects.length) % projects.length
-                      );
+                      const prev = (idx - 1 + projects.length) % projects.length;
+                      setActiveTab(prev);
+                      const el = document.getElementById(`tab-${projects[prev].codeSlug}`);
+                      if (el) el.focus();
+                    } else if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveTab(idx);
                     }
                   }}
                 >
@@ -905,6 +913,7 @@ export default function SelectedWork() {
                   id={`panel-${proj.codeSlug}`}
                   role="tabpanel"
                   aria-labelledby={`tab-${proj.codeSlug}`}
+                  tabIndex={0}
                   className={`${styles.projectPanel} ${
                     isSelected
                       ? styles.projectPanelActive
