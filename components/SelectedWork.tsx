@@ -87,14 +87,14 @@ const projects: Project[] = [
         decision:
           "Decoupled ingress API requests from long-running LLM generation and crawl pipelines via AWS SQS FIFO and Dead-Letter Queues (DLQ).",
         tradeoff:
-          "Client applications require polling or webhook completion semantics, but workers never drop jobs during traffic surges.",
+          "Client applications require polling or webhook completion semantics, while DLQ-backed workers preserve failed jobs for inspection and retry during traffic surges.",
       },
       {
         title: "Tiered LLM Routing & Bedrock Failover",
         decision:
           "OpenAI GPT-4o structured extraction with automated AWS Bedrock Claude 3.5 Sonnet failover on HTTP 429 rate-limits.",
         tradeoff:
-          "Requires maintaining strict schema validation parity across providers to eliminate single-vendor downtime risk.",
+          "Requires maintaining strict schema validation parity across providers to reduce single-vendor outage risk.",
       },
     ],
     stack: [
@@ -283,7 +283,7 @@ const projects: Project[] = [
         decision:
           "Structured balances into strict pending, verified, and settled double-entry journal records in PostgreSQL.",
         tradeoff:
-          "Write amplification of two rows per transaction to guarantee mathematical balance reconciliation and audit tracing.",
+          "Write amplification of two rows per transaction to support reconcilable balance entries and audit tracing.",
       },
     ],
     stack: [
@@ -457,7 +457,7 @@ const projects: Project[] = [
         decision:
           "FastAPI WebSockets with Redis Pub/Sub streaming real-time classroom state transitions and automated presence heartbeats.",
         tradeoff:
-          "Stateful socket connections require sticky session routing, but eliminated client polling lag across global participants.",
+          "Stateful socket connections require sticky session routing, while replacing client polling with push updates across active sessions.",
       },
     ],
     stack: [
@@ -637,7 +637,7 @@ const projects: Project[] = [
         decision:
           "Automated case routing across 5 core insurance approval chains based on policy risk tiers and underwriter approval authority.",
         tradeoff:
-          "Complex configuration matrix, but eliminated physical file transit across dispersed regional branch offices.",
+          "Additional rule configuration complexity, while replacing physical file transit across dispersed regional branch offices with digital routing.",
       },
       {
         title: "Directory-Integrated Governance (AD / LDAP)",

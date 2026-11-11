@@ -57,12 +57,12 @@ export default function AIAuditServicePage() {
           {
             eyebrow: "01 / Hallucination & Accuracy",
             title: "Model Evaluation & Guardrails",
-            text: "Auditing prompt injection vectors, context leakage, schema drift, and implementing deterministic assertion layers to guarantee strict Pydantic JSON outputs.",
+            text: "Auditing prompt injection vectors, context leakage, schema drift, and implementing deterministic assertion layers to enforce strict Pydantic JSON output schemas.",
           },
           {
             eyebrow: "02 / Cost & Latency",
             title: "Token Optimization & Semantic Caching",
-            text: "Inspecting token usage patterns, trimming unnecessary conversation history, configuring Redis semantic caching, and eliminating redundant LLM round-trips.",
+            text: "Inspecting token usage patterns, trimming unnecessary conversation history, configuring Redis semantic caching, and reducing redundant LLM round-trips.",
           },
           {
             eyebrow: "03 / Availability & Fallbacks",

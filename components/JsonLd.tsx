@@ -58,38 +58,38 @@ const serviceSchema = {
   },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Architecture & Engineering Services",
+    "name": "Engineering Services & Architecture Reviews",
     "itemListElement": [
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Enterprise AI Services & Architecture",
-          "description": "Designing production-ready AI systems with LangGraph multi-agent runtimes, deterministic guardrails, RAG, and failover infrastructure."
+          "name": "Production AI & Agentic Systems",
+          "description": "AI agent orchestration, RAG architectures, evaluation, guardrails, failure recovery, and LLM cost controls."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Autonomous AI Workflows",
-          "description": "Building stateful, error-tolerant agent workflows with asynchronous message queues, human-in-the-loop review, and cost controls."
+          "name": "Backend & Distributed Systems",
+          "description": "Backend architecture, APIs, asynchronous processing, event-driven workflows, Redis Redlock concurrency, caching, and performance optimization."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "SaaS Applications & Cloud Backends",
-          "description": "Architecting multi-tenant platforms with Redis Redlock concurrency, Stripe financial ledgers, and scalable cloud microservices."
+          "name": "Enterprise Architecture & Integrations",
+          "description": "Enterprise integration architecture, workflow automation, system modernization, secure data flows, and technical delivery planning."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "High-Performance Web Development",
-          "description": "Engineering modern Next.js 15 web applications with React 19, TypeScript, edge rendering, and global edge delivery."
+          "name": "Production Architecture Pre-Mortem ($250)",
+          "description": "Fixed-scope review of one agreed technical problem with 3–5 pages of prioritized findings, recommended remediation approaches, and a 30-minute walkthrough within 48 hours of scope acceptance and receipt of complete materials."
         }
       }
     ]

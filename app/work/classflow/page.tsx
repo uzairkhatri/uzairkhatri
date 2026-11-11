@@ -388,8 +388,8 @@ export default function ClassFlowCaseStudy() {
           <p className={styles.eyebrow}>Outcomes</p>
           <h2 className={styles.sectionTitle}>Measurable operational transformation.</h2>
           <p className={styles.sectionDesc}>
-            Eliminated the operational headcount requirement as booking volume scaled 4x, while preventing
-            double-booking collisions during surge windows.
+            Transitioned manual scheduling and payout workflows into automated system paths as booking volume scaled,
+            while mitigating double-booking collisions during surge windows.
           </p>
           <div className={styles.outcomeGrid}>
             {outcomes.map((outcome) => (
@@ -408,7 +408,7 @@ export default function ClassFlowCaseStudy() {
           <CaseStudyAuditCTA
             focusArea="Marketplace & Real-Time Operational Architecture"
             title="Scaling a complex marketplace or booking platform?"
-            description="Eliminate double-booking race conditions, WebSocket state desyncs, and payment reconciliation failures before you scale your transaction volume."
+            description="Mitigate double-booking race conditions, WebSocket state desyncs, and payment reconciliation failures before scaling transaction volume."
           />
           <div className={styles.ctaActions} style={{ marginTop: "1.5rem" }}>
             <a href={withBasePath("/#work")} className={styles.ctaSecondary}>

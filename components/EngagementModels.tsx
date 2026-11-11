@@ -87,9 +87,9 @@ const engagementTiers: EngagementTier[] = [
     title: "Production Architecture Pre-Mortem",
     priceBadge: "$250 · 48-HR TURNAROUND",
     description:
-      "A focused review of one critical architectural area or risk surface. Includes prioritized failure modes, concrete code/architecture recommendations, and a 30-minute walkthrough.",
+      "Fixed-scope review of one agreed technical problem. Includes 3–5 pages of prioritized findings (Risk Priority Matrix P0/P1/P2), recommended remediation approaches (no repository access required), and a 30-minute walkthrough.",
     scopeNote:
-      "Scope agreed before payment. Delivery within 48 hours only after scope acceptance, receipt of complete materials, and confirmed availability.",
+      "Scope agreed before payment. Delivered within 48 hours after scope acceptance, receipt of complete materials, and confirmed availability.",
     ctaText: "Request an Architecture Review",
     ctaHref: "/audit/",
     isExternal: false,

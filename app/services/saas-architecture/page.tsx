@@ -39,7 +39,7 @@ export default function SaasArchitectureServicePage() {
       <FeaturedLanding
         eyebrow="SaaS Platform & Distributed Systems"
         title={<>Scalable SaaS backends built for <em>strict concurrency & data safety.</em></>}
-        intro="I architect multi-tenant SaaS platforms, distributed concurrency locks, idempotent financial transaction ledgers, and high-throughput cloud microservices that eliminate race conditions, double-spend vulnerabilities, and database deadlocks."
+        intro="I architect multi-tenant SaaS platforms, distributed concurrency locks, idempotent financial transaction ledgers, and high-throughput cloud microservices that mitigate race conditions, double-spend vulnerabilities, and database lock contention."
         proof="Architect of ClassFlow (Redis Redlock instructor matchmaking, Stripe Connect ledgers) and Savyour (100+ partner high-concurrency cashback ledger with cached balance retrieval)."
         primaryLabel="Discuss SaaS Architecture"
         primaryHref={BOOKING_URL}
@@ -51,7 +51,7 @@ export default function SaasArchitectureServicePage() {
           { value: "100+", label: "Affiliate & e-commerce partner webhook integrations" },
         ]}
         sectionEyebrow="SaaS Engineering Deliverables"
-        sectionTitle="Eliminating race conditions, ledger drift, and scale bottlenecks."
+        sectionTitle="Mitigating race conditions, ledger drift, and scale bottlenecks."
         sectionIntro="Every SaaS architecture I build prioritizes strict data integrity, fault-tolerant worker pipelines, and predictable operating costs."
         cards={[
           {

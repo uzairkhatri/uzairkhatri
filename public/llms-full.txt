@@ -12,36 +12,28 @@ Uzair Khatri (Uzair Iqbal) is a Principal AI Systems Architect and Senior Full-S
 
 ---
 
-## Core Domains of Expertise
+## How I Can Help — Core Services
 
-### 1. AI Services & Production Architectures
-- **Problem Solved**: Most AI prototypes function well in sandbox demos but break under concurrency, API rate-limits, unexpected hallucinations, and spiraling token costs.
+### 1. Production AI & Agentic Systems
+- **Problem Solved**: Prototypes work in demos, but making them reliable, testable, and cost-effective in production is difficult.
 - **Engineering Approach**:
-  - **Multi-Agent Orchestration**: Implementation of LangGraph StateGraph architectures where distinct agents (e.g. Ingestion, Reasoning, Critique, Citation) execute with independent state contexts.
-  - **Deterministic Guardrails**: Pre-execution input sanitization and post-generation schema validation via Pydantic and regex verification to eliminate hallucinations.
-  - **Multi-Model Failover**: Seamless switching between frontier models (OpenAI GPT-4o, Anthropic Claude 3.5 Sonnet via AWS Bedrock) with exponential backoff and jitter.
-  - **Observability & Tracing**: End-to-end token auditing, latency tracing, and cost attribution via LangSmith, OpenTelemetry, and structured JSON logs.
+  - **Multi-Agent Orchestration**: LangGraph StateGraph coordination where specialized agents (Citation Intelligence, Technical Auditor, Remediation) run with isolated state contexts and retry limits.
+  - **RAG & Evaluation**: Hybrid dense + sparse retrieval, verifiable citations, Recall@5 / MRR regression checks, and Pydantic schema validation.
+  - **Multi-Model Failover & Cost Controls**: Fallback routing (OpenAI GPT-4o to Claude 3.5 Sonnet via AWS Bedrock) with exponential backoff, jitter, and token budget governance.
+  - **Observability & Tracing**: End-to-end token auditing, latency tracing, and OpenTelemetry/LangSmith instrumentation.
 
-### 2. Autonomous AI Workflows
-- **Problem Solved**: Unstructured prompt chains fail silently and cannot be audited or rolled back when an external tool call fails.
+### 2. Backend & Distributed Systems
+- **Problem Solved**: Scaling platforms need to handle growth, concurrency, integrations, and partial failures without becoming fragile.
 - **Engineering Approach**:
-  - **State Machine Modeling**: Treating every step in an AI workflow as a distinct state transition with explicit inputs, outputs, and timeouts.
-  - **Resilient Queuing**: Integrating RabbitMQ, Celery, and AWS SQS dead-letter queues to catch failed agent executions without crashing client sessions.
-  - **Human-in-the-Loop (HITL)**: Embedding review checkpoints for financial transactions, data mutations, and public-facing content generation.
+  - **Concurrency Safety**: Redis Distributed Locks (Redlock) paired with ACID transaction boundaries and row-level locking to mitigate race conditions during burst traffic.
+  - **Idempotent Pipelines & Ledgers**: HMAC webhook validation, Bloom/cache deduplication, AWS SQS/Celery asynchronous queues, and double-entry transaction ledgers with Stripe Connect reconciliation.
+  - **Database & Cache Engineering**: PostgreSQL indexing, PgBouncer connection pooling, read-replica routing, and hierarchical Redis cache invalidation.
 
-### 3. SaaS Applications & Multi-Tenant Architecture
-- **Problem Solved**: Scaling SaaS platforms from prototype to thousands of concurrent users requires strict concurrency guarantees, transaction isolation, and predictable payment reconciliation.
+### 3. Enterprise Architecture & Integrations
+- **Problem Solved**: Existing legacy systems, directories, and business processes must integrate cleanly without introducing operational risk.
 - **Engineering Approach**:
-  - **Concurrency Safety**: Implementing Redis Distributed Locks (Redlock) to prevent race conditions during scheduling runs and resource reservation.
-  - **Payment Integration**: Complete Stripe Connect architectures supporting automated payouts, split payments, webhook idempotency, and ledger balance verification.
-  - **Database Scalability**: Relational schema normalization, read replicas, connection pooling with PgBouncer, and index optimization in PostgreSQL.
-
-### 4. High-Performance Web Development
-- **Problem Solved**: Slow, unoptimized web applications lose user trust and degrade search rankings.
-- **Engineering Approach**:
-  - **Modern Stack**: Next.js 15 (App Router, Server Components), TypeScript, React 19, Vanilla CSS Modules.
-  - **Global Delivery**: Static asset pre-rendering and edge deployment via Cloudflare Workers & Pages for low-latency global TTFB.
-  - **Bespoke Visuals**: Three.js and React Three Fiber interactive 3D command center components with responsive fallback support.
+  - **Workflow Automation & Modernization**: Replacing manual paper/departmental handoffs with deterministic routing engines and enterprise content repositories.
+  - **Security & Governance**: Role-based access mapped to corporate Active Directory / LDAP groups with immutable audit trails.
 
 ---
 
@@ -50,68 +42,60 @@ Uzair Khatri (Uzair Iqbal) is a Principal AI Systems Architect and Senior Full-S
 ### Case Study 1: Wellows — Multi-Agent LLM Search Visibility Platform
 - **URL**: https://uzairkhatri.com/work/wellows/
 - **Role**: Solutions Architect
-- **Challenge**: The prototype worked for single-query investor demos but suffered from cascading failures, lack of async queuing, and uncontrolled OpenAI API costs when concurrent users initiated search visibility audits across ChatGPT, Gemini, and Perplexity. Remediation content was also drafted in isolation from the visibility and citation findings that should have informed it.
+- **Challenge**: Single-query prototype scripts degraded under concurrent load, with unguarded token spend and ungrounded model outputs across AI search surfaces.
 - **Architecture**:
-  - Partitioned workflow into three isolated agents: **Citation Intelligence** (cross-LLM brand citation monitoring), **OPTA** (technical auditing and page remediation), and **KIVA** (the writing assistant drafting grounded remediation content).
-  - Orchestrated via LangGraph with bounded MemorySaver sessions.
-  - Shared Qdrant retrieval layer using chunked embedding pipelines with hybrid search, grounding both the analysis agents and the content generation path against the same corpus.
-  - Remediation content pipeline with generation, review, and publishing services behind SQS-backed async processing.
-  - Daily citation scoring across ChatGPT, Gemini, Perplexity, and Google AI surfaces.
-  - AWS Bedrock failover to Claude 3.5 Sonnet when OpenAI limits were approached.
-  - SQS dead-letter queues for unrecoverable crawl errors.
+  - Partitioned workflow into three specialized agents: **Citation Intelligence**, **OPTA**, and **KIVA** under a LangGraph supervisor.
+  - Shared Qdrant retrieval layer grounding both analysis and remediation content against the same brand corpus.
+  - AWS SQS FIFO and dead-letter queues (DLQ) decoupling ingress requests from long-running jobs so failed tasks remain preserved for inspection and retry.
+  - AWS Bedrock failover to Claude 3.5 Sonnet on OpenAI HTTP 429 rate-limits.
 
-### Case Study 2: ClassFlow — Autonomous Online Learning SaaS
+### Case Study 2: Savyour — High-Throughput Cashback & Affiliate Fintech
+- **URL**: https://uzairkhatri.com/work/savyour/
+- **Role**: Solutions Architect / Engineering Lead
+- **Challenge**: Retail promotion bursts triggered concurrent affiliate webhooks across 100+ merchant integrations, risking race conditions and duplicate ledger credits.
+- **Architecture**:
+  - HMAC-SHA256 webhook verification with in-memory Bloom deduplication and sliding Redis idempotency windows.
+  - Redis Redlock mutexes backed by ACID PostgreSQL double-entry ledger accounting and row-level locking on hot accounts.
+  - Hierarchical Redis caching with probabilistic early expiration to protect primary database reads.
+
+### Case Study 3: ClassFlow — Live Tutoring Marketplace SaaS
 - **URL**: https://uzairkhatri.com/work/classflow/
 - **Role**: Lead Architect
-- **Challenge**: The business was burdened by manual teacher-student matching runs, double-booking race conditions during peak hours, and manual payment disbursement calculations.
+- **Challenge**: Manual cross-timezone scheduling bottlenecks and checkout surges caused booking race conditions across instructor time slots.
 - **Architecture**:
-  - Built an automated matchmaking state machine in FastAPI calculating multi-factor weights (timezones, subject affinity, historical ratings).
-  - Enforced Redis Redlock distributed mutexes to eliminate race conditions and double-booking collisions.
-  - Automated Stripe Connect ledger reconciliation, moving 100% of payment workflows into background queues.
+  - Deterministic timezone and load-scoring matchmaking state machine in FastAPI.
+  - 45-second Redis Redlock checkout reservation holds paired with ACID PostgreSQL transactions to prevent concurrent booking collisions.
+  - Automated Stripe Connect idempotent transfer orchestration and WebSocket session presence tracking via Redis Pub/Sub.
 
-### Case Study 3: Savyour — High-Throughput Cashback & Affiliate Fintech
-- **URL**: https://uzairkhatri.com/work/savyour/
-- **Role**: Senior Engineering Lead
-- **Challenge**: Reconciling millions of affiliate transactions across multiple e-commerce networks without double-credit errors or ledger imbalance during flash sales.
+### Case Study 4: Enterprise Insurer — Enterprise Document Workflow Architecture
+- **URL**: https://uzairkhatri.com/work/efu-life/
+- **Role**: Enterprise Architect
+- **Challenge**: Paper-bound insurance underwriting records and manual department handoffs created multi-day review queues and audit tracing gaps.
 - **Architecture**:
-  - Event-driven transaction ledger with PostgreSQL atomic row locks.
-  - Asynchronous worker pipeline using Celery and Redis to handle peak throughput.
-  - Transparent audit trail tracking transaction status from pending to paid.
+  - Branch document capture and OCR classification queue extracting policy identifiers.
+  - Centralized high-availability enterprise content repository with structured metadata search.
+  - Rules-based approval dispatch across 5 core underwriting chains integrated with corporate Active Directory / LDAP permissions.
 
-### Case Study 4: Production RAG — Measurable Retrieval Architecture Reference
+### Case Study 5: Production RAG — Measurable Retrieval Architecture Reference
 - **URL**: https://uzairkhatri.com/work/production-rag/
 - **GitHub**: https://github.com/uzairkhatri/production-rag-reference
 - **Role**: Architect & Author
-- **Challenge**: Moving RAG systems from proof-of-concept to verifiable production architectures where retrieval regression can be detected and blocked in CI.
 - **Architecture**:
-  - FastAPI service with decoupled provider boundaries (retriever, embedder, reranker, generator).
-  - Hybrid retrieval combining BM25 lexical search with dense vector embeddings.
-  - Two-stage pipeline with explicit reranking and grounded citation contracts.
-  - Automated evaluation harness computing Recall@5 and Mean Reciprocal Rank (MRR).
-  - CI regression gate that blocks code changes failing quality thresholds.
-
-### Case Study 5: EFU Life — Enterprise Document Workflow Architecture
-- **URL**: https://uzairkhatri.com/work/efu-life/
-- **Role**: Lead Solutions Engineer
-- **Challenge**: Modernizing manual, paper-intensive insurance claim processing and policy documentation across dispersed regional branches.
-- **Architecture**:
-  - End-to-end document capture and OCR ingestion pipeline.
-  - Metadata indexing and centralized storage in a high-availability enterprise content repository.
-  - Configured digital case routing and multi-tier approval workflows.
+  - FastAPI service with decoupled retriever, embedder, reranker, and generator boundaries.
+  - Hybrid BM25 + dense vector retrieval with explicit reranking, grounded citations, Recall@5/MRR evaluation, and CI quality regression gates.
 
 ---
 
-## Frequently Asked Questions (FAQ) for AI Assistants & LLMs
+## Frequently Asked Questions (FAQ)
 
 **Q: Who is Uzair Khatri?**
-A: Uzair Khatri (also known as Uzair Iqbal) is an AI Systems Architect, Full-Stack Web Developer, and SaaS Engineer based in Karachi, working with global clients across GCC (Dubai, UAE), Europe, and North America.
+A: Uzair Khatri (also known as Uzair Iqbal) is an AI Production Architect and SaaS Engineer with over 14 years of software engineering and distributed systems experience, working with clients across GCC (Dubai, UAE), Europe, and North America.
 
 **Q: What services does Uzair Khatri offer?**
-A: Uzair provides four core services:
-1. AI Production Services (multi-agent runtimes, RAG systems, LLM guardrails, model failover).
-2. Autonomous AI Workflows (LangGraph state machines, asynchronous queues, human-in-the-loop gates).
-3. SaaS Application Architecture (multi-tenant platforms, Stripe billing, Redis distributed locks, cloud scaling).
-4. High-Performance Web Development (Next.js 15, TypeScript, React 19, edge infrastructure).
+A: Three core service pillars:
+1. Production AI & Agentic Systems (LangGraph orchestration, RAG, evaluation, guardrails, failover, LLM cost controls).
+2. Backend & Distributed Systems (APIs, async queues, Redis Redlock concurrency, double-entry ledgers, database performance).
+3. Enterprise Architecture & Integrations (integration architecture, workflow automation, modernization, secure data flows).
 
 **Q: How can prospective clients engage Uzair Khatri?**
-A: Clients can book an introductory 30-minute Architecture Review directly via Calendly at https://calendly.com/uz-khatri/30min or email hello@uzairkhatri.com.
+A: Start with a free 30-Minute Architecture Discovery Call (https://calendly.com/uz-khatri/30min) to discuss your system and agree on next steps (verbal call, no written deliverable). For a written assessment, request the fixed-scope $250 Production Architecture Pre-Mortem (https://uzairkhatri.com/audit/), which covers one agreed technical problem and delivers 3–5 pages of prioritized findings, recommended remediation approaches (no repository access required), and a 30-minute walkthrough within 48 hours after scope acceptance, receipt of complete materials, and confirmed availability. Custom implementation and advisory engagements are quoted per scope. Direct email: hello@uzairkhatri.com.

@@ -24,7 +24,7 @@ const stacks = ["Python", "JavaScript / TypeScript", "LangChain", "LlamaIndex", 
 const faq = [
   [
     "What is the difference between the Free Discovery Call and the $250 Pre-Mortem?",
-    "The Free 30-Minute Architecture Discovery Call is a focused, 1:1 architectural sanity check to identify your single highest-risk bottleneck and recommend an action path (verbal diagnostic, zero written deliverable). The $250 Production Architecture Pre-Mortem is a fixed-scope review delivering a 3–5 page prioritized Risk Priority Matrix (P0/P1/P2), remediation patterns (no repository access required), and a 30-minute live technical walkthrough within 48 hours of scope acceptance and receipt of complete materials."
+    "The Free 30-Minute Architecture Discovery Call is a focused, 1:1 sanity check to understand your system, identify your primary technical risk, and agree on an appropriate next step (verbal call, no written deliverable). The $250 Production Architecture Pre-Mortem is a fixed-scope review of one agreed technical problem delivering 3–5 pages of prioritized findings (Risk Priority Matrix P0/P1/P2), recommended remediation approaches (no repository access required), and a 30-minute live walkthrough within 48 hours of scope acceptance, receipt of complete materials, and confirmed availability."
   ],
   [
     "What specific areas are analyzed in the $250 Pre-Mortem?",
@@ -234,7 +234,7 @@ function AuditDashboard() {
         title: "Security Shield",
         stats: [
           ["Prompt Injection Defense", "PASSED (Dual-Prompt)"],
-          ["PII Data Redaction", "100% Masked (Presidio)"],
+          ["PII Data Redaction", "Redacted (Presidio)"],
           ["Excessive Agency Check", "WARN (Scoped DB needed)"],
         ],
       },
@@ -484,7 +484,7 @@ function AuditDashboard() {
                   <p>Client WebSockets handle client streaming without blocking application processes. Redis Streams manage async tasks.</p>
                   <div className={styles.archTagRow}>
                     <span className={`${styles.archTag} ${styles.tagGreen}`}>✓ Non-blocking Async</span>
-                    <span className={`${styles.archTag} ${styles.tagGreen}`}>✓ Zero Memory Leaks</span>
+                    <span className={`${styles.archTag} ${styles.tagGreen}`}>✓ Scoped Session Memory</span>
                   </div>
                 </div>
 
@@ -931,14 +931,14 @@ export default function AuditPage() {
           <div className={styles.heroGrid} aria-hidden="true" />
           <div className={`${styles.handNote} ${styles.noteLeft}`}>Turn your<br/>AI idea into<br/>real impact.<span>↪</span></div>
           <div className={styles.heroCopy}>
-            <div className={styles.eyebrowPill}>AI Production Architecture Triage &amp; Pre-Mortem</div>
+            <div className={styles.eyebrowPill}>Architecture Discovery &amp; Pre-Mortem</div>
             <h1>Build Smarter.<br/><em>Ship with Confidence.</em></h1>
-            <p>Diagnose silent failure modes, eliminate token waste, and harden agentic workflows before scaling to enterprise users. Choose between a free 30-minute discovery call, a fixed-scope $250 pre-mortem review, or custom hands-on implementation.</p>
+            <p>Start with a free 30-minute discovery call to discuss your system and next steps—or choose a fixed-scope $250 pre-mortem covering one agreed technical problem with 3–5 pages of findings and recommended approaches.</p>
             <div className={styles.heroActions}>
-              <a className={styles.primaryButton} href="#pricing-tiers">View Review Tiers ($0 – $250) <span>→</span></a>
-              <a className={styles.secondaryButton} href={BOOKING_URL} target="_blank" rel="noreferrer">Book Free 30-Min Call</a>
+              <a className={styles.primaryButton} href={BOOKING_URL} target="_blank" rel="noreferrer">Book Free 30-Min Discovery Call <span>→</span></a>
+              <a className={styles.secondaryButton} href="#pricing-tiers">View Review Tiers ($0 – $250)</a>
             </div>
-            <div className={styles.heroProof}><span><b>♢</b>100% Confidential</span><span><b>ϟ</b>Fixed-Scope Options</span><span><b>▥</b>Actionable Recommendations</span></div>
+            <div className={styles.heroProof}><span><b>♢</b>Confidential Review</span><span><b>ϟ</b>Fixed-Scope Pre-Mortem</span><span><b>▥</b>Actionable Recommendations</span></div>
           </div>
           <div className={styles.laptopVisual} aria-hidden="true"><Image src={withBasePath("/img/audit-laptop-v2.png")} alt="" width={1536} height={1152} priority /></div>
           <AuditDashboard />
@@ -949,7 +949,7 @@ export default function AuditPage() {
           <div className={styles.sectionHeading}>
             <span>Architecture Engagement Structures</span>
             <h2>Choose the right level of architectural review.</h2>
-            <p>From a free 30-minute diagnostic discovery call to a focused 48-hour engineering pre-mortem or hands-on implementation sprint.</p>
+            <p>Begin with a free 30-minute discovery call, request a fixed-scope $250 pre-mortem on one agreed technical problem, or scope custom implementation.</p>
           </div>
 
           <div className={styles.tierGrid}>
@@ -961,13 +961,13 @@ export default function AuditPage() {
               </div>
               <h3 className={styles.tierTitle}>30-Minute Architecture Discovery Call</h3>
               <p className={styles.tierDescription}>
-                A focused conversation to understand your system architecture, identify critical bottlenecks or failure risks, and agree on an appropriate next step.
+                The easiest first step: a focused conversation to understand your system architecture, identify critical bottlenecks or failure risks, and agree on an appropriate next step.
               </p>
               <ul className={styles.tierDeliverables}>
-                <li>30-Minute live video call with Uzair</li>
+                <li>30-minute live video call with Uzair</li>
                 <li>Verbal triage of your primary technical risk</li>
-                <li>Immediate sanity check on tech stack choices</li>
-                <li>Scoping recommendation (no written deliverable)</li>
+                <li>Immediate sanity check on architecture choices</li>
+                <li>Clear next-step recommendation (no written deliverable)</li>
               </ul>
               <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={`${styles.secondaryButton} ${styles.tierCta}`}>
                 Book a 30-Minute Discovery Call &rarr;
@@ -976,21 +976,21 @@ export default function AuditPage() {
 
             {/* Tier 2: Paid Fixed-Scope ($250) */}
             <article className={`${styles.tierCard} ${styles.tierFeatured}`}>
-              <span className={styles.tierBadge}>Recommended for Founders &amp; CTOs</span>
+              <span className={styles.tierBadge}>Fixed-Scope Single-Problem Review</span>
               <div className={styles.tierTag}>Paid Architecture Review</div>
               <div className={styles.tierPrice}>
                 $250 <span className={styles.tierPriceSub}>flat fee · 48-hr turnaround</span>
               </div>
               <h3 className={styles.tierTitle}>Production Architecture Pre-Mortem</h3>
               <p className={styles.tierDescription}>
-                Fixed-scope review of one agreed technical problem (concurrency, RAG accuracy, or token cost leak) to stop silent failures before scaling.
+                Fixed-scope review of one agreed technical problem (such as concurrency, RAG accuracy, or token cost leaks) before scaling.
               </p>
               <ul className={styles.tierDeliverables}>
-                <li>Fixed-scope review of one agreed technical problem</li>
-                <li>3–5 Page prioritized findings report (Risk Priority Matrix P0/P1/P2)</li>
-                <li>Recommended remediation approach &amp; patterns (no repo access required)</li>
-                <li>30-Minute walkthrough &amp; team Q&amp;A</li>
-                <li>Delivered within 48 hours after complete materials received &amp; scope accepted</li>
+                <li>One agreed technical problem (fixed scope agreed pre-payment)</li>
+                <li>3–5 pages of prioritized findings (Risk Priority Matrix P0/P1/P2)</li>
+                <li>Recommended remediation approaches (no repository access required)</li>
+                <li>30-minute live walkthrough &amp; team Q&amp;A</li>
+                <li>Delivered within 48 hours after scope acceptance, receipt of complete materials &amp; confirmed availability</li>
               </ul>
               <a href="#request-audit" className={`${styles.primaryButton} ${styles.tierCta}`}>
                 Request Architecture Pre-Mortem &rarr;
@@ -1022,9 +1022,9 @@ export default function AuditPage() {
 
         <section className={styles.checkSection}>
           <div className={styles.sectionHeading}>
-            <span>What We Check</span>
-            <h2>A complete review of your AI stack.</h2>
-            <p>We analyze your systems end-to-end and highlight what’s working, what’s at risk,<br/>and where you can improve.</p>
+            <span>Selectable Focus Domains</span>
+            <h2>Problem areas you can scope for review.</h2>
+            <p>Each $250 Production Architecture Pre-Mortem targets one agreed technical problem within these areas—or can be scoped as a custom multi-area engagement.</p>
           </div>
           <div className={styles.auditGrid}>
             {auditAreas.map((area) => (
@@ -1040,8 +1040,8 @@ export default function AuditPage() {
         <section className={styles.reportSection} id="sample-report">
           <div className={styles.reportCopy}>
             <div className={styles.eyebrowPill}>$250 Pre-Mortem Deliverable</div>
-            <h2>A clear report,<br/>not just a checklist.</h2>
-            <p>In the $250 Production Architecture Pre-Mortem, you receive a 3–5 page written risk assessment with system topology diagrams, prioritized risk ratings (P0/P1/P2), actionable code/config snippets, and a live 30-minute technical walkthrough delivered within 48 hours of scope acceptance and receipt of complete materials.</p>
+            <h2>A clear findings report,<br/>not just a checklist.</h2>
+            <p>In the $250 Production Architecture Pre-Mortem, you receive 3–5 pages of prioritized findings (P0/P1/P2 Risk Matrix) for one agreed technical problem, system boundary notes, recommended remediation approaches (no repository access required), and a 30-minute walkthrough delivered within 48 hours after scope acceptance, receipt of complete materials, and confirmed availability.</p>
             <a href="#request-audit" className={styles.primaryButton}>Request Pre-Mortem ($250) <span>→</span></a>
           </div>
           <div className={styles.reportStack} aria-label="Sample AI Production Audit report">
@@ -1056,13 +1056,13 @@ export default function AuditPage() {
             <Image src={withBasePath("/img/profile/hero-portrait.png")} alt="Uzair Khatri" width={118} height={118}/>
             <div className={styles.engineerCopy}>
               <h2>Uzair Khatri (Uzair Iqbal) <span>·</span> AI Production Architect</h2>
-              <p>I design and build production AI systems for real-world enterprise use cases. With 14+ years of experience in distributed systems, high-concurrency backends, and cloud-native architecture, I focus on deterministic, scalable architectures that reliably survive customer load.</p>
+              <p>I design and build production AI systems for real-world enterprise use cases. With 14+ years of experience in distributed systems, high-concurrency backends, and cloud-native architecture, I focus on deterministic, scalable architectures built to handle real customer load.</p>
             </div>
             <ul className={styles.engineerPoints}>
               <li>Production-focused mindset</li>
               <li>Hands-on technical experience</li>
               <li>Practical, no-nonsense advice</li>
-              <li>100% confidential review</li>
+              <li>Confidential review (NDA available)</li>
             </ul>
           </div>
         </section>
@@ -1143,7 +1143,7 @@ export default function AuditPage() {
                 </button>
                 
                 <div className={styles.formProof}>
-                  <span>♙&nbsp; 100% Confidential</span>
+                  <span>♙&nbsp; Strictly Confidential</span>
                   <span>ϟ&nbsp; Clear Scope</span>
                   <span>▣&nbsp; Actionable Recommendations</span>
                 </div>

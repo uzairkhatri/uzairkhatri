@@ -39,7 +39,7 @@ const decisions = [
     decision:
       "Engineered an ingestion barrier verifying HMAC-SHA256 partner signatures and enforcing deterministic idempotency keys via Redis atomic operations (SETNX with sliding TTL windows sized to merchant retry envelopes) before entering async task queues.",
     tradeoff:
-      "Adds lightweight cryptographic and cache verification overhead, but eliminated duplicate transaction processing across high-velocity webhook bursts while absorbing intermittent partner retries.",
+      "Adds lightweight cryptographic and cache verification overhead, while rejecting duplicate transaction keys across high-velocity webhook bursts and absorbing intermittent partner retries.",
   },
   {
     title: "Immutable Double-Entry Ledger with Strict Transaction Boundaries",
@@ -48,7 +48,7 @@ const decisions = [
     decision:
       "Implemented a strict double-entry bookkeeping ledger where user balances are computed from immutable credit/debit transaction lines within atomic PostgreSQL transactions and row-level locking on hot accounts.",
     tradeoff:
-      "Requires explicit transaction boundaries and advisory locks during concurrent balance updates, but guarantees verifiable audit reconciliation and prevents balance drift.",
+      "Requires explicit transaction boundaries and advisory locks during concurrent balance updates to support verifiable audit reconciliation and prevent unrecorded balance drift.",
   },
   {
     title: "Two-Tier Hierarchical Redis Invalidation Architecture",
@@ -212,7 +212,7 @@ export default function SavyourCaseStudy() {
             </p>
             <p>
               The challenge was to engineer a high-concurrency ingestion barrier that validates signatures,
-              guarantees idempotency, maintains absolute ledger consistency, and scales reads seamlessly.
+              enforces idempotent key handling, preserves double-entry ledger consistency, and scales cached reads under load.
             </p>
           </div>
         </div>
@@ -331,8 +331,8 @@ export default function SavyourCaseStudy() {
               </div>
             </div>
             <p className={styles.diagramNote}>
-              Double-entry consistency guaranteed. Balance queries never read arbitrary mutable columns;
-              they verify the sum of signed credit/debit entries across auditable ledger accounts.
+              Double-entry accounting enforced. Balance queries derive state from the sum of signed credit/debit
+              entries across auditable ledger accounts rather than mutable balance columns.
             </p>
           </div>
         </div>
@@ -389,7 +389,7 @@ export default function SavyourCaseStudy() {
           <p className={styles.eyebrow}>Outcomes</p>
           <h2 className={styles.sectionTitle}>Hard metrics from real consumer scale.</h2>
           <p className={styles.sectionDesc}>
-            Eliminated duplicate payout exploits while maintaining responsive balance reads
+            Mitigated duplicate payout race conditions while maintaining responsive balance reads
             during peak nationwide retail promotions.
           </p>
           <div className={styles.outcomeGrid}>
