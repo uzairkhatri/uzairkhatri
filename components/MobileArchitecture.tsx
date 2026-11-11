@@ -50,7 +50,7 @@ const DIAGRAMS: Record<ProjectVisualType, Stage[]> = {
     ]},
     { label: "Processing", nodes: [
       { title: "Celery Worker", sub: "Asynchronous Queue" },
-      { title: "PostgreSQL DB", sub: "Serializable Transaction" },
+      { title: "PostgreSQL DB", sub: "ACID Row Locking" },
     ]},
     { label: "Settlement", nodes: [
       { title: "Double-Entry Ledger", sub: "Deduplication Key" },
@@ -76,7 +76,7 @@ const DIAGRAMS: Record<ProjectVisualType, Stage[]> = {
       { title: "Redis Cache Eviction", sub: "Wallet Namespace" },
     ]},
     { label: "Ledger", nodes: [
-      { title: "PostgreSQL DB", sub: "Repeatable Read ACID" },
+      { title: "PostgreSQL DB", sub: "ACID Transaction Ledger" },
       { title: "Double-Entry Ledger", sub: "Balance Mutex" },
     ]},
     { label: "Settlement", nodes: [

@@ -39,7 +39,7 @@ const decisions = [
     decision:
       "Engineered an ingestion barrier verifying HMAC-SHA256 partner signatures and enforcing deterministic idempotency keys via Redis atomic operations (SETNX with sliding TTL windows sized to merchant retry envelopes) before entering async task queues.",
     tradeoff:
-      "Added ~15ms of ingestion verification latency, but eliminated duplicate transaction processing across high-velocity webhook bursts while absorbing intermittent partner retries.",
+      "Adds lightweight cryptographic and cache verification overhead, but eliminated duplicate transaction processing across high-velocity webhook bursts while absorbing intermittent partner retries.",
   },
   {
     title: "Immutable Double-Entry Ledger with Strict Transaction Boundaries",
@@ -57,7 +57,7 @@ const decisions = [
     decision:
       "Designed a hierarchical Redis caching architecture with namespace-level invalidation triggered via admin partner updates and probabilistic early expiration (XFetch) to prevent cache stampedes.",
     tradeoff:
-      "Cache eviction patterns require exact key hygiene across microservices, but achieved a sustained 99.4% cache hit ratio during peak campaigns.",
+      "Cache eviction patterns require exact key hygiene across microservices, but achieved high cache hit efficiency during peak campaigns.",
   },
   {
     title: "Decoupled Asynchronous Payout Outbox Engine",
@@ -66,25 +66,25 @@ const decisions = [
     decision:
       "Implemented the Transactional Outbox pattern, queueing payout jobs in Celery/RabbitMQ with exponential backoff, jittered retries, and automated operator dead-letter escalation.",
     tradeoff:
-      "Payouts execute asynchronously with a 1-2 minute verification window rather than synchronous execution, but unhandled gateway failures dropped to zero.",
+      "Payouts execute asynchronously with a deferred verification window rather than synchronous execution, while unhandled gateway timeouts are captured by dead-letter queues for automated reconciliation.",
   },
 ];
 
 const constraints = [
   {
     label: "Latency SLA",
-    title: "<50ms P95 Balance Lookups",
+    title: "Fast Balance Lookups",
     text: "Consumer mobile app users expected real-time wallet balance displays, preventing expensive dynamic balance aggregations on every user screen load.",
   },
   {
     label: "Ledger Consistency",
     title: "Double-Entry Balance Accounting",
-    text: "Zero financial discrepancy tolerance across millions of historical user reward line items and merchant commission credits.",
+    text: "Strict mathematical reconciliation across high-volume user reward line items and merchant commission credits.",
   },
   {
     label: "Throughput Resilience",
     title: "Burst Ingestion Capacity",
-    text: "Mega-sale campaigns (11.11 / Black Friday) generated 5,000+ simultaneous webhook hits from partner networks that could not be dropped or delayed.",
+    text: "Mega-sale campaigns (11.11 / Black Friday) generated massive spikes of simultaneous webhook hits from partner networks that could not be dropped or delayed.",
   },
 ];
 
@@ -99,7 +99,7 @@ const failureModes = [
     tag: "Failure Mode 02",
     title: "Database Lock Contention on Balances",
     impact: "Multiple cashback events trying to mutate the same user's balance row concurrently, leading to transaction rollbacks.",
-    defense: "Immutable append-only ledger architecture. New transactions write new credit/debit journal rows with zero row locks on user profiles, with balances projected asynchronously.",
+    defense: "Immutable append-only ledger architecture. New transactions write new credit/debit journal rows without long-running row locks on user profiles, with balances projected asynchronously.",
   },
   {
     tag: "Failure Mode 03",
@@ -121,7 +121,7 @@ const timeline = [
   ["Week 5-6", "Engineered double-entry ledger backend: PostgreSQL ACID transaction boundaries, debit/credit audit logging, and automated balancing triggers."],
   ["Week 7-8", "Designed hierarchical Redis caching layers: brand commission caches, user balance projections, and cache stampede protection."],
   ["Week 9-10", "Built payout outbox engine: asynchronous 1-Link bank gateway adapters, retry state machines, and dead-letter reconciliation playbooks."],
-  ["Week 11-12", "Load testing with 5,000+ concurrent simulated webhook bursts, chaos engineering on database failover, and zero-downtime cutover."],
+  ["Week 11-12", "Load testing with high-concurrency webhook burst simulations, chaos engineering on database failover, and verified staged cutover."],
   ["Week 13-14", "Telemetry dashboards, automated discrepancy alarms, security penetration testing, and engineering team handoff."],
 ];
 
@@ -132,19 +132,19 @@ const outcomes = [
     note: "Supported across Daraz, Foodpanda, local retailers, and international affiliate networks without ingestion failures.",
   },
   {
-    value: "99.4%",
-    label: "Cache hit ratio",
-    note: "Sustained cache hit rate on high-velocity brand commission queries during national shopping campaigns.",
+    value: "High-Hit",
+    label: "Cache architecture efficiency",
+    note: "Multi-tier Redis caching absorbs read spikes on brand tiers and commission rates during major shopping campaigns.",
   },
   {
-    value: "<50ms",
-    label: "P95 wallet query latency",
-    note: "Cached balance retrieval under high concurrent mobile consumer traffic.",
+    value: "Indexed",
+    label: "Wallet read projections",
+    note: "In-memory caching and indexed read projections avoid dynamic balance aggregation during consumer app sessions.",
   },
   {
-    value: "Zero",
-    label: "Ledger balance drift",
-    note: "Deterministic double-entry journal validation eliminated balance discrepancies across affiliate reward lines.",
+    value: "Reconciled",
+    label: "Double-entry ledger balances",
+    note: "Paired credit and debit journal entries with atomic database transactions prevent unrecorded balance mutations.",
   },
 ];
 
@@ -185,8 +185,8 @@ export default function SavyourCaseStudy() {
             </p>
             <div className={styles.heroFacts}>
               <span><strong>100+</strong> brand partners</span>
-              <span><strong>99.4%</strong> cache hit ratio</span>
-              <span><strong>&lt;50ms</strong> P95 wallet query</span>
+              <span><strong>Double-Entry</strong> immutable ledger</span>
+              <span><strong>Idempotent</strong> webhook ingestion</span>
             </div>
           </div>
           <ProjectVisual type="savyour" variant="hero" />
@@ -244,7 +244,7 @@ export default function SavyourCaseStudy() {
         <div className={styles.sectionInner}>
           <p className={styles.eyebrow}>Architecture decisions</p>
           <h2 className={styles.sectionTitleLight}>
-            Designing for zero financial drift and high-throughput ingestion.
+            Designing for reconciled financial integrity and high-throughput ingestion.
           </h2>
           <p className={styles.sectionDescLight}>
             Every architectural boundary prioritized mathematical auditability, cryptographic payload

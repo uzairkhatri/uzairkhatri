@@ -97,6 +97,16 @@ export function trackLinkClick(event: MouseEvent) {
   if (!(event.target instanceof Element)) return;
   const anchor = event.target.closest<HTMLAnchorElement>("a[href]");
   if (!anchor) return;
+  if (
+    anchor.getAttribute("role") === "tab" &&
+    event.type === "click" &&
+    !event.metaKey &&
+    !event.ctrlKey &&
+    !event.shiftKey &&
+    !event.altKey
+  ) {
+    return;
+  }
   const source = anchor.getAttribute("data-source") ||
     anchor.closest("section[id], nav, footer")?.getAttribute("id") || "page_link";
   const destination = new URL(anchor.href, window.location.href);

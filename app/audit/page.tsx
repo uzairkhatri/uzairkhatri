@@ -23,8 +23,8 @@ const stacks = ["Python", "JavaScript / TypeScript", "LangChain", "LlamaIndex", 
 
 const faq = [
   [
-    "What is the difference between the Free Triage Call and the $250 Pre-Mortem?",
-    "The Free 30-Minute Architecture Discovery Call is a focused, 1:1 architectural sanity check to identify your single highest-risk bottleneck and recommend an action path (verbal diagnostic, zero written deliverable). The $250 Production Pre-Mortem is an intensive 48-hour diagnostic sprint delivering a focused written Risk Priority Matrix (P0/P1/P2), architecture remediation patterns (no repository access required), cost optimization modeling, and a 30-minute live technical walkthrough with Uzair."
+    "What is the difference between the Free Discovery Call and the $250 Pre-Mortem?",
+    "The Free 30-Minute Architecture Discovery Call is a focused, 1:1 architectural sanity check to identify your single highest-risk bottleneck and recommend an action path (verbal diagnostic, zero written deliverable). The $250 Production Architecture Pre-Mortem is a fixed-scope review delivering a 3–5 page prioritized Risk Priority Matrix (P0/P1/P2), remediation patterns (no repository access required), and a 30-minute live technical walkthrough within 48 hours of scope acceptance and receipt of complete materials."
   ],
   [
     "What specific areas are analyzed in the $250 Pre-Mortem?",
@@ -859,7 +859,7 @@ export default function AuditPage() {
     email: "",
     company: "",
     stage: "",
-    engagementType: "Fixed-Scope Architecture Pre-Mortem ($250 Flat)",
+    engagementType: "Production Architecture Pre-Mortem ($250 Flat)",
     description: "",
     _gotcha: ""
   });
@@ -955,31 +955,31 @@ export default function AuditPage() {
           <div className={styles.tierGrid}>
             {/* Tier 1: Free */}
             <article className={styles.tierCard}>
-              <div className={styles.tierTag}>Introductory Triage</div>
+              <div className={styles.tierTag}>Free Discovery</div>
               <div className={styles.tierPrice}>
                 $0 <span className={styles.tierPriceSub}>/ 30-min call</span>
               </div>
-              <h3 className={styles.tierTitle}>Free Architecture Discovery</h3>
+              <h3 className={styles.tierTitle}>30-Minute Architecture Discovery Call</h3>
               <p className={styles.tierDescription}>
-                A fast, high-impact 1:1 conversation to triage your biggest technical risk (latency, hallucination, or cloud bill) and identify the right path forward.
+                A focused conversation to understand your system architecture, identify critical bottlenecks or failure risks, and agree on an appropriate next step.
               </p>
               <ul className={styles.tierDeliverables}>
                 <li>30-Minute live video call with Uzair</li>
-                <li>Verbal triage of your primary technical fire</li>
+                <li>Verbal triage of your primary technical risk</li>
                 <li>Immediate sanity check on tech stack choices</li>
                 <li>Scoping recommendation (no written deliverable)</li>
               </ul>
               <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={`${styles.secondaryButton} ${styles.tierCta}`}>
-                Book Free 30-Min Call &rarr;
+                Book a 30-Minute Discovery Call &rarr;
               </a>
             </article>
 
             {/* Tier 2: Paid Fixed-Scope ($250) */}
             <article className={`${styles.tierCard} ${styles.tierFeatured}`}>
               <span className={styles.tierBadge}>Recommended for Founders &amp; CTOs</span>
-              <div className={styles.tierTag}>Fixed-Scope Pre-Mortem</div>
+              <div className={styles.tierTag}>Paid Architecture Review</div>
               <div className={styles.tierPrice}>
-                $250 <span className={styles.tierPriceSub}>flat fee · 48-hr SLA</span>
+                $250 <span className={styles.tierPriceSub}>flat fee · 48-hr turnaround</span>
               </div>
               <h3 className={styles.tierTitle}>Production Architecture Pre-Mortem</h3>
               <p className={styles.tierDescription}>
@@ -993,7 +993,7 @@ export default function AuditPage() {
                 <li>Delivered within 48 hours after complete materials received &amp; scope accepted</li>
               </ul>
               <a href="#request-audit" className={`${styles.primaryButton} ${styles.tierCta}`}>
-                Request $250 Pre-Mortem &rarr;
+                Request Architecture Pre-Mortem &rarr;
               </a>
             </article>
 
@@ -1041,7 +1041,7 @@ export default function AuditPage() {
           <div className={styles.reportCopy}>
             <div className={styles.eyebrowPill}>$250 Pre-Mortem Deliverable</div>
             <h2>A clear report,<br/>not just a checklist.</h2>
-            <p>In the $250 Architecture Pre-Mortem, you receive a 3–5 page written risk assessment with system topology diagrams, prioritized risk ratings (P0/P1/P2), actionable code/config snippets, and a live 30-minute technical walkthrough delivered within 48 hours of scope acceptance.</p>
+            <p>In the $250 Production Architecture Pre-Mortem, you receive a 3–5 page written risk assessment with system topology diagrams, prioritized risk ratings (P0/P1/P2), actionable code/config snippets, and a live 30-minute technical walkthrough delivered within 48 hours of scope acceptance and receipt of complete materials.</p>
             <a href="#request-audit" className={styles.primaryButton}>Request Pre-Mortem ($250) <span>→</span></a>
           </div>
           <div className={styles.reportStack} aria-label="Sample AI Production Audit report">
@@ -1061,7 +1061,7 @@ export default function AuditPage() {
             <ul className={styles.engineerPoints}>
               <li>Production-focused mindset</li>
               <li>Hands-on technical experience</li>
-              <li>Practical, non-nonsense advice</li>
+              <li>Practical, no-nonsense advice</li>
               <li>100% confidential review</li>
             </ul>
           </div>
@@ -1112,8 +1112,8 @@ export default function AuditPage() {
                       onChange={(e) => update("engagementType", e.target.value)}
                       style={{ width: "100%", height: "46px", background: "#0a1012", border: "1px solid rgba(255, 255, 255, 0.15)", borderRadius: "6px", color: "#ffffff", padding: "0 14px", marginTop: "4px" }}
                     >
-                      <option value="Fixed-Scope Architecture Pre-Mortem ($250 Flat)">Fixed-Scope Architecture Pre-Mortem ($250 Flat Scope — 48-hr SLA)</option>
-                      <option value="Free 30-Min Architecture Discovery Call ($0)">Free 30-Min Architecture Discovery Call ($0 — Verbal Triage)</option>
+                      <option value="Production Architecture Pre-Mortem ($250 Flat)">Production Architecture Pre-Mortem ($250 Flat — 48-hr turnaround after scope acceptance)</option>
+                      <option value="30-Minute Architecture Discovery Call ($0)">30-Minute Architecture Discovery Call ($0 — Verbal Triage)</option>
                       <option value="Senior Engineering Role / Recruiter Inquiry">Senior Engineering Role / Recruiter Inquiry (Full-time / Contract)</option>
                       <option value="Implementation & Advisory (Custom Quote)">Implementation &amp; Advisory (Custom Quote)</option>
                     </select>

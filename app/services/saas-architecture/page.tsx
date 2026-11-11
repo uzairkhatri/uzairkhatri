@@ -46,9 +46,9 @@ export default function SaasArchitectureServicePage() {
         secondaryLabel="Read ClassFlow Case Study"
         secondaryHref={withBasePath("/work/classflow/")}
         stats={[
-          { value: "100%", label: "Ledger reconciliation accuracy across double-entry transactions" },
-          { value: "<100ms", label: "Dynamic matchmaking & distributed lock resolution" },
-          { value: "100+", label: "High-throughput affiliate & e-commerce partner integrations" },
+          { value: "Double-Entry", label: "Reconciled ledger integrity across concurrent transactions" },
+          { value: "Redlock", label: "Distributed mutex locking across concurrent booking surges" },
+          { value: "100+", label: "Affiliate & e-commerce partner webhook integrations" },
         ]}
         sectionEyebrow="SaaS Engineering Deliverables"
         sectionTitle="Eliminating race conditions, ledger drift, and scale bottlenecks."
@@ -67,7 +67,7 @@ export default function SaasArchitectureServicePage() {
           {
             eyebrow: "03 / Database Scaling",
             title: "PostgreSQL Isolation & Query Optimization",
-            text: "Connection pooling via PgBouncer, read-replica routing, selective Redis cache warming, and zero-downtime database migration strategies under live traffic.",
+            text: "Connection pooling via PgBouncer, read-replica routing, selective Redis cache warming, and staged expand-and-contract database migration strategies under live traffic.",
           },
           {
             eyebrow: "04 / Async Workers",

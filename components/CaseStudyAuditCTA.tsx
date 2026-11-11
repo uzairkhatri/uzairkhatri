@@ -41,7 +41,7 @@ export default function CaseStudyAuditCTA({
           className={styles.secondaryBtn}
           data-source="case_study_booking"
         >
-          <span>Book 30-Min Strategy Call (Free)</span>
+          <span>Book 30-Min Discovery Call (Free)</span>
         </a>
       </div>
 
@@ -52,7 +52,7 @@ export default function CaseStudyAuditCTA({
         </div>
         <div className={styles.trustItem}>
           <span className={styles.trustIcon}>⚡</span>
-          <span>48-Hour Report &amp; Walkthrough Turnaround</span>
+          <span>48-Hour Turnaround (Post-Scope Acceptance)</span>
         </div>
         <div className={styles.trustItem}>
           <span className={styles.trustIcon}>🛠️</span>

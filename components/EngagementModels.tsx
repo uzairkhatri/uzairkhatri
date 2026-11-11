@@ -69,40 +69,41 @@ interface EngagementTier {
 
 const engagementTiers: EngagementTier[] = [
   {
-    kicker: "FREE DIAGNOSTIC",
+    kicker: "FREE DISCOVERY",
     title: "30-Minute Architecture Discovery Call",
     priceBadge: "FREE · 30 MIN",
     description:
       "An initial conversation to understand your system architecture, identify critical bottlenecks or failure risks, and agree on an appropriate next step.",
-    scopeNote: "No extensive written technical report is included.",
-    ctaText: "Book Discovery Call",
+    scopeNote:
+      "A focused conversation to understand your system and agree on an appropriate next step. No written deliverable is promised.",
+    ctaText: "Book a 30-Minute Discovery Call",
     ctaHref: BOOKING_URL,
     isExternal: true,
     featured: false,
     source: "engagement_discovery_call",
   },
   {
-    kicker: "FIXED-SCOPE AUDIT",
+    kicker: "PAID ARCHITECTURE REVIEW",
     title: "Production Architecture Pre-Mortem",
     priceBadge: "$250 · 48-HR TURNAROUND",
     description:
       "A focused review of one critical architectural area or risk surface. Includes prioritized failure modes, concrete code/architecture recommendations, and a 30-minute walkthrough.",
     scopeNote:
-      "Scope agreed before payment. 48-hr turnaround starts after scope confirmation and receipt of complete materials.",
-    ctaText: "Request Architecture Review",
+      "Scope agreed before payment. Delivery within 48 hours only after scope acceptance, receipt of complete materials, and confirmed availability.",
+    ctaText: "Request an Architecture Review",
     ctaHref: "/audit/",
     isExternal: false,
     featured: true,
     source: "engagement_pre_mortem_audit",
   },
   {
-    kicker: "CUSTOM DELIVERY",
+    kicker: "IMPLEMENTATION & ADVISORY",
     title: "Engineering Implementation & Advisory",
-    priceBadge: "SCOPED SPRINT OR ADVISORY",
+    priceBadge: "CUSTOM QUOTE",
     description:
       "Hands-on backend delivery, production AI system implementation, architecture remediation, and technical leadership tailored to your operational requirements.",
     scopeNote:
-      "Custom pricing and contract models based on agreed milestones and deliverables.",
+      "Custom scope and pricing based on agreed milestones and deliverables.",
     ctaText: "Discuss Your Project",
     ctaHref: BOOKING_URL,
     isExternal: true,
@@ -211,13 +212,13 @@ export default function EngagementModels() {
         {/* Engagement Models Sub-Section */}
         <div className={styles.engagementSection}>
           <div className={styles.engagementHeader}>
-            <div className={styles.subEyebrow}>WAYS TO COLLABORATE</div>
+            <div className={styles.subEyebrow}>ENGAGEMENT</div>
             <h3 className={styles.engagementHeading}>
-              Structured Engagement Models
+              Ways We Can Work Together
             </h3>
             <p className={styles.engagementSub}>
-              From zero-risk diagnostic calls to fixed-scope architectural
-              pre-mortems and comprehensive implementation sprints.
+              From a focused 30-minute discovery call to fixed-scope architecture
+              pre-mortems and hands-on implementation sprints.
             </p>
           </div>
 

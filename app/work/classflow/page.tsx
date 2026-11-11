@@ -37,14 +37,14 @@ const decisions = [
     problem:
       "Operational coordinators manually reviewed student requests, teacher subject strengths, timezone differences, and calendar slots, creating up to 4-hour booking turnaround times and frequent scheduling conflicts.",
     decision:
-      "Designed a real-time heuristic scoring pipeline evaluating 3-tier weighting (timezone offsets, historical completion ratings, and active instructor workload) resolving matches in under 100ms.",
+      "Designed a real-time heuristic scoring pipeline evaluating 3-tier weighting (timezone offsets, historical completion ratings, and active instructor workload) resolving matches with low-latency execution.",
     tradeoff:
-      "Algorithmic assignment requires continuous calibration of teacher load ceilings to prevent superstar burnout, but reduced match latency by 99%.",
+      "Algorithmic assignment requires continuous calibration of teacher load ceilings to prevent superstar burnout, replacing hours of manual dispatch with automated matching.",
   },
   {
     title: "Redis Distributed Mutex (Redlock) for Concurrency Safety",
     problem:
-      "Peak registration bursts created race conditions where multiple students attempted to confirm bookings for the same teacher calendar window at the exact same sub-second interval.",
+      "Peak registration bursts created race conditions where multiple students attempted to confirm bookings for the same teacher calendar window at the exact same moment.",
     decision:
       "Implemented a distributed lock pattern using Redis Redlock with a 45-second lease time and atomic lease release on checkout completion, ensuring strict mutual exclusion across nodes.",
     tradeoff:
@@ -55,7 +55,7 @@ const decisions = [
     problem:
       "Polling HTTP endpoints for classroom events (student check-in, instructor late warnings, connection drops, session completion) generated massive request volume and a 10-15s state lag.",
     decision:
-      "Built a real-time event pipeline over FastAPI WebSockets paired with Redis Pub/Sub, streaming classroom state transitions and automated grace-period timers to all parties with sub-second latency.",
+      "Built a real-time event pipeline over FastAPI WebSockets paired with Redis Pub/Sub, streaming classroom state transitions and automated grace-period timers to all parties with low-latency updates.",
     tradeoff:
       "Stateful socket connections required dedicated sticky-session management and reconnect jitter logic on client apps.",
   },
@@ -64,27 +64,27 @@ const decisions = [
     problem:
       "Instructors were paid via manual spreadsheet calculations at week-end, resulting in high administrative labor, human calculation discrepancies, and delayed disbursements.",
     decision:
-      "Designed an event-driven webhook pipeline consuming verified session completion events, computing commission splits with PostgreSQL Serializable transactions, and dispatching Stripe Transfers idempotently.",
+      "Designed an event-driven webhook pipeline consuming verified session completion events, computing commission splits within ACID database transactions, and dispatching Stripe Transfers idempotently.",
     tradeoff:
-      "Required cryptographic webhook signature validation and dead-letter queue replay mechanisms, but reduced operational payout workload to zero.",
+      "Required cryptographic webhook signature validation and dead-letter queue replay mechanisms, but transitioned manual payout calculations into automated workflows.",
   },
 ];
 
 const constraints = [
   {
     label: "Latency SLA",
-    title: "<100ms Heuristic Matchmaking",
-    text: "Students required instantaneous instructor matching across dynamic availability matrices without incurring slow sequential database table scans.",
+    title: "Algorithmic Matchmaking",
+    text: "Students required rapid instructor matching across dynamic availability matrices without incurring slow sequential database table scans.",
   },
   {
     label: "Concurrency Safety",
-    title: "Zero Double-Booking Tolerance",
+    title: "Strict Double-Booking Prevention",
     text: "During opening flash surges, multiple users checking out the same time slot had to be resolved deterministically without human operator intervention.",
   },
   {
     label: "Financial Precision",
     title: "Idempotent Automated Ledgers",
-    text: "Automating hundreds of daily instructor payouts via Stripe Connect required absolute idempotency to prevent duplicate transfers or ledger drift.",
+    text: "Automating hundreds of daily instructor payouts via Stripe Connect required strict idempotency to prevent duplicate transfers or ledger balance drift.",
   },
 ];
 
@@ -121,28 +121,28 @@ const timeline = [
   ["Week 5-6", "Implemented distributed locking with Redis Redlock: atomic reservation holds, checkout lease management, and concurrency stress testing."],
   ["Week 7-8", "Constructed real-time WebSocket state layer: live room heartbeats, session timers, and Redis Pub/Sub broadcast infrastructure."],
   ["Week 9-10", "Engineered Stripe Connect payout engine: automated balance calculations, idempotent transfer dispatches, and audit trail logging."],
-  ["Week 11-12", "Load testing, failover drills, telemetry dashboards, team runbooks, and zero-defect production deployment."],
+  ["Week 11-12", "Load testing, failover drills, telemetry dashboards, team runbooks, and staged production rollout."],
 ];
 
 const outcomes = [
   {
-    value: "0",
-    label: "Manual operations required",
-    note: "100% of teacher scheduling, slot reservations, and payout allocations transitioned into automated system paths.",
+    value: "Automated",
+    label: "Scheduling & payout pipeline",
+    note: "Teacher scheduling, slot reservations, and payout allocations transitioned into automated system paths.",
   },
   {
-    value: "<100ms",
+    value: "Dynamic",
     label: "Teacher match scoring",
-    note: "Sub-100ms heuristic matching across thousands of concurrent instructor availability slots.",
+    note: "Multi-factor heuristic scoring across concurrent instructor availability slots.",
   },
   {
-    value: "0%",
-    label: "Double-booking race conditions",
-    note: "Zero scheduling overlap incidents recorded post-deployment via distributed mutex isolation.",
+    value: "Mutex-Gated",
+    label: "Slot reservation safety",
+    note: "Atomic reservation leases via Redis Redlock preventing concurrent checkout collisions.",
   },
   {
-    value: "100%",
-    label: "Automated payout accuracy",
+    value: "Idempotent",
+    label: "Automated payout dispatch",
     note: "All instructor disbursements computed and transferred idempotently via Stripe Connect webhooks.",
   },
 ];
@@ -178,14 +178,13 @@ export default function ClassFlowCaseStudy() {
             </h1>
             <p className={styles.heroSub}>Automated Global Tutoring &amp; Scheduling Engine</p>
             <p className={styles.heroDesc}>
-              How I architected a high-concurrency education marketplace unifying sub-100ms tutor matchmaking across global timezones,
-              distributed lock safety with Redis Redlock to eliminate double-booking, and automated Stripe Connect teacher payouts — eliminating
-              100% of manual scheduling operations.
+              How I architected a high-concurrency education marketplace unifying heuristic tutor matchmaking across global timezones,
+              distributed lock safety with Redis Redlock to prevent double-booking, and automated Stripe Connect teacher payouts.
             </p>
             <div className={styles.heroFacts}>
-              <span><strong>0</strong> manual ops</span>
-              <span><strong>&lt;100ms</strong> match scoring</span>
-              <span><strong>0%</strong> double-bookings</span>
+              <span><strong>Automated</strong> scheduling</span>
+              <span><strong>Dynamic</strong> match scoring</span>
+              <span><strong>Mutex-gated</strong> reservations</span>
             </div>
           </div>
           <ProjectVisual type="classflow" variant="hero" />
@@ -206,7 +205,7 @@ export default function ClassFlowCaseStudy() {
             </p>
             <p>
               When popular teachers opened availability slots, registration surges routinely caused
-              sub-second race conditions where multiple students paid for the exact same session,
+              concurrent race conditions where multiple students paid for the exact same session,
               forcing awkward customer support interventions and refunds.
             </p>
             <p>
@@ -244,11 +243,11 @@ export default function ClassFlowCaseStudy() {
         <div className={styles.sectionInner}>
           <p className={styles.eyebrow}>Architecture decisions</p>
           <h2 className={styles.sectionTitleLight}>
-            Designing for absolute consistency and sub-second execution.
+            Designing for strict consistency and low-latency execution.
           </h2>
           <p className={styles.sectionDescLight}>
             Every architectural decision balanced strict concurrency boundaries against frictionless
-            student booking experience and zero manual operator intervention.
+            student booking experience and minimal manual operator intervention.
           </p>
           <div className={styles.decisionGrid}>
             {decisions.map((decision) => (
@@ -307,7 +306,7 @@ export default function ClassFlowCaseStudy() {
                 <div className={styles.diagramArrow} aria-hidden="true" />
                 <div className={styles.diagramNode}>
                   <strong>PostgreSQL ACID Store</strong>
-                  <span>Serializable booking &amp; ledger records</span>
+                  <span>Transactional booking &amp; ledger records</span>
                 </div>
               </div>
 
@@ -389,8 +388,8 @@ export default function ClassFlowCaseStudy() {
           <p className={styles.eyebrow}>Outcomes</p>
           <h2 className={styles.sectionTitle}>Measurable operational transformation.</h2>
           <p className={styles.sectionDesc}>
-            Eliminated the operational headcount requirement as booking volume scaled 4x, while delivering
-            zero double-booking incidents.
+            Eliminated the operational headcount requirement as booking volume scaled 4x, while preventing
+            double-booking collisions during surge windows.
           </p>
           <div className={styles.outcomeGrid}>
             {outcomes.map((outcome) => (

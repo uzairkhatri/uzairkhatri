@@ -82,7 +82,7 @@ const decisions = [
 const constraints = [
   {
     label: "Latency SLA",
-    title: "Sub-Second Vector Retrieval",
+    title: "Grounded Vector Retrieval",
     text: "Brand monitoring queries demanded rapid dashboard rendering, precluding naive, synchronous multi-LLM re-ranking on the critical user path.",
   },
   {
@@ -92,8 +92,8 @@ const constraints = [
   },
   {
     label: "Failure Isolation",
-    title: "Zero Shared Mutable State",
-    text: "A transient timeout or hallucination in the content drafting agent (KIVA) could not be allowed to corrupt memory or interrupt ongoing technical audits (OPTA).",
+    title: "Strict State Isolation",
+    text: "A transient timeout or parsing exception in the content drafting agent (KIVA) is isolated from corrupting memory or interrupting ongoing technical audits (OPTA).",
   },
 ];
 
@@ -130,7 +130,7 @@ const timeline = [
   ["Week 5-6", "Built OPTA: technical audit agent, crawler integration, remediation output format, and LangGraph orchestration wiring."],
   ["Week 7-8", "Built Citation Intelligence: multi-LLM monitoring across ChatGPT, Gemini, and Perplexity with sentiment diff logic."],
   ["Week 9-10", "Production hardening: retry logic, cost controls, observability dashboards, load testing, and FastAPI contract finalization."],
-  ["Week 11", "Handoff: architecture documentation, agent operating playbooks, team onboarding, and zero open critical issues."],
+  ["Week 11", "Handoff: architecture documentation, agent operating playbooks, team onboarding, and verified test suites."],
 ];
 
 const outcomes = [
@@ -145,9 +145,9 @@ const outcomes = [
     note: "Replaced manual cross-engine research spreadsheets with continuous LLM search monitoring.",
   },
   {
-    value: "Sub-second",
-    label: "Vector retrieval latency",
-    note: "Achieved through chunked ingestion design and a shared Qdrant retrieval layer across all three agents.",
+    value: "Grounded",
+    label: "Semantic vector retrieval",
+    note: "Chunked ingestion design and a shared Qdrant retrieval layer across all three agents.",
   },
   {
     value: "Decoupled",
@@ -195,7 +195,7 @@ export default function WellowsCaseStudy() {
             <div className={styles.heroFacts}>
               <span><strong>3</strong> production agents</span>
               <span><strong>Automated</strong> citation audits</span>
-              <span><strong>Sub-second</strong> vector retrieval</span>
+              <span><strong>Grounded</strong> vector retrieval</span>
             </div>
             <p className={styles.heroLive}>
               <a href="https://wellows.com" target="_blank" rel="noreferrer">

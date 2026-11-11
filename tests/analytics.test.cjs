@@ -19,16 +19,21 @@ function setup(url = "https://uzairkhatri.com/", options = {}) {
   };
   if (options.blockStorage) Object.defineProperty(win, "localStorage", { get() { throw new Error("Blocked"); } });
   class Element {
-    constructor(href, source, parentId) {
+    constructor(href, source, parentId, role = null) {
       this.href = href ? new URL(href, location).href : undefined;
       this.source = source;
       this.parentId = parentId;
+      this.role = role;
     }
     closest(selector) {
       if (selector === "a[href]") return this.anchor || (this.href ? this : null);
       return this.parentId ? { getAttribute: () => this.parentId } : null;
     }
-    getAttribute(name) { return name === "data-source" ? this.source : null; }
+    getAttribute(name) {
+      if (name === "data-source") return this.source;
+      if (name === "role") return this.role;
+      return null;
+    }
   }
   const effects = [];
   const listeners = new Map();
@@ -190,4 +195,19 @@ test("root does not enable a script or listeners for local previews or opted-out
     assert.equal(state.listeners.size, 0);
     assert.equal(state.win.gtag, undefined);
   }
+});
+
+test("unmodified Selected Work tab clicks do not fire case_study_click, while modified/middle clicks and CTA links do", () => {
+  const { api, Element, events } = setup("https://uzairkhatri.com/");
+  api.initializeAnalytics();
+  const tabEl = new Element("/work/savyour/", undefined, "work", "tab");
+  api.trackLinkClick({ type: "click", button: 0, target: tabEl });
+  assert.equal(events().length, 0);
+
+  api.trackLinkClick({ type: "click", button: 0, metaKey: true, target: tabEl });
+  api.trackLinkClick({ type: "auxclick", button: 1, target: tabEl });
+  const ctaEl = new Element("/work/savyour/", "selected-work", "work", null);
+  api.trackLinkClick({ type: "click", button: 0, target: ctaEl });
+  assert.equal(events().length, 3);
+  assert.ok(events().every((entry) => entry[1] === "case_study_click"));
 });

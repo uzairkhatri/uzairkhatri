@@ -47,8 +47,8 @@ export default function AIAgentsServicePage() {
         secondaryHref={withBasePath("/work/wellows/")}
         stats={[
           { value: "3+", label: "Isolated agents coordinated in production clusters" },
-          { value: "Sub-second", label: "Vector retrieval across shared brand corpora" },
-          { value: "Zero", label: "Cascading failure propagation across agent boundaries" },
+          { value: "Grounded", label: "Semantic vector retrieval across brand corpora" },
+          { value: "Isolated", label: "Failure domains across agent boundaries" },
         ]}
         sectionEyebrow="Agent Engineering Deliverables"
         sectionTitle="How I take agents from fragile scripts to deterministic pipelines."

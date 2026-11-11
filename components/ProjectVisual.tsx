@@ -24,7 +24,7 @@ const visualData = {
     brand: "ClassFlow",
     title: "Scheduler & Ledger Engine",
     metric: "Automated ops",
-    tabs: ["Redis Redlock", "Timezone Matcher", "Serializable DB Ledger"]
+    tabs: ["Redis Redlock", "Timezone Matcher", "ACID DB Ledger"]
   },
   savyour: {
     brand: "Savyour",
@@ -48,7 +48,7 @@ const nodeDescriptions: Record<string, string> = {
   "w-kiva": "Writing assistant drafting remediation content grounded in retrieved brand context.",
   "w-opta": "Audit agent crawling search surfaces and resolving technical citation anomalies.",
   "w-citation": "Compliance monitoring agent tracking brand visibility and sentiment variations across LLMs.",
-  "w-vector": "Shared Qdrant vector cluster containing cached competitor crawls (retrieval under 200ms).",
+  "w-vector": "Shared Qdrant vector cluster containing cached competitor crawls with semantic vector retrieval.",
   "w-llm": "Primary LLM node (GPT-4o) running structured JSON parsers for citation audit outputs.",
   "w-fallback": "Failover AWS Bedrock (Claude 3.5 Sonnet) activated automatically on primary rate-limits.",
   "w-judge": "Self-Correction LLM Evaluator scoring output confidence. Triggers plan retry if confidence <0.85.",
@@ -62,7 +62,7 @@ const nodeDescriptions: Record<string, string> = {
   "cf-timezone": "UTC timezone resolution matching candidates in correct geographic latency groups.",
   "cf-load": "Scoring engine querying candidate historical ratings and active class load factors.",
   "cf-celery": "Celery asynchronous background workers executing matching sequences out-of-band.",
-  "cf-postgres": "Serializable isolation level database cluster preventing matching races under concurrent load.",
+  "cf-postgres": "PostgreSQL ACID transaction cluster with row-level locking preventing booking races under concurrent load.",
   "cf-ledger": "Idempotent transactional billing engine checking deduplication keys before accounting writes.",
   "cf-stripe": "Stripe Connect billing sync dispatching partner payouts on verified class completion events.",
   "cf-release": "Redis lock evictor clearing booking slot states upon successful database commits.",
@@ -70,13 +70,13 @@ const nodeDescriptions: Record<string, string> = {
 
   // Savyour
   "sv-webhook": "Affiliate callback gateway receiving high-volume transaction tracking payloads.",
-  "sv-limiter": "Nginx rate-limiting buffer queue cap checking and throttling payloads (2500 req/sec).",
+  "sv-limiter": "Nginx rate-limiting buffer throttling burst payloads ahead of upstream ingestion.",
   "sv-router": "FastAPI gateway route checking partner request headers and payload hashes.",
-  "sv-bloom": "Bloom Filter checking transaction IDs in 2ms to prevent double cashback disbursements.",
+  "sv-bloom": "Bloom Filter checking transaction IDs in memory to prevent double cashback disbursements.",
   "sv-calc": "Cashback rewards compiler mapping tier multipliers and brand-partner campaign rules.",
   "sv-sqs": "Decoupled AWS SQS message queue buffering spike traffic during shopping campaigns.",
   "sv-evict": "Cache eviction scheduler wiping cache keys for modified user wallet states on DB commits.",
-  "sv-postgres": "PostgreSQL repeatable read transaction isolation safeguarding double-entry accounting records.",
+  "sv-postgres": "PostgreSQL ACID transaction boundaries with advisory row locking safeguarding double-entry accounting records.",
   "sv-ledger": "ACID double-entry ledger validating balances before ledger commits.",
   "sv-sync": "Synchronizer service replicating wallet states to localized edge databases.",
   "sv-settle": "Disbursement gateway executing settlement payloads with partner APIs.",
@@ -350,7 +350,7 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 6 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("cf-postgres")} onMouseEnter={() => setHoveredNode("cf-postgres")} onMouseLeave={() => setHoveredNode(null)}>
         <rect x="480" y="30" width="120" height="40" rx="6" />
         <text x="540" y="48" className={styles.nodeTitle} fill="#c59b53 !important">PostgreSQL DB</text>
-        <text x="540" y="60" className={styles.nodeSub}>Serializable Transaction</text>
+        <text x="540" y="60" className={styles.nodeSub}>ACID Row Locking</text>
       </motion.g>
 
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 7 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("cf-ledger")} onMouseEnter={() => setHoveredNode("cf-ledger")} onMouseLeave={() => setHoveredNode(null)}>
@@ -418,7 +418,7 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
         <rect x="20" y="110" width="110" height="40" rx="6" />
         <circle cx="32" cy="130" r="3" fill="#9db5d8" />
         <text x="77" y="128" className={styles.nodeTitle}>Nginx Gateway</text>
-        <text x="77" y="140" className={styles.nodeSub} fill="#9db5d8 !important">Rate Limiter (2500/s)</text>
+        <text x="77" y="140" className={styles.nodeSub} fill="#9db5d8 !important">Burst Rate Limiter</text>
       </motion.g>
 
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 2 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("sv-router")} onMouseEnter={() => setHoveredNode("sv-router")} onMouseLeave={() => setHoveredNode(null)}>
@@ -454,7 +454,7 @@ export default function ProjectVisual({ type, variant = "card", activeLogIndex =
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 7 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("sv-postgres")} onMouseEnter={() => setHoveredNode("sv-postgres")} onMouseLeave={() => setHoveredNode(null)}>
         <rect x="480" y="110" width="120" height="40" rx="6" />
         <text x="540" y="128" className={styles.nodeTitle} fill="#c59b53 !important">PostgreSQL DB</text>
-        <text x="540" y="140" className={styles.nodeSub}>Repeatable Read ACID</text>
+        <text x="540" y="140" className={styles.nodeSub}>ACID Transaction Ledger</text>
       </motion.g>
 
       <motion.g initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" as const, stiffness: 280, damping: 18, delay: 8 * 0.025 }} whileHover={{ y: -3 }} className={nodeClass("sv-ledger")} onMouseEnter={() => setHoveredNode("sv-ledger")} onMouseLeave={() => setHoveredNode(null)}>

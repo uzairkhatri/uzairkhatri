@@ -443,7 +443,7 @@ const projects: Project[] = [
         decision:
           "Enforced a 45-second reservation lease during checkout with atomic release upon Stripe payment confirmation.",
         tradeoff:
-          "Temporary slot holds during abandoned checkouts, but completely eliminated concurrent booking collisions.",
+          "Temporary slot holds during abandoned checkouts, but prevented concurrent booking collisions across checkout surges.",
       },
       {
         title: "Deterministic Matchmaking Scoring Engine",
@@ -463,13 +463,13 @@ const projects: Project[] = [
     stack: [
       "FastAPI & Celery",
       "Redis Redlock",
-      "PostgreSQL Serializable",
+      "PostgreSQL ACID",
       "Stripe Connect",
       "WebSockets",
     ],
     blueprint: {
       orchestration: "FastAPI · Celery · WebSockets",
-      data: "Redis Redlock · PostgreSQL Serializable",
+      data: "Redis Redlock · PostgreSQL ACID",
       infra: "Stripe Connect · AWS ECS · Docker",
     },
     tierLabels: ["INGRESS", "MATCHING", "SETTLEMENT"],
@@ -550,14 +550,14 @@ const projects: Project[] = [
       {
         id: "cf-db",
         title: "PostgreSQL DB",
-        sub: "Serializable ACID",
+        sub: "ACID Transactions",
         x: 105,
         y: 228,
         w: 122,
         h: 56,
         tone: "emerald",
         description:
-          "Relational datastore running with serializable isolation level to guarantee booking slot conflict rejection.",
+          "Relational datastore enforcing ACID transactions and row-level locking to serialize booking slot writes.",
       },
       {
         id: "cf-redis",
@@ -1212,19 +1212,23 @@ export default function SelectedWork() {
                     </div>
 
                     {/* Active Node Inspector Bar */}
-                    <div className={styles.inspectorBar}>
-                      <span className={styles.inspectorDot} aria-hidden="true" />
-                      <p className={styles.inspectorText}>
-                        <strong className={styles.inspectorPrefix}>
-                          ACTIVE NODE:{" "}
-                          {isSelected ? activeNode.title : proj.nodes[0].title}
-                        </strong>{" "}
-                        &mdash;{" "}
-                        {isSelected
-                          ? activeNode.description
-                          : proj.nodes[0].description}
-                      </p>
-                    </div>
+                    {(() => {
+                      const panelDefaultNode =
+                        proj.nodes.find((n) => n.id === proj.defaultActiveNodeId) ||
+                        proj.nodes[0];
+                      const displayNode = isSelected ? activeNode : panelDefaultNode;
+                      return (
+                        <div className={styles.inspectorBar}>
+                          <span className={styles.inspectorDot} aria-hidden="true" />
+                          <p className={styles.inspectorText}>
+                            <strong className={styles.inspectorPrefix}>
+                              ACTIVE NODE: {displayNode.title}
+                            </strong>{" "}
+                            &mdash; {displayNode.description}
+                          </p>
+                        </div>
+                      );
+                    })()}
                   </div>
 
                   {/* Panel Footer: Tech Stack Pills & Primary Case Study CTA */}
