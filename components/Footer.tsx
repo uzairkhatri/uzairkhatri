@@ -12,7 +12,7 @@ const navLinks = [
 ];
 
 const connectLinks = [
-  { label: "Book Strategy Call", href: BOOKING_URL, external: true, isPrimary: true },
+  { label: "Book Discovery Call", href: BOOKING_URL, external: true, isPrimary: true },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/uzair-khatri", external: true },
   { label: "GitHub", href: "https://github.com/UzairKhatri", external: true },
   { label: "Email", href: EMAIL_URL, external: false },

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./BookingModal.module.css";
 import { BOOKING_URL } from "./siteLinks";
+import { trackBookingScheduled } from "./analytics";
 
 const CALENDLY_EMBED_URL =
   "https://calendly.com/uz-khatri/30min?embed_domain=uzairkhatri.com&embed_type=inline&background_color=171b1a&text_color=ffffff&primary_color=c59b53";
@@ -74,7 +75,21 @@ export default function BookingModal() {
     document.body.style.paddingRight = `${scrollbarWidth}px`;
     document.body.style.overflow = "hidden";
     dialog?.showModal();
+
+    const handleCalendlyMessage = (event: MessageEvent) => {
+      if (event.origin !== "https://calendly.com") return;
+      if (
+        event.data &&
+        typeof event.data === "object" &&
+        (event.data as { event?: string }).event === "calendly.event_scheduled"
+      ) {
+        trackBookingScheduled("calendly_modal_embed");
+      }
+    };
+    window.addEventListener("message", handleCalendlyMessage);
+
     return () => {
+      window.removeEventListener("message", handleCalendlyMessage);
       dialog?.close();
       document.body.style.paddingRight = previousPadding;
       document.body.style.overflow = previousOverflow;

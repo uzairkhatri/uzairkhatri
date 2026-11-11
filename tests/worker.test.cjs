@@ -70,6 +70,8 @@ test("Worker: POST /api/contact handles valid submissions and sends email", asyn
   assert.equal(res.status, 200);
   const data = await res.json();
   assert.equal(data.success, true);
+  assert.equal(data.dispatched, true);
+  assert.equal(data.messageId, "mock-msg-123");
 
   assert.equal(sentEmails.length, 1);
   const email = sentEmails[0];
@@ -116,6 +118,7 @@ test("Worker: POST /api/contact honeypot silently returns success without sendin
   assert.equal(res.status, 200);
   const data = await res.json();
   assert.equal(data.success, true);
+  assert.equal(data.dispatched, false);
   assert.equal(sentEmails.length, 0); // zero emails sent!
 });
 
@@ -142,6 +145,8 @@ test("Worker: POST /api/audit handles valid diagnostic requests", async () => {
   assert.equal(res.status, 200);
   const data = await res.json();
   assert.equal(data.success, true);
+  assert.equal(data.dispatched, true);
+  assert.equal(data.messageId, "mock-msg-123");
 
   assert.equal(sentEmails.length, 1);
   const email = sentEmails[0];
@@ -184,6 +189,7 @@ test("Worker: POST /api/audit honeypot silently returns success without sending 
   assert.equal(res.status, 200);
   const data = await res.json();
   assert.equal(data.success, true);
+  assert.equal(data.dispatched, false);
   assert.equal(sentEmails.length, 0);
 });
 
@@ -216,7 +222,59 @@ test("Worker: Error handling does not leak stack traces", async () => {
   const res = await worker.fetch(req, env);
   assert.equal(res.status, 500);
   const data = await res.json();
+  assert.equal(data.success, false);
   assert.equal(data.error, "Internal Cloudflare Mail Gateway Error");
+  assert.equal(data.stack, undefined);
+});
+
+test("Worker: Rejects invalid JSON and malformed email cleanly without dispatching", async () => {
+  const { env, sentEmails } = createMockEnv();
+
+  const badJsonRes = await worker.fetch(
+    new Request("https://uzairkhatri.com/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "{not-json",
+    }),
+    env
+  );
+  assert.equal(badJsonRes.status, 400);
+
+  const badEmailRes = await worker.fetch(
+    new Request("https://uzairkhatri.com/api/audit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "Test User",
+        email: "not-an-email",
+        message: "Review request",
+      }),
+    }),
+    env
+  );
+  assert.equal(badEmailRes.status, 400);
+  assert.equal(sentEmails.length, 0);
+});
+
+test("Worker: Returns 502 when mail transport resolves without confirming a messageId", async () => {
+  const { env } = createMockEnv();
+  env.EMAIL.send = async () => ({});
+
+  const res = await worker.fetch(
+    new Request("https://uzairkhatri.com/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "Jane",
+        email: "jane@test.com",
+        message: "Valid message content",
+      }),
+    }),
+    env
+  );
+  assert.equal(res.status, 502);
+  const data = await res.json();
+  assert.equal(data.success, false);
   assert.equal(data.stack, undefined);
 });
 

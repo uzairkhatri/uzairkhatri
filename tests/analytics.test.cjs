@@ -211,3 +211,18 @@ test("unmodified Selected Work tab clicks do not fire case_study_click, while mo
   assert.equal(events().length, 3);
   assert.ok(events().every((entry) => entry[1] === "case_study_click"));
 });
+
+test("booking_click remains distinct from booking_scheduled and fails closed off production", () => {
+  const { api, click, events } = setup("https://uzairkhatri.com/");
+  api.initializeAnalytics();
+  click("https://calendly.com/uz-khatri/30min", "contact_section");
+  api.trackBookingScheduled("calendly_modal_embed");
+  assert.equal(events().length, 2);
+  assert.equal(events()[0][1], "booking_click");
+  assert.equal(events()[1][1], "booking_scheduled");
+
+  const local = setup("http://localhost:3000/");
+  local.api.initializeAnalytics();
+  local.api.trackBookingScheduled("calendly_modal_embed");
+  assert.equal(local.events().length, 0);
+});

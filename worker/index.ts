@@ -1,3 +1,7 @@
+export interface EmailSendResult {
+  messageId?: string;
+}
+
 export interface Env {
   ASSETS: {
     fetch: typeof fetch;
@@ -10,9 +14,11 @@ export interface Env {
       text: string;
       html?: string;
       replyTo?: string;
-    }) => Promise<{ messageId: string }>;
+    }) => Promise<EmailSendResult>;
   };
 }
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function escapeHtml(str: string): string {
   return str
@@ -21,6 +27,79 @@ function escapeHtml(str: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function jsonResponse(payload: Record<string, unknown>, status = 200): Response {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+async function parseJsonBody<T>(request: Request): Promise<T | null> {
+  try {
+    const parsed = await request.json();
+    if (!parsed || typeof parsed !== "object") return null;
+    return parsed as T;
+  } catch {
+    return null;
+  }
+}
+
+class MailTransportError extends Error {
+  status: number;
+  constructor(message: string, status = 500) {
+    super(message);
+    this.status = status;
+  }
+}
+
+async function dispatchEmail(
+  env: Env,
+  route: string,
+  message: {
+    to: string;
+    from: string;
+    subject: string;
+    text: string;
+    html?: string;
+    replyTo?: string;
+  }
+): Promise<string> {
+  if (!env?.EMAIL || typeof env.EMAIL.send !== "function") {
+    throw new MailTransportError("Email delivery service is unavailable.", 500);
+  }
+
+  const sendResult = await env.EMAIL.send(message);
+  const messageId =
+    typeof sendResult?.messageId === "string" ? sendResult.messageId.trim() : "";
+
+  if (!messageId) {
+    throw new MailTransportError(
+      "Mail transport did not confirm a delivery messageId.",
+      502
+    );
+  }
+
+  console.log("Email dispatched", { route, messageId });
+  return messageId;
+}
+
+function handleDispatchError(err: unknown, route: string, fallback: string): Response {
+  const errObj = err as { message?: string; code?: string; status?: number } | null;
+  const status = typeof errObj?.status === "number" ? errObj.status : 500;
+  const errorMessage =
+    typeof errObj?.message === "string" && errObj.message.trim()
+      ? errObj.message
+      : fallback;
+
+  console.error("Email dispatch failed", {
+    route,
+    code: errObj?.code,
+    error: errorMessage,
+  });
+
+  return jsonResponse({ success: false, error: errorMessage }, status);
 }
 
 export default {
@@ -34,7 +113,7 @@ export default {
 
     if (url.pathname === "/api/audit" && request.method === "POST") {
       try {
-        const body = (await request.json()) as {
+        const body = await parseJsonBody<{
           name?: string;
           email?: string;
           company?: string;
@@ -44,12 +123,14 @@ export default {
           repoOrDiagram?: string;
           message?: string;
           _gotcha?: string;
-        };
+        }>(request);
+
+        if (!body) {
+          return jsonResponse({ error: "Invalid JSON request body." }, 400);
+        }
 
         if (body._gotcha) {
-          return new Response(JSON.stringify({ success: true }), {
-            headers: { "Content-Type": "application/json" },
-          });
+          return jsonResponse({ success: true, dispatched: false });
         }
 
         const name = (body.name || "").trim().slice(0, 100);
@@ -62,9 +143,16 @@ export default {
         const rawMessage = (body.message || "").trim().slice(0, 4000);
 
         if (!name || !email || !rawMessage) {
-          return new Response(
-            JSON.stringify({ error: "Name, email, and description are required." }),
-            { status: 400, headers: { "Content-Type": "application/json" } }
+          return jsonResponse(
+            { error: "Name, email, and description are required." },
+            400
+          );
+        }
+
+        if (!EMAIL_RE.test(email)) {
+          return jsonResponse(
+            { error: "Please provide a valid email address." },
+            400
           );
         }
 
@@ -177,7 +265,7 @@ ${rawMessage}
 Quick Reply: mailto:${email}?subject=${encodeURIComponent(`Re: AI Architecture Pre-Mortem - Uzair Khatri (${name})`)}
 ============================================================`;
 
-        await env.EMAIL.send({
+        const messageId = await dispatchEmail(env, "/api/audit", {
           to: "uz.khatri@gmail.com",
           from: "hello@uzairkhatri.com",
           subject: `🚨 [AI Pre-Mortem Request]: ${name} (${company || stack || "Production"})`,
@@ -186,32 +274,29 @@ Quick Reply: mailto:${email}?subject=${encodeURIComponent(`Re: AI Architecture P
           replyTo: email,
         });
 
-        return new Response(JSON.stringify({ success: true }), {
-          headers: { "Content-Type": "application/json" },
-        });
-      } catch (err: any) {
-        return new Response(
-          JSON.stringify({ error: err?.message || "Failed to dispatch audit email" }),
-          { status: 500, headers: { "Content-Type": "application/json" } }
-        );
+        return jsonResponse({ success: true, dispatched: true, messageId });
+      } catch (err: unknown) {
+        return handleDispatchError(err, "/api/audit", "Failed to dispatch audit email");
       }
     }
 
     if (url.pathname === "/api/contact" && request.method === "POST") {
       try {
-        const body = (await request.json()) as {
+        const body = await parseJsonBody<{
           name?: string;
           email?: string;
           message?: string;
           stage?: string;
           _gotcha?: string;
-        };
+        }>(request);
 
-        // Anti-bot honeypot check: If filled, return fake success silently
+        if (!body) {
+          return jsonResponse({ error: "Invalid JSON request body." }, 400);
+        }
+
+        // Anti-bot honeypot check: If filled, return silent non-dispatched response
         if (body._gotcha) {
-          return new Response(JSON.stringify({ success: true }), {
-            headers: { "Content-Type": "application/json" },
-          });
+          return jsonResponse({ success: true, dispatched: false });
         }
 
         const name = (body.name || "").trim().slice(0, 100);
@@ -220,9 +305,16 @@ Quick Reply: mailto:${email}?subject=${encodeURIComponent(`Re: AI Architecture P
         let stage = (body.stage || "").trim().slice(0, 50);
 
         if (!name || !email || !rawMessage) {
-          return new Response(
-            JSON.stringify({ error: "Name, email, and message are required." }),
-            { status: 400, headers: { "Content-Type": "application/json" } }
+          return jsonResponse(
+            { error: "Name, email, and message are required." },
+            400
+          );
+        }
+
+        if (!EMAIL_RE.test(email)) {
+          return jsonResponse(
+            { error: "Please provide a valid email address." },
+            400
           );
         }
 
@@ -353,8 +445,8 @@ Quick Reply: mailto:${email}?subject=${encodeURIComponent(`Re: Architecture Inqu
 Delivered via Cloudflare Workers API (uzairkhatri.com)
 ============================================================`;
 
-        // Dispatch directly through Cloudflare Workers email binding to your verified Gmail
-        await env.EMAIL.send({
+        // Dispatch directly through Cloudflare Email Service binding to your verified Gmail
+        const messageId = await dispatchEmail(env, "/api/contact", {
           to: "uz.khatri@gmail.com",
           from: "hello@uzairkhatri.com",
           subject: `Architecture Inquiry: ${name} [${stage}]`,
@@ -363,14 +455,9 @@ Delivered via Cloudflare Workers API (uzairkhatri.com)
           replyTo: email,
         });
 
-        return new Response(JSON.stringify({ success: true }), {
-          headers: { "Content-Type": "application/json" },
-        });
-      } catch (err: any) {
-        return new Response(
-          JSON.stringify({ error: err?.message || "Failed to dispatch email" }),
-          { status: 500, headers: { "Content-Type": "application/json" } }
-        );
+        return jsonResponse({ success: true, dispatched: true, messageId });
+      } catch (err: unknown) {
+        return handleDispatchError(err, "/api/contact", "Failed to dispatch email");
       }
     }
 

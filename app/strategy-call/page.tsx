@@ -5,26 +5,26 @@ import { BOOKING_URL, withBasePath } from "@/components/siteLinks";
 const image = "https://uzairkhatri.com/linkedin-featured/strategy-call.png?v=20260921";
 
 export const metadata: Metadata = {
-  title: "Book an AI Architecture Strategy Call",
-  description: "A focused 30-minute conversation about your AI services, SaaS application bottlenecks, or AI workflow architecture.",
+  title: "Book a 30-Minute Architecture Discovery Call",
+  description: "A focused 30-minute verbal conversation about your AI services, SaaS application bottlenecks, or engineering role scope.",
   alternates: {
     canonical: "https://uzairkhatri.com/strategy-call/",
   },
-  openGraph: { title: "Let’s Solve Your AI Workflow & SaaS Architecture", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Leave with a concrete engineering plan.", url: "https://uzairkhatri.com/strategy-call/", images: [{ url: image, width: 1734, height: 907 }] },
-  twitter: { card: "summary_large_image", title: "Let’s Solve Your AI Workflow & SaaS Architecture", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Leave with a concrete engineering plan.", images: [image] },
+  openGraph: { title: "30-Minute Architecture Discovery Call | Uzair Khatri", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Walk through constraints, key risks, and next steps (verbal call, no written deliverable).", url: "https://uzairkhatri.com/strategy-call/", images: [{ url: image, width: 1734, height: 907 }] },
+  twitter: { card: "summary_large_image", title: "30-Minute Architecture Discovery Call | Uzair Khatri", description: "Bring one difficult AI, SaaS, or architecture bottleneck. Walk through constraints, key risks, and next steps (verbal call, no written deliverable).", images: [image] },
 };
 
 export default function StrategyCall() {
   return <FeaturedLanding
-    eyebrow="30-minute architecture strategy call"
+    eyebrow="Free 30-minute architecture discovery call"
     title={<>Bring one hard problem. Leave with a <em>clearer direction.</em></>}
-    intro="This is a focused working conversation for founders, CTOs, and product leaders dealing with an AI workflow, product architecture decision, integration bottleneck, or unreliable system."
-    proof="No generic AI pitch. We will stay with your actual workflow, constraints, risks, and next decision."
+    intro="This is a focused verbal conversation for founders, CTOs, product leaders, and engineering hiring teams dealing with an AI workflow, architecture bottleneck, or senior hiring decision."
+    proof="No generic pitch and no written deliverable promised—we spend 30 minutes testing assumptions, bottlenecks, and the clearest next move."
     primaryLabel="Choose a time on Calendly"
     primaryHref={BOOKING_URL}
-    secondaryLabel="Review my services first"
-    secondaryHref={withBasePath("/services/ai-systems/")}
-    stats={[{value:"30 min",label:"Focused discussion around one problem"},{value:"3 outputs",label:"Direction, key risks, and next steps"},{value:"No pitch deck",label:"A practical architecture conversation"}]}
+    secondaryLabel="Explore $250 Architecture Pre-Mortem"
+    secondaryHref={withBasePath("/audit/")}
+    stats={[{value:"Free · 30 Min",label:"1-on-1 verbal engineering triage around one problem"},{value:"No Report",label:"Verbal discussion only—written audits live in /audit/"},{value:"No Pitch Deck",label:"Practical architecture and next-step clarity"}]}
     sectionEyebrow="Good reasons to book"
     sectionTitle="Use the call when the next technical decision matters."
     sectionIntro="You do not need a finished specification. You do need a real problem, enough context to discuss it, and a reason to make progress now."

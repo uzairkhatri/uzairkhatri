@@ -27,8 +27,8 @@ const faq = [
     "The Free 30-Minute Architecture Discovery Call is a focused, 1:1 sanity check to understand your system, identify your primary technical risk, and agree on an appropriate next step (verbal call, no written deliverable). The $250 Production Architecture Pre-Mortem is a fixed-scope review of one agreed technical problem delivering 3–5 pages of prioritized findings (Risk Priority Matrix P0/P1/P2), recommended remediation approaches (no repository access required), and a 30-minute live walkthrough within 48 hours of scope acceptance, receipt of complete materials, and confirmed availability."
   ],
   [
-    "What specific areas are analyzed in the $250 Pre-Mortem?",
-    "We inspect system boundaries, database connection pool exhaustion risks under LLM streaming, uncached prompt token inflation, hybrid RAG retrieval precision (dense + sparse BM25), LangGraph multi-agent recursion guards, latency waterfalls, and OWASP LLM security vulnerabilities."
+    "What specific areas can be scoped for the $250 Pre-Mortem?",
+    "Each $250 Pre-Mortem covers one agreed technical problem — for example, DB connection pool exhaustion under streaming, uncached prompt token inflation, hybrid RAG retrieval precision, LangGraph recursion guards, latency waterfalls, or LLM security boundaries. Multi-area or full-stack audits belong in Implementation & Advisory (Custom Quote)."
   ],
   [
     "Do I need to share proprietary source code?",
@@ -864,6 +864,7 @@ export default function AuditPage() {
     _gotcha: ""
   });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [deliveryRef, setDeliveryRef] = useState("");
   const sending = useRef(false);
 
   const toggleStack = (stack: string) =>
@@ -877,6 +878,18 @@ export default function AuditPage() {
   async function submitAudit(event: React.FormEvent) {
     event.preventDefault();
     if (sending.current) return;
+    const trimmedEmail = form.email.trim();
+    if (!form.name.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail) || !form.description.trim()) {
+      setStatus("error");
+      return;
+    }
+
+    if (form._gotcha) {
+      setDeliveryRef("");
+      setStatus("success");
+      return;
+    }
+
     sending.current = true;
     setStatus("submitting");
 
@@ -887,19 +900,25 @@ export default function AuditPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          company: form.company,
+          name: form.name.trim(),
+          email: trimmedEmail,
+          company: form.company.trim(),
           stage: form.stage,
           stack: selectedStacks.join(", "),
+          bottleneck: form.engagementType,
           message,
           _gotcha: form._gotcha
         })
       });
 
       const result = await response.json();
-      if (!response.ok || !result?.success) throw new Error();
+      const confirmedId =
+        typeof result?.messageId === "string" ? result.messageId.trim() : "";
+      if (!response.ok || result?.success !== true || result?.dispatched !== true || !confirmedId) {
+        throw new Error();
+      }
 
+      setDeliveryRef(confirmedId);
       trackAuditSubmission(selectedStacks.join(", "), form.engagementType);
       setStatus("success");
     } catch {
@@ -1024,7 +1043,7 @@ export default function AuditPage() {
           <div className={styles.sectionHeading}>
             <span>Selectable Focus Domains</span>
             <h2>Problem areas you can scope for review.</h2>
-            <p>Each $250 Production Architecture Pre-Mortem targets one agreed technical problem within these areas—or can be scoped as a custom multi-area engagement.</p>
+            <p>Each $250 Production Architecture Pre-Mortem targets <strong>one agreed technical problem</strong> chosen from these domains. Multi-area reviews or full-stack engagements belong under Implementation &amp; Advisory (Custom Quote).</p>
           </div>
           <div className={styles.auditGrid}>
             {auditAreas.map((area) => (
@@ -1071,8 +1090,12 @@ export default function AuditPage() {
           {status === "success" ? (
             <div className={styles.success}>
               <span>✓</span>
-              <h2>Your request has been received.</h2>
-              <p>I’ll review your details and get back to you within 24 to 48 hours.</p>
+              <h2>Your request has been queued for delivery.</h2>
+              <p>
+                {deliveryRef
+                  ? `Confirmed handoff to mail transport (Ref: ${deliveryRef}). I’ll review your details and reply within 24 to 48 hours.`
+                  : "Request received."}
+              </p>
             </div>
           ) : (
             <>

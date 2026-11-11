@@ -6,23 +6,23 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 const image = "https://uzairkhatri.com/linkedin-featured/services.png?v=20260921";
 
 export const metadata: Metadata = {
-  title: "Production AI & Architecture Diagnostic Review",
+  title: "Production AI & Architecture Diagnostic Review (Custom 2-Week Sprint)",
   description:
-    "A 2-week focused technical review for AI systems and SaaS platforms: isolating hallucination vectors, token cost leaks, rate-limit bottlenecks, and scale risks by Uzair Khatri.",
+    "A custom-scoped 2-week technical review for AI systems and SaaS platforms: isolating hallucination vectors, token cost leaks, rate-limit bottlenecks, and scale risks by Uzair Khatri.",
   alternates: {
     canonical: "https://uzairkhatri.com/services/ai-audit/",
   },
   openGraph: {
-    title: "Production AI & Architecture Diagnostic Review",
-    description: "Isolate hallucination vectors, token cost leaks, and scale risks in a focused 2-week architectural sprint.",
+    title: "Production AI & Architecture Diagnostic Review | Uzair Khatri",
+    description: "Custom-scoped 2-week architectural sprint to isolate hallucination vectors, token cost leaks, and scale risks.",
     url: "https://uzairkhatri.com/services/ai-audit/",
     images: [{ url: image, width: 1734, height: 907 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Production AI & Architecture Diagnostic Review",
-    description: "Isolate hallucination vectors, token cost leaks, and scale risks in a focused 2-week architectural sprint.",
-    images: [image],
+    title: "Production AI & Architecture Diagnostic Review | Uzair Khatri",
+    description: "Custom-scoped 2-week architectural sprint to isolate hallucination vectors, token cost leaks, and scale risks.",
+    images: ["https://uzairkhatri.com/img/og-image.png"],
   },
 };
 
@@ -37,18 +37,18 @@ export default function AIAuditServicePage() {
         ]}
       />
       <FeaturedLanding
-        eyebrow="Diagnostic Sprint / Architecture Review"
+        eyebrow="Custom-Scoped 2-Week Deep Diagnostic (Implementation & Advisory)"
         title={<>Find the failure points in your AI system <em>before your customers do.</em></>}
-        intro="A focused 2-week architectural diagnostic for founders, CTOs, and engineering leaders: isolating hallucination vectors, API rate-limit bottlenecks, token cost leaks, and state corruption risks in your prototype or live product."
+        intro="A custom-scoped 2-week architectural engagement (Implementation & Advisory tier) for teams needing full-stack trace analysis and remediation diffs. Looking for a fixed-scope $250 review of one agreed technical problem instead? Request the $250 Pre-Mortem or start with a free 30-minute discovery call."
         proof="14+ years across mission-critical enterprise systems, regulated insurance platforms (Enterprise Insurer), and high-throughput production AI applications."
-        primaryLabel="Book Diagnostic Review"
+        primaryLabel="Book Discovery Call"
         primaryHref={BOOKING_URL}
-        secondaryLabel="Review All Services"
-        secondaryHref={withBasePath("/services/ai-systems/")}
+        secondaryLabel="Explore $250 Single-Problem Review"
+        secondaryHref={withBasePath("/audit/")}
         stats={[
-          { value: "2-Week", label: "Fixed-scope diagnostic sprint with immediate deliverables" },
-          { value: "360°", label: "Audit covering prompts, schemas, state graphs & cloud infrastructure" },
-          { value: "Direct ROI", label: "Immediate token cost reductions & reliability hardening" },
+          { value: "Custom Quote", label: "2-week multi-area sprint tailored to your codebase & traces" },
+          { value: "End-to-End", label: "Deep inspection of prompts, schemas, state graphs & infrastructure" },
+          { value: "Direct Handoff", label: "Prioritized risk scorecards, remediation diffs & team walkthrough" },
         ]}
         sectionEyebrow="Diagnostic Focus Areas"
         sectionTitle="What the 2-week architecture review inspects and hardens."

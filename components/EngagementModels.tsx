@@ -73,9 +73,9 @@ const engagementTiers: EngagementTier[] = [
     title: "30-Minute Architecture Discovery Call",
     priceBadge: "FREE · 30 MIN",
     description:
-      "An initial conversation to understand your system architecture, identify critical bottlenecks or failure risks, and agree on an appropriate next step.",
+      "An engineer-to-engineer conversation to review your system context, surface the primary bottleneck or failure risk, and agree on an appropriate next step.",
     scopeNote:
-      "A focused conversation to understand your system and agree on an appropriate next step. No written deliverable is promised.",
+      "Verbal call only — no written report, architecture map, or code review is included.",
     ctaText: "Book a 30-Minute Discovery Call",
     ctaHref: BOOKING_URL,
     isExternal: true,

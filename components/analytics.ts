@@ -91,6 +91,17 @@ export function trackBookingClick(source: string = "general") {
   });
 }
 
+export function trackBookingScheduled(source: string = "calendly_modal_embed") {
+  if (!isAnalyticsAllowed()) return;
+  trackEvent("booking_scheduled", {
+    event_category: "Conversion",
+    event_label: source,
+    source,
+    page_path: window.location.pathname,
+    value: 1,
+  });
+}
+
 export function trackLinkClick(event: MouseEvent) {
   if (!isAnalyticsAllowed()) return;
   if (event.type === "click" ? event.button !== 0 : event.type !== "auxclick" || event.button !== 1) return;

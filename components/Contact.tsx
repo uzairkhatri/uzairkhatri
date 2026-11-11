@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import styles from "./Contact.module.css";
 import {
   BOOKING_URL,
+  CV_URL,
   EMAIL_ADDRESS,
   EMAIL_URL,
   withBasePath,
@@ -69,7 +70,7 @@ const channels: ChannelCard[] = [
   },
   {
     label: "GITHUB",
-    value: "Inspect production code",
+    value: "Code & repositories",
     href: "https://github.com/UzairKhatri",
     external: true,
     arrow: "↗",
@@ -92,8 +93,8 @@ const channels: ChannelCard[] = [
   },
   {
     label: "RESUME / CV",
-    value: "Uzair Khatri (Uzair Iqbal) · PDF",
-    href: withBasePath("/Uzair-Iqbal-AI-Architect-CV.pdf"),
+    value: "Uzair Iqbal · PDF",
+    href: CV_URL,
     download: true,
     arrow: "↓",
     icon: (
@@ -117,15 +118,17 @@ const channels: ChannelCard[] = [
   },
 ];
 
-const projectStages = [
-  "Idea",
-  "Prototype",
+const inquiryOptions = [
+  "Idea / MVP",
   "In Production",
-  "Existing System",
+  "$250 Pre-Mortem",
+  "Hiring / Role",
 ] as const;
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Contact() {
-  const [projectStage, setProjectStage] = useState<string>("Prototype");
+  const [projectStage, setProjectStage] = useState<string>("Idea / MVP");
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -135,32 +138,47 @@ export default function Contact() {
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
+  const [deliveryRef, setDeliveryRef] = useState("");
   const submitting = useRef(false);
   const [errorMessage, setErrorMessage] = useState("");
   const emailFallback = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(
-    "Architecture Inquiry (" + projectStage + ") from " + formState.name
+    "Inquiry (" + projectStage + ") from " + formState.name
   )}&body=${encodeURIComponent(
     "From: " +
       formState.name +
       " (" +
       formState.email +
-      ")\n\n[Project Stage: " +
+      ")\n\n[Inquiry Type: " +
       projectStage +
       "]\n\n" +
       formState.message
   )}`;
 
+  const messagePlaceholder =
+    projectStage === "Hiring / Role"
+      ? "Share the role title (e.g., Principal AI Architect / Staff Backend), team scope, location/remote model, and timeline..."
+      : projectStage === "$250 Pre-Mortem"
+      ? "Describe the one technical problem or bottleneck you want scoped for the $250 Pre-Mortem..."
+      : "What are you building, what is breaking or scaling, and what outcome do you need?";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting.current) return;
+    const trimmedEmail = formState.email.trim();
     if (!formState.name.trim() || !formState.message.trim()) {
-      setErrorMessage("Please enter your name and project context.");
+      setErrorMessage("Please enter your name and inquiry details.");
+      setStatus("error");
+      return;
+    }
+    if (!EMAIL_RE.test(trimmedEmail)) {
+      setErrorMessage("Please enter a valid work or contact email address.");
       setStatus("error");
       return;
     }
 
-    // Honeypot check: If filled by automated bot, fake success silently without hitting API
+    // Honeypot check: If filled by automated bot, silently reset without triggering analytics or API
     if (formState._gotcha) {
+      setDeliveryRef("");
       setStatus("success");
       setFormState({ name: "", email: "", message: "", _gotcha: "" });
       return;
@@ -169,6 +187,7 @@ export default function Contact() {
     submitting.current = true;
     setStatus("submitting");
     setErrorMessage("");
+    setDeliveryRef("");
 
     const endpoint = withBasePath("/api/contact");
     const controller = new AbortController();
@@ -184,7 +203,7 @@ export default function Contact() {
         },
         body: JSON.stringify({
           name: formState.name.trim().slice(0, 100),
-          email: formState.email.trim().slice(0, 100),
+          email: trimmedEmail.slice(0, 100),
           message: formState.message.trim().slice(0, 3000),
           stage: projectStage,
           _gotcha: formState._gotcha,
@@ -192,16 +211,24 @@ export default function Contact() {
       });
 
       const result = await response.json();
-      if (response.ok && result?.success === true) {
+      const messageId =
+        typeof result?.messageId === "string" ? result.messageId.trim() : "";
+      if (
+        response.ok &&
+        result?.success === true &&
+        result?.dispatched === true &&
+        messageId
+      ) {
+        setDeliveryRef(messageId);
         trackLeadSubmission(projectStage, "api_contact");
         setStatus("success");
         setFormState({ name: "", email: "", message: "", _gotcha: "" });
       } else {
-        throw new Error("Contact request was not accepted");
+        throw new Error(result?.error || "Mail transport dispatch was not confirmed");
       }
     } catch {
       setErrorMessage(
-        "We couldn't confirm delivery. Your message is still here. Try again, or send it using your email app."
+        "We couldn't confirm mail dispatch. Your message is still intact—try again, or open an email draft directly."
       );
       setStatus("error");
     } finally {
@@ -304,37 +331,38 @@ export default function Contact() {
                         <circle cx="12" cy="12" r="10" />
                         <polyline points="12 6 12 12 16 14" />
                       </svg>
-                      <span>30 MIN &middot; 1-ON-1</span>
+                      <span>FREE · 30 MIN</span>
                     </div>
                   </div>
 
                   <h3 className={styles.callTitle}>
-                    Book an Architecture Strategy Call
+                    Book a 30-Minute Discovery Call
                   </h3>
                   <p className={styles.callDesc}>
-                    A focused 30-minute engineer-to-engineer conversation to review
-                    your system architecture, identify your highest-risk bottlenecks,
-                    and agree on concrete next steps.
+                    A focused 30-minute conversation for founders, CTOs, and
+                    hiring leaders to discuss your system context, surface the
+                    primary bottleneck or role scope, and agree on a practical
+                    next step (verbal call — no written deliverable).
                   </p>
 
-                  {/* Concrete 30-Min Session Agenda */}
+                  {/* 30-Min Discovery Call Flow Preview */}
                   <div className={styles.agendaWindow} aria-hidden="true">
                     <div className={styles.agendaHeader}>
-                      <span>30-MIN STRATEGY CALL AGENDA</span>
-                      <span className={styles.agendaTag}>1-ON-1</span>
+                      <span>30-MIN DISCOVERY CALL FLOW</span>
+                      <span className={styles.agendaTag}>VERBAL · FREE</span>
                     </div>
                     <div className={styles.agendaRows}>
                       <div className={styles.agendaRow}>
-                        <span>01 · Current Architecture &amp; Topology</span>
-                        <span className={styles.agendaPill}>System Map</span>
+                        <span>01 · System Context &amp; Constraints</span>
+                        <span className={styles.agendaPill}>Walkthrough</span>
                       </div>
                       <div className={styles.agendaRow}>
-                        <span>02 · Critical Failure Points &amp; Scaling Limits</span>
-                        <span className={styles.agendaPillGold}>Risk Triage</span>
+                        <span>02 · Primary Bottleneck or Role Fit</span>
+                        <span className={styles.agendaPillGold}>Triage</span>
                       </div>
                       <div className={styles.agendaRow}>
-                        <span>03 · High-Priority Engineering Decisions</span>
-                        <span className={styles.agendaPill}>Action Plan</span>
+                        <span>03 · Agreed Practical Next Step</span>
+                        <span className={styles.agendaPill}>No Written Report</span>
                       </div>
                     </div>
                   </div>
@@ -347,7 +375,7 @@ export default function Contact() {
                   data-source="contact_section"
                   className={styles.goldBtn}
                 >
-                  <span>Book 30-Min Architecture Call</span>
+                  <span>Book 30-Minute Discovery Call</span>
                   <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
@@ -386,16 +414,17 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* RIGHT COLUMN (55%): Async System Context Form */}
+            {/* RIGHT COLUMN (55%): Async Inquiry & Hiring Form */}
             <div className={styles.rightCol} id="contact-card">
               <div className={styles.formPanel}>
-                <span className={styles.formKicker}>
-                  PREFER ASYNC? // SEND SYSTEM CONTEXT
-                </span>
-                <h3 className={styles.formHeading}>
-                  Send the context. I&apos;ll pressure-test the shape of the
-                  system.
-                </h3>
+                <div className={styles.formHeader}>
+                  <span className={styles.formKicker}>
+                    PREFER ASYNC? // CLIENT, AUDIT &amp; HIRING INQUIRIES
+                  </span>
+                  <h3 className={styles.formHeading}>
+                    Send your context or role details for a direct response.
+                  </h3>
+                </div>
 
                 {status === "success" ? (
                   <div className={styles.formSuccess} role="status">
@@ -412,10 +441,11 @@ export default function Contact() {
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </div>
-                    <strong>Message received.</strong>
+                    <strong>Message queued for delivery.</strong>
                     <p>
-                      I&apos;ll review your system context and respond within 24
-                      hours.
+                      {deliveryRef
+                        ? `Confirmed mail transport handoff (Ref: ${deliveryRef}). I'll review your inquiry and reply within 24 hours.`
+                        : "I'll review your inquiry and respond within 24 hours."}
                     </p>
                     <button
                       type="button"
@@ -481,9 +511,9 @@ export default function Contact() {
                     <div
                       className={styles.stageTrack}
                       role="radiogroup"
-                      aria-label="Project stage"
+                      aria-label="Inquiry type or system stage"
                     >
-                      {projectStages.map((stage) => {
+                      {inquiryOptions.map((stage) => {
                         const active = projectStage === stage;
                         return (
                           <button
@@ -497,15 +527,37 @@ export default function Contact() {
                             aria-checked={active}
                             role="radio"
                           >
-                            [{stage}]
+                            {stage}
                           </button>
                         );
                       })}
                     </div>
 
+                    {projectStage === "$250 Pre-Mortem" && (
+                      <div className={styles.contextHint}>
+                        <span>
+                          Fixed-scope review of one agreed technical problem (3–5 pages + 30-min walkthrough).
+                        </span>
+                        <a href={withBasePath("/audit/#pricing-tiers")}>
+                          Compare Tiers &rarr;
+                        </a>
+                      </div>
+                    )}
+
+                    {projectStage === "Hiring / Role" && (
+                      <div className={styles.contextHint}>
+                        <span>
+                          Open to Principal / Staff AI &amp; Backend Engineering roles (remote / Dubai / GCC).
+                        </span>
+                        <a href={CV_URL} target="_blank" rel="noreferrer">
+                          Open CV (PDF) &rarr;
+                        </a>
+                      </div>
+                    )}
+
                     <textarea
-                      placeholder="What is built, what is breaking, and what has to scale?"
-                      aria-label="Project context"
+                      placeholder={messagePlaceholder}
+                      aria-label="Inquiry details"
                       name="message"
                       disabled={status === "submitting"}
                       required
@@ -532,17 +584,21 @@ export default function Contact() {
                     >
                       <span>
                         {status === "submitting"
-                          ? "Sending..."
+                          ? "Dispatching..."
                           : status === "error"
                           ? "Try again"
-                          : "Send System Context"}
+                          : projectStage === "Hiring / Role"
+                          ? "Send Hiring / Role Inquiry"
+                          : projectStage === "$250 Pre-Mortem"
+                          ? "Request Scope Confirmation"
+                          : "Send Inquiry"}
                       </span>
                       <span aria-hidden="true">&rarr;</span>
                     </button>
 
                     <p className={styles.formFootnote}>
-                      Direct response within 24 hours &middot; Zero sales
-                      intermediaries
+                      Direct response within 24 hours &middot; Transport-verified
+                      dispatch &middot; No sales intermediaries
                     </p>
                   </form>
                 )}

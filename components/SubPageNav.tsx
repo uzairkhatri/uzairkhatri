@@ -59,8 +59,8 @@ export default function SubPageNav({
           CV
         </a>
       </div>
-      <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta}>
-        Book Strategy Call
+      <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.topNavCta} data-source="subpage_nav">
+        Book Discovery Call
       </a>
     </nav>
   );
