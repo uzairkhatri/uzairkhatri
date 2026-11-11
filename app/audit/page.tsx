@@ -865,6 +865,7 @@ export default function AuditPage() {
   });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [deliveryRef, setDeliveryRef] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const sending = useRef(false);
 
   const toggleStack = (stack: string) =>
@@ -879,7 +880,13 @@ export default function AuditPage() {
     event.preventDefault();
     if (sending.current) return;
     const trimmedEmail = form.email.trim();
-    if (!form.name.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail) || !form.description.trim()) {
+    if (!form.name.trim() || !form.description.trim()) {
+      setErrorMessage("Please enter your name and system or problem details.");
+      setStatus("error");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setErrorMessage("Please enter a valid work or contact email address.");
       setStatus("error");
       return;
     }
@@ -892,17 +899,22 @@ export default function AuditPage() {
 
     sending.current = true;
     setStatus("submitting");
+    setErrorMessage("");
+    setDeliveryRef("");
 
-    const message = `[ARCHITECTURE ENGAGEMENT INQUIRY]\nType: ${form.engagementType}\nCompany: ${form.company || "N/A"}\nStage: ${form.stage || "N/A"}\nStack: ${selectedStacks.join(", ") || "N/A"}\n\n${form.description}`;
+    const message = `[ARCHITECTURE ENGAGEMENT INQUIRY]\nType: ${form.engagementType}\nCompany: ${form.company || "N/A"}\nStage: ${form.stage || "N/A"}\nStack: ${selectedStacks.join(", ") || "N/A"}\n\n${form.description.trim().slice(0, 3500)}`;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
 
     try {
       const response = await fetch(withBasePath("/api/audit"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          name: form.name.trim(),
-          email: trimmedEmail,
-          company: form.company.trim(),
+          name: form.name.trim().slice(0, 100),
+          email: trimmedEmail.slice(0, 100),
+          company: form.company.trim().slice(0, 100),
           stage: form.stage,
           stack: selectedStacks.join(", "),
           bottleneck: form.engagementType,
@@ -912,18 +924,44 @@ export default function AuditPage() {
       });
 
       const result = await response.json();
-      const confirmedId =
-        typeof result?.messageId === "string" ? result.messageId.trim() : "";
-      if (!response.ok || result?.success !== true || result?.dispatched !== true || !confirmedId) {
-        throw new Error();
+      const confirmedRef =
+        typeof result?.referenceId === "string" ? result.referenceId.trim() : "";
+      if (!response.ok || result?.success !== true || result?.dispatched !== true || !confirmedRef) {
+        const apiError =
+          response.status >= 400 &&
+          response.status < 500 &&
+          typeof result?.error === "string" &&
+          result.error.trim()
+            ? result.error.trim()
+            : "Mail transport dispatch was not confirmed";
+        throw Object.assign(new Error(apiError), { status: response.status });
       }
 
-      setDeliveryRef(confirmedId);
+      setDeliveryRef(confirmedRef);
       trackAuditSubmission(selectedStacks.join(", "), form.engagementType);
       setStatus("success");
-    } catch {
+      setSelectedStacks([]);
+      setForm({
+        name: "",
+        email: "",
+        company: "",
+        stage: "",
+        engagementType: "Production Architecture Pre-Mortem ($250 Flat)",
+        description: "",
+        _gotcha: "",
+      });
+    } catch (err: unknown) {
+      const errObj = err as { name?: string; status?: number; message?: string } | null;
+      if (errObj?.name === "AbortError") {
+        setErrorMessage("The dispatch request timed out before confirmation. Please retry or email hello@uzairkhatri.com.");
+      } else if (errObj?.status && errObj.status >= 400 && errObj.status < 500 && errObj.message) {
+        setErrorMessage(errObj.message);
+      } else {
+        setErrorMessage("The request could not be confirmed for mail dispatch. Please retry or email hello@uzairkhatri.com.");
+      }
       setStatus("error");
     } finally {
+      window.clearTimeout(timeout);
       sending.current = false;
     }
   }
@@ -939,9 +977,9 @@ export default function AuditPage() {
             <h3>Looking for a Principal AI Systems Architect or Staff Backend Engineer?</h3>
             <p>14+ years of software engineering and distributed systems, hands-on production AI architecture across Python, Java, AWS, Redis Redlock, and LangGraph multi-agent runtimes. Available for senior full-time roles, contracts, and fractional leadership.</p>
             <div className={styles.recruiterActions}>
-              <a href={CV_URL} target="_blank" rel="noreferrer" className={styles.recruiterButton}>Download CV (Uzair Iqbal - PDF) &rarr;</a>
-              <a href={withBasePath("/#work")} className={styles.recruiterSecondary}>View Enterprise Case Studies</a>
-              <a href="mailto:hello@uzairkhatri.com" className={styles.recruiterSecondary}>hello@uzairkhatri.com</a>
+              <a href={CV_URL} target="_blank" rel="noreferrer" data-source="audit_recruiter_banner" className={styles.recruiterButton}>Download CV (Uzair Iqbal - PDF) &rarr;</a>
+              <a href={withBasePath("/#work")} data-source="audit_recruiter_banner" data-recruiter-cta="audit_banner_case_studies" className={styles.recruiterSecondary}>View Enterprise Case Studies</a>
+              <a href="mailto:hello@uzairkhatri.com" data-source="audit_recruiter_banner" data-recruiter-cta="audit_banner_email" className={styles.recruiterSecondary}>hello@uzairkhatri.com</a>
             </div>
           </div>
         </div>
@@ -1088,14 +1126,26 @@ export default function AuditPage() {
 
         <section className={styles.formSection} id="request-audit">
           {status === "success" ? (
-            <div className={styles.success}>
+            <div className={styles.success} role="status">
               <span>✓</span>
               <h2>Your request has been queued for delivery.</h2>
               <p>
                 {deliveryRef
-                  ? `Confirmed handoff to mail transport (Ref: ${deliveryRef}). I’ll review your details and reply within 24 to 48 hours.`
-                  : "Request received."}
+                  ? `Reference: ${deliveryRef}. Your inquiry comes directly to me. I'll respond as soon as possible.`
+                  : "Your inquiry comes directly to me. I'll respond as soon as possible."}
               </p>
+              <button
+                type="button"
+                className={styles.secondaryButton}
+                style={{ marginTop: "16px" }}
+                onClick={() => {
+                  setDeliveryRef("");
+                  setErrorMessage("");
+                  setStatus("idle");
+                }}
+              >
+                Submit another request
+              </button>
             </div>
           ) : (
             <>
@@ -1104,20 +1154,20 @@ export default function AuditPage() {
                 <h2>Request Your Architecture Review</h2>
                 <p>Select your preferred engagement level. All submissions are kept strictly confidential.</p>
               </div>
-              <form onSubmit={submitAudit}>
-                <input className={styles.honeypot} tabIndex={-1} autoComplete="off" value={form._gotcha} onChange={(e) => update("_gotcha", e.target.value)}/>
+              <form onSubmit={submitAudit} aria-busy={status === "submitting"}>
+                <input className={styles.honeypot} name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden="true" value={form._gotcha} onChange={(e) => update("_gotcha", e.target.value)}/>
                 <div className={styles.formGrid}>
                   <label>Your Name <b>*</b>
-                    <input required value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="e.g. Alex Vance"/>
+                    <input required name="name" autoComplete="name" maxLength={100} disabled={status === "submitting"} value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="e.g. Alex Vance"/>
                   </label>
                   <label>Work Email <b>*</b>
-                    <input required type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="alex@company.com"/>
+                    <input required type="email" name="email" autoComplete="email" maxLength={100} disabled={status === "submitting"} value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="alex@company.com"/>
                   </label>
                   <label>Company / Product URL
-                    <input value={form.company} onChange={(e) => update("company", e.target.value)} placeholder="company.com or app name"/>
+                    <input name="company" autoComplete="organization" maxLength={100} disabled={status === "submitting"} value={form.company} onChange={(e) => update("company", e.target.value)} placeholder="company.com or app name"/>
                   </label>
                   <label>Current Stage
-                    <select value={form.stage} onChange={(e) => update("stage", e.target.value)}>
+                    <select name="stage" disabled={status === "submitting"} value={form.stage} onChange={(e) => update("stage", e.target.value)}>
                       <option value="">Select stage</option>
                       <option>Idea / Planning</option>
                       <option>Prototype / MVP</option>
@@ -1131,6 +1181,8 @@ export default function AuditPage() {
                   <label style={{ fontSize: "0.82rem", fontWeight: "700", color: "var(--audit-gold-bright)", display: "block", marginBottom: "8px" }}>
                     Engagement Type <b>*</b>
                     <select
+                      name="engagementType"
+                      disabled={status === "submitting"}
                       value={form.engagementType}
                       onChange={(e) => update("engagementType", e.target.value)}
                       style={{ width: "100%", height: "46px", background: "#0a1012", border: "1px solid rgba(255, 255, 255, 0.15)", borderRadius: "6px", color: "#ffffff", padding: "0 14px", marginTop: "4px" }}
@@ -1156,10 +1208,10 @@ export default function AuditPage() {
 
                 <label className={styles.fullLabel}>
                   Tell me about your system &amp; what you’re looking to review or build <b>*</b>
-                  <textarea required value={form.description} onChange={(e) => update("description", e.target.value)} placeholder="e.g. We’re deploying an agentic LangGraph workflow and experiencing latency spikes on tool calls, plus need a pre-launch sanity check..."/>
+                  <textarea required name="description" maxLength={3500} disabled={status === "submitting"} value={form.description} onChange={(e) => update("description", e.target.value)} placeholder="e.g. We’re deploying an agentic LangGraph workflow and experiencing latency spikes on tool calls, plus need a pre-launch sanity check..."/>
                 </label>
 
-                {status === "error" && <p className={styles.formError}>The request could not be sent. Please email hello@uzairkhatri.com.</p>}
+                {status === "error" && <p className={styles.formError} role="alert">{errorMessage || "The request could not be sent. Please email hello@uzairkhatri.com."}</p>}
                 
                 <button className={styles.submitButton} disabled={status === "submitting"}>
                   {status === "submitting" ? "Submitting…" : "Submit Review Request →"}

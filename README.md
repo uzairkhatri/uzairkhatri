@@ -1,14 +1,14 @@
 <h1 align="center">Hi, I'm Uzair Khatri</h1>
 
 <p align="center">
-  <strong>Solutions Architect and AI Systems Engineer</strong><br />
+  <strong>Principal AI Systems Architect &amp; SaaS Engineer</strong><br />
   I turn fragile AI prototypes into observable, testable, production systems.
 </p>
 
 <p align="center">
-  <a href="https://uzairkhatri.com"><img src="https://img.shields.io/badge/Portfolio-uzairkhatri.com-0052CC?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
+  <a href="https://uzairkhatri.com/?utm_source=github&utm_medium=profile&utm_campaign=profile_hero"><img src="https://img.shields.io/badge/Portfolio-uzairkhatri.com-0052CC?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
   <a href="https://uzairkhatri.com/Uzair-Iqbal-AI-Architect-CV.pdf"><img src="https://img.shields.io/badge/Resume%2FCV-Download_PDF-blue?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Resume / CV" /></a>
-  <a href="https://uzairkhatri.com/insights"><img src="https://img.shields.io/badge/Blog-Insights-7C3AED?style=flat-square&logo=rss&logoColor=white" alt="Blog" /></a>
+  <a href="https://uzairkhatri.com/insights/?utm_source=github&utm_medium=profile&utm_campaign=profile_insights"><img src="https://img.shields.io/badge/Blog-Insights-7C3AED?style=flat-square&logo=rss&logoColor=white" alt="Blog" /></a>
   <a href="https://www.linkedin.com/in/uzair-khatri/"><img src="https://img.shields.io/badge/LinkedIn-Uzair_Khatri-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:hello@uzairkhatri.com"><img src="https://img.shields.io/badge/Email-hello%40uzairkhatri.com-059669?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
   <a href="https://calendly.com/uz-khatri/30min"><img src="https://img.shields.io/badge/Book_a_Call-30_minutes-EA580C?style=flat-square&logo=calendly&logoColor=white" alt="Book a call" /></a>
@@ -32,7 +32,7 @@ Provider-independent FastAPI reference architecture for measurable retrieval-aug
 - Reproducible evaluation with Recall@5 and MRR quality gates in CI
 - Local adapters for offline development and provider interfaces for production integration
 
-[Repository](https://github.com/uzairkhatri/production-rag-reference) | [Architecture case study](https://uzairkhatri.com/work/production-rag/)
+[Repository](https://github.com/uzairkhatri/production-rag-reference) | [Architecture case study](https://uzairkhatri.com/work/production-rag/?utm_source=github&utm_medium=profile&utm_campaign=rag_reference)
 
 ---
 
@@ -63,7 +63,7 @@ Deterministic CLI for auditing AI and LLM repositories before deployment.
 - Produces JSON, Markdown, and SARIF output for local use and CI workflows
 - Converts production-readiness requirements into reviewable repository evidence
 
-[Repository](https://github.com/uzairkhatri/production-ai-readiness) | [AI audit practice](https://uzairkhatri.com/services/ai-audit/)
+[Repository](https://github.com/uzairkhatri/production-ai-readiness) | [Architecture review practice](https://uzairkhatri.com/services/ai-audit/?utm_source=github&utm_medium=profile&utm_campaign=ai_audit)
 
 ---
 
@@ -134,9 +134,9 @@ Detailed outcomes and project context are available in the [case studies](https:
 
 I work with teams moving AI prototypes into production and with engineering organizations that need stronger architecture, reliability, or delivery controls.
 
-**Availability:** Actively available for senior engineering leadership, Staff/Principal AI Systems Architect roles, and fixed-scope architecture pre-mortems ($250).
+**Availability:** Open to Staff / Principal AI Systems Architect roles and technical architecture advisory.
 
-[Portfolio](https://uzairkhatri.com) | [Case studies](https://uzairkhatri.com/case-studies/) | [LinkedIn](https://www.linkedin.com/in/uzair-khatri/) | [Book a call](https://calendly.com/uz-khatri/30min) | [Email](mailto:hello@uzairkhatri.com)
+[Portfolio](https://uzairkhatri.com/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [Case studies](https://uzairkhatri.com/case-studies/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [Architecture review](https://uzairkhatri.com/audit/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [LinkedIn](https://www.linkedin.com/in/uzair-khatri/) | [Book a call](https://calendly.com/uz-khatri/30min) | [Email](mailto:hello@uzairkhatri.com)
 
 <p align="center">
   <strong>Production AI | Grounded RAG | Distributed Systems | Reliable Delivery</strong>

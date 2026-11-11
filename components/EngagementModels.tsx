@@ -299,6 +299,8 @@ export default function EngagementModels() {
           <div className={styles.recruiterActions}>
             <a
               href={withBasePath("/case-studies/")}
+              data-source="engagement_recruiter"
+              data-recruiter-cta="engagement_recruiter_case_studies"
               className={styles.recruiterBtnOutline}
             >
               <span>Case Studies</span>
@@ -308,6 +310,7 @@ export default function EngagementModels() {
               href={CV_URL}
               target="_blank"
               rel="noreferrer"
+              data-source="engagement_recruiter"
               className={styles.recruiterBtnGold}
             >
               <span>View CV (PDF)</span>

@@ -102,6 +102,19 @@ export function trackBookingScheduled(source: string = "calendly_modal_embed") {
   });
 }
 
+export function trackRecruiterCta(ctaAction: string, source: string = "page_link") {
+  if (!isAnalyticsAllowed()) return;
+  trackEvent("recruiter_cta_click", {
+    cta_action: ctaAction,
+    source,
+    page_path: window.location.pathname,
+  });
+}
+
+function normalizeUrlWithoutParams(url: URL): string {
+  return `${url.origin}${url.pathname.replace(/\/$/, "")}`;
+}
+
 export function trackLinkClick(event: MouseEvent) {
   if (!isAnalyticsAllowed()) return;
   if (event.type === "click" ? event.button !== 0 : event.type !== "auxclick" || event.button !== 1) return;
@@ -121,10 +134,50 @@ export function trackLinkClick(event: MouseEvent) {
   const source = anchor.getAttribute("data-source") ||
     anchor.closest("section[id], nav, footer")?.getAttribute("id") || "page_link";
   const destination = new URL(anchor.href, window.location.href);
-  if (destination.href === BOOKING_URL) {
+
+  // 1. Calendly booking intent
+  if (normalizeUrlWithoutParams(destination) === BOOKING_URL) {
     trackBookingClick(source);
     return;
   }
+
+  // 2. Outbound developer & recruiter network links (no query strings or PII)
+  if (destination.hostname === "github.com") {
+    trackEvent("github_outbound_click", {
+      destination_path: destination.pathname,
+      source,
+      page_path: window.location.pathname,
+    });
+    return;
+  }
+
+  if (destination.hostname === "www.linkedin.com" || destination.hostname === "linkedin.com") {
+    trackEvent("linkedin_outbound_click", {
+      destination_path: destination.pathname,
+      source,
+      page_path: window.location.pathname,
+    });
+    return;
+  }
+
+  // 3. Explicit non-CV recruiter CTAs (never double-fire on CV links)
+  const recruiterAction = anchor.getAttribute("data-recruiter-cta");
+  const cvPath = `${BASE_PATH}/Uzair-Iqbal-AI-Architect-CV.pdf`;
+  if (destination.origin === window.location.origin && destination.pathname === cvPath) {
+    trackEvent("resume_download", {
+      file_name: "Uzair-Iqbal-AI-Architect-CV.pdf",
+      source,
+      page_path: window.location.pathname,
+    });
+    return;
+  }
+
+  if (recruiterAction) {
+    trackRecruiterCta(recruiterAction, source);
+    return;
+  }
+
+  // 4. Internal case study navigation
   if (destination.origin !== window.location.origin) return;
   const workPrefix = `${BASE_PATH}/work/`;
   if (!destination.pathname.startsWith(workPrefix)) return;

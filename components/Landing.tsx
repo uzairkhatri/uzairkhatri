@@ -83,6 +83,7 @@ export default function Landing() {
                 href={CV_URL}
                 target="_blank"
                 rel="noreferrer"
+                data-source="hero_nav"
                 title="Download Resume / CV (PDF)"
                 className={styles.navLink}
               >
@@ -195,6 +196,7 @@ export default function Landing() {
               href={CV_URL}
               target="_blank"
               rel="noreferrer"
+              data-source="hero_mobile_menu"
               onClick={() => setMobileMenuOpen(false)}
             >
               Resume / CV (PDF)
@@ -212,10 +214,10 @@ export default function Landing() {
           </div>
 
           <div className={styles.mobileMenuFooter}>
-            <a href="https://www.linkedin.com/in/uzair-khatri" target="_blank" rel="noreferrer">
+            <a href="https://www.linkedin.com/in/uzair-khatri" target="_blank" rel="noreferrer" data-source="hero_mobile_menu">
               LinkedIn
             </a>
-            <a href="https://github.com/uzairkhatri" target="_blank" rel="noreferrer">
+            <a href="https://github.com/uzairkhatri" target="_blank" rel="noreferrer" data-source="hero_mobile_menu">
               GitHub
             </a>
           </div>

@@ -19,11 +19,12 @@ function setup(url = "https://uzairkhatri.com/", options = {}) {
   };
   if (options.blockStorage) Object.defineProperty(win, "localStorage", { get() { throw new Error("Blocked"); } });
   class Element {
-    constructor(href, source, parentId, role = null) {
+    constructor(href, source, parentId, role = null, recruiterCta = null) {
       this.href = href ? new URL(href, location).href : undefined;
       this.source = source;
       this.parentId = parentId;
       this.role = role;
+      this.recruiterCta = recruiterCta;
     }
     closest(selector) {
       if (selector === "a[href]") return this.anchor || (this.href ? this : null);
@@ -32,6 +33,7 @@ function setup(url = "https://uzairkhatri.com/", options = {}) {
     getAttribute(name) {
       if (name === "data-source") return this.source;
       if (name === "role") return this.role;
+      if (name === "data-recruiter-cta") return this.recruiterCta;
       return null;
     }
   }
@@ -57,9 +59,10 @@ function setup(url = "https://uzairkhatri.com/", options = {}) {
     const module = { exports: {} };
     cache.set(name, module);
     const localRequire = (id) => {
-      if (id === "react") return { useEffect: (fn) => effects.push(fn), useState: () => [false, (value) => enabled.push(value)] };
+      if (id === "react") return { useEffect: (fn) => effects.push(fn), useState: () => [false, (value) => enabled.push(value)], useRef: (v) => ({ current: v }) };
       if (id === "react/jsx-runtime") return require(id);
       if (id === "next/script") return { __esModule: true, default: () => null };
+      if (id.endsWith(".module.css")) return { __esModule: true, default: {} };
       if (id.startsWith("./")) return load(id.slice(2) + ".ts");
       throw new Error(`Unexpected dependency: ${id}`);
     };
@@ -225,4 +228,89 @@ test("booking_click remains distinct from booking_scheduled and fails closed off
   local.api.initializeAnalytics();
   local.api.trackBookingScheduled("calendly_modal_embed");
   assert.equal(local.events().length, 0);
+});
+
+test("booking_click handles UTM parameters and trailing slashes on Calendly links", () => {
+  const { api, click, events } = setup("https://uzairkhatri.com/");
+  api.initializeAnalytics();
+  click("https://calendly.com/uz-khatri/30min/?utm_source=linkedin&email=secret@test.com", "hero_nav");
+  assert.equal(events().length, 1);
+  assert.equal(events()[0][1], "booking_click");
+  assert.equal(events()[0][2].source, "hero_nav");
+  assert.equal(JSON.stringify(events()[0][2]).includes("secret@test.com"), false);
+});
+
+test("CV downloads, recruiter CTAs, GitHub, and LinkedIn clicks emit distinct non-duplicate events without query/PII leakage", () => {
+  const { api, Element, events } = setup("https://uzairkhatri.com/audit/");
+  api.initializeAnalytics();
+
+  api.trackLinkClick({
+    type: "click",
+    button: 0,
+    target: new Element("/Uzair-Iqbal-AI-Architect-CV.pdf?token=ignore", "audit_recruiter_banner"),
+  });
+  api.trackLinkClick({
+    type: "click",
+    button: 0,
+    target: new Element("/case-studies/", "engagement_recruiter", "services", null, "engagement_recruiter_case_studies"),
+  });
+  api.trackLinkClick({
+    type: "click",
+    button: 0,
+    target: new Element("https://github.com/uzairkhatri/production-rag-reference?ref=private", "contact_section"),
+  });
+  api.trackLinkClick({
+    type: "click",
+    button: 0,
+    target: new Element("https://www.linkedin.com/in/uzair-khatri/?trk=private", "contact_section"),
+  });
+
+  assert.equal(events().length, 4);
+  assert.deepEqual(
+    Array.from(events(), (e) => e[1]),
+    ["resume_download", "recruiter_cta_click", "github_outbound_click", "linkedin_outbound_click"]
+  );
+  assert.equal(events()[0][2].file_name, "Uzair-Iqbal-AI-Architect-CV.pdf");
+  assert.equal(events()[1][2].cta_action, "engagement_recruiter_case_studies");
+  assert.equal(events()[2][2].destination_path, "/uzairkhatri/production-rag-reference");
+  assert.equal(events()[3][2].destination_path, "/in/uzair-khatri/");
+  assert.equal(JSON.stringify(events()).includes("token=ignore"), false);
+  assert.equal(JSON.stringify(events()).includes("ref=private"), false);
+});
+
+test("Calendly scheduled message validator rejects untrusted origins, wrong source windows, and malformed payloads", () => {
+  const { load } = setup("https://uzairkhatri.com/");
+  const { validateCalendlyScheduledMessage } = load("BookingModal.tsx");
+  const trustedWin = { name: "calendly-iframe" };
+  const otherWin = { name: "spoof-window" };
+
+  const validMsg = {
+    origin: "https://calendly.com",
+    source: trustedWin,
+    data: {
+      event: "calendly.event_scheduled",
+      payload: {
+        event: { uri: "https://api.calendly.com/scheduled_events/EV123" },
+        invitee: { uri: "https://api.calendly.com/scheduled_events/EV123/invitees/INV456" },
+      },
+    },
+  };
+  const ok = validateCalendlyScheduledMessage(validMsg, trustedWin);
+  assert.equal(ok.valid, true);
+  assert.ok(ok.dedupeKey.includes("EV123"));
+
+  // Spoofed origins
+  assert.equal(validateCalendlyScheduledMessage({ ...validMsg, origin: "https://evil.com" }, trustedWin).valid, false);
+  assert.equal(validateCalendlyScheduledMessage({ ...validMsg, origin: "http://calendly.com" }, trustedWin).valid, false);
+
+  // Untrusted source window
+  assert.equal(validateCalendlyScheduledMessage({ ...validMsg, source: otherWin }, trustedWin).valid, false);
+  assert.equal(validateCalendlyScheduledMessage({ ...validMsg, source: null }, trustedWin).valid, false);
+  assert.equal(validateCalendlyScheduledMessage(validMsg, null).valid, false);
+
+  // Wrong event names & invalid payload structures
+  assert.equal(validateCalendlyScheduledMessage({ ...validMsg, data: { event: "calendly.event_type_viewed", payload: {} } }, trustedWin).valid, false);
+  assert.equal(validateCalendlyScheduledMessage({ ...validMsg, data: { event: "calendly.event_scheduled" } }, trustedWin).valid, false);
+  assert.equal(validateCalendlyScheduledMessage({ ...validMsg, data: { event: "calendly.event_scheduled", payload: {} } }, trustedWin).valid, false);
+  assert.equal(validateCalendlyScheduledMessage({ ...validMsg, data: "calendly.event_scheduled" }, trustedWin).valid, false);
 });

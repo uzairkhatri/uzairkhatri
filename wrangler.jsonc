@@ -6,7 +6,12 @@
   "assets": {
     "directory": "out",
     "not_found_handling": "404-page",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/book",
+      "/book/*",
+      "/api/*"
+    ]
   },
   "send_email": [
     {

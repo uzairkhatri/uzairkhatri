@@ -9,7 +9,7 @@ import {
   EMAIL_URL,
   withBasePath,
 } from "./siteLinks";
-import { trackLeadSubmission } from "./analytics";
+import { trackLeadSubmission, trackRecruiterCta } from "./analytics";
 
 interface ChannelCard {
   label: string;
@@ -71,7 +71,7 @@ const channels: ChannelCard[] = [
   {
     label: "GITHUB",
     value: "Code & repositories",
-    href: "https://github.com/UzairKhatri",
+    href: "https://github.com/uzairkhatri",
     external: true,
     arrow: "↗",
     icon: (
@@ -140,6 +140,7 @@ export default function Contact() {
   >("idle");
   const [deliveryRef, setDeliveryRef] = useState("");
   const submitting = useRef(false);
+  const recruiterIntentTracked = useRef(false);
   const [errorMessage, setErrorMessage] = useState("");
   const emailFallback = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(
     "Inquiry (" + projectStage + ") from " + formState.name
@@ -211,25 +212,41 @@ export default function Contact() {
       });
 
       const result = await response.json();
-      const messageId =
-        typeof result?.messageId === "string" ? result.messageId.trim() : "";
+      const referenceId =
+        typeof result?.referenceId === "string" ? result.referenceId.trim() : "";
       if (
         response.ok &&
         result?.success === true &&
         result?.dispatched === true &&
-        messageId
+        referenceId
       ) {
-        setDeliveryRef(messageId);
+        setDeliveryRef(referenceId);
         trackLeadSubmission(projectStage, "api_contact");
         setStatus("success");
         setFormState({ name: "", email: "", message: "", _gotcha: "" });
       } else {
-        throw new Error(result?.error || "Mail transport dispatch was not confirmed");
+        const apiError =
+          response.status >= 400 &&
+          response.status < 500 &&
+          typeof result?.error === "string" &&
+          result.error.trim()
+            ? result.error.trim()
+            : "Mail transport dispatch was not confirmed";
+        throw Object.assign(new Error(apiError), { status: response.status });
       }
-    } catch {
-      setErrorMessage(
-        "We couldn't confirm mail dispatch. Your message is still intact—try again, or open an email draft directly."
-      );
+    } catch (err: unknown) {
+      const errObj = err as { name?: string; status?: number; message?: string } | null;
+      if (errObj?.name === "AbortError") {
+        setErrorMessage(
+          "The dispatch request timed out before confirmation. Your message is still intact—try again, or open an email draft directly."
+        );
+      } else if (errObj?.status && errObj.status >= 400 && errObj.status < 500 && errObj.message) {
+        setErrorMessage(errObj.message);
+      } else {
+        setErrorMessage(
+          "We couldn't confirm mail dispatch. Your message is still intact—try again, or open an email draft directly."
+        );
+      }
       setStatus("error");
     } finally {
       window.clearTimeout(timeout);
@@ -393,6 +410,7 @@ export default function Contact() {
                     target={ch.external ? "_blank" : undefined}
                     rel={ch.external ? "noreferrer" : undefined}
                     download={ch.download ? true : undefined}
+                    data-source="contact_section"
                     className={styles.channelCard}
                     role="listitem"
                   >
@@ -444,12 +462,15 @@ export default function Contact() {
                     <strong>Message queued for delivery.</strong>
                     <p>
                       {deliveryRef
-                        ? `Confirmed mail transport handoff (Ref: ${deliveryRef}). I'll review your inquiry and reply within 24 hours.`
-                        : "I'll review your inquiry and respond within 24 hours."}
+                        ? `Reference: ${deliveryRef}. Your inquiry comes directly to me. I'll respond as soon as possible.`
+                        : "Your inquiry comes directly to me. I'll respond as soon as possible."}
                     </p>
                     <button
                       type="button"
-                      onClick={() => setStatus("idle")}
+                      onClick={() => {
+                        setDeliveryRef("");
+                        setStatus("idle");
+                      }}
                       className={styles.resetFormBtn}
                     >
                       Send another message
@@ -523,7 +544,13 @@ export default function Contact() {
                             className={`${styles.stageBtn} ${
                               active ? styles.stageBtnActive : ""
                             }`}
-                            onClick={() => setProjectStage(stage)}
+                            onClick={() => {
+                              setProjectStage(stage);
+                              if (stage === "Hiring / Role" && !recruiterIntentTracked.current) {
+                                recruiterIntentTracked.current = true;
+                                trackRecruiterCta("hiring_role_selected", "contact_section");
+                              }
+                            }}
                             aria-checked={active}
                             role="radio"
                           >
@@ -549,7 +576,12 @@ export default function Contact() {
                         <span>
                           Open to Principal / Staff AI &amp; Backend Engineering roles (remote / Dubai / GCC).
                         </span>
-                        <a href={CV_URL} target="_blank" rel="noreferrer">
+                        <a
+                          href={CV_URL}
+                          target="_blank"
+                          rel="noreferrer"
+                          data-source="contact_hiring_hint"
+                        >
                           Open CV (PDF) &rarr;
                         </a>
                       </div>
@@ -597,8 +629,8 @@ export default function Contact() {
                     </button>
 
                     <p className={styles.formFootnote}>
-                      Direct response within 24 hours &middot; Transport-verified
-                      dispatch &middot; No sales intermediaries
+                      Your inquiry comes directly to me. I&apos;ll respond as
+                      soon as possible &middot; No sales intermediaries
                     </p>
                   </form>
                 )}

@@ -45,3 +45,16 @@ test("JsonLd schemas are valid Schema.org entities with no placeholder data", ()
   assert.equal(faq.mainEntity.length, 5);
 });
 
+test("Public security.txt and contact response copy do not expose private Gmail or unverified 24h promises", () => {
+  const secTxt = readFileSync(path.join(__dirname, "..", "public", ".well-known", "security.txt"), "utf8");
+  assert.doesNotMatch(secTxt, /uz\.khatri@gmail\.com/i);
+  assert.match(secTxt, /mailto:hello@uzairkhatri\.com/);
+
+  const contactSrc = readFileSync(path.join(__dirname, "..", "components", "Contact.tsx"), "utf8");
+  assert.doesNotMatch(contactSrc, /within 24 hours/i);
+  assert.doesNotMatch(contactSrc, /https:\/\/github\.com\/UzairKhatri/);
+
+  const auditSrc = readFileSync(path.join(__dirname, "..", "app", "audit", "page.tsx"), "utf8");
+  assert.doesNotMatch(auditSrc, /24 to 48 hours/i);
+});
+

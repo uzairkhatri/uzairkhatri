@@ -39,48 +39,64 @@ function createMockEnv() {
   };
 }
 
-test("Worker: /book and /book/ redirect to Calendly with 302", async () => {
+test("Worker: /book, /book/, and /book/index.html redirect to Calendly with 302 and no-store; wrangler run_worker_first covers them", async () => {
   const { env } = createMockEnv();
-  
-  const res1 = await worker.fetch(new Request("https://uzairkhatri.com/book"), env);
-  assert.equal(res1.status, 302);
-  assert.equal(res1.headers.get("Location"), "https://calendly.com/uz-khatri/30min");
+  const wranglerConfig = JSON.parse(readFileSync(path.join(__dirname, "..", "wrangler.jsonc"), "utf8"));
+  assert.deepEqual(wranglerConfig.assets?.run_worker_first, ["/book", "/book/*", "/api/*"]);
+  assert.equal(wranglerConfig.assets.directory, "out");
+  assert.equal(wranglerConfig.assets.binding, "ASSETS");
 
-  const res2 = await worker.fetch(new Request("https://uzairkhatri.com/book/"), env);
-  assert.equal(res2.status, 302);
-  assert.equal(res2.headers.get("Location"), "https://calendly.com/uz-khatri/30min");
+  for (const target of [
+    "https://uzairkhatri.com/book",
+    "https://uzairkhatri.com/book/",
+    "https://uzairkhatri.com/book/index.html",
+    "https://uzairkhatri.com/book?utm_source=linkedin",
+    "https://uzairkhatri.com/book/?utm_source=linkedin",
+  ]) {
+    const res = await worker.fetch(new Request(target), env);
+    assert.equal(res.status, 302, `Expected 302 for ${target}`);
+    assert.equal(res.headers.get("Location"), "https://calendly.com/uz-khatri/30min");
+    assert.equal(res.headers.get("Cache-Control"), "no-store");
+  }
 });
 
-test("Worker: POST /api/contact handles valid submissions and sends email", async () => {
-  const { env, sentEmails } = createMockEnv();
-  const payload = {
-    name: "Jane Doe",
-    email: "jane@example.com",
-    message: "We need an AI systems architect to review our multi-agent pipeline.",
-    stage: "Production"
-  };
+test("Worker: POST /api/contact handles all four inquiry categories with opaque referenceId and no messageId leak", async () => {
+  const categories = ["Idea / MVP", "In Production", "$250 Pre-Mortem", "Hiring / Role"];
+  for (const category of categories) {
+    const { env, sentEmails } = createMockEnv();
+    const payload = {
+      name: "Jane Doe",
+      email: "jane@example.com",
+      message: `Inquiry regarding ${category} pipeline architecture.`,
+      stage: category,
+    };
 
-  const req = new Request("https://uzairkhatri.com/api/contact", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
+    const req = new Request("https://uzairkhatri.com/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-  const res = await worker.fetch(req, env);
-  assert.equal(res.status, 200);
-  const data = await res.json();
-  assert.equal(data.success, true);
-  assert.equal(data.dispatched, true);
-  assert.equal(data.messageId, "mock-msg-123");
+    const res = await worker.fetch(req, env);
+    assert.equal(res.status, 200);
+    const data = await res.json();
+    assert.equal(data.success, true);
+    assert.equal(data.dispatched, true);
+    assert.equal(data.deliveryStatus, "accepted_by_transport");
+    assert.equal(data.messageId, undefined, "Internal mail transport messageId must not be exposed to client");
+    assert.match(data.referenceId, /^INQ-[A-F0-9]{8}$/);
 
-  assert.equal(sentEmails.length, 1);
-  const email = sentEmails[0];
-  assert.equal(email.to, "uz.khatri@gmail.com");
-  assert.equal(email.from, "hello@uzairkhatri.com");
-  assert.equal(email.replyTo, "jane@example.com");
-  assert.ok(email.subject.includes("Jane Doe"));
-  assert.ok(email.text.includes("multi-agent pipeline"));
-  assert.ok(email.html.includes("Jane Doe"));
+    assert.equal(sentEmails.length, 1);
+    const email = sentEmails[0];
+    assert.equal(email.to, "uz.khatri@gmail.com");
+    assert.equal(email.from, "hello@uzairkhatri.com");
+    assert.equal(email.replyTo, "jane@example.com");
+    assert.ok(email.subject.includes(data.referenceId));
+    assert.ok(email.subject.includes("Jane Doe"));
+    assert.ok(email.subject.includes(`[${category}]`));
+    assert.ok(email.text.includes(data.referenceId));
+    assert.ok(email.html.includes(data.referenceId));
+  }
 });
 
 test("Worker: POST /api/contact rejects missing required fields safely with 400", async () => {
@@ -146,13 +162,17 @@ test("Worker: POST /api/audit handles valid diagnostic requests", async () => {
   const data = await res.json();
   assert.equal(data.success, true);
   assert.equal(data.dispatched, true);
-  assert.equal(data.messageId, "mock-msg-123");
+  assert.equal(data.deliveryStatus, "accepted_by_transport");
+  assert.equal(data.messageId, undefined, "Internal mail transport messageId must not be exposed to client");
+  assert.match(data.referenceId, /^AUD-[A-F0-9]{8}$/);
 
   assert.equal(sentEmails.length, 1);
   const email = sentEmails[0];
   assert.equal(email.to, "uz.khatri@gmail.com");
   assert.equal(email.from, "hello@uzairkhatri.com");
-  assert.ok(email.subject.includes("[AI Pre-Mortem Request]: Mark CTO"));
+  assert.ok(email.subject.includes(`[${data.referenceId}]`));
+  assert.ok(email.subject.includes("[AI Pre-Mortem Request]"));
+  assert.ok(email.subject.includes("Mark CTO"));
   assert.ok(email.text.includes("Hallucination and high token latency"));
   assert.ok(email.html.includes("mark@techcorp.io"));
 });
@@ -203,10 +223,10 @@ test("Worker: Static routes forward to ASSETS.fetch", async () => {
   assert.equal(fetchedAssets[0].url, "https://uzairkhatri.com/services/ai-systems/");
 });
 
-test("Worker: Error handling does not leak stack traces", async () => {
+test("Worker: Error handling does not leak stack traces, internal errors, or routing addresses", async () => {
   const { env } = createMockEnv();
   env.EMAIL.send = async () => {
-    throw new Error("Internal Cloudflare Mail Gateway Error");
+    throw new Error("Internal Cloudflare Mail Gateway Error to uz.khatri@gmail.com");
   };
 
   const req = new Request("https://uzairkhatri.com/api/contact", {
@@ -223,8 +243,85 @@ test("Worker: Error handling does not leak stack traces", async () => {
   assert.equal(res.status, 500);
   const data = await res.json();
   assert.equal(data.success, false);
-  assert.equal(data.error, "Internal Cloudflare Mail Gateway Error");
+  assert.equal(data.error, "Failed to dispatch email");
+  assert.equal(data.error.includes("uz.khatri@gmail.com"), false);
   assert.equal(data.stack, undefined);
+});
+
+test("Worker: Rejects non-POST methods on API endpoints and handles missing EMAIL binding", async () => {
+  const { env, sentEmails } = createMockEnv();
+  const getRes = await worker.fetch(new Request("https://uzairkhatri.com/api/contact", { method: "GET" }), env);
+  assert.equal(getRes.status, 405);
+
+  const missingEnvRes = await worker.fetch(
+    new Request("https://uzairkhatri.com/api/audit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "Alex", email: "alex@co.io", message: "Scope check" }),
+    }),
+    { ASSETS: env.ASSETS }
+  );
+  assert.equal(missingEnvRes.status, 500);
+  assert.equal(sentEmails.length, 0);
+});
+
+test("Worker: Logs never contain sender PII (name, email, message content) on success or error", async () => {
+  const { env } = createMockEnv();
+  const logs = [];
+  const origLog = console.log;
+  const origErr = console.error;
+  console.log = (...args) => logs.push(JSON.stringify(args));
+  console.error = (...args) => logs.push(JSON.stringify(args));
+  try {
+    await worker.fetch(
+      new Request("https://uzairkhatri.com/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "SecretPersonName",
+          email: "secret.person@privatecorp.test",
+          message: "Confidential bottleneck body text",
+          stage: "Hiring / Role",
+        }),
+      }),
+      env
+    );
+    env.EMAIL.send = async () => ({ messageId: "   " });
+    await worker.fetch(
+      new Request("https://uzairkhatri.com/api/audit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "SecretPersonName",
+          email: "secret.person@privatecorp.test",
+          message: "Confidential audit details",
+        }),
+      }),
+      env
+    );
+  } finally {
+    console.log = origLog;
+    console.error = origErr;
+  }
+  const combinedLogs = logs.join("\n");
+  assert.equal(combinedLogs.includes("SecretPersonName"), false);
+  assert.equal(combinedLogs.includes("secret.person@privatecorp.test"), false);
+  assert.equal(combinedLogs.includes("Confidential bottleneck"), false);
+  assert.equal(combinedLogs.includes("mock-msg"), false);
+});
+
+test("Worker: Rejects whitespace-only fields cleanly with 400", async () => {
+  const { env, sentEmails } = createMockEnv();
+  const res = await worker.fetch(
+    new Request("https://uzairkhatri.com/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "   ", email: "jane@co.com", message: "Hello" }),
+    }),
+    env
+  );
+  assert.equal(res.status, 400);
+  assert.equal(sentEmails.length, 0);
 });
 
 test("Worker: Rejects invalid JSON and malformed email cleanly without dispatching", async () => {

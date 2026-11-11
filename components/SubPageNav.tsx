@@ -55,7 +55,7 @@ export default function SubPageNav({
             {link.label}
           </a>
         ))}
-        <a href={CV_URL} target="_blank" rel="noreferrer" className={`${styles.topNavLink} ${styles.hideOnMobile}`}>
+        <a href={CV_URL} target="_blank" rel="noreferrer" data-source="subpage_nav" className={`${styles.topNavLink} ${styles.hideOnMobile}`}>
           CV
         </a>
       </div>

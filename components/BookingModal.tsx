@@ -8,11 +8,44 @@ import { trackBookingScheduled } from "./analytics";
 const CALENDLY_EMBED_URL =
   "https://calendly.com/uz-khatri/30min?embed_domain=uzairkhatri.com&embed_type=inline&background_color=171b1a&text_color=ffffff&primary_color=c59b53";
 
+export interface CalendlyScheduledCheck {
+  valid: boolean;
+  dedupeKey?: string;
+}
+
+export function validateCalendlyScheduledMessage(
+  event: Pick<MessageEvent, "origin" | "source" | "data">,
+  expectedWindow: Window | null | undefined
+): CalendlyScheduledCheck {
+  if (event.origin !== "https://calendly.com") return { valid: false };
+  if (!expectedWindow || event.source !== expectedWindow) return { valid: false };
+
+  const data = event.data as Record<string, unknown> | null;
+  if (!data || typeof data !== "object" || Array.isArray(data)) return { valid: false };
+  if (data.event !== "calendly.event_scheduled") return { valid: false };
+
+  const payload = data.payload as Record<string, unknown> | null;
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return { valid: false };
+
+  const eventObj = payload.event as Record<string, unknown> | null;
+  const inviteeObj = payload.invitee as Record<string, unknown> | null;
+  const eventUri = typeof eventObj?.uri === "string" ? eventObj.uri.trim() : "";
+  const inviteeUri = typeof inviteeObj?.uri === "string" ? inviteeObj.uri.trim() : "";
+  if (!eventUri) return { valid: false };
+
+  return {
+    valid: true,
+    dedupeKey: `${eventUri}|${inviteeUri}`,
+  };
+}
+
 export default function BookingModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const triggerRef = useRef<HTMLAnchorElement | null>(null);
+  const trackedKeysRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     // Warm up Calendly connection on mouse hover or focus over booking links
@@ -77,14 +110,11 @@ export default function BookingModal() {
     dialog?.showModal();
 
     const handleCalendlyMessage = (event: MessageEvent) => {
-      if (event.origin !== "https://calendly.com") return;
-      if (
-        event.data &&
-        typeof event.data === "object" &&
-        (event.data as { event?: string }).event === "calendly.event_scheduled"
-      ) {
-        trackBookingScheduled("calendly_modal_embed");
-      }
+      const check = validateCalendlyScheduledMessage(event, iframeRef.current?.contentWindow);
+      if (!check.valid || !check.dedupeKey) return;
+      if (trackedKeysRef.current.has(check.dedupeKey)) return;
+      trackedKeysRef.current.add(check.dedupeKey);
+      trackBookingScheduled("calendly_modal_embed");
     };
     window.addEventListener("message", handleCalendlyMessage);
 
@@ -107,11 +137,11 @@ export default function BookingModal() {
         if (event.target === event.currentTarget) setIsOpen(false);
       }}
       onCancel={() => setIsOpen(false)}
-      aria-label="Architecture Review Booking Modal"
+      aria-label="30-Minute Discovery Call Booking Modal"
     >
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
-          <span>Book an architecture call</span>
+          <span>Book a 30-Minute Discovery Call</span>
           <button
             autoFocus
             className={styles.closeBtn}
@@ -132,7 +162,7 @@ export default function BookingModal() {
                   <span>Loading your booking calendar&hellip;</span>
                 </div>
                 <span className={styles.subtext}>
-                  30-Minute Architecture Review &bull; Uzair Khatri
+                  Free 30-Minute Discovery Call &bull; Uzair Khatri
                 </span>
               </div>
 
@@ -162,11 +192,12 @@ export default function BookingModal() {
           )}
 
           <iframe
+            ref={iframeRef}
             src={CALENDLY_EMBED_URL}
             width="100%"
             height="100%"
             frameBorder="0"
-            title="Book a 30-Min Architecture Review"
+            title="Book a 30-Minute Discovery Call"
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             onLoad={() => setIsLoading(false)}
             className={`${styles.iframe} ${isLoading ? "" : styles.iframeLoaded}`}

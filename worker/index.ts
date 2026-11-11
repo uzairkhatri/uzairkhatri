@@ -46,6 +46,14 @@ async function parseJsonBody<T>(request: Request): Promise<T | null> {
   }
 }
 
+function generatePublicRef(prefix: "INQ" | "AUD"): string {
+  const uuid =
+    typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID().replace(/-/g, "").slice(0, 8).toUpperCase()
+      : Math.random().toString(36).slice(2, 10).toUpperCase();
+  return `${prefix}-${uuid}`;
+}
+
 class MailTransportError extends Error {
   status: number;
   constructor(message: string, status = 500) {
@@ -57,6 +65,7 @@ class MailTransportError extends Error {
 async function dispatchEmail(
   env: Env,
   route: string,
+  referenceId: string,
   message: {
     to: string;
     from: string;
@@ -65,7 +74,7 @@ async function dispatchEmail(
     html?: string;
     replyTo?: string;
   }
-): Promise<string> {
+): Promise<void> {
   if (!env?.EMAIL || typeof env.EMAIL.send !== "function") {
     throw new MailTransportError("Email delivery service is unavailable.", 500);
   }
@@ -76,39 +85,46 @@ async function dispatchEmail(
 
   if (!messageId) {
     throw new MailTransportError(
-      "Mail transport did not confirm a delivery messageId.",
+      "Mail transport did not confirm delivery acceptance.",
       502
     );
   }
 
-  console.log("Email dispatched", { route, messageId });
-  return messageId;
+  // Log only non-PII route and opaque public referenceId server-side.
+  // Note: Cloudflare EMAIL.send resolution means transport accepted the message, not final inbox delivery.
+  console.log("Email accepted by transport", { route, referenceId });
 }
 
 function handleDispatchError(err: unknown, route: string, fallback: string): Response {
-  const errObj = err as { message?: string; code?: string; status?: number } | null;
+  if (err instanceof MailTransportError) {
+    console.error("Email dispatch rejected", { route, status: err.status });
+    return jsonResponse({ success: false, error: err.message }, err.status);
+  }
+
+  const errObj = err as { code?: string; status?: number } | null;
   const status = typeof errObj?.status === "number" ? errObj.status : 500;
-  const errorMessage =
-    typeof errObj?.message === "string" && errObj.message.trim()
-      ? errObj.message
-      : fallback;
+  console.error("Email dispatch failed", { route, code: errObj?.code, status });
 
-  console.error("Email dispatch failed", {
-    route,
-    code: errObj?.code,
-    error: errorMessage,
-  });
-
-  return jsonResponse({ success: false, error: errorMessage }, status);
+  return jsonResponse({ success: false, error: fallback }, status);
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    // Instant /book shortlink redirect to Calendly booking calendar
-    if (url.pathname === "/book" || url.pathname === "/book/") {
-      return Response.redirect("https://calendly.com/uz-khatri/30min", 302);
+    // Server-side /book shortlink redirect to Calendly (invoked before static assets via run_worker_first)
+    if (url.pathname === "/book" || url.pathname === "/book/" || url.pathname === "/book/index.html") {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: "https://calendly.com/uz-khatri/30min",
+          "Cache-Control": "no-store",
+        },
+      });
+    }
+
+    if ((url.pathname === "/api/audit" || url.pathname === "/api/contact") && request.method !== "POST") {
+      return jsonResponse({ error: "Method not allowed." }, 405);
     }
 
     if (url.pathname === "/api/audit" && request.method === "POST") {
@@ -157,6 +173,7 @@ export default {
         }
 
         const nowFormatted = new Date().toUTCString();
+        const referenceId = generatePublicRef("AUD");
 
         const html = `<!DOCTYPE html>
 <html lang="en">
@@ -210,6 +227,10 @@ export default {
                   </td>
                 </tr>
                 <tr>
+                  <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Reference</td>
+                  <td style="padding: 7px 0; font-size: 13px; color: #d8ad64; font-family: 'SF Mono', monospace; font-weight: 700;">${escapeHtml(referenceId)}</td>
+                </tr>
+                <tr>
                   <td width="140" style="padding: 7px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', monospace; font-weight: 700;">Received</td>
                   <td style="padding: 7px 0; font-size: 13px; color: #8e9594; font-family: 'SF Mono', monospace;">${nowFormatted}</td>
                 </tr>
@@ -248,6 +269,7 @@ export default {
 
 CLIENT DETAILS
 ------------------------------------------------------------
+Reference:     ${referenceId}
 Name:          ${name}
 Email:         ${email}
 Company:       ${company || "N/A"}
@@ -265,16 +287,21 @@ ${rawMessage}
 Quick Reply: mailto:${email}?subject=${encodeURIComponent(`Re: AI Architecture Pre-Mortem - Uzair Khatri (${name})`)}
 ============================================================`;
 
-        const messageId = await dispatchEmail(env, "/api/audit", {
+        await dispatchEmail(env, "/api/audit", referenceId, {
           to: "uz.khatri@gmail.com",
           from: "hello@uzairkhatri.com",
-          subject: `🚨 [AI Pre-Mortem Request]: ${name} (${company || stack || "Production"})`,
+          subject: `🚨 [AI Pre-Mortem Request] [${referenceId}]: ${name} (${company || stack || "Production"})`,
           text,
           html,
           replyTo: email,
         });
 
-        return jsonResponse({ success: true, dispatched: true, messageId });
+        return jsonResponse({
+          success: true,
+          dispatched: true,
+          deliveryStatus: "accepted_by_transport",
+          referenceId,
+        });
       } catch (err: unknown) {
         return handleDispatchError(err, "/api/audit", "Failed to dispatch audit email");
       }
@@ -324,9 +351,10 @@ Quick Reply: mailto:${email}?subject=${encodeURIComponent(`Re: AI Architecture P
           if (!stage) stage = stageMatch[1].trim();
           rawMessage = rawMessage.replace(stageMatch[0], "").trim();
         }
-        if (!stage) stage = "Prototype";
+        if (!stage) stage = "General";
 
         const nowFormatted = new Date().toUTCString();
+        const referenceId = generatePublicRef("INQ");
 
         // High-contrast, executive branded HTML email
         const html = `<!DOCTYPE html>
@@ -376,6 +404,10 @@ Quick Reply: mailto:${email}?subject=${encodeURIComponent(`Re: AI Architecture P
                       ${escapeHtml(stage)}
                     </span>
                   </td>
+                </tr>
+                <tr>
+                  <td width="130" style="padding: 9px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', Consolas, monospace; font-weight: 700; letter-spacing: 0.06em;">Reference</td>
+                  <td style="padding: 9px 0; font-size: 13px; color: #d8ad64; font-family: 'SF Mono', Consolas, monospace; font-weight: 700;">${escapeHtml(referenceId)}</td>
                 </tr>
                 <tr>
                   <td width="130" style="padding: 9px 0; font-size: 12px; color: #8e9594; text-transform: uppercase; font-family: 'SF Mono', Consolas, monospace; font-weight: 700; letter-spacing: 0.06em;">Received</td>
@@ -431,6 +463,7 @@ UZAIRKHATRI.COM • NEW ARCHITECTURE INQUIRY
 
 CLIENT DETAILS
 ------------------------------------------------------------
+Reference:     ${referenceId}
 Name:          ${name}
 Email:         ${email}
 Project Stage: ${stage}
@@ -446,16 +479,21 @@ Delivered via Cloudflare Workers API (uzairkhatri.com)
 ============================================================`;
 
         // Dispatch directly through Cloudflare Email Service binding to your verified Gmail
-        const messageId = await dispatchEmail(env, "/api/contact", {
+        await dispatchEmail(env, "/api/contact", referenceId, {
           to: "uz.khatri@gmail.com",
           from: "hello@uzairkhatri.com",
-          subject: `Architecture Inquiry: ${name} [${stage}]`,
+          subject: `Architecture Inquiry [${referenceId}]: ${name} [${stage}]`,
           text,
           html,
           replyTo: email,
         });
 
-        return jsonResponse({ success: true, dispatched: true, messageId });
+        return jsonResponse({
+          success: true,
+          dispatched: true,
+          deliveryStatus: "accepted_by_transport",
+          referenceId,
+        });
       } catch (err: unknown) {
         return handleDispatchError(err, "/api/contact", "Failed to dispatch email");
       }

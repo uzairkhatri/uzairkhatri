@@ -14,7 +14,7 @@ const navLinks = [
 const connectLinks = [
   { label: "Book Discovery Call", href: BOOKING_URL, external: true, isPrimary: true },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/uzair-khatri", external: true },
-  { label: "GitHub", href: "https://github.com/UzairKhatri", external: true },
+  { label: "GitHub", href: "https://github.com/uzairkhatri", external: true },
   { label: "Email", href: EMAIL_URL, external: false },
 ];
 
@@ -52,6 +52,7 @@ export default function Footer() {
                   <a
                     key={item.label}
                     href={item.href}
+                    data-source="footer"
                     className={item.isPrimary ? styles.bookButton : styles.connectLink}
                     target={item.external ? "_blank" : undefined}
                     rel={item.external ? "noreferrer" : undefined}

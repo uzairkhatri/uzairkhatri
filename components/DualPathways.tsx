@@ -175,6 +175,7 @@ export default function DualPathways() {
               href={CV_URL}
               target="_blank"
               rel="noreferrer"
+              data-source="dual_pathways_hiring"
               className={styles.pathwayBtnOutline}
               aria-label="Download Uzair Khatri resume and CV in PDF format"
             >
