@@ -50,12 +50,20 @@ test("Worker: /book, /book/, and /book/index.html redirect to Calendly with 302 
     "https://uzairkhatri.com/book",
     "https://uzairkhatri.com/book/",
     "https://uzairkhatri.com/book/index.html",
+  ]) {
+    const res = await worker.fetch(new Request(target), env);
+    assert.equal(res.status, 302, `Expected 302 for ${target}`);
+    assert.equal(res.headers.get("Location"), "https://calendly.com/uz-khatri/30min");
+    assert.equal(res.headers.get("Cache-Control"), "no-store");
+  }
+
+  for (const target of [
     "https://uzairkhatri.com/book?utm_source=linkedin",
     "https://uzairkhatri.com/book/?utm_source=linkedin",
   ]) {
     const res = await worker.fetch(new Request(target), env);
     assert.equal(res.status, 302, `Expected 302 for ${target}`);
-    assert.equal(res.headers.get("Location"), "https://calendly.com/uz-khatri/30min");
+    assert.equal(res.headers.get("Location"), "https://calendly.com/uz-khatri/30min?utm_source=linkedin");
     assert.equal(res.headers.get("Cache-Control"), "no-store");
   }
 });

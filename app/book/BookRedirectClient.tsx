@@ -5,7 +5,8 @@ import Logo from "@/components/Logo";
 
 export default function BookRedirectClient({ bookingUrl }: { bookingUrl: string }) {
   useEffect(() => {
-    window.location.replace(bookingUrl);
+    const search = typeof window !== "undefined" ? window.location.search : "";
+    window.location.replace(`${bookingUrl}${search}`);
   }, [bookingUrl]);
 
   return (

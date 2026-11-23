@@ -117,7 +117,7 @@ export default {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: "https://calendly.com/uz-khatri/30min",
+          Location: `https://calendly.com/uz-khatri/30min${url.search}`,
           "Cache-Control": "no-store",
         },
       });
