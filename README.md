@@ -7,11 +7,12 @@
 
 <p align="center">
   <a href="https://uzairkhatri.com/?utm_source=github&utm_medium=profile&utm_campaign=profile_hero"><img src="https://img.shields.io/badge/Portfolio-uzairkhatri.com-0052CC?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
+  <a href="https://uzairkhatri.com/audit/?utm_source=github&utm_medium=profile&utm_campaign=profile_hero"><img src="https://img.shields.io/badge/Architecture_Audit-Production_AI-4F46E5?style=flat-square&logo=target&logoColor=white" alt="Architecture Audit" /></a>
+  <a href="https://uzairkhatri.com/services/ai-systems/?utm_source=github&utm_medium=profile&utm_campaign=profile_hero"><img src="https://img.shields.io/badge/Services-AI_Systems-2563EB?style=flat-square&logo=blueprint&logoColor=white" alt="AI Systems Services" /></a>
+  <a href="https://uzairkhatri.com/insights/?utm_source=github&utm_medium=profile&utm_campaign=profile_hero"><img src="https://img.shields.io/badge/Insights-Engineering-7C3AED?style=flat-square&logo=rss&logoColor=white" alt="Blog" /></a>
   <a href="https://uzairkhatri.com/Uzair-Iqbal-AI-Architect-CV.pdf"><img src="https://img.shields.io/badge/Resume%2FCV-Download_PDF-blue?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Resume / CV" /></a>
-  <a href="https://uzairkhatri.com/insights/?utm_source=github&utm_medium=profile&utm_campaign=profile_insights"><img src="https://img.shields.io/badge/Blog-Insights-7C3AED?style=flat-square&logo=rss&logoColor=white" alt="Blog" /></a>
   <a href="https://www.linkedin.com/in/uzair-khatri/"><img src="https://img.shields.io/badge/LinkedIn-Uzair_Khatri-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-  <a href="mailto:hello@uzairkhatri.com"><img src="https://img.shields.io/badge/Email-hello%40uzairkhatri.com-059669?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
-  <a href="https://calendly.com/uz-khatri/30min"><img src="https://img.shields.io/badge/Book_a_Call-30_minutes-EA580C?style=flat-square&logo=calendly&logoColor=white" alt="Book a call" /></a>
+  <a href="https://uzairkhatri.com/book?utm_source=github&utm_medium=profile&utm_campaign=profile_hero"><img src="https://img.shields.io/badge/Book_a_Call-30_minutes-EA580C?style=flat-square&logo=calendly&logoColor=white" alt="Book a call" /></a>
 </p>
 
 I have spent **14+ years** designing backend platforms, enterprise workflows, distributed services, and production AI systems. My current work sits at the intersection of **RAG quality**, **agent orchestration**, **event-driven architecture**, and **operational reliability**.
@@ -63,7 +64,7 @@ Deterministic CLI for auditing AI and LLM repositories before deployment.
 - Produces JSON, Markdown, and SARIF output for local use and CI workflows
 - Converts production-readiness requirements into reviewable repository evidence
 
-[Repository](https://github.com/uzairkhatri/production-ai-readiness) | [Architecture review practice](https://uzairkhatri.com/services/ai-audit/?utm_source=github&utm_medium=profile&utm_campaign=ai_audit)
+[Repository](https://github.com/uzairkhatri/production-ai-readiness) | [Architecture audit practice](https://uzairkhatri.com/audit/?utm_source=github&utm_medium=profile&utm_campaign=ai_readiness)
 
 ---
 
@@ -75,7 +76,7 @@ Multi-agent engineering workflow with specialized roles and explicit verificatio
 - Structured handoffs instead of an unbounded prompt loop
 - Reusable FastAPI architecture and delivery skills
 
-[Repository](https://github.com/uzairkhatri/fastapi-ai-team)
+[Repository](https://github.com/uzairkhatri/fastapi-ai-team) | [AI systems architecture](https://uzairkhatri.com/services/ai-systems/?utm_source=github&utm_medium=profile&utm_campaign=fastapi_team)
 
 ## Open Source
 
@@ -91,12 +92,12 @@ The contribution includes focused regression coverage, package-level validation,
 
 | Product | System | Engineering focus |
 | :--- | :--- | :--- |
-| [Wellows](https://uzairkhatri.com/work/wellows/) | AI search visibility platform | Multi-agent workflows, retrieval, citation scoring, and production observability |
-| [Savyour](https://uzairkhatri.com/work/savyour/) | Fintech and merchant platform | Distributed services, ledger workflows, partner APIs, and settlement processing |
-| [EFU Life](https://uzairkhatri.com/work/efu-life/) | Regulated insurance workflows | Auditable workflow services, enterprise integration, and access controls |
-| [ClassFlow](https://uzairkhatri.com/work/classflow/) | Live marketplace SaaS | Concurrency control, Redis coordination, matching, and payment workflows |
+| [Wellows](https://uzairkhatri.com/work/wellows/?utm_source=github&utm_medium=profile&utm_campaign=experience_table) | AI search visibility platform | Multi-agent workflows, retrieval, citation scoring, and production observability |
+| [Savyour](https://uzairkhatri.com/work/savyour/?utm_source=github&utm_medium=profile&utm_campaign=experience_table) | Fintech and merchant platform | Distributed services, ledger workflows, partner APIs, and settlement processing |
+| [EFU Life](https://uzairkhatri.com/work/efu-life/?utm_source=github&utm_medium=profile&utm_campaign=experience_table) | Regulated insurance workflows | Auditable workflow services, enterprise integration, and access controls |
+| [ClassFlow](https://uzairkhatri.com/work/classflow/?utm_source=github&utm_medium=profile&utm_campaign=experience_table) | Live marketplace SaaS | Concurrency control, Redis coordination, matching, and payment workflows |
 
-Detailed outcomes and project context are available in the [case studies](https://uzairkhatri.com/case-studies/).
+Detailed outcomes and architecture metrics are available in the [case studies](https://uzairkhatri.com/case-studies/?utm_source=github&utm_medium=profile&utm_campaign=experience_table).
 
 ## Engineering Toolkit
 
@@ -136,7 +137,7 @@ I work with teams moving AI prototypes into production and with engineering orga
 
 **Availability:** Open to Staff / Principal AI Systems Architect roles and technical architecture advisory.
 
-[Portfolio](https://uzairkhatri.com/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [Case studies](https://uzairkhatri.com/case-studies/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [Architecture review](https://uzairkhatri.com/audit/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [LinkedIn](https://www.linkedin.com/in/uzair-khatri/) | [Book a call](https://calendly.com/uz-khatri/30min) | [Email](mailto:hello@uzairkhatri.com)
+[Portfolio](https://uzairkhatri.com/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [AI Systems Architecture](https://uzairkhatri.com/services/ai-systems/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [Case Studies](https://uzairkhatri.com/case-studies/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [Architecture Audit](https://uzairkhatri.com/audit/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [Insights](https://uzairkhatri.com/insights/?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [LinkedIn](https://www.linkedin.com/in/uzair-khatri/) | [Book a Call](https://uzairkhatri.com/book?utm_source=github&utm_medium=profile&utm_campaign=profile_connect) | [Email](mailto:hello@uzairkhatri.com)
 
 <p align="center">
   <strong>Production AI | Grounded RAG | Distributed Systems | Reliable Delivery</strong>
