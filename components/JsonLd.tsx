@@ -3,7 +3,7 @@ const personSchema = {
   "@type": "Person",
   "@id": "https://uzairkhatri.com/#person",
   "name": "Uzair Khatri",
-  "alternateName": ["Uzair Iqbal", "Uzair Iqbal Khatri"],
+  "alternateName": ["uzairkhatri", "Uzair Iqbal", "Uzair Iqbal Khatri"],
   "jobTitle": "Principal AI Systems Architect & Full-Stack SaaS Engineer",
   "url": "https://uzairkhatri.com",
   "image": "https://uzairkhatri.com/img/profile/hero-portrait.png",

@@ -33,6 +33,7 @@ export const metadata: Metadata = {
     "Stripe Connect",
     "RAG Architecture",
     "Uzair Khatri",
+    "uzairkhatri",
     "Uzair Iqbal"
   ],
   authors: [{ name: "Uzair Khatri (Uzair Iqbal)" }],
